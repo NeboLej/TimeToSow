@@ -13,8 +13,9 @@ struct TimeToSowApp: App {
     private var screenBuilder: ScreenBuilder
     
     init() {
-        screenBuilder = ScreenBuilder()
-        
+        let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
+        let appStore = AppStore(shelfRepository: shelfRepository)
+        screenBuilder = ScreenBuilder(appStore: appStore)
     }
     
     var body: some Scene {

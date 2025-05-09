@@ -17,12 +17,19 @@ enum ComponentType {
 
 final class ScreenBuilder {
     
+    var appStore: AppStore
+    
+    init(appStore: AppStore) {
+        self.appStore = appStore
+    }
     
     @ViewBuilder
     func getScreen(type: ScreenType) -> some View {
         switch type {
         case .home:
             HomeScreen()
+                .environment(\.appStore, appStore)
+                .environment(\.screenBuilder, self)
         }
     }
     
