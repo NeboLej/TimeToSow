@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct TimeToSowApp: App {
+    
+    private var screenBuilder: ScreenBuilder
+    
+    init() {
+        screenBuilder = ScreenBuilder()
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            screenBuilder.getScreen(type: .home)
         }
     }
 }
