@@ -11,6 +11,6 @@ protocol TagRepositoryProtocol {
     
 }
 
-final class TagRepository: BaseRepository, ShelfRepositoryProtocol {
+final class TagRepository: BaseRepository, TagRepositoryProtocol {
     
 }

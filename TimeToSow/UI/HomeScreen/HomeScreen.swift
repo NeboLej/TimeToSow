@@ -9,12 +9,26 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @Environment(\.appStore) var countersStore: AppStore
+    @Environment(\.appStore) var appStore: AppStore
     @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .background(Color.red)
+        ZStack {
+            ScrollView {
+                ShelfView(shelf: appStore.currentShelf)
+                Group {
+                    Rectangle()
+                        .frame(height: 220)
+                    Rectangle()
+                        .frame(height: 300)
+                    Rectangle()
+                        .frame(height: 100)
+                }
+                .cornerRadius(20)
+                .padding(.horizontal, 8)
+                .offset(y: -20)
+            }
+        }.ignoresSafeArea(.all, edges: .top)
     }
 }
 

@@ -7,20 +7,21 @@
 
 import Foundation
 
-class Plant {
-    var id: UUID = UUID.init()
-    var seed: Seed
-    var pot: Pot
-    var tag: Tag
+struct Plant: Hashable {
+    let id: UUID = UUID.init()
+    let seed: Seed
+    let pot: Pot
+    let tag: Tag
     
-    var time: Int = 0
-    var line: Int = 0
-    var offsetX: Double = 0
+    let line: Int
+    let offsetX: Double = 0
+    let time: Int = 0
     
     
-    init(seed: Seed, pot: Pot, tag: Tag) {
+    init(seed: Seed, pot: Pot, tag: Tag, line: Int = 0) {
         self.seed = seed
         self.pot = pot
         self.tag = tag
+        self.line = line
     }
 }

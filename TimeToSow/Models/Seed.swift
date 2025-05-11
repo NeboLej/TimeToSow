@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Seed {
+struct Seed: Hashable {
     var id: UUID = UUID.init()
     var name: String = ""
     var availavlePotTypes: [PotType] = []

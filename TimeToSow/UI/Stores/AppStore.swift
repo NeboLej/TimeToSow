@@ -13,7 +13,14 @@ class AppStore {
     @ObservationIgnored
     private let shelfRepository: ShelfRepositoryProtocol
     
+    var currentShelf: Shelf
+    
     init(shelfRepository: ShelfRepositoryProtocol) {
         self.shelfRepository = shelfRepository
+        currentShelf = shelfRepository.getCurrentShelf()
+    }
+    
+    func updateShelf() {
+        currentShelf = shelfRepository.getCurrentShelf()
     }
 }

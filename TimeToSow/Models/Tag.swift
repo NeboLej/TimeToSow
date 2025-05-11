@@ -7,10 +7,10 @@
 
 import Foundation
 
-class Tag {
-    var id: UUID = UUID.init()
-    var name: String
-    var color: String
+struct Tag: Hashable {
+    let id: UUID = UUID.init()
+    let name: String
+    let color: String
     
     init(name: String, color: String) {
         self.name = name

@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum PotType {
+enum PotType: Hashable, Equatable {
     case small, medium, large
 }
 
-class Pot {
-    var id: UUID = UUID.init()
-    var potType: PotType
-    var name: String = ""
-    var image: String = ""
-    var width: Int
+struct Pot: Hashable {
+    let id: UUID = UUID.init()
+    let potType: PotType
+    let name: String
+    let image: String
+    let width: Int
     
     init(potType: PotType, name: String, image: String, width: Int) {
         self.potType = potType

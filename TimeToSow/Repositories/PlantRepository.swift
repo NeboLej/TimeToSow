@@ -13,4 +13,5 @@ protocol PlantRepositoryProtocol {
 
 final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     
+    
 }
