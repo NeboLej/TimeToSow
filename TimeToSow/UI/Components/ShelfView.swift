@@ -12,9 +12,10 @@ struct PlantView: View {
     @State var plant: Plant
     
     @State private var accumulated: CGFloat
+    @State var offsetX: CGFloat
     @State var isEdit: Bool = false
     @Binding var isCanEdit: Bool
-    @State var offsetX: CGFloat
+
     
     init(plant: Plant, isCanEdit: Binding<Bool>) {
         self.plant = plant
