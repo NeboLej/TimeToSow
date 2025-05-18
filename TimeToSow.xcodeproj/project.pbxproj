@@ -21,6 +21,8 @@
 		8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575682DCE49D600AEC31A /* EnvironmentValues.swift */; };
 		8EF5756D2DCE4E8700AEC31A /* ShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5756C2DCE4E8700AEC31A /* ShelfView.swift */; };
 		8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575882DDA00E200AEC31A /* TimePickerView.swift */; };
+		8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758A2DDA125A00AEC31A /* StrokeText.swift */; };
+		8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		8EF575682DCE49D600AEC31A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		8EF5756C2DCE4E8700AEC31A /* ShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfView.swift; sourceTree = "<group>"; };
 		8EF575882DDA00E200AEC31A /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		8EF5758A2DDA125A00AEC31A /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
+		8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -165,7 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				8EF5756C2DCE4E8700AEC31A /* ShelfView.swift */,
+				8EF5758A2DDA125A00AEC31A /* StrokeText.swift */,
 				8EF575882DDA00E200AEC31A /* TimePickerView.swift */,
+				8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */,
 				8EF575672DCE435800AEC31A /* Tag.swift in Sources */,
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* ShelfView.swift in Sources */,
@@ -257,6 +264,7 @@
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
+				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
