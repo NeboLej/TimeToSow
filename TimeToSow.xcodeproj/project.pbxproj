@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EBF147A2DE657A700422876 /* Font +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF14792DE657A700422876 /* Font +.swift */; };
+		8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */; };
+		8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */; };
+		8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */; };
+		8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* Shelf.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -26,6 +31,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8EBF14782DE6577800422876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8EBF14792DE657A700422876 /* Font +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font +.swift"; sourceTree = "<group>"; };
+		8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LoveYaLikeASister-Regular.ttf"; sourceTree = "<group>"; };
+		8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SedgwickAve-Regular.ttf"; sourceTree = "<group>"; };
+		8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-MediumItalic.ttf"; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
@@ -120,6 +131,11 @@
 			children = (
 				8EF575402DCE3F3A00AEC31A /* Preview Content */,
 				8EF575412DCE3F3A00AEC31A /* Assets.xcassets */,
+				8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */,
+				8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */,
+				8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */,
+				8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */,
+				8EBF14792DE657A700422876 /* Font +.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -155,6 +171,7 @@
 		8EF5754A2DCE3F3A00AEC31A /* TimeToSow */ = {
 			isa = PBXGroup;
 			children = (
+				8EBF14782DE6577800422876 /* Info.plist */,
 				8EF575532DCE3F4600AEC31A /* Repositories */,
 				8EF5753B2DCE3F3A00AEC31A /* App */,
 				8EF5753C2DCE3F3A00AEC31A /* Extensions */,
@@ -240,6 +257,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */,
+				8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */,
+				8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */,
+				8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */,
 				8EF575512DCE3F3A00AEC31A /* Preview Assets.xcassets in Resources */,
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
 			);
@@ -260,6 +281,7 @@
 				8EF5754C2DCE3F3A00AEC31A /* Shelf.swift in Sources */,
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,
+				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
@@ -402,6 +424,7 @@
 				DEVELOPMENT_TEAM = 955DP87LHM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeToSow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,6 +459,7 @@
 				DEVELOPMENT_TEAM = 955DP87LHM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeToSow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

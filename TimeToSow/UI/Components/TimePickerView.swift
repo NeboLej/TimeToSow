@@ -23,9 +23,13 @@ struct TimePickerView: View {
         VStack {
             HStack {
                 Text(String(minInterval))
+                    .font(.myDescription(20))
                 Spacer()
                 Text(String(maxInterval))
+                    .font(.myDescription(20))
             }
+            .padding(.horizontal, 8)
+            .padding(.bottom, -10)
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Image(.timePickerMainLine)

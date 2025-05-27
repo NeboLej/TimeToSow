@@ -3,11 +3,17 @@ import CoreText
 
 struct TextEllipseStrokeView: View {
     let text: String
-    let font: Font = .system(size: 18)
+    let font: Font
     let duration: Double = 0.5
     
     @State var startTime: Date? = .now
     var isSelected: Bool
+    
+    init(text: String, font: Font = .myButton(20), isSelected: Bool) {
+        self.text = text
+        self.font = font
+        self.isSelected = isSelected
+    }
     
     var body: some View {
         ZStack {

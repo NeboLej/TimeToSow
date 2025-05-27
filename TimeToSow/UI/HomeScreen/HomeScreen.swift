@@ -25,8 +25,10 @@ struct HomeScreen: View {
                 Group {
                     Rectangle()
                         .frame(height: 300)
+                        .foregroundStyle(.black)
                     Rectangle()
                         .frame(height: 100)
+                        .foregroundStyle(.black)
                 }
                 
                 .cornerRadius(20)
@@ -44,17 +46,20 @@ struct HomeScreen: View {
             HStack(spacing: 0) {
                 VStack {
                     Text("New Plant")
-                        .font(.system(size: 30))
+                        .font(.myTitle(40))
                         .padding(.top, 24)
+                        .foregroundStyle(.black)
                     Spacer()
                     Text("\(selectedTime) min")
-                        .font(.system(size: 30))
+                        .font(.myTitle(40))
+                        .foregroundStyle(.black)
                     Spacer()
                     Button {
                         print("start")
                     } label: {
-                        Text("Start")
-                            .font(.system(size: 30))
+                        TextEllipseStrokeView(text: "Start", font: .myButton(30), isSelected: true)
+                            .foregroundStyle(Color(UIColor.systemPink))
+                            .frame(width: 140, height: 60)
                     }
                 }
                 VStack {
@@ -65,9 +70,10 @@ struct HomeScreen: View {
                 }
                 .padding(.all, 16)
             }
+            .padding(.bottom, 20)
             TimePickerView(selectedTime: $selectedTime)
                 .frame(height: 100)
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 0)
         }
         .padding(.horizontal, 12)
         .frame(maxWidth: .infinity)
