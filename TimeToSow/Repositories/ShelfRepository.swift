@@ -37,7 +37,7 @@ final class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
                                width: 20),
                       tag: Tag(name: "job",
                                color: "555555"),
-                      line: 2),
+                      line: 1),
                 
                 Plant(seed: Seed(name: "asasd",
                                  availavlePotTypes: [.small, .large, .medium],

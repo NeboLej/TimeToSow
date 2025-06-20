@@ -18,6 +18,7 @@ struct TimePickerView: View {
     @State private var accumulated: CGFloat = 0
     @State var offsetX: CGFloat = 0
     @State var widthInOneTime: CGFloat = 0
+    @State var step: Int = 5
     
     var body: some View {
         VStack {
@@ -71,12 +72,16 @@ struct TimePickerView: View {
     }
     
     func calculateSelectedTime(_ offsetX: CGFloat) {
-        selectedTime = Int(offsetX / widthInOneTime) + minInterval
+        selectedTime = ((Int(offsetX / widthInOneTime) + minInterval) / step) * step
     }
 }
 
 #Preview {
     @Previewable @State var time: Int = 10
     
-    TimePickerView(selectedTime: $time)
+    VStack {
+        TimePickerView(selectedTime: $time, step: 1)
+        Text("\(time)")
+    }
+   
 }

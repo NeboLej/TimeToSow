@@ -14,7 +14,7 @@ struct Plant: Hashable {
     let tag: Tag
     
     let line: Int
-    let offsetX: Double = 0
+    let offsetX: Double = 40
     let time: Int = 0
     
     
