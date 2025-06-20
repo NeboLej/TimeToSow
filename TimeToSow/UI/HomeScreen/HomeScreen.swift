@@ -41,7 +41,6 @@ struct HomeScreen: View {
     
     @ViewBuilder
     func newPlantSection() -> some View {
-        
         VStack {
             HStack(spacing: 0) {
                 VStack {
@@ -50,7 +49,7 @@ struct HomeScreen: View {
                         .padding(.top, 24)
                         .foregroundStyle(.black)
                     Spacer()
-                    Text("\(selectedTime) min")
+                    NumericText(text: $selectedTime)
                         .font(.myTitle(40))
                         .foregroundStyle(.black)
                     Spacer()
@@ -81,6 +80,15 @@ struct HomeScreen: View {
             Image(.sectionBackground)
                 .resizable()
         }
+    }
+}
+
+
+fileprivate struct NumericText: View {
+    @Binding var text: Int
+    
+    var body: some View {
+        Text("\(text) min")
     }
 }
 
