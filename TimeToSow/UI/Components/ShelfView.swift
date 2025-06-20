@@ -11,20 +11,20 @@ import UIKit
 struct PlantView: View {
     
     @State var plant: Plant
-    
-    @State private var accumulated: CGFloat
+    @State private var accumulatedX: CGFloat
+    @State private var accumulatedY: CGFloat
     @State var offsetX: CGFloat
-    @State var isEdit: Bool = false
-    @Binding var isCanEdit: Bool
-    @State var lastXYPosisitions: EdgeInsets
+    @State var offsetY: CGFloat
+    @State var positionDelegate: PositionPlantDelegate
     
-    
-    init(plant: Plant, lastXYPosisitions: EdgeInsets, isCanEdit: Binding<Bool>) {
+    init(plant: Plant, positionDelegate: PositionPlantDelegate) {
         self.plant = plant
-        self._isCanEdit = isCanEdit
-        self.accumulated = plant.offsetX
-        self.offsetX = plant.offsetX
-        self.lastXYPosisitions = lastXYPosisitions
+        let startPosition = positionDelegate.getPositionPlant(plant: plant)
+        self.offsetX = startPosition.x
+        self.offsetY = startPosition.y
+        self.accumulatedX = startPosition.x
+        self.accumulatedY = startPosition.y
+        self.positionDelegate = positionDelegate
     }
     
     var body: some View {
@@ -38,27 +38,31 @@ struct PlantView: View {
                 .scaledToFit()
                 .frame(height: CGFloat(plant.pot.width))
         }
-        .offset(x: offsetX)
+        .offset(x: offsetX, y: offsetY)
         .gesture(DragGesture()
-            .onChanged{ value in
-                if isCanEdit {
-                    let newOffsetX = value.translation.width + self.accumulated
-                    if newOffsetX < lastXYPosisitions.leading {
-                        offsetX = lastXYPosisitions.leading
-                    } else if newOffsetX > lastXYPosisitions.trailing {
-                        offsetX = lastXYPosisitions.trailing
-                    } else {
-                        offsetX = newOffsetX
-                    }
-                    print(offsetX)
+            .onChanged { value in
+                let newOffsetX = value.translation.width + self.accumulatedX
+
+                if newOffsetX < 0 {
+                    offsetX = 0
+                } else if newOffsetX > positionDelegate.width - CGFloat(plant.pot.width) {
+                    offsetX = positionDelegate.width - CGFloat(plant.pot.width)
+                } else {
+                    offsetX = newOffsetX
                 }
+                
+                offsetY = value.translation.height + self.accumulatedY
             }
             .onEnded { value in
-                if isCanEdit {
-                    self.accumulated = offsetX
-                    //                    vm.endMove()
+                withAnimation(.easeIn) {
+                    let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
+                    offsetY = point.y
+                    offsetX = point.x
                 }
-            })
+                self.accumulatedX = offsetX
+                self.accumulatedY = offsetY
+            }
+        )
     }
 }
 
@@ -66,57 +70,84 @@ struct ShelfView: View {
     
     @State var shelf: Shelf
     @State var height: CGFloat = 400
-    @State var width: CGFloat = 400
-    
+    @State var width: CGFloat = 0
+
     var body: some View {
         ZStack(alignment: .top) {
             GeometryReader { proxy in
                 Image(shelf.type.image)
                     .resizable()
+                plants()
+                //для тестирования позиций полок
+                //shelfsTest()
                 
-                ForEach(shelf.type.shelfPositions,  id: \.self) {
-                    Rectangle()
-                        .fill(.red)
-                        .frame(height: 12)
-                        .offset(y: $0.coefOffsetY * height)
-                        .padding(.leading, $0.paddingLeading)
-                        .padding(.trailing, $0.paddingTrailing)
-                        .opacity(0.1)
-                }
-                plants(widthView: proxy.size.width)
             }
-            
         }
         .frame(height: height)
-        
+        .onGeometryChange(for: CGSize.self) { proxy in
+            proxy.size
+        } action: { newValue in
+            width = newValue.width
+        }
     }
     
     @ViewBuilder
-    func plants(widthView: CGFloat) -> some View {
+    func plants() -> some View {
         ForEach(shelf.plants, id: \.self) {
-            PlantView(plant: $0,
-                      lastXYPosisitions: EdgeInsets(top: 0,
-                                                    leading: getLeadingOffsetX(line: $0.line),
-                                                    bottom: 0,
-                                                    trailing: getTrailingOffsetX(plant: $0, widthView: widthView)),
-                      isCanEdit: .constant(true))
-                .offset(y: getOffsetY(line: $0.line) - CGFloat($0.pot.width) - CGFloat($0.seed.width) + 1)
+            PlantView(plant: $0, positionDelegate: self)
         }
     }
     
+    @ViewBuilder
+    func shelfsTest() -> some View {
+        ForEach(shelf.type.shelfPositions,  id: \.self) {
+            Rectangle()
+                .fill(.red)
+                .frame(height: 12)
+                .offset(y: $0.coefOffsetY * height)
+                .padding(.leading, $0.paddingLeading)
+                .padding(.trailing, $0.paddingTrailing)
+                .opacity(0.1)
+        }
+    }
+}
+
+
+extension ShelfView: PositionPlantDelegate {
     
-    func getOffsetY(line: Int) -> CGFloat {
+    func getPositionPlant(plant: Plant) -> CGPoint {
+        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+    }
+    
+    func getPositionOfPlantInFall2(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
+        let y = y + CGFloat(plant.pot.width) + CGFloat(plant.seed.width)
+        let shelfsY = shelf.type.shelfPositions.map { shelfPosition in
+            shelfPosition.coefOffsetY * height
+        }.sorted { $0 < $1 }
+        let result = shelfsY.first(where: { $0 > y } ) ?? shelfsY.last ?? 0
+        
+        return CGPoint(x: x, y: result - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+    }
+    
+    func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
+        let y = y + CGFloat(plant.pot.width) + CGFloat(plant.seed.width)
+        
+        let shelfs = shelf.type.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
+        
+        for shelf in shelfs {
+            if shelf.coefOffsetY * height >= y {
+                if x >= shelf.paddingLeading - CGFloat(plant.pot.width) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.width) / 2 {
+                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+                }
+            }
+        }
+        
+        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 0) * height - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+    }
+    
+    private func getOffsetY(line: Int) -> CGFloat {
         shelf.type.shelfPositions[line].coefOffsetY * height
     }
-    
-    func getLeadingOffsetX(line: Int) -> CGFloat {
-        shelf.type.shelfPositions[line].paddingLeading
-    }
-    
-    func getTrailingOffsetX(plant: Plant, widthView: CGFloat) -> CGFloat {
-        widthView - shelf.type.shelfPositions[plant.line].paddingTrailing - CGFloat(plant.pot.width)
-    }
-    
 }
 
 //#Preview {
@@ -125,4 +156,10 @@ struct ShelfView: View {
 
 #Preview {
     HomeScreen()
+}
+
+protocol PositionPlantDelegate {
+    var width: CGFloat { get }
+    func getPositionPlant(plant: Plant) -> CGPoint
+    func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint
 }
