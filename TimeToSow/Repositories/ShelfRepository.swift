@@ -9,6 +9,7 @@ import Foundation
 
 protocol ShelfRepositoryProtocol {
     func getRandomShelf(except: ShelfType?) -> ShelfType
+    func getNextShelf(curent: ShelfType, isNext: Bool) -> ShelfType
 }
 
 class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
@@ -18,6 +19,24 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
         return newShelf != except ? newShelf : getRandomShelf(except: except)
     }
     
+    func getNextShelf(curent: ShelfType, isNext: Bool) -> ShelfType {
+        guard let index = shelfs.firstIndex(of: curent) else { return shelfs.first! }
+        
+        print(index)
+        if isNext {
+            if index + 1 <= shelfs.count - 1 {
+                return shelfs[index + 1]
+            } else {
+                return shelfs[0]
+            }
+        } else {
+            if index - 1 >= 0 {
+                return shelfs[index - 1]
+            } else {
+                return shelfs.last!
+            }
+        }
+    }
     
     private var shelfs: [ShelfType] = [
         ShelfType(name: "First",

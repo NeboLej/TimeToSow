@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ScreenType {
-    case home
+    case home, editRoom
 }
 
 enum ComponentType {
@@ -30,6 +30,9 @@ final class ScreenBuilder {
             HomeScreen()
                 .environment(\.appStore, appStore)
                 .environment(\.screenBuilder, self)
+        case .editRoom:
+            EditRoomScreen()
+                .environment(\.appStore, appStore)
         }
     }
     

@@ -43,6 +43,14 @@ class AppStore {
         return currentRoom
     }
     
+    func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
+        roomRepository.getNextRoom(curent: currentRoom, isNext: isNext)
+    }
+    
+    func getNextShelf(currentShelf: ShelfType, isNext: Bool) -> ShelfType {
+        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
+    }
+    
     func newRandomPlant() {
         
     }

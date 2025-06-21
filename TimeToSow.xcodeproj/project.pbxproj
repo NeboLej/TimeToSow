@@ -19,6 +19,8 @@
 		8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E182E06C9E800AA6AFA /* ShelfType.swift */; };
 		8EC86E272E06D01B00AA6AFA /* HomeScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E262E06D01B00AA6AFA /* HomeScreenLocalStore.swift */; };
 		8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */; };
+		8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2E2E06E38600AA6AFA /* View + extension.swift */; };
+		8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -51,6 +53,8 @@
 		8EC86E182E06C9E800AA6AFA /* ShelfType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfType.swift; sourceTree = "<group>"; };
 		8EC86E262E06D01B00AA6AFA /* HomeScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenLocalStore.swift; sourceTree = "<group>"; };
 		8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + extension.swift"; sourceTree = "<group>"; };
+		8EC86E2E2E06E38600AA6AFA /* View + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + extension.swift"; sourceTree = "<group>"; };
+		8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomScreen.swift; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMonthRoom.swift; sourceTree = "<group>"; };
@@ -89,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EC86E322E06E82B00AA6AFA /* EditRoomScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */,
+			);
+			path = EditRoomScreen;
+			sourceTree = "<group>";
+		};
 		8EF574E32DCCEEAE00AEC31A = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				8EC86E042E06215C00AA6AFA /* Vibration.swift */,
+				8EC86E2E2E06E38600AA6AFA /* View + extension.swift */,
 				8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */,
 			);
 			path = Extensions;
@@ -179,6 +192,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8EC86E322E06E82B00AA6AFA /* EditRoomScreen */,
 				8EF5756A2DCE4E6700AEC31A /* Components */,
 				8EF575442DCE3F3A00AEC31A /* HomeScreen */,
 				8EF575462DCE3F3A00AEC31A /* Stores */,
@@ -304,6 +318,7 @@
 				8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */,
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
+				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,
 				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
@@ -315,6 +330,7 @@
 				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
+				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

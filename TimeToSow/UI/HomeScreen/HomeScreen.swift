@@ -16,11 +16,21 @@ struct HomeScreen: View {
     @State var selectedTime: Int = 50
     @State var selectedElement: PickerElement = .new
     @State var localStore = HomeScreenLocalStore()
+    @State var isShowMenu: Bool = false
+    @State var isShowEditRoom = false
     
     var body: some View {
         ZStack {
             ScrollView {
                 RoomView(room: $localStore.currenRoom)
+                    .gesture(TapGesture().onEnded {
+                        withAnimation(.easeInOut) {
+                            isShowMenu.toggle()
+                        }
+                    })
+                    .overlay(alignment: .trailing) {
+                        cityMenu()
+                    }
 #if DEBUG
                 debugConsole()
 #endif
@@ -42,9 +52,45 @@ struct HomeScreen: View {
             .background(.gray)
         }
         .ignoresSafeArea(.all, edges: .top)
+        .sheet(isPresented: $isShowEditRoom, content: {
+            Circle()
+                .fill(.red)
+        })
+
+//        .fullScreenCover(isPresented: $isShowEditRoom) {
+//            isShowEditRoom = false
+////            vm.afterSnapshot()
+//        } content: {
+//            Circle()
+//                .fill(.red)
+//        }
         .onAppear {
             localStore.setCurrentRoom(room: appStore.currentRoom)
         }
+        
+    }
+    
+    @ViewBuilder
+    private func cityMenu() -> some View {
+        VStack(alignment: .center, spacing: 25) {
+            Button(action: { withAnimation { isShowEditRoom = true } }, label: {
+                Image(systemName: "paintbrush")
+                    .foregroundColor(.black)
+            } )
+            Button(action: {}, label: {
+                Image(systemName: "info.circle")
+                    .foregroundColor(.black)
+            } )
+            Button(action: {}, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.black)
+            } )
+        }
+        .padding(.vertical, 20)
+        .padding(.horizontal, 12)
+        .background(Color.white.opacity(0.67))
+        .cornerRadius(20, corners: [.bottomLeft, .topLeft])
+        .offset(x: isShowMenu ? 0 : 50, y: -20)
     }
     
     @ViewBuilder

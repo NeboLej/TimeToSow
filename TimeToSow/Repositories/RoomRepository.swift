@@ -9,6 +9,7 @@ import Foundation
 
 protocol RoomRepositoryProtocol {
     func getRandomRoom(except: RoomType?) -> RoomType
+    func getNextRoom(curent: RoomType, isNext: Bool) -> RoomType
 }
 
 class RoomRepository: BaseRepository, RoomRepositoryProtocol {
@@ -17,11 +18,29 @@ class RoomRepository: BaseRepository, RoomRepositoryProtocol {
         RoomType(name: "1", image: "room1"),
         RoomType(name: "2", image: "room2"),
         RoomType(name: "3", image: "room3"),
-        
     ]
     
     func getRandomRoom(except: RoomType?) -> RoomType {
         let newRoom = rooms.randomElement()!
         return newRoom != except ? newRoom : getRandomRoom(except: except)
+    }
+    
+    func getNextRoom(curent: RoomType, isNext: Bool) -> RoomType {
+        guard let index = rooms.firstIndex(of: curent) else { return rooms.first! }
+        
+        print(index)
+        if isNext {
+            if index + 1 <= rooms.count - 1 {
+                return rooms[index + 1]
+            } else {
+                return rooms[0]
+            }
+        } else {
+            if index - 1 >= 0 {
+                return rooms[index - 1]
+            } else {
+                return rooms.last!
+            }
+        }
     }
 }
