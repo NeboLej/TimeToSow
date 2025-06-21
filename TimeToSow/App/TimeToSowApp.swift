@@ -13,8 +13,11 @@ struct TimeToSowApp: App {
     private var screenBuilder: ScreenBuilder
     
     init() {
+        let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository()
+        let roomRepository: RoomRepositoryProtocol = RoomRepository()
         let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
-        let appStore = AppStore(shelfRepository: shelfRepository)
+        
+        let appStore = AppStore(myRoomRepository: myRoomRepository, roomRepository: roomRepository, shelfRepository: shelfRepository)
         screenBuilder = ScreenBuilder(appStore: appStore)
     }
     

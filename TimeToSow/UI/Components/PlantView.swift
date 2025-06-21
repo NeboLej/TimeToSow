@@ -46,6 +46,9 @@ struct PlantView: View {
         }
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
+        .onChange(of: plant) { oldValue, newValue in
+            plantsFall()
+        }
         .gesture(DragGesture()
             .onChanged { value in
                 let newOffsetX = value.translation.width + self.accumulatedX
@@ -68,23 +71,28 @@ struct PlantView: View {
             }
             .onEnded { value in
                 stopShaking()
-                withAnimation(.easeIn) {
-                    let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
-                    offsetY = point.y
-                    offsetX = point.x
-                } completion: {
-                    Vibration.medium.vibrate()
-                    isShowDust = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        isShowDust = false
-                    }
-                }
+                plantsFall()
                 
                 self.accumulatedX = offsetX
                 self.accumulatedY = offsetY
             }
         )
     }
+    
+    private func plantsFall() {
+        withAnimation(.easeIn) {
+            let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
+            offsetY = point.y
+            offsetX = point.x
+        } completion: {
+            Vibration.medium.vibrate()
+            isShowDust = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isShowDust = false
+            }
+        }
+    }
+    
     
     private func startShaking() {
         withAnimation(Animation.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {

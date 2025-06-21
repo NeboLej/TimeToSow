@@ -15,11 +15,15 @@ struct HomeScreen: View {
     @State var activityType: Int = 0
     @State var selectedTime: Int = 50
     @State var selectedElement: PickerElement = .new
+    @State var localStore = HomeScreenLocalStore()
     
     var body: some View {
         ZStack {
             ScrollView {
-                ShelfView(shelf: appStore.currentShelf)
+                RoomView(room: $localStore.currenRoom)
+#if DEBUG
+                debugConsole()
+#endif
                 newPlantSection()
                     .offset(y: -20)
                 Group {
@@ -36,7 +40,28 @@ struct HomeScreen: View {
                 .offset(y: -20)
             }
             .background(.gray)
-        }.ignoresSafeArea(.all, edges: .top)
+        }
+        .ignoresSafeArea(.all, edges: .top)
+        .onAppear {
+            localStore.setCurrentRoom(room: appStore.currentRoom)
+        }
+    }
+    
+    @ViewBuilder
+    func debugConsole() -> some View {
+        HStack {
+            Button("Room") {
+                localStore.setCurrentRoom(room: appStore.setRandomRoom()) 
+            }
+            
+            Button("Shelf") {
+                localStore.setCurrentRoom(room: appStore.setRandomShelf())
+            }
+            
+            Button("Plant") {
+                
+            }
+        }.padding(.bottom, 20)
     }
     
     @ViewBuilder

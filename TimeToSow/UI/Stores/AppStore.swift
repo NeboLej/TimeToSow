@@ -5,22 +5,45 @@
 //  Created by Nebo on 09.05.2025.
 //
 
-import Foundation
+//import Foundation
+import SwiftUI
 
 @Observable
 class AppStore {
     
     @ObservationIgnored
+    private let myRoomRepository: MyRoomRepositoryProtocol
+    @ObservationIgnored
+    private let roomRepository: RoomRepositoryProtocol
+    @ObservationIgnored
     private let shelfRepository: ShelfRepositoryProtocol
     
-    var currentShelf: Shelf
+    var currentRoom: UserMonthRoom
     
-    init(shelfRepository: ShelfRepositoryProtocol) {
+    init(myRoomRepository: MyRoomRepositoryProtocol,
+         roomRepository: RoomRepositoryProtocol,
+         shelfRepository: ShelfRepositoryProtocol) {
+        self.myRoomRepository = myRoomRepository
+        self.roomRepository = roomRepository
         self.shelfRepository = shelfRepository
-        currentShelf = shelfRepository.getCurrentShelf()
+        currentRoom = myRoomRepository.getCurrentRoom()
     }
     
     func updateShelf() {
-        currentShelf = shelfRepository.getCurrentShelf()
+        currentRoom = myRoomRepository.getCurrentRoom()
+    }
+    
+    func setRandomRoom() -> UserMonthRoom {
+        currentRoom = currentRoom.copy(roomType: roomRepository.getRandomRoom(except: currentRoom.roomType))
+        return currentRoom
+    }
+    
+    func setRandomShelf() -> UserMonthRoom {
+        currentRoom = currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
+        return currentRoom
+    }
+    
+    func newRandomPlant() {
+        
     }
 }
