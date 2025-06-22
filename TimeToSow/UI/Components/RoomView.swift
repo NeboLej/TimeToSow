@@ -30,7 +30,7 @@ struct RoomView: View {
                 plants()
                     .id(room)
 //                для тестирования позиций полок
-                shelfsTest()
+//                shelfsTest()
                 
             }
         }

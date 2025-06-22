@@ -52,20 +52,13 @@ struct HomeScreen: View {
             .background(.gray)
         }
         .ignoresSafeArea(.all, edges: .top)
-        .sheet(isPresented: $isShowEditRoom, content: {
-            Circle()
-                .fill(.red)
+        .sheet(isPresented: $isShowEditRoom, onDismiss: {
+            localStore.bindRoom(appStore.currentRoom)
+        }, content: {
+            screenBuilder.getScreen(type: .editRoom)
         })
-
-//        .fullScreenCover(isPresented: $isShowEditRoom) {
-//            isShowEditRoom = false
-////            vm.afterSnapshot()
-//        } content: {
-//            Circle()
-//                .fill(.red)
-//        }
         .onAppear {
-            localStore.setCurrentRoom(room: appStore.currentRoom)
+            localStore.bindRoom(appStore.currentRoom)
         }
         
     }
@@ -97,15 +90,15 @@ struct HomeScreen: View {
     func debugConsole() -> some View {
         HStack {
             Button("Room") {
-                localStore.setCurrentRoom(room: appStore.setRandomRoom()) 
+                localStore.bindRoom(appStore.setRandomRoom())
             }
             
             Button("Shelf") {
-                localStore.setCurrentRoom(room: appStore.setRandomShelf())
+                localStore.bindRoom(appStore.setRandomShelf())
             }
             
             Button("Plant") {
-                
+                localStore.bindRoom(appStore.addRandomPlantToShelf())
             }
         }.padding(.bottom, 20)
     }

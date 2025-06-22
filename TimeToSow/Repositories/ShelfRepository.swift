@@ -39,9 +39,7 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
     }
     
     private var shelfs: [ShelfType] = [
-        ShelfType(name: "First",
-                  image: "shelf1",
-                  shelfPositions: [
+        ShelfType(name: "First", image: "shelf1", shelfPositions: [
                     ShelfPosition(coefOffsetY: 0.9, paddingLeading: 5, paddingTrailing: 5),
                     ShelfPosition(coefOffsetY: 0.647, paddingLeading: 31, paddingTrailing: 103),
                     ShelfPosition(coefOffsetY: 0.48, paddingLeading: 29, paddingTrailing: 28),
@@ -51,7 +49,7 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
         ShelfType(name: "Second", image: "shelf2", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.9, paddingLeading: 5, paddingTrailing: 5),
             ShelfPosition(coefOffsetY: 0.647, paddingLeading: 31, paddingTrailing: 103),
-//            ShelfPosition(coefOffsetY: 0.48, paddingLeading: 10, paddingTrailing: 100),
+            ShelfPosition(coefOffsetY: 0.48, paddingLeading: 29, paddingTrailing: 28),
             ShelfPosition(coefOffsetY: 0.28, paddingLeading: 29, paddingTrailing: 27),
           ])
     ]

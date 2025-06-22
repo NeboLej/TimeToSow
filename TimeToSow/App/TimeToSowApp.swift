@@ -16,8 +16,14 @@ struct TimeToSowApp: App {
         let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository()
         let roomRepository: RoomRepositoryProtocol = RoomRepository()
         let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
+        let seedRepository: SeedRepositoryProtocol = SeedRepository()
+        let potRepository: PotRepositoryProtocol = PotRepository()
         
-        let appStore = AppStore(myRoomRepository: myRoomRepository, roomRepository: roomRepository, shelfRepository: shelfRepository)
+        let appStore = AppStore(myRoomRepository: myRoomRepository,
+                                roomRepository: roomRepository,
+                                shelfRepository: shelfRepository,
+                                seedRepository: seedRepository,
+                                potRepository: potRepository)
         screenBuilder = ScreenBuilder(appStore: appStore)
     }
     

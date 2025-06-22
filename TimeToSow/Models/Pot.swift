@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PotType: Hashable, Equatable {
+enum PotType: Hashable, Equatable, CaseIterable {
     case small, medium, large
 }
 

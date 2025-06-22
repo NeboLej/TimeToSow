@@ -9,11 +9,19 @@ import Foundation
 import SwiftUI
 
 struct ScreenBuilderKey: EnvironmentKey {
-    static var defaultValue = ScreenBuilder(appStore: AppStore(myRoomRepository: MyRoomRepository(), roomRepository: RoomRepository(), shelfRepository: ShelfRepository()))
+    static var defaultValue = ScreenBuilder(appStore: AppStore(myRoomRepository: MyRoomRepository(),
+                                                               roomRepository: RoomRepository(),
+                                                               shelfRepository: ShelfRepository(),
+                                                               seedRepository: SeedRepository(),
+                                                               potRepository: PotRepository()))
 }
 
 struct AppStoreKey: EnvironmentKey {
-    static var defaultValue = AppStore(myRoomRepository: MyRoomRepository(), roomRepository: RoomRepository(), shelfRepository: ShelfRepository())
+    static var defaultValue = AppStore(myRoomRepository: MyRoomRepository(),
+                                       roomRepository: RoomRepository(),
+                                       shelfRepository: ShelfRepository(),
+                                       seedRepository: SeedRepository(),
+                                       potRepository: PotRepository())
 }
 
 extension EnvironmentValues {

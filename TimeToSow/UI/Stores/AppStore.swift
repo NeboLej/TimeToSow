@@ -17,15 +17,23 @@ class AppStore {
     private let roomRepository: RoomRepositoryProtocol
     @ObservationIgnored
     private let shelfRepository: ShelfRepositoryProtocol
+    @ObservationIgnored
+    private let seedRepository: SeedRepositoryProtocol
+    @ObservationIgnored
+    private let potRepository: PotRepositoryProtocol
     
     var currentRoom: UserMonthRoom
     
     init(myRoomRepository: MyRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
-         shelfRepository: ShelfRepositoryProtocol) {
+         shelfRepository: ShelfRepositoryProtocol,
+         seedRepository: SeedRepositoryProtocol,
+         potRepository: PotRepositoryProtocol) {
         self.myRoomRepository = myRoomRepository
         self.roomRepository = roomRepository
         self.shelfRepository = shelfRepository
+        self.seedRepository = seedRepository
+        self.potRepository = potRepository
         currentRoom = myRoomRepository.getCurrentRoom()
     }
     
@@ -33,14 +41,8 @@ class AppStore {
         currentRoom = myRoomRepository.getCurrentRoom()
     }
     
-    func setRandomRoom() -> UserMonthRoom {
-        currentRoom = currentRoom.copy(roomType: roomRepository.getRandomRoom(except: currentRoom.roomType))
-        return currentRoom
-    }
-    
-    func setRandomShelf() -> UserMonthRoom {
-        currentRoom = currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
-        return currentRoom
+    func setShelf(roomType: RoomType? = nil, shelfType: ShelfType? = nil) {
+        currentRoom = currentRoom.copy(shelfType: shelfType ?? currentRoom.shelfType, roomType: roomType ?? currentRoom.roomType)
     }
     
     func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
@@ -53,5 +55,26 @@ class AppStore {
     
     func newRandomPlant() {
         
+    }
+}
+
+//MARK: Test -
+extension AppStore {
+    func setRandomRoom() -> UserMonthRoom {
+        currentRoom = currentRoom.copy(roomType: roomRepository.getRandomRoom(except: currentRoom.roomType))
+        return currentRoom
+    }
+    
+    func setRandomShelf() -> UserMonthRoom {
+        currentRoom = currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
+        return currentRoom
+    }
+    
+    func addRandomPlantToShelf() -> UserMonthRoom  {
+        let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
+                                pot: potRepository.getRandomPot(),
+                                tag: .init(name: "", color: ""))
+        currentRoom = currentRoom.copy(plants: currentRoom.plants + [randomPlant])
+        return currentRoom
     }
 }

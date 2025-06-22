@@ -12,7 +12,7 @@ class HomeScreenLocalStore {
     
     var currenRoom: UserMonthRoom = .empty
     
-    func setCurrentRoom(room: UserMonthRoom) {
+    func bindRoom(_ room: UserMonthRoom) {
         currenRoom = room
     }
 }
