@@ -14,14 +14,15 @@ struct Plant: Hashable {
     let tag: Tag
     
     let line: Int
-    let offsetX: Double = 40
+    let offsetX: Double
     let time: Int = 0
     
     
-    init(seed: Seed, pot: Pot, tag: Tag, line: Int = 0) {
+    init(seed: Seed, pot: Pot, tag: Tag, line: Int = 0, offsetX: Double = 40) {
         self.seed = seed
         self.pot = pot
         self.tag = tag
         self.line = line
+        self.offsetX = offsetX
     }
 }

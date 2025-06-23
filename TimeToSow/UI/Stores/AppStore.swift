@@ -73,7 +73,9 @@ extension AppStore {
     func addRandomPlantToShelf() -> UserMonthRoom  {
         let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
                                 pot: potRepository.getRandomPot(),
-                                tag: .init(name: "", color: ""))
+                                tag: .init(name: "", color: ""),
+                                line: (0...currentRoom.shelfType.shelfPositions.count).randomElement()!,
+                                offsetX: 100)
         currentRoom = currentRoom.copy(plants: currentRoom.plants + [randomPlant])
         return currentRoom
     }
