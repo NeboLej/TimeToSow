@@ -21,7 +21,7 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
         Pot(potType: .medium,
             name: "aeded",
             image: "pot1",
-            width: 25),
+            width: 20),
         
         Pot(potType: .medium,
             name: "aeded",
@@ -31,11 +31,16 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
         Pot(potType: .medium,
             name: "aeded",
             image: "pot3",
-            width: 25),
+            width: 20),
         
         Pot(potType: .medium,
             name: "aeded",
             image: "pot4",
-            width: 30),
+            width: 25),
+        
+        Pot(potType: .medium,
+            name: "aeded",
+            image: "pot5",
+            width: 22),
     ]
 }

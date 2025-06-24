@@ -36,10 +36,24 @@ struct PlantView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: CGFloat(plant.seed.width))
-            Image(plant.pot.image)
-                .resizable()
-                .scaledToFit()
-                .frame(height: CGFloat(plant.pot.width))
+                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.width),
+                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.width))
+                .zIndex(10)
+            
+            ZStack {
+                Image(plant.pot.image)
+                    .resizable()
+                    .scaledToFit()
+                    
+                Image(plant.pot.image)
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(AngledShape())
+                    .foregroundStyle(.black.opacity(0.2))
+                    
+            }.frame(height: CGFloat(plant.pot.width))
+
             if isShowDust {
                 DustView(width: CGFloat(plant.pot.width))
             }
@@ -118,4 +132,16 @@ struct PlantView: View {
 
 #Preview {
     HomeScreen()
+}
+
+struct AngledShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX * 1.5, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.midX * 1.2, y: rect.maxY))
+        path.closeSubpath()
+        return path
+    }
 }
