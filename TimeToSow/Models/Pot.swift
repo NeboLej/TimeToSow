@@ -16,12 +16,12 @@ struct Pot: Hashable {
     let potType: PotType
     let name: String
     let image: String
-    let width: Int
+    let height: Int
     
     init(potType: PotType, name: String, image: String, width: Int) {
         self.potType = potType
         self.name = name
         self.image = image
-        self.width = width
+        self.height = width
     }
 }

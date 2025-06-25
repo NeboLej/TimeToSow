@@ -35,9 +35,9 @@ struct PlantView: View {
             Image(plant.seed.image)
                 .resizable()
                 .scaledToFit()
-                .frame(height: CGFloat(plant.seed.width))
-                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.width),
-                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.width))
+                .frame(height: CGFloat(plant.seed.height))
+                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height),
+                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height))
                 .zIndex(10)
             
             ZStack {
@@ -52,10 +52,10 @@ struct PlantView: View {
                     .clipShape(AngledShape())
                     .foregroundStyle(.black.opacity(0.2))
                     
-            }.frame(height: CGFloat(plant.pot.width))
+            }.frame(height: CGFloat(plant.pot.height))
 
             if isShowDust {
-                DustView(width: CGFloat(plant.pot.width))
+                DustView(width: CGFloat(plant.pot.height))
             }
         }
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
@@ -75,8 +75,8 @@ struct PlantView: View {
                 
                 if newOffsetX < 0 {
                     offsetX = 0
-                } else if newOffsetX > positionDelegate.width - CGFloat(plant.pot.width) {
-                    offsetX = positionDelegate.width - CGFloat(plant.pot.width)
+                } else if newOffsetX > positionDelegate.width - CGFloat(plant.pot.height) {
+                    offsetX = positionDelegate.width - CGFloat(plant.pot.height)
                 } else {
                     offsetX = newOffsetX
                 }

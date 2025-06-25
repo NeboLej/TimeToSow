@@ -12,16 +12,16 @@ struct Seed: Hashable {
     var name: String = ""
     var availavlePotTypes: [PotType] = []
     var image: String = ""
-    var width: Int
+    var height: Int
     var rootCoordinateCoef: CGPoint?
     var startTimeInterval: Int
     var endTimeInterval: Int
     
-    init(name: String, availavlePotTypes: [PotType], image: String, width: Int, rootCoordinateCoef: CGPoint? = nil, startTimeInterval: Int, endTimeInterval: Int) {
+    init(name: String, availavlePotTypes: [PotType], image: String, height: Int, rootCoordinateCoef: CGPoint? = nil, startTimeInterval: Int, endTimeInterval: Int) {
         self.name = name
         self.availavlePotTypes = availavlePotTypes
         self.image = image
-        self.width = width
+        self.height = height
         self.rootCoordinateCoef = rootCoordinateCoef
         self.startTimeInterval = startTimeInterval
         self.endTimeInterval = endTimeInterval

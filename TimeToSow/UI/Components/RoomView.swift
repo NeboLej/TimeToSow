@@ -46,6 +46,7 @@ struct RoomView: View {
     func plants() -> some View {
         ForEach(room.plants, id: \.self) {
             PlantView(plant: $0, positionDelegate: self)
+                .zIndex(getOffsetY(line: $0.line))
         }
     }
     
@@ -67,23 +68,23 @@ struct RoomView: View {
 extension RoomView: PositionPlantDelegate {
     
     func getPositionPlant(plant: Plant) -> CGPoint {
-        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
     }
     
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
-        let y = y + CGFloat(plant.pot.width) + CGFloat(plant.seed.width)
+        let y = y + CGFloat(plant.pot.height) + CGFloat(plant.seed.height)
         
         let shelfs = room.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
         
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
-                if x >= shelf.paddingLeading - CGFloat(plant.pot.width) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.width) / 2 {
-                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+                if x >= shelf.paddingLeading - CGFloat(plant.pot.height) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.height) / 2 {
+                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
                 }
             }
         }
         
-        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.width) - CGFloat(plant.seed.width) + 1)
+        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
     }
     
     private func getOffsetY(line: Int) -> CGFloat {
