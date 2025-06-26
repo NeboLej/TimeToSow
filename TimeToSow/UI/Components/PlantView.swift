@@ -36,24 +36,26 @@ struct PlantView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: CGFloat(plant.seed.height))
-                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height),
-                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height))
+                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
+                        + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height),
+                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
+                        + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height))
                 .zIndex(10)
             
             ZStack {
                 Image(plant.pot.image)
                     .resizable()
                     .scaledToFit()
-                    
                 Image(plant.pot.image)
                     .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
                     .clipShape(AngledShape())
                     .foregroundStyle(.black.opacity(0.2))
-                    
-            }.frame(height: CGFloat(plant.pot.height))
-
+                
+            }
+            .frame(height: CGFloat(plant.pot.height))
+            
             if isShowDust {
                 DustView(width: CGFloat(plant.pot.height))
             }
@@ -61,6 +63,9 @@ struct PlantView: View {
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
         .onChange(of: plant) { oldValue, newValue in
+            plantsFall()
+        }
+        .onAppear {
             plantsFall()
         }
         .gesture(DragGesture()
@@ -75,8 +80,8 @@ struct PlantView: View {
                 
                 if newOffsetX < 0 {
                     offsetX = 0
-                } else if newOffsetX > positionDelegate.width - CGFloat(plant.pot.height) {
-                    offsetX = positionDelegate.width - CGFloat(plant.pot.height)
+                } else if newOffsetX > positionDelegate.width - plant.pot.width {
+                    offsetX = positionDelegate.width - plant.pot.width
                 } else {
                     offsetX = newOffsetX
                 }

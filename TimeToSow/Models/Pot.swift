@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum PotType: Hashable, Equatable, CaseIterable {
     case small, medium, large
@@ -17,11 +18,25 @@ struct Pot: Hashable {
     let name: String
     let image: String
     let height: Int
+    let anchorPointCoefficient: CGPoint?
+    let width: CGFloat
     
-    init(potType: PotType, name: String, image: String, width: Int) {
+    init(potType: PotType, name: String, image: String, height: Int, anchorPointCoefficient: CGPoint? = nil) {
         self.potType = potType
         self.name = name
         self.image = image
-        self.height = width
+        self.height = height
+        self.anchorPointCoefficient = anchorPointCoefficient
+        
+        let image = UIImage(named: image)
+        let originalWidth = image?.size.width
+        let originalHeight = image?.size.height
+
+        if let originalHeight, let originalWidth {
+            width = CGFloat(height) * (originalWidth / originalHeight)
+        } else {
+            width =  CGFloat(height)
+        }
+        
     }
 }

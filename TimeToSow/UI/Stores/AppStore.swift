@@ -75,7 +75,7 @@ extension AppStore {
                                 pot: potRepository.getRandomPot(),
                                 tag: .init(name: "", color: ""),
                                 line: (0...currentRoom.shelfType.shelfPositions.count).randomElement()!,
-                                offsetX: 100)
+                                offsetX: Double((10...350).randomElement()!))
         currentRoom = currentRoom.copy(plants: currentRoom.plants + [randomPlant])
         return currentRoom
     }

@@ -30,7 +30,7 @@ struct RoomView: View {
                 plants()
                     .id(room)
 //                для тестирования позиций полок
-//                shelfsTest()
+                shelfsTest()
                 
             }
         }
@@ -68,7 +68,7 @@ struct RoomView: View {
 extension RoomView: PositionPlantDelegate {
     
     func getPositionPlant(plant: Plant) -> CGPoint {
-        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
+        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
     }
     
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
@@ -78,13 +78,13 @@ extension RoomView: PositionPlantDelegate {
         
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
-                if x >= shelf.paddingLeading - CGFloat(plant.pot.height) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.height) / 2 {
-                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
+                if x >= shelf.paddingLeading - CGFloat(plant.pot.width) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.width) / 2 {
+                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
                 }
             }
         }
         
-        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height) + 1)
+        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
     }
     
     private func getOffsetY(line: Int) -> CGFloat {

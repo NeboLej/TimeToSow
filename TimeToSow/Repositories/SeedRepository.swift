@@ -126,5 +126,20 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              height: 100,
              startTimeInterval: 10,
              endTimeInterval: 100),
+        
+        Seed(name: "asasd2",
+             availavlePotTypes: [.large],
+             image: "seed17",
+             height: 40,
+             startTimeInterval: 10,
+             endTimeInterval: 100),
+        
+        Seed(name: "asasd2",
+             availavlePotTypes: [.large],
+             image: "seed18",
+             height: 44,
+             rootCoordinateCoef: .init(x: 0.1, y: 0),
+             startTimeInterval: 10,
+             endTimeInterval: 100),
     ]
 }
