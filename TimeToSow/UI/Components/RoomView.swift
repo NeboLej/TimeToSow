@@ -30,7 +30,7 @@ struct RoomView: View {
                 plants()
                     .id(room)
 //                для тестирования позиций полок
-                shelfsTest()
+//                shelfsTest()
                 
             }
         }
@@ -73,12 +73,13 @@ extension RoomView: PositionPlantDelegate {
     
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
         let y = y + CGFloat(plant.pot.height) + CGFloat(plant.seed.height)
-        
+        let deltaX = [plant.pot.width, plant.seed.width].max()! / 2
+        print(deltaX)
         let shelfs = room.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
         
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
-                if x >= shelf.paddingLeading - CGFloat(plant.pot.width) / 2 && x <= width - shelf.paddingTrailing - CGFloat(plant.pot.width) / 2 {
+                if x + deltaX >= shelf.paddingLeading  && x + deltaX <= width - shelf.paddingTrailing {
                     return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
                 }
             }

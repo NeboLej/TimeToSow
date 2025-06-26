@@ -5,7 +5,7 @@
 //  Created by Nebo on 09.05.2025.
 //
 
-import Foundation
+import UIKit
 
 struct Seed: Hashable {
     var id: UUID = UUID.init()
@@ -16,6 +16,7 @@ struct Seed: Hashable {
     var rootCoordinateCoef: CGPoint?
     var startTimeInterval: Int
     var endTimeInterval: Int
+    var width: CGFloat
     
     init(name: String, availavlePotTypes: [PotType], image: String, height: Int, rootCoordinateCoef: CGPoint? = nil, startTimeInterval: Int, endTimeInterval: Int) {
         self.name = name
@@ -25,5 +26,15 @@ struct Seed: Hashable {
         self.rootCoordinateCoef = rootCoordinateCoef
         self.startTimeInterval = startTimeInterval
         self.endTimeInterval = endTimeInterval
+        
+        let image = UIImage(named: image)
+        let originalWidth = image?.size.width
+        let originalHeight = image?.size.height
+
+        if let originalHeight, let originalWidth {
+            width = CGFloat(height) * (originalWidth / originalHeight)
+        } else {
+            width =  CGFloat(height)
+        }
     }
 }
