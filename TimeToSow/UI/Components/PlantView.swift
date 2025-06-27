@@ -60,6 +60,7 @@ struct PlantView: View {
                 DustView(width: CGFloat(plant.pot.height))
             }
         }
+        .flatShadow(distanceToLight: offsetY)
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
         .onChange(of: plant) { oldValue, newValue in

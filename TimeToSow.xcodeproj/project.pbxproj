@@ -21,6 +21,7 @@
 		8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */; };
 		8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2E2E06E38600AA6AFA /* View + extension.swift */; };
 		8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */; };
+		8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -55,6 +56,7 @@
 		8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + extension.swift"; sourceTree = "<group>"; };
 		8EC86E2E2E06E38600AA6AFA /* View + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + extension.swift"; sourceTree = "<group>"; };
 		8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomScreen.swift; sourceTree = "<group>"; };
+		8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatShadow.swift; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMonthRoom.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				8EF5756C2DCE4E8700AEC31A /* RoomView.swift */,
+				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
 				8EC86E062E0628E400AA6AFA /* DustView.swift */,
 				8EF5758A2DDA125A00AEC31A /* StrokeText.swift */,
@@ -329,6 +332,7 @@
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
 				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
+				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,

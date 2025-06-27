@@ -24,7 +24,7 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                                             ShelfPosition(coefOffsetY: 0.256, paddingLeading: 39, paddingTrailing: 170),
                                             ShelfPosition(coefOffsetY: 0.252, paddingLeading: 280, paddingTrailing: 19),
                                            ]),
-                      roomType: .init(name: "May", image: "room1"),
+                      roomType: .init(name: "May", image: "room9"),
                       name: "May",
                       dateCreate: Date(),
                       plants: [
