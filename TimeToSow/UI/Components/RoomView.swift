@@ -21,7 +21,7 @@ struct RoomView: View {
     @State var width: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack {
             GeometryReader { proxy in
                 Image(room.roomType.image)
                     .resizable()
@@ -29,10 +29,12 @@ struct RoomView: View {
                     .resizable()
                 plants()
                     .id(room)
+               
 //                для тестирования позиций полок
 //                shelfsTest()
                 
             }
+//            window()
         }
         .frame(height: height)
         .onGeometryChange(for: CGSize.self) { proxy in
@@ -49,6 +51,27 @@ struct RoomView: View {
                 .zIndex(getOffsetY(line: $0.line))
         }
     }
+    
+//    @ViewBuilder
+//    func window() -> some View {
+//        HStack(spacing: 15) {
+//            Rectangle()
+//                .scale(x: 0.8, y: 1, anchor: .trailing)
+//            
+//            VStack(spacing: 10) {
+//                Rectangle()
+//                    .frame(height: 70)
+//                Rectangle()
+//                
+//            }
+//        }
+//        .frame(width: 180, height: 200)
+//        .foregroundStyle(.white.opacity(0.08))
+//        .blendMode(.plusLighter)
+//            .transformEffect(CGAffineTransform(a: 1, b: 0, c: -0.2, d: 1, tx: 0, ty: 0))
+//            .allowsHitTesting(false)
+//            .offset(x: -100, y: -15)
+//    }
     
     @ViewBuilder
     func shelfsTest() -> some View {
