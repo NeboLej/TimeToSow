@@ -22,11 +22,11 @@ struct PlantView: View {
     
     init(plant: Plant, positionDelegate: PositionPlantDelegate) {
         self.plant = plant
-        let startPosition = positionDelegate.getPositionPlant(plant: plant)
-        self.offsetX = startPosition.x
-        self.offsetY = startPosition.y
-        self.accumulatedX = startPosition.x
-        self.accumulatedY = startPosition.y
+        
+        self.offsetX = plant.offsetX
+        self.offsetY = plant.offsetY
+        self.accumulatedX = plant.offsetX
+        self.accumulatedY = plant.offsetY
         self.positionDelegate = positionDelegate
     }
     
@@ -63,9 +63,7 @@ struct PlantView: View {
         .flatShadow(distanceToLight: offsetY)
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
-        .onChange(of: plant) { oldValue, newValue in
-            plantsFall()
-        }
+        .zIndex(abs(offsetY))
         .onAppear {
             plantsFall()
         }
@@ -81,8 +79,8 @@ struct PlantView: View {
                 
                 if newOffsetX < 0 {
                     offsetX = 0
-                } else if newOffsetX > positionDelegate.width - plant.pot.width {
-                    offsetX = positionDelegate.width - plant.pot.width
+                } else if newOffsetX > positionDelegate.roomViewWidth - plant.pot.width {
+                    offsetX = positionDelegate.roomViewWidth - plant.pot.width
                 } else {
                     offsetX = newOffsetX
                 }
@@ -100,8 +98,10 @@ struct PlantView: View {
     }
     
     private func plantsFall() {
+        let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
+        if point.x == offsetX && point.y == offsetY { return }
+        
         withAnimation(.easeIn) {
-            let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
             offsetY = point.y
             offsetX = point.x
         } completion: {

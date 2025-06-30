@@ -122,5 +122,11 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
             height: 16,
             anchorPointCoefficient: .init(x: -0.15, y: 0)),
         
+        Pot(potType: .medium,
+            name: "aeded",
+            image: "pot21",
+            height: 24,
+            anchorPointCoefficient: .init(x: -0.15, y: 0)),
+        
     ]
 }

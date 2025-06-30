@@ -44,19 +44,18 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                         
                         Plant(seed:         Seed(name: "asasd2",
                                                  availavlePotTypes: [.large],
-                                                 image: "seed15",
+                                                 image: "seed10",
                                                  height: 35,
                                                  startTimeInterval: 10,
                                                  endTimeInterval: 100),
                               
                               pot:         Pot(potType: .small,
                                                name: "aeded",
-                                               image: "pot13",
-                                               height: 16,
+                                               image: "pot21",
+                                               height: 24,
                                                anchorPointCoefficient: .init(x: -0.15, y: 0)),
                               tag: Tag(name: "job",
-                                       color: "555555"),
-                              line: 0)
+                                       color: "555555"))
                       ])
     }
 }

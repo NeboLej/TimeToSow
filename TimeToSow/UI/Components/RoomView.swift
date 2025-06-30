@@ -9,19 +9,23 @@ import SwiftUI
 import UIKit
 
 protocol PositionPlantDelegate {
-    var width: CGFloat { get }
-    func getPositionPlant(plant: Plant) -> CGPoint
+    var roomViewWidth: CGFloat { get }
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint
+}
+
+protocol PlantEditorDelegate {
+    func editPisitionPlant(plant: Plant, newPosition: CGPoint)
 }
 
 struct RoomView: View {
     
     @Binding var room: UserMonthRoom
     @State var height: CGFloat = 400
-    @State var width: CGFloat = 0
+    @State var roomViewWidth: CGFloat = 0
+    @State var plantEditorDelegate: PlantEditorDelegate?
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             GeometryReader { proxy in
                 Image(room.roomType.image)
                     .resizable()
@@ -34,13 +38,12 @@ struct RoomView: View {
 //                shelfsTest()
                 
             }
-//            window()
         }
         .frame(height: height)
         .onGeometryChange(for: CGSize.self) { proxy in
             proxy.size
         } action: { newValue in
-            width = newValue.width
+            roomViewWidth = newValue.width
         }
     }
     
@@ -48,7 +51,6 @@ struct RoomView: View {
     func plants() -> some View {
         ForEach(room.plants, id: \.self) {
             PlantView(plant: $0, positionDelegate: self)
-                .zIndex(getOffsetY(line: $0.line))
         }
     }
     
@@ -90,30 +92,28 @@ struct RoomView: View {
 
 extension RoomView: PositionPlantDelegate {
     
-    func getPositionPlant(plant: Plant) -> CGPoint {
-        CGPoint(x: plant.offsetX, y: getOffsetY(line: plant.line) - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
-    }
-    
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
+        let result: CGPoint
         let y = y + CGFloat(plant.pot.height) + CGFloat(plant.seed.height)
         let deltaX = [plant.pot.width, plant.seed.width].max()! / 2
-        print(deltaX)
+        
+        defer {
+            plantEditorDelegate?.editPisitionPlant(plant: plant, newPosition: result)
+        }
+        
         let shelfs = room.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
         
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
-                if x + deltaX >= shelf.paddingLeading  && x + deltaX <= width - shelf.paddingTrailing {
-                    return CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
+                if x + deltaX >= shelf.paddingLeading  && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
+                    result = CGPoint(x: x, y: shelf.coefOffsetY * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
+                    return result
                 }
             }
         }
+        result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
         
-        return CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
-    }
-    
-    private func getOffsetY(line: Int) -> CGFloat {
-        let coefOffsetY = room.shelfType.shelfPositions[safe: line]?.coefOffsetY ?? room.shelfType.shelfPositions.last?.coefOffsetY ?? 1
-        return coefOffsetY * height
+        return result
     }
 }
 

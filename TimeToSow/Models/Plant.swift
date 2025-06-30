@@ -8,21 +8,33 @@
 import Foundation
 
 struct Plant: Hashable {
-    let id: UUID = UUID.init()
+    let id: UUID
     let seed: Seed
     let pot: Pot
     let tag: Tag
     
-    let line: Int
+    let offsetY: Double
     let offsetX: Double
     let time: Int = 0
     
+    static func == (lhs: Plant, rhs: Plant) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.seed == rhs.seed &&
+        lhs.pot == rhs.pot &&
+        lhs.tag == rhs.tag &&
+        lhs.time == rhs.time
+    }
     
-    init(seed: Seed, pot: Pot, tag: Tag, line: Int = 0, offsetX: Double = 40) {
+    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100) {
+        self.id = id
         self.seed = seed
         self.pot = pot
         self.tag = tag
-        self.line = line
         self.offsetX = offsetX
+        self.offsetY = offsetY
+    }
+    
+    func copy(offsetX: Double? = nil, offsetY: Double? = nil) -> Plant {
+        Plant(id: self.id, seed: self.seed, pot: self.pot, tag: self.tag, offsetX: offsetX ?? self.offsetX, offsetY: offsetY ?? self.offsetY)
     }
 }

@@ -22,7 +22,8 @@ struct HomeScreen: View {
     var body: some View {
         ZStack {
             ScrollView {
-                RoomView(room: $localStore.currenRoom)
+                RoomView(room: $localStore.currenRoom,
+                         plantEditorDelegate: self)
                     .gesture(TapGesture().onEnded {
                         withAnimation(.easeInOut) {
                             isShowMenu.toggle()
