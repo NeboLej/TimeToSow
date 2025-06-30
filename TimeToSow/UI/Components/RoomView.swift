@@ -32,6 +32,7 @@ struct RoomView: View {
                 Image(room.shelfType.image)
                     .resizable()
                 plants()
+                    .id(room.shelfType.id)
 //                для тестирования позиций полок
 //                shelfsTest()
                 
