@@ -105,6 +105,8 @@ struct PlantView: View {
             offsetY = point.y
             offsetX = point.x
         } completion: {
+            accumulatedX = offsetX
+            accumulatedY = offsetY
             Vibration.medium.vibrate()
             isShowDust = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

@@ -13,7 +13,7 @@ struct UserMonthRoom: Hashable {
     let roomType: RoomType
     let name: String
     let dateCreate: Date
-    let plants: [Plant]
+    var plants: [Plant]
     
     init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [Plant]) {
         self.id = id
@@ -24,7 +24,7 @@ struct UserMonthRoom: Hashable {
         self.plants = plants
     }
     
-    func copy(id: UUID = UUID.init(), shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [Plant]? = nil) -> UserMonthRoom {
+    func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [Plant]? = nil) -> UserMonthRoom {
         UserMonthRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
                       roomType: roomType ?? self.roomType, name: name ?? self.name,
                       dateCreate: self.dateCreate, plants: plants ?? self.plants)

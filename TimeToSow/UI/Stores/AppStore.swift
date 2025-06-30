@@ -53,11 +53,11 @@ class AppStore {
         shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
     }
     
-    func changePlant(plant: Plant) {
-        var newPlants = currentRoom.plants
-        if let index = newPlants.firstIndex(where: { $0.id == plant.id }) {
-            newPlants[index] = plant
-            currentRoom = currentRoom.copy(plants: newPlants)
+    func updatePlant(with newPlant: Plant) {
+        if let index = currentRoom.plants.firstIndex(where: { $0.id == newPlant.id }) {
+            currentRoom.plants[index] = newPlant
+        } else {
+            currentRoom.plants.append(newPlant)
         }
     }
     
@@ -84,7 +84,7 @@ extension AppStore {
                                 tag: .init(name: "", color: ""),
                                 offsetX: Double((10...350).randomElement()!),
                                 offsetY: Double((10...350).randomElement()!))
-        currentRoom = currentRoom.copy(plants: currentRoom.plants + [randomPlant])
+        updatePlant(with: randomPlant)
         return currentRoom
     }
 }

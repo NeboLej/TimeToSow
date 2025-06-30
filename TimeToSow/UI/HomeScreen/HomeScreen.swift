@@ -32,11 +32,14 @@ struct HomeScreen: View {
                     .overlay(alignment: .trailing) {
                         cityMenu()
                     }
+                    .zIndex(100)
 #if DEBUG
                 debugConsole()
+                    .zIndex(90)
 #endif
                 newPlantSection()
                     .offset(y: -20)
+                    .zIndex(90)
                 Group {
                     Rectangle()
                         .frame(height: 300)

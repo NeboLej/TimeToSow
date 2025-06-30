@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Plant: Hashable {
+struct Plant: Hashable, Identifiable {
     let id: UUID
     let seed: Seed
     let pot: Pot

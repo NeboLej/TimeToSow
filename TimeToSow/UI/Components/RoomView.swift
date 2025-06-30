@@ -32,8 +32,6 @@ struct RoomView: View {
                 Image(room.shelfType.image)
                     .resizable()
                 plants()
-                    .id(room)
-               
 //                для тестирования позиций полок
 //                shelfsTest()
                 
@@ -49,31 +47,10 @@ struct RoomView: View {
     
     @ViewBuilder
     func plants() -> some View {
-        ForEach(room.plants, id: \.self) {
+        ForEach(room.plants, id: \.id) {
             PlantView(plant: $0, positionDelegate: self)
         }
     }
-    
-//    @ViewBuilder
-//    func window() -> some View {
-//        HStack(spacing: 15) {
-//            Rectangle()
-//                .scale(x: 0.8, y: 1, anchor: .trailing)
-//            
-//            VStack(spacing: 10) {
-//                Rectangle()
-//                    .frame(height: 70)
-//                Rectangle()
-//                
-//            }
-//        }
-//        .frame(width: 180, height: 200)
-//        .foregroundStyle(.white.opacity(0.08))
-//        .blendMode(.plusLighter)
-//            .transformEffect(CGAffineTransform(a: 1, b: 0, c: -0.2, d: 1, tx: 0, ty: 0))
-//            .allowsHitTesting(false)
-//            .offset(x: -100, y: -15)
-//    }
     
     @ViewBuilder
     func shelfsTest() -> some View {
