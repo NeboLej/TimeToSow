@@ -22,19 +22,18 @@ struct HomeScreen: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
-                    RoomView(room: $localStore.currenRoom,
-                             plantEditorDelegate: self)
-                    .gesture(TapGesture().onEnded {
-                        withAnimation(.easeInOut) {
-                            isShowMenu.toggle()
+                    roomView()
+                        .zIndex(100)
+                        .gesture(TapGesture().onEnded {
+                            withAnimation(.easeInOut) {
+                                isShowMenu.toggle()
+                            }
+                        })
+                        .overlay(alignment: .trailing) {
+                            cityMenu()
                         }
-                    })
-                    .overlay(alignment: .trailing) {
-                        cityMenu()
-                    }
-                    .zIndex(100)
                     
                     if isMovePlant {
                         editPlantSection()
@@ -42,27 +41,14 @@ struct HomeScreen: View {
                         selectPlantSection()
                     } else {
                         newPlantSection()
-                            .zIndex(90)
                     }
-    #if DEBUG
-                debugConsole()
-                    .zIndex(90)
-    #endif
-                    
-                    Group {
-                        Rectangle()
-                            .frame(height: 300)
-                            .foregroundStyle(.black)
-                        Rectangle()
-                            .frame(height: 100)
-                            .foregroundStyle(.white)
-                    }
-                    .cornerRadius(20)
+#if DEBUG
+                    debugConsole()
+#endif
                 }
-                
-
             }
-            .background(.gray)
+            .coordinateSpace(name: "SCROLL")
+            .background(.gray.opacity(0.5))
         }
         .ignoresSafeArea(.all, edges: .top)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
@@ -74,6 +60,21 @@ struct HomeScreen: View {
             localStore.bindRoom(appStore.currentRoom)
         }
         
+    }
+    
+    @ViewBuilder
+    private func roomView() -> some View {
+        GeometryReader { proxy in
+            let minY = proxy.frame(in: .named("SCROLL")).minY
+            
+            RoomView(room: $localStore.currenRoom,
+                     plantEditorDelegate: self)
+            .offset(y: minY > 0 ? -minY : 0)
+            .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,
+                         y: minY > 0 ? 1 + minY / 1000 : 1,
+                         anchor: .top)
+        }
+        .frame(height: 400)
     }
     
     @ViewBuilder
@@ -113,8 +114,7 @@ struct HomeScreen: View {
             Button("Plant") {
                 localStore.bindRoom(appStore.addRandomPlantToShelf())
             }
-        }
-        .opacity(0.4)
+        }.padding(.vertical, 30)
     }
     
     @State var isInTargetZone = false

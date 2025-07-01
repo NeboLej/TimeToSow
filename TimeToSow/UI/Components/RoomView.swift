@@ -32,9 +32,12 @@ struct RoomView: View {
             GeometryReader { proxy in
                 Image(room.roomType.image)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                 Image(room.shelfType.image)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                 plants()
+                
                     .id(room.shelfType.id)
 //                для тестирования позиций полок
 //                shelfsTest()
