@@ -74,6 +74,7 @@ struct PlantView: View {
                 if !isDragging {
                     isDragging = true
                     Vibration.light.vibrate()
+                    positionDelegate.beganToChangePosition()
                     startShaking()
                 }
                 

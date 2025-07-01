@@ -12,18 +12,20 @@ struct HomeScreen: View {
     @Environment(\.appStore) var appStore: AppStore
     @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     
-    @State var activityType: Int = 0
-    @State var selectedTime: Int = 50
-    @State var selectedElement: PickerElement = .new
-    @State var localStore = HomeScreenLocalStore()
-    @State var isShowMenu: Bool = false
-    @State var isShowEditRoom = false
+    @State private var activityType: Int = 0
+    @State private var selectedTime: Int = 50
+    @State private var selectedElement: PickerElement = .new
+    @State private var localStore = HomeScreenLocalStore()
+    @State private var isShowMenu: Bool = false
+    @State private var isShowEditRoom = false
+    @State var selectedPlant: Plant?
     
     var body: some View {
         ZStack {
             ScrollView {
-                RoomView(room: $localStore.currenRoom,
-                         plantEditorDelegate: self)
+                VStack(spacing: 0) {
+                    RoomView(room: $localStore.currenRoom,
+                             plantEditorDelegate: self)
                     .gesture(TapGesture().onEnded {
                         withAnimation(.easeInOut) {
                             isShowMenu.toggle()
@@ -33,25 +35,32 @@ struct HomeScreen: View {
                         cityMenu()
                     }
                     .zIndex(100)
-#if DEBUG
+                    
+                    if isMovePlant {
+                        editPlantSection()
+                    } else if selectedPlant != nil {
+                        selectPlantSection()
+                    } else {
+                        newPlantSection()
+                            .zIndex(90)
+                    }
+    #if DEBUG
                 debugConsole()
                     .zIndex(90)
-#endif
-                newPlantSection()
-                    .offset(y: -20)
-                    .zIndex(90)
-                Group {
-                    Rectangle()
-                        .frame(height: 300)
-                        .foregroundStyle(.black)
-                    Rectangle()
-                        .frame(height: 100)
-                        .foregroundStyle(.black)
+    #endif
+                    
+                    Group {
+                        Rectangle()
+                            .frame(height: 300)
+                            .foregroundStyle(.black)
+                        Rectangle()
+                            .frame(height: 100)
+                            .foregroundStyle(.white)
+                    }
+                    .cornerRadius(20)
                 }
                 
-                .cornerRadius(20)
-                .padding(.horizontal, 8)
-                .offset(y: -20)
+
             }
             .background(.gray)
         }
@@ -91,7 +100,7 @@ struct HomeScreen: View {
     }
     
     @ViewBuilder
-    func debugConsole() -> some View {
+    private func debugConsole() -> some View {
         HStack {
             Button("Room") {
                 localStore.bindRoom(appStore.setRandomRoom())
@@ -104,23 +113,28 @@ struct HomeScreen: View {
             Button("Plant") {
                 localStore.bindRoom(appStore.addRandomPlantToShelf())
             }
-        }.padding(.bottom, 20)
+        }
+        .opacity(0.4)
     }
     
+    @State var isInTargetZone = false
+    @State var targetFrame: CGRect = .zero
+    @State var isMovePlant = false
+    
     @ViewBuilder
-    func newPlantSection() -> some View {
-        VStack {
+    private func selectPlantSection() -> some View {
+        VStack(spacing: 0) {
+            Text("Update Plant")
+                .font(.myTitle(30))
+                .padding(.top, 16)
+                .foregroundStyle(.black)
+                .padding(.bottom, 16)
             HStack(spacing: 0) {
-                VStack {
-                    Text("New Plant")
-                        .font(.myTitle(40))
-                        .padding(.top, 24)
-                        .foregroundStyle(.black)
-                    Spacer()
+                VStack(spacing: 0) {
                     NumericText(text: $selectedTime)
                         .font(.myTitle(40))
                         .foregroundStyle(.black)
-                    Spacer()
+                    
                     Button {
                         print("start")
                     } label: {
@@ -129,24 +143,124 @@ struct HomeScreen: View {
                             .frame(width: 140, height: 60)
                     }
                 }
-                VStack {
-                    SelectPickerView(selectedElement: $selectedElement)
-                        .padding(.horizontal, 0)
-                    Image(ImageResource.plantActivity)
-                        .offset(x: 10)
-                }
-                .padding(.all, 16)
+                Spacer()
+                selectedPlantPreview(plant: selectedPlant!)
+                    .padding(.bottom, 20)
+                Spacer()
             }
-            .padding(.bottom, 20)
+            
             TimePickerView(selectedTime: $selectedTime)
                 .frame(height: 100)
                 .padding(.horizontal, 0)
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 16)
         .frame(maxWidth: .infinity)
         .background {
             Image(.sectionBackground)
                 .resizable()
+        }
+    }
+    
+    @ViewBuilder
+    private func editPlantSection() -> some View {
+        HStack {
+            VStack(spacing: 5) {
+                Text("Delete Plant")
+                    .font(.myTitle(25))
+                    .foregroundStyle(.black)
+                Rectangle()
+                    .fill(Color.red)
+                    .frame(height: 200)
+            }
+            
+            VStack(spacing: 5) {
+                Text("Update Plant")
+                    .font(.myTitle(25))
+                    .foregroundStyle(.black)
+                Rectangle()
+                    .fill(Color.green)
+                    .frame(height: 200)
+                    .background(
+                        GeometryReader { geometry in
+                            Color.clear
+                                .onAppear {
+                                    self.targetFrame = geometry.frame(in: .global)
+                                }
+                                .onChange(of: geometry.frame(in: .global)) { newFrame in
+                                    self.targetFrame = newFrame
+                                }
+                        }
+                    )
+                    .overlay {
+                        if isMovePlant {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(isInTargetZone ? Color.green : Color.red, lineWidth: 2)
+                        }
+                    }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background {
+            Image(.sectionBackground)
+                .resizable()
+        }
+    }
+    
+    @ViewBuilder
+    private func newPlantSection() -> some View {
+        VStack(spacing: 0) {
+            Text("New Plant")
+                .font(.myTitle(30))
+                .padding(.top, 16)
+                .foregroundStyle(.black)
+            HStack(spacing: 0) {
+                VStack {
+                    NumericText(text: $selectedTime)
+                        .font(.myTitle(40))
+                        .foregroundStyle(.black)
+                    Button {
+                        print("start")
+                    } label: {
+                        TextEllipseStrokeView(text: "Start", font: .myButton(30), isSelected: true)
+                            .foregroundStyle(Color(UIColor.systemPink))
+                            .frame(width: 140, height: 20)
+                    }
+                }
+                Spacer()
+                Image(ImageResource.plantActivity)
+                    .offset(x: 10)
+            }
+            .padding(.bottom, 8)
+            TimePickerView(selectedTime: $selectedTime)
+                .frame(height: 100)
+                .padding(.horizontal, 0)
+        }
+        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity)
+        .background {
+            Image(.sectionBackground)
+                .resizable()
+        }
+    }
+    
+    
+    private let zoomCoef: CGFloat = 2.0
+    @ViewBuilder
+    private func selectedPlantPreview(plant: Plant) -> some View {
+        VStack(alignment: .center, spacing: 0) {
+            Image(plant.seed.image)
+                .resizable()
+                .scaledToFit()
+                .frame(height: CGFloat(plant.seed.height) * zoomCoef)
+                .offset(x: ((plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
+                            + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height)) * zoomCoef ,
+                        y: ((plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
+                            + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height)) * zoomCoef)
+            Image(plant.pot.image)
+                .resizable()
+                .scaledToFit()
+                .frame(height: CGFloat(plant.pot.height) * zoomCoef)
         }
     }
 }

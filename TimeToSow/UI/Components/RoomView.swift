@@ -11,10 +11,13 @@ import UIKit
 protocol PositionPlantDelegate {
     var roomViewWidth: CGFloat { get }
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint
+    func beganToChangePosition()
 }
 
 protocol PlantEditorDelegate {
-    func editPisitionPlant(plant: Plant, newPosition: CGPoint)
+    func editPositionPlant(plant: Plant, newPosition: CGPoint)
+    func positionFixedOutsideTheRoom(plant: Plant, newPosition: CGPoint)
+    func beganToChangePosition()
 }
 
 struct RoomView: View {
@@ -76,7 +79,7 @@ extension RoomView: PositionPlantDelegate {
         let deltaX = [plant.pot.width, plant.seed.width].max()! / 2
         
         defer {
-            plantEditorDelegate?.editPisitionPlant(plant: plant, newPosition: result)
+            plantEditorDelegate?.editPositionPlant(plant: plant, newPosition: result)
         }
         
         let shelfs = room.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
@@ -89,9 +92,14 @@ extension RoomView: PositionPlantDelegate {
                 }
             }
         }
-        result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
+        plantEditorDelegate?.positionFixedOutsideTheRoom(plant: plant, newPosition: CGPoint(x: x, y: y))
         
+        result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - CGFloat(plant.pot.height) - CGFloat(plant.seed.height))
         return result
+    }
+    
+    func beganToChangePosition() {
+        plantEditorDelegate?.beganToChangePosition()
     }
 }
 
