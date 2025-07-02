@@ -16,13 +16,10 @@ class RoomRepository: BaseRepository, RoomRepositoryProtocol {
     
     private var rooms: [RoomType] = [
         RoomType(name: "1", image: "room1"),
-        RoomType(name: "2", image: "room2"),
-        RoomType(name: "3", image: "room3"),
-        RoomType(name: "3", image: "room4"),
-        RoomType(name: "3", image: "room5"),
         RoomType(name: "3", image: "room7"),
         RoomType(name: "3", image: "room8"),
         RoomType(name: "3", image: "room9"),
+        RoomType(name: "3", image: "room10"),
     ]
     
     func getRandomRoom(except: RoomType?) -> RoomType {

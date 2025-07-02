@@ -131,6 +131,7 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              availavlePotTypes: [.large],
              image: "seed17",
              height: 40,
+             rootCoordinateCoef: .init(x: 0.05, y: 0),
              startTimeInterval: 10,
              endTimeInterval: 100),
         
