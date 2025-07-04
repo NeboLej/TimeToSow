@@ -12,6 +12,8 @@ struct HomeScreen: View {
     @Environment(\.appStore) var appStore: AppStore
     @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
+    @State private var grandColor: Color = .clear
     @State private var activityType: Int = 0
     @State private var selectedTime: Int = 50
     @State private var selectedElement: PickerElement = .new
@@ -21,7 +23,8 @@ struct HomeScreen: View {
     @State var selectedPlant: Plant?
     
     var body: some View {
-        ZStack {
+        VStack(spacing: 0) {
+            header()
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
                     roomView()
@@ -48,7 +51,7 @@ struct HomeScreen: View {
                 }
             }
             .coordinateSpace(name: "SCROLL")
-            .background(.gray.opacity(0.5))
+            .background(grandColor.opacity(0.5))
         }
         .ignoresSafeArea(.all, edges: .top)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
@@ -75,6 +78,18 @@ struct HomeScreen: View {
                          anchor: .top)
         }
         .frame(height: 400)
+    }
+    
+    @ViewBuilder
+    private func header() -> some View {
+        HStack {
+            Spacer()
+        }
+        .frame(height: safeAreaInsets.top )
+        .background(grandColor)
+        .onChange(of: localStore.currenRoom.roomType.image) { oldValue, newValue in
+            grandColor = Color.averageTopRowColor(from: UIImage(named: localStore.currenRoom.roomType.image))
+        }
     }
     
     @ViewBuilder

@@ -24,6 +24,13 @@ struct AppStoreKey: EnvironmentKey {
                                        potRepository: PotRepository())
 }
 
+
+private struct SafeAreaInsetsKey: EnvironmentKey {
+    static var defaultValue: UIEdgeInsets {
+        (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero)
+    }
+}
+
 extension EnvironmentValues {
     var screenBuilder: ScreenBuilder {
         get { self[ScreenBuilderKey.self] }
@@ -33,5 +40,9 @@ extension EnvironmentValues {
     var appStore: AppStore {
         get { self[AppStoreKey.self] }
         set { self[AppStoreKey.self] = newValue }
+    }
+    
+    var safeAreaInsets: UIEdgeInsets {
+        self[SafeAreaInsetsKey.self]
     }
 }

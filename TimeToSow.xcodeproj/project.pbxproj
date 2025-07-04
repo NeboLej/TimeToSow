@@ -24,6 +24,7 @@
 		8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */; };
 		8EC86F1A2E131B1300AA6AFA /* HomeScreen + PlantEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F192E131B1300AA6AFA /* HomeScreen + PlantEditor.swift */; };
 		8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */; };
+		8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F522E18547600AA6AFA /* Color + extension.swift */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -61,6 +62,7 @@
 		8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatShadow.swift; sourceTree = "<group>"; };
 		8EC86F192E131B1300AA6AFA /* HomeScreen + PlantEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeScreen + PlantEditor.swift"; sourceTree = "<group>"; };
 		8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingFramesView.swift; sourceTree = "<group>"; };
+		8EC86F522E18547600AA6AFA /* Color + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extension.swift"; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMonthRoom.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				8EC86E042E06215C00AA6AFA /* Vibration.swift */,
+				8EC86F522E18547600AA6AFA /* Color + extension.swift */,
 				8EC86E2E2E06E38600AA6AFA /* View + extension.swift */,
 				8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */,
 			);
@@ -322,6 +325,7 @@
 				8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */,
 				8EF575672DCE435800AEC31A /* Tag.swift in Sources */,
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
+				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
 				8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */,
 				8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */,
