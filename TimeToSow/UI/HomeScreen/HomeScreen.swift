@@ -124,11 +124,25 @@ struct HomeScreen: View {
     @ViewBuilder
     private func selectPlantSection() -> some View {
         VStack(spacing: 0) {
-            Text("Update Plant")
-                .font(.myTitle(30))
-                .padding(.top, 16)
-                .foregroundStyle(.black)
-                .padding(.bottom, 16)
+            HStack {
+                Spacer()
+                Text("Update Plant")
+                    .font(.myTitle(30))
+                    .padding(.top, 16)
+                    .foregroundStyle(.black)
+                    .padding(.bottom, 16)
+                Spacer()
+                Button {
+                    withAnimation {
+                        selectedPlant = nil
+                    }
+                } label: {
+                    Image("iconClose")
+                        .resizable()
+                }
+                .frame(width: 30, height: 30)
+            }
+
             HStack(spacing: 0) {
                 VStack(spacing: 0) {
                     NumericText(text: $selectedTime)
@@ -163,44 +177,51 @@ struct HomeScreen: View {
     
     @ViewBuilder
     private func editPlantSection() -> some View {
-        HStack {
+        HStack(spacing: 16) {
             VStack(spacing: 5) {
                 Text("Delete Plant")
                     .font(.myTitle(25))
                     .foregroundStyle(.black)
-                Rectangle()
-                    .fill(Color.red)
-                    .frame(height: 200)
+                    .padding(.bottom, 8)
+                LoopingFramesView(frames: ["deleteAnimation1", "deleteAnimation2"], speed: 0.5)
+                    .overlay {
+                        if isMovePlant {
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(style: StrokeStyle(lineWidth: 4, dash: [12]))
+                                .foregroundColor(.strokeAcsent2)
+                        }
+                    }
             }
-            
+              
             VStack(spacing: 5) {
                 Text("Update Plant")
                     .font(.myTitle(25))
                     .foregroundStyle(.black)
-                Rectangle()
-                    .fill(Color.green)
-                    .frame(height: 200)
+                    .padding(.bottom, 8)
+                LoopingFramesView(frames: ["updateAnimation1", "updateAnimation2", "updateAnimation3", "updateAnimation4"], speed: 0.5)
                     .background(
                         GeometryReader { geometry in
                             Color.clear
                                 .onAppear {
                                     self.targetFrame = geometry.frame(in: .global)
                                 }
-                                .onChange(of: geometry.frame(in: .global)) { newFrame in
+                                .onChange(of: geometry.frame(in: .global)) { _ , newFrame in
                                     self.targetFrame = newFrame
                                 }
                         }
                     )
                     .overlay {
                         if isMovePlant {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(isInTargetZone ? Color.green : Color.red, lineWidth: 2)
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(style: StrokeStyle(lineWidth: 4, dash: [12]))
+                                .foregroundColor(.strokeAcsent1)
+                        
                         }
                     }
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
+        .padding(.all, 16)
         .background {
             Image(.sectionBackground)
                 .resizable()

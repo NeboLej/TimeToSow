@@ -30,13 +30,12 @@ struct TextEllipseStrokeView: View {
                             let trimmedPath = ellipsePath.trimmedPath(from: 0, to: progress)
                             context.stroke(
                                 trimmedPath,
-                                with: .color(.strokeAcsent),
+                                with: .color(.strokeAcsent1),
                                 lineWidth: 2.0
                             )
                         }
                     }
                 }
-
             }
 
 
@@ -50,8 +49,6 @@ struct TextEllipseStrokeView: View {
                     }
                 }
         }
-//        .frame(width: 250, height: 100)
-
     }
 
     private func createHandDrawnEllipsePath(for size: CGSize) -> Path {

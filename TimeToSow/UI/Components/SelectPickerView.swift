@@ -30,7 +30,7 @@ struct SelectPickerView: View {
             ForEach(pickerElements, id: \.id) { element in
                 TextEllipseStrokeView(text: element.name, isSelected: element == selectedElement)
                     .font(.caption)
-                    .foregroundColor(element == selectedElement ? .strokeAcsent : .strokeAcsent.opacity(0.9))
+                    .foregroundColor(element == selectedElement ? .strokeAcsent1 : .strokeAcsent1.opacity(0.9))
                     .onTapGesture {
                         selectedElement = element
                     }
