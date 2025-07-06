@@ -30,16 +30,15 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                       plants: [
                         Plant(seed:         Seed(name: "qwe",
                                                  availavlePotTypes: PotType.allCases,
-                                                 image: "seed27",
-                                                 height: 50,
-                                                 rootCoordinateCoef: .init(x: 0, y: 0.38),
+                                                 image: "seed28",
+                                                 height: 130,
                                                  startTimeInterval: 10,
                                                  endTimeInterval: 100),
                               
                               pot:         Pot(potType: .small,
                                                name: "aeded",
                                                image: "pot15",
-                                               height: 16,
+                                               height: 20,
                                                anchorPointCoefficient: .init(x: -0.15, y: 0)),
                               
                               tag: Tag(name: "job",

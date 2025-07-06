@@ -25,9 +25,11 @@ struct TimePickerView: View {
             HStack {
                 Text(String(minInterval))
                     .font(.myDescription(20))
+                    .foregroundStyle(.black)
                 Spacer()
                 Text(String(maxInterval))
                     .font(.myDescription(20))
+                    .foregroundStyle(.black)
             }
             .padding(.horizontal, 8)
             .padding(.bottom, -10)

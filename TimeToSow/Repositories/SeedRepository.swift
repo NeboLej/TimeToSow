@@ -210,5 +210,12 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              rootCoordinateCoef: .init(x: 0, y: 0.38),
              startTimeInterval: 10,
              endTimeInterval: 100),
+        
+        Seed(name: "qwe",
+             availavlePotTypes: PotType.allCases,
+             image: "seed28",
+             height: 130,
+             startTimeInterval: 10,
+             endTimeInterval: 100)
     ]
 }
