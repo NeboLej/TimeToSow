@@ -26,7 +26,7 @@ struct LoopingFramesView: View {
         Image(frames[frameIndex])
             .resizable()
             .scaledToFit()
-            .animation(.linear(duration: speed * 0.9), value: frameIndex)
+//            .animation(.linear(duration: speed * 0.9), value: frameIndex)
             .onReceive(timer) { _ in
                 frameIndex = (frameIndex + 1) % frames.count
             }

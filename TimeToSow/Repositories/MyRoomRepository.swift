@@ -28,34 +28,24 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                       name: "May",
                       dateCreate: Date(),
                       plants: [
-                        //                        Plant(seed: Seed(name: "asasd",
-                        //                                         availavlePotTypes: [.small, .large, .medium],
-                        //                                         image: "seed1",
-                        //                                         width: 25,
-                        //                                         startTimeInterval: 10,
-                        //                                         endTimeInterval: 100),
-                        //                              pot: Pot(potType: .medium,
-                        //                                       name: "aeded",
-                        //                                       image: "pot1",
-                        //                                       width: 20),
-                        //                              tag: Tag(name: "job",
-                        //                                       color: "555555"),
-                        //                              line: 1),
-                        
-                        Plant(seed:         Seed(name: "asasd2",
-                                                 availavlePotTypes: [.large],
-                                                 image: "seed10",
-                                                 height: 35,
+                        Plant(seed:         Seed(name: "qwe",
+                                                 availavlePotTypes: PotType.allCases,
+                                                 image: "seed27",
+                                                 height: 50,
+                                                 rootCoordinateCoef: .init(x: 0, y: 0.38),
                                                  startTimeInterval: 10,
                                                  endTimeInterval: 100),
                               
                               pot:         Pot(potType: .small,
                                                name: "aeded",
-                                               image: "pot21",
-                                               height: 24,
+                                               image: "pot15",
+                                               height: 16,
                                                anchorPointCoefficient: .init(x: -0.15, y: 0)),
+                              
                               tag: Tag(name: "job",
                                        color: "555555"))
-                      ])
+                      ]
+                      
+        )
     }
 }

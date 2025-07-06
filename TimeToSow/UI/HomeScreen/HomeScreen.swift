@@ -198,7 +198,7 @@ struct HomeScreen: View {
                     .font(.myTitle(25))
                     .foregroundStyle(.black)
                     .padding(.bottom, 8)
-                LoopingFramesView(frames: ["deleteAnimation1", "deleteAnimation2"], speed: 0.5)
+                LoopingFramesView(frames: ["deleteAnimation1", "deleteAnimation2", "deleteAnimation3", "deleteAnimation4", "deleteAnimation5", "deleteAnimation6"], speed: 0.15)
                     .overlay {
                         if isMovePlant {
                             RoundedRectangle(cornerRadius: 16)
@@ -284,20 +284,26 @@ struct HomeScreen: View {
     private let zoomCoef: CGFloat = 2.0
     @ViewBuilder
     private func selectedPlantPreview(plant: Plant) -> some View {
+        
+        let offetX = ((plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
+                      + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height)) * zoomCoef
+        let offsetY = ((plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
+                       + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height)) * zoomCoef
+        
         VStack(alignment: .center, spacing: 0) {
             Image(plant.seed.image)
                 .resizable()
                 .scaledToFit()
                 .frame(height: CGFloat(plant.seed.height) * zoomCoef)
-                .offset(x: ((plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
-                            + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height)) * zoomCoef ,
-                        y: ((plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
-                            + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height)) * zoomCoef)
+                .offset(x: offetX,
+                        y: offsetY)
+                .zIndex(10)
             Image(plant.pot.image)
                 .resizable()
                 .scaledToFit()
                 .frame(height: CGFloat(plant.pot.height) * zoomCoef)
         }
+        .offset(x: 0, y: -offsetY/1.3)
     }
 }
 

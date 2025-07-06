@@ -83,7 +83,7 @@ extension AppStore {
                                 pot: potRepository.getRandomPot(),
                                 tag: .init(name: "", color: ""),
                                 offsetX: Double((10...350).randomElement()!),
-                                offsetY: Double((10...350).randomElement()!))
+                                offsetY: Double((10...250).randomElement()!))
         updatePlant(with: randomPlant)
         return currentRoom
     }
