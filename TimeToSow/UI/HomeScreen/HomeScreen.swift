@@ -21,6 +21,7 @@ struct HomeScreen: View {
     @State private var isShowMenu: Bool = false
     @State private var isShowEditRoom = false
     @State var selectedPlant: Plant?
+    @State var isProgress = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -58,6 +59,11 @@ struct HomeScreen: View {
             localStore.bindRoom(appStore.currentRoom)
         }, content: {
             screenBuilder.getScreen(type: .editRoom)
+        })
+        .fullScreenCover(isPresented: $isProgress, onDismiss: {
+            isProgress = false
+        }, content: {
+            screenBuilder.getScreen(type: .progress(selectedTime))
         })
         .onAppear {
             localStore.bindRoom(appStore.currentRoom)
@@ -173,7 +179,7 @@ struct HomeScreen: View {
                     }
                 }
                 Spacer()
-                selectedPlantPreview(plant: selectedPlant!)
+                PlantPreview(zoomCoef: 2.0, plant: selectedPlant!)
                     .padding(.bottom, 20)
                 Spacer()
             }
@@ -257,6 +263,7 @@ struct HomeScreen: View {
                         .foregroundStyle(.black)
                     Button {
                         print("start")
+                        isProgress = true
                     } label: {
                         TextEllipseStrokeView(text: "Start", font: .myButton(30), isSelected: true)
                             .foregroundStyle(Color(UIColor.systemPink))
@@ -278,32 +285,6 @@ struct HomeScreen: View {
             Image(.sectionBackground)
                 .resizable()
         }
-    }
-    
-    
-    private let zoomCoef: CGFloat = 2.0
-    @ViewBuilder
-    private func selectedPlantPreview(plant: Plant) -> some View {
-        
-        let offetX = ((plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
-                      + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height)) * zoomCoef
-        let offsetY = ((plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
-                       + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height)) * zoomCoef
-        
-        VStack(alignment: .center, spacing: 0) {
-            Image(plant.seed.image)
-                .resizable()
-                .scaledToFit()
-                .frame(height: CGFloat(plant.seed.height) * zoomCoef)
-                .offset(x: offetX,
-                        y: offsetY)
-                .zIndex(10)
-            Image(plant.pot.image)
-                .resizable()
-                .scaledToFit()
-                .frame(height: CGFloat(plant.pot.height) * zoomCoef)
-        }
-        .offset(x: 0, y: -offsetY/1.3)
     }
 }
 

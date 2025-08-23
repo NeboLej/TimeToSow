@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ScreenType {
-    case home, editRoom
+    case home, editRoom, progress(Int)
 }
 
 enum ComponentType {
@@ -32,6 +32,9 @@ final class ScreenBuilder {
                 .environment(\.screenBuilder, self)
         case .editRoom:
             EditRoomScreen()
+                .environment(\.appStore, appStore)
+        case .progress(let minutes):
+            ProgressScreen(minutes: minutes)
                 .environment(\.appStore, appStore)
         }
     }

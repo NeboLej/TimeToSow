@@ -10,7 +10,7 @@ import SwiftUI
 struct TimePickerView: View {
     
     @Binding var selectedTime: Int
-    @State var minInterval: Int = 10
+    @State var minInterval: Int = 1
     @State var maxInterval: Int = 120
     
     @State var pointWidth: CGFloat = 48
@@ -18,7 +18,7 @@ struct TimePickerView: View {
     @State private var accumulated: CGFloat = 0
     @State var offsetX: CGFloat = 0
     @State var widthInOneTime: CGFloat = 0
-    @State var step: Int = 5
+    @State var step: Int = 1
     
     var body: some View {
         VStack {
