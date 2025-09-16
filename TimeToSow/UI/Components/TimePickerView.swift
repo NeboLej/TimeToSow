@@ -32,7 +32,7 @@ struct TimePickerView: View {
                     .foregroundStyle(.black)
             }
             .padding(.horizontal, 8)
-            .padding(.bottom, -10)
+            .padding(.bottom, -15)
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Image(.timePickerMainLine)

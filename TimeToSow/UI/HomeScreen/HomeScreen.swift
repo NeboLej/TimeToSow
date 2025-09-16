@@ -91,7 +91,7 @@ struct HomeScreen: View {
         HStack {
             Spacer()
         }
-        .frame(height: safeAreaInsets.top )
+        .frame(height: safeAreaInsets.top)
         .background(grandColor)
         .onChange(of: localStore.currenRoom.roomType.image) { oldValue, newValue in
             grandColor = Color.averageTopRowColor(from: UIImage(named: localStore.currenRoom.roomType.image))
@@ -251,40 +251,45 @@ struct HomeScreen: View {
     
     @ViewBuilder
     private func newPlantSection() -> some View {
-        VStack(spacing: 0) {
-            Text("New Plant")
-                .font(.myTitle(30))
-                .padding(.top, 16)
-                .foregroundStyle(.black)
-            HStack(spacing: 0) {
-                VStack {
-                    NumericText(text: $selectedTime)
-                        .font(.myTitle(40))
-                        .foregroundStyle(.black)
-                    Button {
-                        print("start")
-                        isProgress = true
-                    } label: {
-                        TextEllipseStrokeView(text: "Start", font: .myButton(30), isSelected: true)
-                            .foregroundStyle(Color(UIColor.systemPink))
-                            .frame(width: 140, height: 20)
+        TextureView(insets: .zero) {
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("New Plant")
+                            .font(.myTitle(30))
+                            .foregroundStyle(.black)
+                        
+                        NumericText(text: $selectedTime)
+                            .foregroundStyle(.black)
                     }
+                    .padding(.top, 16)
+                    .padding(.leading, 14)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing, spacing: 18) {
+                        TextureButton(label: "Start", color: .strokeAcsent1, icon: Image(.iconPlay)) {
+                            print("start")
+                            isProgress = true
+                        }
+                        
+                        RoundedRectangle(cornerRadius: 11)
+                            .foregroundStyle(.red.opacity(0.5))
+                            .frame(width: 72, height: 22)
+                    }.padding(.trailing, 14)
+                        .padding(.top, 48)
                 }
-                Spacer()
-                Image(ImageResource.plantActivity)
-                    .offset(x: 10)
+                
+                TimePickerView(selectedTime: $selectedTime)
+                    .frame(height: 70)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 16)
+                    .padding(.top, 28)
             }
-            .padding(.bottom, 8)
-            TimePickerView(selectedTime: $selectedTime)
-                .frame(height: 100)
-                .padding(.horizontal, 0)
+            .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal, 16)
-        .frame(maxWidth: .infinity)
-        .background {
-            Image(.sectionBackground)
-                .resizable()
-        }
+        .padding(.horizontal, 10)
+        .padding(.top, 16)
     }
 }
 
@@ -293,7 +298,13 @@ fileprivate struct NumericText: View {
     @Binding var text: Int
     
     var body: some View {
-        Text("\(text) min")
+        HStack(alignment: .bottom, spacing: 10) {
+            Text("\(text)")
+                .font(.myTitle(50))
+            Text("min")
+                .font(.myTitle(22))
+                .padding(.bottom, 7)
+        }
     }
 }
 

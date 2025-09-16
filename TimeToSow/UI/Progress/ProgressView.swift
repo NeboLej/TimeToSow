@@ -52,6 +52,7 @@ struct CircleProgressView: View {
         .frame(width: 130, height: 130)
 
     }
+    
 }
 
 #Preview {

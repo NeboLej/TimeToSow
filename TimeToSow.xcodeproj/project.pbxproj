@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */; };
 		8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */; };
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
@@ -30,6 +31,8 @@
 		8EC86F1A2E131B1300AA6AFA /* HomeScreen + PlantEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F192E131B1300AA6AFA /* HomeScreen + PlantEditor.swift */; };
 		8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */; };
 		8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F522E18547600AA6AFA /* Color + extension.swift */; };
+		8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */; };
+		8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C5A12E7A126600818D95 /* TextureButton.swift */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -49,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreen.swift; sourceTree = "<group>"; };
 		8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenLocalStore.swift; sourceTree = "<group>"; };
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		8EC86F192E131B1300AA6AFA /* HomeScreen + PlantEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeScreen + PlantEditor.swift"; sourceTree = "<group>"; };
 		8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingFramesView.swift; sourceTree = "<group>"; };
 		8EC86F522E18547600AA6AFA /* Color + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extension.swift"; sourceTree = "<group>"; };
+		8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets + extension.swift"; sourceTree = "<group>"; };
+		8EE4C5A12E7A126600818D95 /* TextureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureButton.swift; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMonthRoom.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 				8EC86F522E18547600AA6AFA /* Color + extension.swift */,
 				8EC86E2E2E06E38600AA6AFA /* View + extension.swift */,
 				8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */,
+				8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +266,8 @@
 				8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */,
 				8E75DE132E5A306C0004C3D3 /* TimerView.swift */,
 				8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */,
+				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
+				8EE4C5A12E7A126600818D95 /* TextureButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -350,7 +359,9 @@
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
+				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
 				8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */,
+				8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */,
 				8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */,
 				8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */,
 				8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */,
@@ -365,6 +376,7 @@
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
+				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
