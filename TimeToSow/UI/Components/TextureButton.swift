@@ -28,7 +28,9 @@ struct TextureButton: View {
         Button(action: action) {
             TextureView(
                 insets: .init(top: 8, leading: 18, bottom: 8, trailing: 18),
-                color: color
+                texture: Image(.smallTexture1),
+                color: color,
+                cornerRadius: 50
             ) {
                 HStack(spacing: 8) {
                     if let icon {
@@ -44,8 +46,6 @@ struct TextureButton: View {
                     }
                 }
             }
-            .cornerRadius(23.5, corners: .allCorners)
-            .contentShape(RoundedRectangle(cornerRadius: 23.5))
         }
         .buttonStyle(PressableStyle())
     }
@@ -60,9 +60,10 @@ struct PressableStyle: ButtonStyle {
 }
 
 #Preview {
-    TextureButton(label: "Start",
-                  color: .green,
-                  icon: Image(.deleteAnimation2)) {
-        print("asdasd")
+    VStack {
+        TextureButton(label: "Start",
+                      color: .green,
+                      icon: Image(.deleteAnimation2)) {
+            print("asdasd")}
     }
 }

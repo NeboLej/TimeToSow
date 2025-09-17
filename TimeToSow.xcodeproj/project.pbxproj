@@ -33,6 +33,7 @@
 		8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F522E18547600AA6AFA /* Color + extension.swift */; };
 		8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */; };
 		8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C5A12E7A126600818D95 /* TextureButton.swift */; };
+		8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB2E882E7B54CF00D0F736 /* TagView.swift */; };
 		8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */; };
 		8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */; };
 		8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */; };
@@ -79,6 +80,7 @@
 		8EC86F522E18547600AA6AFA /* Color + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extension.swift"; sourceTree = "<group>"; };
 		8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets + extension.swift"; sourceTree = "<group>"; };
 		8EE4C5A12E7A126600818D95 /* TextureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureButton.swift; sourceTree = "<group>"; };
+		8EEB2E882E7B54CF00D0F736 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToSow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToSowApp.swift; sourceTree = "<group>"; };
 		8EF5753D2DCE3F3A00AEC31A /* UserMonthRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMonthRoom.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */,
 				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
 				8EE4C5A12E7A126600818D95 /* TextureButton.swift */,
+				8EEB2E882E7B54CF00D0F736 /* TagView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
 				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
+				8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */,
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
 				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,

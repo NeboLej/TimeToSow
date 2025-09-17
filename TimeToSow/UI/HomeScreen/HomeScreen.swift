@@ -273,9 +273,13 @@ struct HomeScreen: View {
                             isProgress = true
                         }
                         
-                        RoundedRectangle(cornerRadius: 11)
-                            .foregroundStyle(.red.opacity(0.5))
-                            .frame(width: 72, height: 22)
+                        HStack(spacing: 10) {
+                            Image(systemName: "arrow.clockwise")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15)
+                            TagView(tag: Tag(name: "Programming", color: "7C37B5"))
+                        }
                     }.padding(.trailing, 14)
                         .padding(.top, 48)
                 }
