@@ -42,7 +42,9 @@ class AppStore {
     }
     
     func setShelf(roomType: RoomType? = nil, shelfType: ShelfType? = nil) {
-        currentRoom = currentRoom.copy(shelfType: shelfType ?? currentRoom.shelfType, roomType: roomType ?? currentRoom.roomType)
+        currentRoom.shelfType = shelfType ?? currentRoom.shelfType
+        currentRoom.roomType = roomType ?? currentRoom.roomType
+//        currentRoom = currentRoom.copy(shelfType: shelfType ?? currentRoom.shelfType, roomType: roomType ?? currentRoom.roomType)
     }
     
     func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
@@ -55,10 +57,17 @@ class AppStore {
     
     func updatePlant(with newPlant: Plant) {
         if let index = currentRoom.plants.firstIndex(where: { $0.id == newPlant.id }) {
-            currentRoom.plants[index] = newPlant
+//            currentRoom.plants[index] = newPlant
+            var plants = currentRoom.plants
+            plants[index] = newPlant
+            currentRoom.plants = plants//currentRoom.copy(plants: plants)
+//
+//            currentRoom = currentRoom.copy(plants: currentRoom.plants + [newPlant])
         } else {
-            currentRoom.plants.append(newPlant)
+//            currentRoom.plants.append(newPlant)
+            currentRoom.plants.append(newPlant)// = currentRoom.copy(plants: currentRoom.plants + [newPlant])
         }
+        
     }
     
     func getRandomPlant() -> Plant {
@@ -84,7 +93,7 @@ extension AppStore {
     }
     
     func setRandomShelf() -> UserMonthRoom {
-        currentRoom = currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
+        currentRoom.shelfType = shelfRepository.getRandomShelf(except: currentRoom.shelfType) //currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
         return currentRoom
     }
     

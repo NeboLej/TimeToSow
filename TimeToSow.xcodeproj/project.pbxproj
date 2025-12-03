@@ -13,6 +13,7 @@
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
 		8E75DE162E5A351B0004C3D3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE152E5A351B0004C3D3 /* ProgressView.swift */; };
 		8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */; };
+		8E7A7FE22EDF959400575A81 /* TextToShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* TextToShape.swift */; };
 		8EBF147A2DE657A700422876 /* Font +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF14792DE657A700422876 /* Font +.swift */; };
 		8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */; };
 		8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */; };
@@ -59,6 +60,7 @@
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8E75DE152E5A351B0004C3D3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPreview.swift; sourceTree = "<group>"; };
+		8E7A7FE12EDF959400575A81 /* TextToShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToShape.swift; sourceTree = "<group>"; };
 		8EBF14782DE6577800422876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8EBF14792DE657A700422876 /* Font +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font +.swift"; sourceTree = "<group>"; };
 		8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LoveYaLikeASister-Regular.ttf"; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
 				8EE4C5A12E7A126600818D95 /* TextureButton.swift */,
 				8EEB2E882E7B54CF00D0F736 /* TagView.swift */,
+				8E7A7FE12EDF959400575A81 /* TextToShape.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
+				8E7A7FE22EDF959400575A81 /* TextToShape.swift in Sources */,
 				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
 				8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */,
 				8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */,

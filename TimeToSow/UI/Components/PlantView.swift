@@ -67,6 +67,16 @@ struct PlantView: View {
         .onAppear {
             plantsFall()
         }
+        .gesture(LongPressGesture(minimumDuration: 0.7)
+            .onChanged { _ in
+                print("123123")
+            }
+            .onEnded { _ in
+                Vibration.light.vibrate()
+                positionDelegate.longPressed(plant: plant)
+            }
+        )
+        
         .gesture(DragGesture()
             .onChanged { value in
                 let newOffsetX = value.translation.width + self.accumulatedX

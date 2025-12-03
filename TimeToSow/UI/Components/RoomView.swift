@@ -12,6 +12,7 @@ protocol PositionPlantDelegate {
     var roomViewWidth: CGFloat { get }
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint
     func beganToChangePosition()
+    func longPressed(plant: Plant)
 }
 
 protocol PlantEditorDelegate {
@@ -22,26 +23,25 @@ protocol PlantEditorDelegate {
 
 struct RoomView: View {
     
-    @Binding var room: UserMonthRoom
+    @Bindable var room: UserMonthRoom
     @State var height: CGFloat = 400
     @State var roomViewWidth: CGFloat = 0
     @State var plantEditorDelegate: PlantEditorDelegate?
     
     var body: some View {
-        ZStack(alignment: .center) {
             GeometryReader { proxy in
-                Image(room.roomType.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                Image(room.shelfType.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                plants()
-                
-                    .id(room.shelfType.id)
-//                для тестирования позиций полок
-//                shelfsTest()
-                
+                ZStack(alignment: .topLeading) {
+                    Image(room.roomType.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                    Image(room.shelfType.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                    
+                    plants()
+                        .id(room.shelfType)
+                    plantMenu()
+                        .zIndex(1000)
             }
         }
         .frame(height: height)
@@ -50,6 +50,7 @@ struct RoomView: View {
         } action: { newValue in
             roomViewWidth = newValue.width
         }
+  
     }
     
     @ViewBuilder
@@ -57,6 +58,17 @@ struct RoomView: View {
         ForEach(room.plants, id: \.id) {
             PlantView(plant: $0, positionDelegate: self)
         }
+    }
+    
+    
+    @State var plantMenuOffset: CGSize = .zero
+    
+    @ViewBuilder
+    func plantMenu() -> some View {
+        Circle()
+            .frame(width: 20, height: 20)
+            .offset(plantMenuOffset)
+            .opacity(menuIsShow ? 1 : 0)
     }
     
     @ViewBuilder
@@ -71,10 +83,23 @@ struct RoomView: View {
                 .opacity(0.4)
         }
     }
+    
+    @State var menuIsShow = false
 }
 
 
 extension RoomView: PositionPlantDelegate {
+    
+    func longPressed(plant: Plant) {
+        
+        print(plant.offsetX)
+        print(plant.offsetY)
+        
+        if let plant = room.plants.first(where: { $0.id == plant.id }) {
+            plantMenuOffset = CGSize(width: plant.offsetX, height: plant.offsetY)// + Double(plant.seed.height))
+            menuIsShow = true
+        }
+    }
     
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
         let result: CGPoint
@@ -86,7 +111,7 @@ extension RoomView: PositionPlantDelegate {
         }
         
         let shelfs = room.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
-        
+        print(roomViewWidth)
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
                 if x + deltaX >= shelf.paddingLeading  && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
@@ -102,6 +127,7 @@ extension RoomView: PositionPlantDelegate {
     }
     
     func beganToChangePosition() {
+        menuIsShow = false
         plantEditorDelegate?.beganToChangePosition()
     }
 }

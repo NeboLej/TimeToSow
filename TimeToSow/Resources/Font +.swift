@@ -26,3 +26,21 @@ extension Font {
         Font.custom("K2D-MediumItalic", size: size)
     }
 }
+
+extension UIFont {
+    static func myTitle(_ size: CGFloat) -> UIFont {
+        UIFont(name: "LoveYaLikeASister-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func myButton(_ size: CGFloat) -> UIFont {
+        UIFont(name: "SedgwickAve-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func myDescription(_ size: CGFloat) -> UIFont {
+        UIFont(name: "K2D-ExtraLightItalic", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func myNumber(_ size: CGFloat) -> UIFont {
+        UIFont(name: "K2D-MediumItalic", size: size) ?? .systemFont(ofSize: size)
+    }
+}

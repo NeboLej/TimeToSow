@@ -54,6 +54,7 @@ struct HomeScreen: View {
             .coordinateSpace(name: "SCROLL")
             .background(grandColor.opacity(0.5))
         }
+        .background(.white)
         .ignoresSafeArea(.all, edges: .top)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
             localStore.bindRoom(appStore.currentRoom)
@@ -64,6 +65,9 @@ struct HomeScreen: View {
             isProgress = false
         }, content: {
             screenBuilder.getScreen(type: .progress(selectedTime))
+        })
+        .onChange(of: appStore.currentRoom, { oldValue, newValue in
+            localStore.bindRoom(newValue)
         })
         .onAppear {
             localStore.bindRoom(appStore.currentRoom)
@@ -76,7 +80,7 @@ struct HomeScreen: View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
             
-            RoomView(room: $localStore.currenRoom,
+            RoomView(room: appStore.currentRoom,
                      plantEditorDelegate: self)
             .offset(y: minY > 0 ? -minY : 0)
             .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,
@@ -104,15 +108,15 @@ struct HomeScreen: View {
             Button(action: { withAnimation { isShowEditRoom = true } }, label: {
                 Image(systemName: "paintbrush")
                     .foregroundColor(.black)
-            } )
+            })
             Button(action: {}, label: {
                 Image(systemName: "info.circle")
                     .foregroundColor(.black)
-            } )
+            })
             Button(action: {}, label: {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(.black)
-            } )
+            })
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 12)
@@ -278,6 +282,7 @@ struct HomeScreen: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 15)
+                                .foregroundStyle(.black)
                             TagView(tag: Tag(name: "Programming", color: "7C37B5"))
                         }
                     }.padding(.trailing, 14)

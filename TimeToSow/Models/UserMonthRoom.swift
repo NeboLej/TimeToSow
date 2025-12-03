@@ -7,12 +7,26 @@
 
 import Foundation
 
-struct UserMonthRoom: Hashable {
-    let id: UUID
-    let shelfType: ShelfType
-    let roomType: RoomType
-    let name: String
-    let dateCreate: Date
+@Observable
+class UserMonthRoom: Hashable {
+    
+    static func == (lhs: UserMonthRoom, rhs: UserMonthRoom) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.plants == rhs.plants &&
+        lhs.shelfType == rhs.shelfType
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(shelfType)
+        hasher.combine(plants)
+    }
+    
+    var id: UUID
+    var shelfType: ShelfType
+    var roomType: RoomType
+    var name: String
+    var dateCreate: Date
     var plants: [Plant]
     
     init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [Plant]) {
