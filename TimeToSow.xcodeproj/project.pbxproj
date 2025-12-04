@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
+		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
+		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */; };
 		8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */; };
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
+		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
+		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreen.swift; sourceTree = "<group>"; };
 		8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenLocalStore.swift; sourceTree = "<group>"; };
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E7240C42EE23CD300D08CE7 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */,
+				8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		8E75DE0E2E5A2EAF0004C3D3 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +273,7 @@
 		8EF5756A2DCE4E6700AEC31A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8E7240C42EE23CD300D08CE7 /* ViewModifiers */,
 				8EF5756C2DCE4E8700AEC31A /* RoomView.swift */,
 				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
@@ -367,12 +381,14 @@
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
 				8E7A7FE22EDF959400575A81 /* TextToShape.swift in Sources */,
 				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
+				8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */,
 				8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */,
 				8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */,
 				8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */,
 				8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */,
 				8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */,
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
+				8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */,
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,

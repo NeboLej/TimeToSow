@@ -50,12 +50,20 @@ struct HomeScreen: View {
                     debugConsole()
 #endif
                 }
+
             }
             .coordinateSpace(name: "SCROLL")
-            .background(grandColor.opacity(0.5))
         }
-        .background(.white)
-        .ignoresSafeArea(.all, edges: .top)
+        .background(
+            Color(hex: "FFF9EE")
+                .overlay(
+                    Image(.texture2)
+                        .resizable()
+                        .blendMode(.multiply)
+                        .opacity(0.9)
+                )
+        )
+        .ignoresSafeArea(.all)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
             localStore.bindRoom(appStore.currentRoom)
         }, content: {
@@ -73,15 +81,16 @@ struct HomeScreen: View {
             localStore.bindRoom(appStore.currentRoom)
         }
         
+        
     }
     
     @ViewBuilder
     private func roomView() -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
-            
             RoomView(room: appStore.currentRoom,
                      plantEditorDelegate: self)
+            .textureOverlay()
             .offset(y: minY > 0 ? -minY : 0)
             .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,
                          y: minY > 0 ? 1 + minY / 1000 : 1,
@@ -92,14 +101,12 @@ struct HomeScreen: View {
     
     @ViewBuilder
     private func header() -> some View {
-        HStack {
-            Spacer()
-        }
-        .frame(height: safeAreaInsets.top)
-        .background(grandColor)
-        .onChange(of: localStore.currenRoom.roomType.image) { oldValue, newValue in
-            grandColor = Color.averageTopRowColor(from: UIImage(named: localStore.currenRoom.roomType.image))
-        }
+        Color(grandColor)
+            .frame(height: safeAreaInsets.top)
+            .textureOverlay()
+            .onChange(of: localStore.currenRoom.roomType.image) { oldValue, newValue in
+                grandColor = Color.averageTopRowColor(from: UIImage(named: localStore.currenRoom.roomType.image))
+            }
     }
     
     @ViewBuilder
@@ -167,7 +174,7 @@ struct HomeScreen: View {
                 }
                 .frame(width: 30, height: 30)
             }
-
+            
             HStack(spacing: 0) {
                 VStack(spacing: 0) {
                     NumericText(text: $selectedTime)
@@ -217,7 +224,7 @@ struct HomeScreen: View {
                         }
                     }
             }
-              
+            
             VStack(spacing: 5) {
                 Text("Update Plant")
                     .font(.myTitle(25))
@@ -240,7 +247,7 @@ struct HomeScreen: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .stroke(style: StrokeStyle(lineWidth: 4, dash: [12]))
                                 .foregroundColor(.strokeAcsent1)
-                        
+                            
                         }
                     }
             }

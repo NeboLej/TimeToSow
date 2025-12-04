@@ -40,9 +40,7 @@ struct RoomView: View {
                     
                     plants()
                         .id(room.shelfType)
-                    plantMenu()
-                        .zIndex(1000)
-            }
+                }
         }
         .frame(height: height)
         .onGeometryChange(for: CGSize.self) { proxy in
@@ -62,14 +60,6 @@ struct RoomView: View {
     
     
     @State var plantMenuOffset: CGSize = .zero
-    
-    @ViewBuilder
-    func plantMenu() -> some View {
-        Circle()
-            .frame(width: 20, height: 20)
-            .offset(plantMenuOffset)
-            .opacity(menuIsShow ? 1 : 0)
-    }
     
     @ViewBuilder
     func shelfsTest() -> some View {
@@ -96,7 +86,7 @@ extension RoomView: PositionPlantDelegate {
         print(plant.offsetY)
         
         if let plant = room.plants.first(where: { $0.id == plant.id }) {
-            plantMenuOffset = CGSize(width: plant.offsetX, height: plant.offsetY)// + Double(plant.seed.height))
+            plantMenuOffset = CGSize(width: plant.offsetX, height: plant.offsetY + Double(plant.seed.height))
             menuIsShow = true
         }
     }
