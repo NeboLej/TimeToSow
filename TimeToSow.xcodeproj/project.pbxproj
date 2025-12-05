@@ -10,6 +10,7 @@
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
+		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
 		8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */; };
 		8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */; };
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
@@ -59,6 +60,7 @@
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
+		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
 		8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreen.swift; sourceTree = "<group>"; };
 		8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenLocalStore.swift; sourceTree = "<group>"; };
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */,
+				8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */,
 				8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */,
 			);
 			path = ViewModifiers;
@@ -386,6 +389,7 @@
 				8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */,
 				8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */,
 				8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */,
+				8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */,
 				8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */,
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
 				8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */,

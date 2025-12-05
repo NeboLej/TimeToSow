@@ -67,7 +67,7 @@ struct PlantView: View {
                 DustView(width: CGFloat(plant.pot.height))
             }
         }
-        
+        .rainShimmer(if: menuIsShow, height: CGFloat(plant.pot.height + plant.seed.height))
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
         .zIndex(abs(offsetY))

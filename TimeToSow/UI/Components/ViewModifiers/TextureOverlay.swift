@@ -27,5 +27,8 @@ struct TextureOverlay: ViewModifier {
 }
 
 #Preview {
-    HomeScreen()
+    Rectangle()
+        .foregroundStyle(.strokeAcsent2)
+        .frame(width: 50, height: 250)
+        .rainShimmer(if: true, height: 250)
 }

@@ -11,4 +11,8 @@ extension View {
     func textureOverlay() -> some View {
         self.modifier(TextureOverlay())
     }
+    
+    func rainShimmer(if active: Bool, height: CGFloat) -> some View {
+        self.modifier(RainEffectModifier(isActive: active, height: height))
+    }
 }
