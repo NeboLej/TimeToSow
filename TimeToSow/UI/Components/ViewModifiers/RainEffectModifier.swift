@@ -21,11 +21,11 @@ struct RainEffectModifier: ViewModifier {
         content
             .overlay(alignment: .top) {
                 if isActive {
-                    Circle()
-                        .foregroundStyle(.blue)
-                        .frame(width: 80, height: 80)
+                    Image(.imageCloud)
+                        .resizable()
+                        .frame(width: 70, height: 38)
+                        .offset(x: 0, y: -80)
                         .zIndex(10)
-                        .offset(x: 0, y: -100)
                     ForEach(0..<dropCount, id: \.self) { i in
                         RainDrop(
                             id: i,
@@ -48,7 +48,7 @@ struct RainDrop: View {
     let xWiggleAmplitude: CGFloat
     
     @State private var startY: CGFloat = 0
-    @State private var xOffset: CGFloat = .random(in: -25...25)
+    @State private var xOffset: CGFloat = .random(in: -26...26)
     @State private var fallProgress: CGFloat = 0
     
     var body: some View {
@@ -62,7 +62,7 @@ struct RainDrop: View {
             .opacity(1.0 - (fallProgress * 0.9))
             .offset(
                 x: xOffset + sin(fallProgress * 10) * xWiggleAmplitude,
-                y:  -100 + fallProgress * (contentHeight * 0.5 + 100)
+                y:  -70 + fallProgress * (contentHeight * 0.5 + 70)
             )
             .onAppear {
                 fallProgress = 0
@@ -71,4 +71,11 @@ struct RainDrop: View {
                 }
             }
     }
+}
+
+#Preview {
+    Rectangle()
+        .foregroundStyle(.strokeAcsent2)
+        .frame(width: 50, height: 250)
+        .rainShimmer(if: true, height: 250)
 }

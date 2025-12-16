@@ -10,6 +10,7 @@ import SwiftUI
 struct PlantView: View {
     
     @State private var plant: Plant
+    @State private var isSelected: Bool
     @State private var accumulatedX: CGFloat
     @State private var accumulatedY: CGFloat
     @State private var offsetX: CGFloat
@@ -21,9 +22,9 @@ struct PlantView: View {
     @State var isShowDust = false
     @State var menuIsShow = false
     
-    init(plant: Plant, positionDelegate: PositionPlantDelegate) {
+    init(plant: Plant, positionDelegate: PositionPlantDelegate, isSelected: Bool) {
         self.plant = plant
-        
+        self.isSelected = isSelected
         self.offsetX = plant.offsetX
         self.offsetY = plant.offsetY
         self.accumulatedX = plant.offsetX
@@ -67,26 +68,19 @@ struct PlantView: View {
                 DustView(width: CGFloat(plant.pot.height))
             }
         }
-        .rainShimmer(if: menuIsShow, height: CGFloat(plant.pot.height + plant.seed.height))
+        .rainShimmer(if: isSelected, height: CGFloat(plant.pot.height + plant.seed.height))
         .rotationEffect(.degrees(rotationAngle), anchor: .center)
         .offset(x: offsetX, y: offsetY)
         .zIndex(abs(offsetY))
         .onAppear {
             plantsFall()
         }
-        .gesture(LongPressGesture(minimumDuration: 0.7)
-            .onChanged { _ in
-                print("123123")
+        .onTapGesture(perform: {
+            Vibration.light.vibrate()
+            withAnimation {
+//                isSelected.toggle()
             }
-            .onEnded { _ in
-                Vibration.light.vibrate()
-//                positionDelegate.longPressed(plant: plant)
-                withAnimation {
-                    menuIsShow.toggle()
-                }
-            }
-        )
-        
+        })
         .gesture(DragGesture()
             .onChanged { value in
                 let newOffsetX = value.translation.width + self.accumulatedX

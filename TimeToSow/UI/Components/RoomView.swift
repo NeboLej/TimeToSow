@@ -27,6 +27,7 @@ struct RoomView: View {
     @State var height: CGFloat = 400
     @State var roomViewWidth: CGFloat = 0
     @State var plantEditorDelegate: PlantEditorDelegate?
+    @Binding var selectedPlant: Plant?
     
     var body: some View {
             GeometryReader { proxy in
@@ -53,8 +54,8 @@ struct RoomView: View {
     
     @ViewBuilder
     func plants() -> some View {
-        ForEach(room.plants, id: \.id) {
-            PlantView(plant: $0, positionDelegate: self)
+        ForEach(room.plants) {
+            PlantView(plant: $0, positionDelegate: self, isSelected: $0 == selectedPlant)
         }
     }
     
