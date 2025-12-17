@@ -5,7 +5,7 @@
 //  Created by Nebo on 18.12.2025.
 //
 
-import Foundation
+import SwiftUI
 
 @Observable
 final class RoomFeatureStore: FeatureStore {
@@ -26,7 +26,17 @@ final class RoomFeatureStore: FeatureStore {
         observeAppState()
     }
     
+    func send(_ acion: RoomFeatureAction, animation: Animation? = .default) {
+        if let animation {
+            withAnimation(animation) {
+                delegate.send(action: acion)
+            }
+        } else {
+            delegate.send(action: acion)
+        }
+    }
     
+    //MARK: - Private
     private func observeAppState() {
         withObservationTracking {
             _ = appStore.currentRoom
@@ -43,9 +53,5 @@ final class RoomFeatureStore: FeatureStore {
                               plants: room.plants.values.map { PlantViewState(plant: $0, isSelected: $0 == appStore.selectedPlant) })
         
         observeAppState()
-    }
-    
-    func send(_ acion: RoomFeatureAction) {
-        delegate.send(action: acion)
     }
 }

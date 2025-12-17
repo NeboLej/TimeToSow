@@ -20,7 +20,6 @@ struct PlantView: View {
     @State private var rotationAngle: Double = 0.0
     @State private var isDragging = false
     @State var isShowDust = false
-    @State var menuIsShow = false
     
     init(plant: PlantViewState, positionDelegate: PositionPlantDelegate) {
         self.plant = plant
@@ -59,8 +58,6 @@ struct PlantView: View {
                     .scaledToFit()
                     .clipShape(AngledShape())
                     .foregroundStyle(.black.opacity(0.2))
-
-                
             }
             .frame(height: CGFloat(plant.pot.height))
             
@@ -77,7 +74,6 @@ struct PlantView: View {
         }
         .onTapGesture(perform: {
             Vibration.light.vibrate()
-            
             withAnimation {
                 positionDelegate.selected(plant: plant.original)
             }
@@ -119,20 +115,20 @@ struct PlantView: View {
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.red)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 20 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 20 : 0)
             
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.blue)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 23 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
                 .rotationEffect(.degrees(45))
             
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.green)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 23 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
                 .rotationEffect(.degrees(-45))
-        }.opacity(menuIsShow ? 1 : 0)
+        }.opacity(isSelected ? 1 : 0)
     }
     
     private func plantsFall() {

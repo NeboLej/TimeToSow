@@ -45,7 +45,6 @@ struct RoomView: View {
         .onTapGesture {
             store.send(.roomTapped)
         }
-  
     }
     
     @ViewBuilder
@@ -85,7 +84,7 @@ extension RoomView: PositionPlantDelegate {
         }
         
         let shelfs = store.state.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
-        print(roomViewWidth)
+        
         for shelf in shelfs {
             if shelf.coefOffsetY * height >= y {
                 if x + deltaX >= shelf.paddingLeading  && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
