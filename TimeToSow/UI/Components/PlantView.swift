@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PlantView: View {
     
-    @State private var plant: Plant
-    @State private var isSelected: Bool
+    @State private var plant: PlantViewState
+    private var isSelected: Bool
     @State private var accumulatedX: CGFloat
     @State private var accumulatedY: CGFloat
     @State private var offsetX: CGFloat
@@ -22,9 +22,9 @@ struct PlantView: View {
     @State var isShowDust = false
     @State var menuIsShow = false
     
-    init(plant: Plant, positionDelegate: PositionPlantDelegate, isSelected: Bool) {
+    init(plant: PlantViewState, positionDelegate: PositionPlantDelegate) {
         self.plant = plant
-        self.isSelected = isSelected
+        self.isSelected = plant.isSelected
         self.offsetX = plant.offsetX
         self.offsetY = plant.offsetY
         self.accumulatedX = plant.offsetX
@@ -77,8 +77,9 @@ struct PlantView: View {
         }
         .onTapGesture(perform: {
             Vibration.light.vibrate()
+            
             withAnimation {
-//                isSelected.toggle()
+                positionDelegate.selected(plant: plant.original)
             }
         })
         .gesture(DragGesture()
@@ -135,7 +136,7 @@ struct PlantView: View {
     }
     
     private func plantsFall() {
-        let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
+        let point = positionDelegate.getPositionOfPlantInFall(plant: plant.original, x: offsetX, y: offsetY)
         if point.x == offsetX && point.y == offsetY { return }
         
         withAnimation(.easeIn) {

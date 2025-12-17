@@ -14,7 +14,26 @@ protocol MyRoomRepositoryProtocol {
 final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
     
     func getCurrentRoom() -> UserMonthRoom {
-        UserMonthRoom(shelfType: ShelfType(name: "First",
+        
+        let plants = [ Plant(seed: Seed(name: "qwe",
+                                     availavlePotTypes: PotType.allCases,
+                                     image: "seed28",
+                                     height: 130,
+                                     startTimeInterval: 10,
+                                     endTimeInterval: 100),
+                             pot: Pot(potType: .small,
+                                   name: "aeded",
+                                   image: "pot15",
+                                   height: 20,
+                                   anchorPointCoefficient: .init(x: -0.15, y: 0)),
+                             tag: Tag(name: "job", color: "555555"))
+          ]
+        var plantDict: [UUID: Plant] = [:]
+        plants.forEach {
+            plantDict[$0.id] = $0
+        }
+        
+        return UserMonthRoom(shelfType: ShelfType(name: "First",
                                            image: "shelf3",
                                            shelfPositions: [
                                             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
@@ -27,24 +46,7 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                       roomType: .init(name: "May", image: "room8"),
                       name: "May",
                       dateCreate: Date(),
-                      plants: [
-                        Plant(seed:         Seed(name: "qwe",
-                                                 availavlePotTypes: PotType.allCases,
-                                                 image: "seed28",
-                                                 height: 130,
-                                                 startTimeInterval: 10,
-                                                 endTimeInterval: 100),
-                              
-                              pot:         Pot(potType: .small,
-                                               name: "aeded",
-                                               image: "pot15",
-                                               height: 20,
-                                               anchorPointCoefficient: .init(x: -0.15, y: 0)),
-                              
-                              tag: Tag(name: "job",
-                                       color: "555555"))
-                      ]
-                      
+                      plants: plantDict
         )
     }
 }

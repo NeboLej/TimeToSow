@@ -12,7 +12,7 @@ enum ScreenType {
 }
 
 enum ComponentType {
-    
+    case roomView
 }
 
 final class ScreenBuilder {
@@ -41,6 +41,9 @@ final class ScreenBuilder {
     
     @ViewBuilder
     func getComponent(type: ComponentType) -> some View {
-        
+        switch type {
+        case .roomView:
+            RoomView(store: RoomFeatureStore(appStore: appStore))
+        }
     }
 }
