@@ -15,7 +15,7 @@ struct Plant: Hashable, Identifiable {
     
     let offsetY: Double
     let offsetX: Double
-    let time: Int = 0
+    let time: Int
     
     static func == (lhs: Plant, rhs: Plant) -> Bool {
         lhs.id == rhs.id &&
@@ -25,16 +25,17 @@ struct Plant: Hashable, Identifiable {
         lhs.time == rhs.time
     }
     
-    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100) {
+    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0) {
         self.id = id
         self.seed = seed
         self.pot = pot
         self.tag = tag
         self.offsetX = offsetX
         self.offsetY = offsetY
+        self.time = time
     }
     
     func copy(offsetX: Double? = nil, offsetY: Double? = nil) -> Plant {
-        Plant(id: self.id, seed: self.seed, pot: self.pot, tag: self.tag, offsetX: offsetX ?? self.offsetX, offsetY: offsetY ?? self.offsetY)
+        Plant(id: self.id, seed: self.seed, pot: self.pot, tag: self.tag, offsetX: offsetX ?? self.offsetX, offsetY: offsetY ?? self.offsetY, time: self.time)
     }
 }

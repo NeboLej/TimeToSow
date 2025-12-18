@@ -26,7 +26,8 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
                                    image: "pot15",
                                    height: 20,
                                    anchorPointCoefficient: .init(x: -0.15, y: 0)),
-                             tag: Tag(name: "job", color: "555555"))
+                             tag: Tag(name: "job", color: "555555"),
+                             time: 7456)
           ]
         var plantDict: [UUID: Plant] = [:]
         plants.forEach {

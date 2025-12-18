@@ -13,14 +13,16 @@ struct HomeScreen: View {
     @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     
     @Environment(\.safeAreaInsets) private var safeAreaInsets
-    @State private var grandColor: Color = .clear
     @State private var activityType: Int = 0
     @State private var selectedTime: Int = 50
-    @State private var selectedElement: PickerElement = .new
     @State private var isShowEditRoom = false
     @State private var isProgress = false
     
-    var store: HomeScreenStore
+    private var store: HomeScreenStore
+    
+    init(store: HomeScreenStore) {
+        self.store = store
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -29,7 +31,15 @@ struct HomeScreen: View {
                 VStack(spacing: 0) {
                     roomView()
                         .zIndex(100)
+                    
+                    HStack {
+                        statisticsView()
+                        Spacer()
+                        menuView()
+                    }
+                    
                     newPlantSection()
+                    
 #if DEBUG
                     debugConsole()
 #endif
@@ -47,7 +57,6 @@ struct HomeScreen: View {
         )
         .ignoresSafeArea(.all)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
-//            store.bindRoom(appStore.currentRoom)
         }, content: {
             screenBuilder.getScreen(type: .editRoom)
         })
@@ -56,22 +65,47 @@ struct HomeScreen: View {
         }, content: {
             screenBuilder.getScreen(type: .progress(selectedTime))
         })
-//        .onChange(of: appStore.currentRoom, { oldValue, newValue in
-//            store.bindRoom(newValue)
-//        })
-//        .onAppear {
-//            store.bindRoom(appStore.currentRoom)
-//        }
     }
     
     @ViewBuilder
     private func header() -> some View {
-        Color(grandColor)
+        Color(store.state.headerColor)
             .frame(height: safeAreaInsets.top)
             .textureOverlay()
-            .onChange(of: store.state.room.image) { oldValue, newValue in
-                grandColor = Color.averageTopRowColor(from: UIImage(named: appStore.currentRoom.roomType.image))
+    }
+    
+    @ViewBuilder
+    private func statisticsView() -> some View {
+        TextureView(insets: .init(top: 6, leading: 15, bottom: 6, trailing: 15), texture: Image(.smallTexture1), cornerRadius: 12) {
+            HStack(spacing: 0) {
+                DrawText(text: "\(store.state.plantCount)",
+                         font: UIFont.myTitle(18),
+                         duration: 1)
+                    .foregroundStyle(.black)
+                Image(.seedIcon)
+                    .padding(.trailing, 20)
+                DrawText(text: store.state.loggedMinutesCount.toHoursAndMinutes(),
+                         font: UIFont.myTitle(18),
+                         duration: 1)
+                    .foregroundStyle(.black)
             }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 12)
+    }
+    
+    @ViewBuilder
+    private func  menuView() -> some View {
+        HStack {
+            Circle()
+                .foregroundStyle(.red)
+                .frame(width: 32, height: 32)
+            Circle()
+                .foregroundStyle(.blue)
+                .frame(width: 32, height: 32)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 12)
     }
     
     @ViewBuilder
@@ -109,7 +143,7 @@ struct HomeScreen: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text(appStore.selectedPlant == nil ? "New Plant" : "Upgrade plant")
+                        Text(store.state.selectedPlant == nil ? "New Plant" : "Upgrade plant")
                             .font(.myTitle(30))
                             .foregroundStyle(.black)
                         
@@ -148,7 +182,6 @@ struct HomeScreen: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, 10)
-        .padding(.top, 16)
     }
 }
 

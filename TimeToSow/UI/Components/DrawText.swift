@@ -1,5 +1,5 @@
 //
-//  TextToShape.swift
+//  DrawText.swift
 //  TimeToSow
 //
 //  Created by Nebo on 03.12.2025.
@@ -10,21 +10,44 @@ import SwiftUI
 
 struct DrawText: View {
     
-    var duration: Double = 3
-    var font: UIFont = UIFont.myButton(70)
+    var text: String
+    var font: UIFont = UIFont.myTitle(18)
+    var duration: Double = 1
+    var stroke: Double = 0.5
     
-    @State var text = "DJn sad"
+    @State private var resultText: String = ""
+    @State private var animate: Bool = false
     
-    @Binding var animate: Bool
+    private var textSize: CGSize {
+        font.toSize(resultText.isEmpty ? text : resultText)
+    }
     
     var body: some View {
-        let textShape = TextToShape(value: text, font: font)
-        VStack  {
-            textShape
-                .trim(from: 0, to: animate ? 1 : 0)
-                .stroke(lineWidth: 1)
-                .frame(height: 70)
-                .animation(.easeInOut(duration: animate ? duration : 0), value: animate)
+        let textShape = TextToShape(value: resultText, font: font)
+        textShape
+            .trim(from: 0, to: animate ? 1 : 0)
+            .stroke(lineWidth: stroke)
+            .frame(width: textSize.width,
+                   height: textSize.height)
+            .animation(.easeInOut(duration: duration), value: animate)
+            .onAppear {
+                resultText = text
+                animate = true
+            }
+            .onChange(of: text) { oldValue, newValue in
+                animate = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    resultText = text
+                    animate = true
+                }
+            }
+    }
+    
+    func startAnimation() {
+        animate = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            resultText = text
+            animate = true
         }
     }
 }
@@ -97,10 +120,15 @@ extension UIFont {
 
 #Preview {
     @Previewable @State var isAnimate: Bool = false
+    @Previewable @State var text: String = "ddddd"
+    @Previewable @State var count: Int = 0
     
     VStack {
-        DrawText(animate: $isAnimate)
-        Toggle("asd", isOn: $isAnimate)
+        DrawText(text: text)
+        Button("new text") {
+            count += 1
+            text = "111" + "\(count)"
+        }
     }
     
 }

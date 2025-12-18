@@ -81,7 +81,8 @@ class AppStore {
                                 pot: potRepository.getRandomPot(),
                                 tag: .init(name: "", color: ""),
                                 offsetX: Double((10...350).randomElement()!),
-                                offsetY: Double((10...250).randomElement()!))
+                                offsetY: Double((10...250).randomElement()!),
+                                time: (10...300).randomElement()!)
         updatePlant(with: randomPlant)
         return randomPlant
     }
@@ -108,7 +109,8 @@ extension AppStore {
                                 pot: potRepository.getRandomPot(),
                                 tag: .init(name: "", color: ""),
                                 offsetX: Double((10...350).randomElement()!),
-                                offsetY: Double((10...250).randomElement()!))
+                                offsetY: Double((10...250).randomElement()!),
+                                time: (10...300).randomElement()!)
         updatePlant(with: randomPlant)
     }
 }

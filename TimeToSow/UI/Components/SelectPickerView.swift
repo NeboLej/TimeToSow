@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//OLD CODE
+
 enum PickerElement: Int, Identifiable, CaseIterable {
     
     case new = 0, upgrade = 1
