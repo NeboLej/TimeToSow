@@ -34,5 +34,5 @@ extension View {
 }
 
 #Preview {
-    HomeScreen()
+    screenBuilderMock.getScreen(type: .home)
 }

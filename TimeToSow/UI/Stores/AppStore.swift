@@ -44,6 +44,12 @@ class AppStore {
             selectedPlant = plant
         case .movePlant(plant: let plant, newPosition: let newPosition):
             currentRoom.plants[plant.id] = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
+        case .changedRoomType:
+            setRandomRoom()
+        case .changedShelfType:
+            setRandomShelf()
+        case .addRandomPlant:
+            addRandomPlantToShelf()
         }
     }
     
@@ -89,23 +95,20 @@ class AppStore {
 
 //MARK: Test -
 extension AppStore {
-    func setRandomRoom() -> UserMonthRoom {
-        currentRoom = currentRoom.copy(roomType: roomRepository.getRandomRoom(except: currentRoom.roomType))
-        return currentRoom
+    func setRandomRoom() {
+        currentRoom.roomType = roomRepository.getRandomRoom(except: currentRoom.roomType)
     }
     
-    func setRandomShelf() -> UserMonthRoom {
-        currentRoom.shelfType = shelfRepository.getRandomShelf(except: currentRoom.shelfType) //currentRoom.copy(shelfType: shelfRepository.getRandomShelf(except: currentRoom.shelfType))
-        return currentRoom
+    func setRandomShelf() {
+        currentRoom.shelfType = shelfRepository.getRandomShelf(except: currentRoom.shelfType)
     }
     
-    func addRandomPlantToShelf() -> UserMonthRoom  {
+    func addRandomPlantToShelf()  {
         let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
                                 pot: potRepository.getRandomPot(),
                                 tag: .init(name: "", color: ""),
                                 offsetX: Double((10...350).randomElement()!),
                                 offsetY: Double((10...250).randomElement()!))
         updatePlant(with: randomPlant)
-        return currentRoom
     }
 }

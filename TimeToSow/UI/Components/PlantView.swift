@@ -156,7 +156,7 @@ struct PlantView: View {
 }
 
 #Preview {
-    HomeScreen()
+    screenBuilderMock.getScreen(type: .home)
 }
 
 struct AngledShape: Shape {

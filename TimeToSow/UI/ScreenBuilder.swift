@@ -27,7 +27,7 @@ final class ScreenBuilder {
     func getScreen(type: ScreenType) -> some View {
         switch type {
         case .home:
-            HomeScreen()
+            HomeScreen(store: HomeScreenStore(appStore: appStore))
                 .environment(\.appStore, appStore)
                 .environment(\.screenBuilder, self)
         case .editRoom:

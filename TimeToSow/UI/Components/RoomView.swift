@@ -108,5 +108,5 @@ extension RoomView: PositionPlantDelegate {
 //}
 
 #Preview {
-    HomeScreen()
+    screenBuilderMock.getScreen(type: .home)
 }

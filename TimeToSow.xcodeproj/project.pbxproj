@@ -23,6 +23,8 @@
 		8EAF67CE2EF3529000780BB9 /* RoomFeatureAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF67CD2EF3529000780BB9 /* RoomFeatureAction.swift */; };
 		8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF67CF2EF352C700780BB9 /* PlantViewState.swift */; };
 		8EAF67D22EF352E300780BB9 /* RoomViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF67D12EF352E300780BB9 /* RoomViewState.swift */; };
+		8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF68032EF4704600780BB9 /* HomeScreenState.swift */; };
+		8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF68052EF471E300780BB9 /* HomeScreenAction.swift */; };
 		8EBF147A2DE657A700422876 /* Font +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF14792DE657A700422876 /* Font +.swift */; };
 		8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */; };
 		8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */; };
@@ -33,7 +35,7 @@
 		8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E062E0628E400AA6AFA /* DustView.swift */; };
 		8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E142E06C75400AA6AFA /* RoomType.swift */; };
 		8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E182E06C9E800AA6AFA /* ShelfType.swift */; };
-		8EC86E272E06D01B00AA6AFA /* HomeScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E262E06D01B00AA6AFA /* HomeScreenLocalStore.swift */; };
+		8EC86E272E06D01B00AA6AFA /* HomeScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E262E06D01B00AA6AFA /* HomeScreenStore.swift */; };
 		8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */; };
 		8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E2E2E06E38600AA6AFA /* View + extension.swift */; };
 		8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */; };
@@ -78,6 +80,8 @@
 		8EAF67CD2EF3529000780BB9 /* RoomFeatureAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFeatureAction.swift; sourceTree = "<group>"; };
 		8EAF67CF2EF352C700780BB9 /* PlantViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantViewState.swift; sourceTree = "<group>"; };
 		8EAF67D12EF352E300780BB9 /* RoomViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewState.swift; sourceTree = "<group>"; };
+		8EAF68032EF4704600780BB9 /* HomeScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenState.swift; sourceTree = "<group>"; };
+		8EAF68052EF471E300780BB9 /* HomeScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenAction.swift; sourceTree = "<group>"; };
 		8EBF14782DE6577800422876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8EBF14792DE657A700422876 /* Font +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font +.swift"; sourceTree = "<group>"; };
 		8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LoveYaLikeASister-Regular.ttf"; sourceTree = "<group>"; };
@@ -89,7 +93,7 @@
 		8EC86E062E0628E400AA6AFA /* DustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustView.swift; sourceTree = "<group>"; };
 		8EC86E142E06C75400AA6AFA /* RoomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomType.swift; sourceTree = "<group>"; };
 		8EC86E182E06C9E800AA6AFA /* ShelfType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfType.swift; sourceTree = "<group>"; };
-		8EC86E262E06D01B00AA6AFA /* HomeScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenLocalStore.swift; sourceTree = "<group>"; };
+		8EC86E262E06D01B00AA6AFA /* HomeScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenStore.swift; sourceTree = "<group>"; };
 		8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection + extension.swift"; sourceTree = "<group>"; };
 		8EC86E2E2E06E38600AA6AFA /* View + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + extension.swift"; sourceTree = "<group>"; };
 		8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomScreen.swift; sourceTree = "<group>"; };
@@ -261,7 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				8EF575432DCE3F3A00AEC31A /* HomeScreen.swift */,
-				8EC86E262E06D01B00AA6AFA /* HomeScreenLocalStore.swift */,
+				8EAF68032EF4704600780BB9 /* HomeScreenState.swift */,
+				8EC86E262E06D01B00AA6AFA /* HomeScreenStore.swift */,
+				8EAF68052EF471E300780BB9 /* HomeScreenAction.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -406,7 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EC86E272E06D01B00AA6AFA /* HomeScreenLocalStore.swift in Sources */,
+				8EC86E272E06D01B00AA6AFA /* HomeScreenStore.swift in Sources */,
 				8EC86DF72E06208600AA6AFA /* PlantView.swift in Sources */,
 				8EAF67CE2EF3529000780BB9 /* RoomFeatureAction.swift in Sources */,
 				8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */,
@@ -430,6 +436,7 @@
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,
+				8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */,
 				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
 				8EAF67C52EF33AB500780BB9 /* RoomFeatureStore.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
@@ -450,6 +457,7 @@
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
 				8E75DE162E5A351B0004C3D3 /* ProgressView.swift in Sources */,
+				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,
 			);

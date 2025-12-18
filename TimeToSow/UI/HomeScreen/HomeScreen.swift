@@ -17,11 +17,10 @@ struct HomeScreen: View {
     @State private var activityType: Int = 0
     @State private var selectedTime: Int = 50
     @State private var selectedElement: PickerElement = .new
-    @State private var localStore = HomeScreenLocalStore()
-    @State private var isShowMenu: Bool = false
     @State private var isShowEditRoom = false
-    @State var selectedPlant: Plant?
-    @State var isProgress = false
+    @State private var isProgress = false
+    
+    var store: HomeScreenStore
     
     var body: some View {
         VStack(spacing: 0) {
@@ -30,29 +29,12 @@ struct HomeScreen: View {
                 VStack(spacing: 0) {
                     roomView()
                         .zIndex(100)
-                        .gesture(TapGesture().onEnded {
-                            withAnimation(.easeInOut) {
-                                isShowMenu.toggle()
-                            }
-                        })
-                        .overlay(alignment: .trailing) {
-                            cityMenu()
-                        }
-                    
-                    if isMovePlant {
-                        editPlantSection()
-                    } else if selectedPlant != nil {
-                        selectPlantSection()
-                    } else {
-                        newPlantSection()
-                    }
+                    newPlantSection()
 #if DEBUG
                     debugConsole()
 #endif
                 }
-
-            }
-            .coordinateSpace(name: "SCROLL")
+            }.coordinateSpace(name: "SCROLL")
         }
         .background(
             Color(hex: "FFF9EE")
@@ -65,7 +47,7 @@ struct HomeScreen: View {
         )
         .ignoresSafeArea(.all)
         .sheet(isPresented: $isShowEditRoom, onDismiss: {
-            localStore.bindRoom(appStore.currentRoom)
+//            store.bindRoom(appStore.currentRoom)
         }, content: {
             screenBuilder.getScreen(type: .editRoom)
         })
@@ -74,14 +56,22 @@ struct HomeScreen: View {
         }, content: {
             screenBuilder.getScreen(type: .progress(selectedTime))
         })
-        .onChange(of: appStore.currentRoom, { oldValue, newValue in
-            localStore.bindRoom(newValue)
-        })
-        .onAppear {
-            localStore.bindRoom(appStore.currentRoom)
-        }
-        
-        
+//        .onChange(of: appStore.currentRoom, { oldValue, newValue in
+//            store.bindRoom(newValue)
+//        })
+//        .onAppear {
+//            store.bindRoom(appStore.currentRoom)
+//        }
+    }
+    
+    @ViewBuilder
+    private func header() -> some View {
+        Color(grandColor)
+            .frame(height: safeAreaInsets.top)
+            .textureOverlay()
+            .onChange(of: store.state.room.image) { oldValue, newValue in
+                grandColor = Color.averageTopRowColor(from: UIImage(named: appStore.currentRoom.roomType.image))
+            }
     }
     
     @ViewBuilder
@@ -99,173 +89,27 @@ struct HomeScreen: View {
     }
     
     @ViewBuilder
-    private func header() -> some View {
-        Color(grandColor)
-            .frame(height: safeAreaInsets.top)
-            .textureOverlay()
-            .onChange(of: localStore.currenRoom.roomType.image) { oldValue, newValue in
-                grandColor = Color.averageTopRowColor(from: UIImage(named: localStore.currenRoom.roomType.image))
-            }
-    }
-    
-    @ViewBuilder
-    private func cityMenu() -> some View {
-        VStack(alignment: .center, spacing: 25) {
-            Button(action: { withAnimation { isShowEditRoom = true } }, label: {
-                Image(systemName: "paintbrush")
-                    .foregroundColor(.black)
-            })
-            Button(action: {}, label: {
-                Image(systemName: "info.circle")
-                    .foregroundColor(.black)
-            })
-            Button(action: {}, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(.black)
-            })
-        }
-        .padding(.vertical, 20)
-        .padding(.horizontal, 12)
-        .background(Color.white.opacity(0.67))
-        .cornerRadius(20, corners: [.bottomLeft, .topLeft])
-        .offset(x: isShowMenu ? 0 : 50, y: -20)
-    }
-    
-    @ViewBuilder
     private func debugConsole() -> some View {
         HStack {
             Button("Room") {
-                localStore.bindRoom(appStore.setRandomRoom())
+                store.send(.changedRoomType, animation: nil)
             }
-            
             Button("Shelf") {
-                localStore.bindRoom(appStore.setRandomShelf())
+                store.send(.changedShelfType, animation: nil)
             }
-            
             Button("Plant") {
-                localStore.bindRoom(appStore.addRandomPlantToShelf())
+                store.send(.addRandomPlant, animation: nil)
             }
         }.padding(.vertical, 30)
     }
-    
-    @State var isInTargetZone = false
-    @State var targetFrame: CGRect = .zero
-    @State var isMovePlant = false
-    
-    @ViewBuilder
-    private func selectPlantSection() -> some View {
-        VStack(spacing: 0) {
-            HStack {
-                Spacer()
-                Text("Update Plant")
-                    .font(.myTitle(30))
-                    .padding(.top, 16)
-                    .foregroundStyle(.black)
-                    .padding(.bottom, 16)
-                Spacer()
-                Button {
-                    withAnimation {
-                        selectedPlant = nil
-                    }
-                } label: {
-                    Image("iconClose")
-                        .resizable()
-                }
-                .frame(width: 30, height: 30)
-            }
-            
-            HStack(spacing: 0) {
-                VStack(spacing: 0) {
-                    NumericText(text: $selectedTime)
-                        .font(.myTitle(40))
-                        .foregroundStyle(.black)
-                    
-                    Button {
-                        print("start")
-                    } label: {
-                        TextEllipseStrokeView(text: "Start", font: .myButton(30), isSelected: true)
-                            .foregroundStyle(Color(UIColor.systemPink))
-                            .frame(width: 140, height: 60)
-                    }
-                }
-                Spacer()
-                PlantPreview(zoomCoef: 2.0, plant: selectedPlant!)
-                    .padding(.bottom, 20)
-                Spacer()
-            }
-            
-            TimePickerView(selectedTime: $selectedTime)
-                .frame(height: 100)
-                .padding(.horizontal, 0)
-        }
-        .padding(.horizontal, 16)
-        .frame(maxWidth: .infinity)
-        .background {
-            Image(.sectionBackground)
-                .resizable()
-        }
-    }
-    
-    @ViewBuilder
-    private func editPlantSection() -> some View {
-        HStack(spacing: 16) {
-            VStack(spacing: 5) {
-                Text("Delete Plant")
-                    .font(.myTitle(25))
-                    .foregroundStyle(.black)
-                    .padding(.bottom, 8)
-                LoopingFramesView(frames: ["deleteAnimation1", "deleteAnimation2", "deleteAnimation3", "deleteAnimation4", "deleteAnimation5", "deleteAnimation6"], speed: 0.15)
-                    .overlay {
-                        if isMovePlant {
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(style: StrokeStyle(lineWidth: 4, dash: [12]))
-                                .foregroundColor(.strokeAcsent2)
-                        }
-                    }
-            }
-            
-            VStack(spacing: 5) {
-                Text("Update Plant")
-                    .font(.myTitle(25))
-                    .foregroundStyle(.black)
-                    .padding(.bottom, 8)
-                LoopingFramesView(frames: ["updateAnimation1", "updateAnimation2", "updateAnimation3", "updateAnimation4"], speed: 0.5)
-                    .background(
-                        GeometryReader { geometry in
-                            Color.clear
-                                .onAppear {
-                                    self.targetFrame = geometry.frame(in: .global)
-                                }
-                                .onChange(of: geometry.frame(in: .global)) { _ , newFrame in
-                                    self.targetFrame = newFrame
-                                }
-                        }
-                    )
-                    .overlay {
-                        if isMovePlant {
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(style: StrokeStyle(lineWidth: 4, dash: [12]))
-                                .foregroundColor(.strokeAcsent1)
-                            
-                        }
-                    }
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.all, 16)
-        .background {
-            Image(.sectionBackground)
-                .resizable()
-        }
-    }
-    
+        
     @ViewBuilder
     private func newPlantSection() -> some View {
         TextureView(insets: .zero) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text("New Plant")
+                        Text(appStore.selectedPlant == nil ? "New Plant" : "Upgrade plant")
                             .font(.myTitle(30))
                             .foregroundStyle(.black)
                         
@@ -324,5 +168,5 @@ fileprivate struct NumericText: View {
 }
 
 #Preview {
-    HomeScreen()
+    screenBuilderMock.getScreen(type: .home)
 }

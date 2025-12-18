@@ -88,5 +88,5 @@ struct TextEllipseStrokeView: View {
 //}
 
 #Preview {
-    HomeScreen()
+    screenBuilderMock.getScreen(type: .home)
 }
