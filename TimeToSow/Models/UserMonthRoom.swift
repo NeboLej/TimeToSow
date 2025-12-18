@@ -27,9 +27,9 @@ class UserMonthRoom: Hashable {
     var roomType: RoomType
     var name: String
     var dateCreate: Date
-    var plants: [Plant]
+    var plants: [UUID: Plant]
     
-    init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [Plant]) {
+    init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [UUID: Plant]) {
         self.id = id
         self.shelfType = shelfType
         self.roomType = roomType
@@ -38,11 +38,11 @@ class UserMonthRoom: Hashable {
         self.plants = plants
     }
     
-    func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [Plant]? = nil) -> UserMonthRoom {
+    func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserMonthRoom {
         UserMonthRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
                       roomType: roomType ?? self.roomType, name: name ?? self.name,
                       dateCreate: self.dateCreate, plants: plants ?? self.plants)
     }
     
-    static var empty = UserMonthRoom(shelfType: .init(name: "", image: "", shelfPositions: []), roomType: .init(name: "", image: ""), name: "", dateCreate: Date(), plants: [])
+    static var empty = UserMonthRoom(shelfType: .init(name: "", image: "", shelfPositions: []), roomType: .init(name: "", image: ""), name: "", dateCreate: Date(), plants: [:])
 }

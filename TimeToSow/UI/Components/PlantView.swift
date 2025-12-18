@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PlantView: View {
     
-    @State private var plant: Plant
-    @State private var isSelected: Bool
+    @State private var plant: PlantViewState
+    private var isSelected: Bool
     @State private var accumulatedX: CGFloat
     @State private var accumulatedY: CGFloat
     @State private var offsetX: CGFloat
@@ -20,11 +20,10 @@ struct PlantView: View {
     @State private var rotationAngle: Double = 0.0
     @State private var isDragging = false
     @State var isShowDust = false
-    @State var menuIsShow = false
     
-    init(plant: Plant, positionDelegate: PositionPlantDelegate, isSelected: Bool) {
+    init(plant: PlantViewState, positionDelegate: PositionPlantDelegate) {
         self.plant = plant
-        self.isSelected = isSelected
+        self.isSelected = plant.isSelected
         self.offsetX = plant.offsetX
         self.offsetY = plant.offsetY
         self.accumulatedX = plant.offsetX
@@ -59,8 +58,6 @@ struct PlantView: View {
                     .scaledToFit()
                     .clipShape(AngledShape())
                     .foregroundStyle(.black.opacity(0.2))
-
-                
             }
             .frame(height: CGFloat(plant.pot.height))
             
@@ -69,7 +66,15 @@ struct PlantView: View {
             }
         }
         .rainShimmer(if: isSelected, height: CGFloat(plant.pot.height + plant.seed.height))
-        .rotationEffect(.degrees(rotationAngle), anchor: .center)
+        .rotationEffect(.degrees(isDragging ? 6 : 0), anchor: .center)
+        .animation(
+            isDragging
+                ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true)
+                : .easeOut(duration: 0.5),
+            value: isDragging
+        )
+        .animation(.easeInOut(duration: 0.1), value: offsetX)
+        .animation(.easeIn(duration: isDragging ? 0 : 0.4), value: offsetY)
         .offset(x: offsetX, y: offsetY)
         .zIndex(abs(offsetY))
         .onAppear {
@@ -77,9 +82,7 @@ struct PlantView: View {
         }
         .onTapGesture(perform: {
             Vibration.light.vibrate()
-            withAnimation {
-//                isSelected.toggle()
-            }
+            positionDelegate.selected(plant: plant.original)
         })
         .gesture(DragGesture()
             .onChanged { value in
@@ -89,7 +92,6 @@ struct PlantView: View {
                     isDragging = true
                     Vibration.light.vibrate()
                     positionDelegate.beganToChangePosition()
-                    startShaking()
                 }
                 
                 if newOffsetX < 0 {
@@ -103,7 +105,7 @@ struct PlantView: View {
                 offsetY = value.translation.height + self.accumulatedY
             }
             .onEnded { value in
-                stopShaking()
+                isDragging = false
                 plantsFall()
                 
                 self.accumulatedX = offsetX
@@ -118,24 +120,24 @@ struct PlantView: View {
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.red)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 20 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 20 : 0)
             
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.blue)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 23 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
                 .rotationEffect(.degrees(45))
             
             Circle()
                 .frame(width: 18, height: 18)
                 .foregroundStyle(.green)
-                .offset(y: menuIsShow ? Double(plant.pot.height / 2) + 23 : 0)
+                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
                 .rotationEffect(.degrees(-45))
-        }.opacity(menuIsShow ? 1 : 0)
+        }.opacity(isSelected ? 1 : 0)
     }
     
     private func plantsFall() {
-        let point = positionDelegate.getPositionOfPlantInFall(plant: plant, x: offsetX, y: offsetY)
+        let point = positionDelegate.getPositionOfPlantInFall(plant: plant.original, x: offsetX, y: offsetY)
         if point.x == offsetX && point.y == offsetY { return }
         
         withAnimation(.easeIn) {
@@ -149,28 +151,6 @@ struct PlantView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 isShowDust = false
             }
-        }
-    }
-    
-    
-    private func startShaking() {
-        withAnimation(Animation.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
-            rotationAngle = 5
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            if isDragging {
-                withAnimation(Animation.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
-                    rotationAngle = -5
-                }
-            }
-        }
-    }
-    
-    private func stopShaking() {
-        isDragging = false
-        withAnimation(.easeOut(duration: 0.4)) {
-            rotationAngle = 0.0
         }
     }
 }
