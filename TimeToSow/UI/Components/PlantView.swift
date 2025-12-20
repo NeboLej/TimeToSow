@@ -33,34 +33,35 @@ struct PlantView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Image(plant.seed.image)
-                .resizable()
-                .scaledToFit()
-                .frame(height: CGFloat(plant.seed.height))
-                .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
-                        + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height),
-                        y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
-                        + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height))
-                .zIndex(10)
-                .flatShadow(distanceToLight: offsetY)
-            
-            ZStack {
-                Image(plant.pot.image)
+            VStack(alignment: .center, spacing: 0) {
+                Image(plant.seed.image)
                     .resizable()
                     .scaledToFit()
+                    .frame(height: CGFloat(plant.seed.height))
+                    .offset(x: (plant.seed.rootCoordinateCoef?.x ?? 0) * CGFloat(plant.seed.height)
+                            + (plant.pot.anchorPointCoefficient?.x ?? 0) * CGFloat(plant.pot.height),
+                            y: (plant.seed.rootCoordinateCoef?.y ?? 0) * CGFloat(plant.seed.height)
+                            + (plant.pot.anchorPointCoefficient?.y ?? 0) * CGFloat(plant.pot.height))
+                    .zIndex(10)
                     .flatShadow(distanceToLight: offsetY)
-                    .overlay {
-                        plantMenu()
-                    }
-                Image(plant.pot.image)
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(AngledShape())
-                    .foregroundStyle(.black.opacity(0.2))
+                ZStack {
+                    Image(plant.pot.image)
+                        .resizable()
+                        .scaledToFit()
+                        .flatShadow(distanceToLight: offsetY)
+                    Image(plant.pot.image)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(AngledShape())
+                        .foregroundStyle(.black.opacity(0.2))
+                }
+                .frame(height: CGFloat(plant.pot.height))
+            }.overlay(alignment: .top) {
+                if isSelected {
+                    plantMenu()
+                }
             }
-            .frame(height: CGFloat(plant.pot.height))
-            
             if isShowDust {
                 DustView(width: CGFloat(plant.pot.height))
             }
@@ -69,14 +70,14 @@ struct PlantView: View {
         .rotationEffect(.degrees(isDragging ? 6 : 0), anchor: .center)
         .animation(
             isDragging
-                ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true)
-                : .easeOut(duration: 0.5),
+            ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true)
+            : .easeOut(duration: 0.5),
             value: isDragging
         )
         .animation(.easeInOut(duration: 0.1), value: offsetX)
         .animation(.easeIn(duration: isDragging ? 0 : 0.4), value: offsetY)
         .offset(x: offsetX, y: offsetY)
-        .zIndex(abs(offsetY))
+        .zIndex(isSelected || isDragging ? 10000 : abs(offsetY))
         .onAppear {
             plantsFall()
         }
@@ -117,23 +118,23 @@ struct PlantView: View {
     @ViewBuilder
     func plantMenu() -> some View {
         ZStack {
-            Circle()
-                .frame(width: 18, height: 18)
-                .foregroundStyle(.red)
-                .offset(y: isSelected ? Double(plant.pot.height / 2) + 20 : 0)
-            
-            Circle()
-                .frame(width: 18, height: 18)
-                .foregroundStyle(.blue)
-                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
-                .rotationEffect(.degrees(45))
-            
-            Circle()
-                .frame(width: 18, height: 18)
-                .foregroundStyle(.green)
-                .offset(y: isSelected ? Double(plant.pot.height / 2) + 23 : 0)
-                .rotationEffect(.degrees(-45))
-        }.opacity(isSelected ? 1 : 0)
+            let width = [plant.pot.width, plant.seed.width].max() ?? plant.seed.width
+            let isLeft = offsetX > positionDelegate.roomViewWidth / 2
+            Image(.badgePlant)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 60)
+                .rotationEffect(.degrees(isLeft ? 180 : 0))
+                .overlay {
+                    Text("Info")
+                        .font(.myTitle(14))
+                        .foregroundStyle(.white)
+                        .offset(x: isLeft ? -8 : 8)
+                }
+                .rotationEffect(.degrees(isLeft ? 15 : -15), anchor: .center)
+                .offset(x: CGFloat(isLeft ? -width : width) * 1.1, y: 0)
+                .zIndex(1000)
+        }
     }
     
     private func plantsFall() {

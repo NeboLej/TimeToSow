@@ -16,7 +16,7 @@ struct TextureOverlay: ViewModifier {
                     Image(.texture1)
                         .resizable()
                         .scaledToFill()
-                        .opacity(0.6)
+                        .opacity(0.7)
                         .blendMode(.multiply)
                         .frame(width: geo.size.width, height: geo.size.height)
                         .clipped()
