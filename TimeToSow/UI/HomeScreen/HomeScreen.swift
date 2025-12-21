@@ -25,6 +25,8 @@ struct HomeScreen: View {
     }
     
     var body: some View {
+        let coordinator = Bindable(appStore.appCoordinator)
+        
         VStack(spacing: 0) {
             header()
             ScrollView(.vertical, showsIndicators: false) {
@@ -56,9 +58,10 @@ struct HomeScreen: View {
                 )
         )
         .ignoresSafeArea(.all)
-        .sheet(isPresented: $isShowEditRoom, onDismiss: {
-        }, content: {
-            screenBuilder.getScreen(type: .editRoom)
+        .sheet(item: coordinator.activeSheet, onDismiss: {
+            print("dismiss")
+        }, content: { screenType in
+            screenBuilder.getScreen(type: screenType)
         })
         .fullScreenCover(isPresented: $isProgress, onDismiss: {
             isProgress = false

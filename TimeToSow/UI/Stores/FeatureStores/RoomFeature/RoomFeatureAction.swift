@@ -12,6 +12,7 @@ enum RoomFeatureAction {
     case roomTapped
     case startMovePlant
     case movePlant(Plant, CGPoint)
+    case detailPlant(Plant)
 }
 
 protocol RoomFeatureDelegate: AnyObject {
@@ -29,6 +30,8 @@ extension AppStore: RoomFeatureDelegate {
             send(.selectPlant(nil))
         case .movePlant(let plant, let position):
             send(.movePlant(plant: plant, newPosition: position))
+        case .detailPlant(let plant):
+            send(.detailPlant(plant))
         }
     }
 }

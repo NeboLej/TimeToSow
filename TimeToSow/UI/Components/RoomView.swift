@@ -12,7 +12,8 @@ protocol PositionPlantDelegate {
     var roomViewWidth: CGFloat { get }
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint
     func beganToChangePosition()
-    func selected(plant: Plant)
+    func selectPlant(_ plant: Plant)
+    func detailPlant(_ plant: Plant)
 }
 
 struct RoomView: View {
@@ -70,8 +71,12 @@ struct RoomView: View {
 
 extension RoomView: PositionPlantDelegate {
     
-    func selected(plant: Plant) {
+    func selectPlant(_ plant: Plant) {
         store.send(.selectPlant(plant))
+    }
+    
+    func detailPlant(_ plant: Plant) {
+        store.send(.detailPlant(plant), animation: nil)
     }
     
     func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
+		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
+		8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -66,6 +68,8 @@
 
 /* Begin PBXFileReference section */
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
+		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
@@ -143,6 +147,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E2E5EE52EF8544200B91347 /* PlantDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */,
+			);
+			path = PlantDetail;
+			sourceTree = "<group>";
+		};
 		8E7240C42EE23CD300D08CE7 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +292,7 @@
 			children = (
 				8EAF67C32EF33A9100780BB9 /* FeatureStores */,
 				8EF575452DCE3F3A00AEC31A /* AppStore.swift */,
+				8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */,
 				8EAF67CA2EF3520200780BB9 /* AppActions.swift */,
 			);
 			path = Stores;
@@ -288,6 +301,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8E2E5EE52EF8544200B91347 /* PlantDetail */,
 				8E75DE0E2E5A2EAF0004C3D3 /* Progress */,
 				8EC86E322E06E82B00AA6AFA /* EditRoomScreen */,
 				8EF5756A2DCE4E6700AEC31A /* Components */,
@@ -423,6 +437,7 @@
 				8EF575672DCE435800AEC31A /* Tag.swift in Sources */,
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
+				8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
 				8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */,
 				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
@@ -448,6 +463,7 @@
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
+				8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */,
 				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */,

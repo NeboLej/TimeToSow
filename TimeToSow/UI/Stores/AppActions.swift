@@ -13,4 +13,5 @@ enum AppAction {
     case changedRoomType
     case changedShelfType
     case addRandomPlant
+    case detailPlant(Plant)
 }

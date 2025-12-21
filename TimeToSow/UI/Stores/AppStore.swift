@@ -23,6 +23,7 @@ class AppStore {
     
     var currentRoom: UserMonthRoom
     var selectedPlant: Plant?
+    var appCoordinator: AppCoordinator = AppCoordinator()
     
     init(myRoomRepository: MyRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
@@ -50,6 +51,8 @@ class AppStore {
             setRandomShelf()
         case .addRandomPlant:
             addRandomPlantToShelf()
+        case .detailPlant(let plant):
+            appCoordinator.navigate(to: .plantDetails(plant), modal: true)
         }
     }
     

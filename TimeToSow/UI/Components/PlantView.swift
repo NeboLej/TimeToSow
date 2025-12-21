@@ -83,7 +83,7 @@ struct PlantView: View {
         }
         .onTapGesture(perform: {
             Vibration.light.vibrate()
-            positionDelegate.selected(plant: plant.original)
+            positionDelegate.selectPlant(plant.original)
         })
         .gesture(DragGesture()
             .onChanged { value in
@@ -134,6 +134,9 @@ struct PlantView: View {
                 .rotationEffect(.degrees(isLeft ? 15 : -15), anchor: .center)
                 .offset(x: CGFloat(isLeft ? -width : width) * 1.1, y: 0)
                 .zIndex(1000)
+        }
+        .onTapGesture {
+            positionDelegate.detailPlant(plant.original)
         }
     }
     
