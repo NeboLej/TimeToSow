@@ -8,20 +8,45 @@
 import SwiftUI
 
 struct PlantDetailView: View {
-
+    
     let plant: Plant
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             headerView()
-            ScrollView(.vertical, showsIndicators: false) {
-                HStack {
-                    PlantPreview(zoomCoef: 2.5, plant: plant)
-//                    Spacer()
-                }.padding()
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Palm tree\nand cute wicker pot")
+                        .font(.myTitle(20))
+                        .foregroundStyle(.black)
+                        .padding(.all, 10)
+                    
+                    HStack(alignment: .top) {
+                        statisticsView()
+                        Spacer()
+                        PlantPreview(zoomCoef: plant.seed.height + plant.pot.height > 100 ? 1.5 : 2.5,
+                                     plant: plant,
+                                     isShowPlantRating: true,
+                                     isShowPotRating: true)
+                            .padding(.trailing, 14)
+                            .padding(.vertical, 20)
+                    }
+                    
+                    Text("Description")
+                        .font(.myTitle(20))
+                        .foregroundStyle(.black)
+                        .padding(.horizontal, 10)
+                        .padding(.top, 10)
+                    
+                    Text("I wrote some description for this plant. The user simply has this option, but they don't have to.")
+                        .font(.myDescription(14))
+                        .foregroundStyle(.black)
+                        .padding(.horizontal, 10)
+                        .padding(.top, 8)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-           
-        }
+        }.background(.mainBackground)
     }
     
     @ViewBuilder
@@ -35,28 +60,22 @@ struct PlantDetailView: View {
         .frame(height: 45)
         .background(.red)
     }
-}
-
-extension PlantDetailView: PositionPlantDelegate  {
-    var roomViewWidth: CGFloat { 0 }
     
-    func getPositionOfPlantInFall(plant: Plant, x: CGFloat, y: CGFloat) -> CGPoint {
-        .zero
+    @ViewBuilder
+    private func statisticsView() -> some View {
+        TextureView(insets: .init(top: 6, leading: 15, bottom: 6, trailing: 15),
+                    texture: Image(.smallTexture1), cornerRadius: 12) {
+            DrawText(text: plant.time.toHoursAndMinutes(),
+                     font: UIFont.myTitle(18),
+                     duration: 1)
+                .foregroundStyle(.black)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 12)
     }
     
-    func beganToChangePosition() {}
-    
-    func selectPlant(_ plant: Plant) {}
-    
-    func detailPlant(_ plant: Plant) {}
-    
-    
 }
 
-
-//#Preview {
-//    screenBuilderMock.getScreen(type: .home)
-//}
 
 #Preview {
     PlantDetailView(plant: Plant(seed: Seed(name: "Oleg",
