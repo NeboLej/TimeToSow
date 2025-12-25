@@ -160,7 +160,7 @@ struct PlantDetailView: View {
         .cornerRadius(20, corners: [.bottomRight, .topRight])
     }
     
-    @State var isMenuOpen: Bool = false
+    @State private var isMenuOpen: Bool = false
     
     @ViewBuilder
     private func menuView() -> some View {
@@ -172,7 +172,7 @@ struct PlantDetailView: View {
                             .frame(width: 5, height: 5)
                             .foregroundStyle(.black)
                     }
-                }.frame(width: 58, height: isMenuOpen ? 110 : 58)
+                }.frame(width: 58, height: isMenuOpen ? 130 : 58)
                     .background(.white.opacity(0.01))
                     .onTapGesture {
                         withAnimation {
@@ -181,9 +181,8 @@ struct PlantDetailView: View {
                         }
                     }
             }
-
             if isMenuOpen {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 12) {
                     menuElement("Edit", color: Color(hex: "DDFFB7"))
                     menuElement("Take off the shelf", color: Color(hex: "C9F3FF"))
                     menuElement("Delete", color: Color(hex: "FFC8C8"))
@@ -194,9 +193,9 @@ struct PlantDetailView: View {
     
     @ViewBuilder
     private func menuElement(_ text: String, color: Color) -> some View {
-        TextureView(insets: .init(top: 2, leading: 4, bottom: 2, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
+        TextureView(insets: .init(top: 4, leading: 6, bottom: 4, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
             Text(text)
-                .font(.myTitle(14))
+                .font(.myTitle(16))
                 .foregroundStyle(.black)
         }
     }
