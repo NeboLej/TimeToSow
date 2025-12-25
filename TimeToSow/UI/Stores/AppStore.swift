@@ -106,7 +106,9 @@ class AppStore {
     
     
     func getRandomNote() -> Note {
-        Note(date: Date(), time: (10...300).randomElement()!, tag: tagRepository.getRandomTag())
+        Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
+             time: (10...300).randomElement()!,
+             tag: tagRepository.getRandomTag())
     }
     
     func newRandomPlant() {

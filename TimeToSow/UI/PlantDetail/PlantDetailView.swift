@@ -11,58 +11,86 @@ struct PlantDetailView: View {
     
     let plant: Plant
     
+    var groupNotesByDay: [[Note]] {
+        let grouped = Dictionary(grouping: plant.notes) { note in
+            Calendar.current.startOfDay(for: note.date)
+        }
+        
+        return grouped
+            .sorted { $0.key > $1.key }
+            .map { $0.value }
+    }
+    
     var body: some View {
-        VStack(spacing: 0) {
-            headerView()
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Palm tree\nand cute wicker pot")
-                        .font(.myTitle(20))
-                        .foregroundStyle(.black)
-                        .padding(.all, 10)
-                    
-                    HStack(alignment: .top) {
-                        statisticsView()
-                        Spacer()
-                        PlantPreview(zoomCoef: plant.seed.height + plant.pot.height > 100 ? 1.5 : 2.5,
-                                     plant: plant,
-                                     isShowPlantRating: true,
-                                     isShowPotRating: true)
+        ZStack(alignment: .bottomLeading) {
+            VStack(spacing: 0) {
+                headerView()
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        titleLabel("Palm tree\nand cute wicker pot")
+                            .foregroundStyle(.black)
+                            .padding(.all, 10)
+                        
+                        HStack(alignment: .top) {
+                            statisticsView()
+                            Spacer()
+                            PlantPreview(zoomCoef: plant.seed.height + plant.pot.height > 100 ? 1.5 : 2.5,
+                                         plant: plant,
+                                         isShowPlantRating: true,
+                                         isShowPotRating: true)
                             .padding(.trailing, 14)
                             .padding(.vertical, 20)
+                        }
+                        
+                        titleLabel("Description")
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+                        
+                        Text("I wrote some description for this plant. The user simply has this option, but they don't have to.")
+                            .font(.myDescription(14))
+                            .foregroundStyle(.black)
+                            .padding(.horizontal, 10)
+                            .padding(.top, 8)
+                        
+                        tagStatisticsSection()
+                            .padding(.top, 10)
+                            .shadow(color: .black.opacity(0.2), radius: 2, x: -1, y: -1)
+                        
+                        recordsHistorySection()
+                            .padding(.horizontal, 10)
+                            .padding(.bottom, 100)
+                            .padding(.top, 16)
                     }
-                    
-                    Text("Description")
-                        .font(.myTitle(20))
-                        .foregroundStyle(.black)
-                        .padding(.horizontal, 10)
-                        .padding(.top, 10)
-                    
-                    Text("I wrote some description for this plant. The user simply has this option, but they don't have to.")
-                        .font(.myDescription(14))
-                        .foregroundStyle(.black)
-                        .padding(.horizontal, 10)
-                        .padding(.top, 8)
-                    
-                    tagStatisticsSection()
-                        .padding(.top, 10)
-                        .shadow(color: .black.opacity(0.1), radius: 1, x: -0.5, y: -0.5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            
+            menuView()
+                .padding()
+                
         }.background(.mainBackground)
+    }
+    
+    @ViewBuilder
+    private func titleLabel(_ text: String) -> some View {
+        Text(text)
+            .font(.myTitle(20))
+            .foregroundStyle(.black)
     }
     
     @ViewBuilder
     func headerView() -> some View {
         HStack(alignment: .center) {
-            Text(plant.seed.name)
-                .foregroundStyle(.black)
-                .font(.myTitle(24))
+            ForEach(0..<10) { _ in
+                Circle()
+                    .frame(width: 14, height: 14)
+                    .foregroundStyle(.mainBackground)
+            }
+            .padding(8)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 45)
-        .background(.red)
+        .frame(height: 50)
+        .background(.strokeAcsent1)
     }
     
     @ViewBuilder
@@ -72,10 +100,10 @@ struct PlantDetailView: View {
             DrawText(text: plant.time.toHoursAndMinutes(),
                      font: UIFont.myTitle(18),
                      duration: 1)
-                .foregroundStyle(.black)
+            .foregroundStyle(.black)
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 12)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 12)
     }
     
     @ViewBuilder
@@ -85,6 +113,93 @@ struct PlantDetailView: View {
         }.padding(.all, 10)
     }
     
+    @ViewBuilder
+    private func recordsHistorySection() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            titleLabel("Records History")
+                .foregroundStyle(.black)
+                .padding(.bottom, -6)
+            
+            ForEach(groupNotesByDay, id: \.self) { dayNotes in
+                VStack(alignment: .leading) {
+                    Text(dayNotes.first?.date.toReadableDate() ?? "")
+                        .font(.myRegular(12))
+                        .foregroundStyle(.black.opacity(0.6))
+                        .padding(.top, 16)
+                        .padding(.leading, 10)
+                    
+                    ForEach(dayNotes) { note in
+                        SwipeableRow {
+                            recordRow(note)
+                        } actions: {
+                            Image(systemName: "trash")
+                                .frame(width: 60, height: 46)
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func recordRow(_ note: Note) -> some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .frame(width: 10)
+                .foregroundStyle(Color(hex: note.tag.color))
+            Text(note.time.toHoursAndMinutes())
+                .font(.myRegular(16))
+                .foregroundStyle(.black)
+            Spacer()
+            TagView(tag: note.tag)
+                .padding(.trailing, 10)
+        }
+        .frame(height: 46)
+        .background(Color(hex: "E7E7E7"))
+        .cornerRadius(20, corners: [.bottomRight, .topRight])
+    }
+    
+    @State var isMenuOpen: Bool = false
+    
+    @ViewBuilder
+    private func menuView() -> some View {
+        HStack {
+            TextureView(insets: .zero, color: .yellow, cornerRadius: 29) {
+                VStack(spacing: isMenuOpen ? 10 : 3) {
+                    ForEach(0..<3, id: \.self) { _ in
+                        Circle()
+                            .frame(width: 5, height: 5)
+                            .foregroundStyle(.black)
+                    }
+                }.frame(width: 58, height: isMenuOpen ? 110 : 58)
+                    .background(.white.opacity(0.01))
+                    .onTapGesture {
+                        withAnimation {
+                            Vibration.light.vibrate()
+                            isMenuOpen.toggle()
+                        }
+                    }
+            }
+
+            if isMenuOpen {
+                VStack(alignment: .leading) {
+                    menuElement("Edit", color: Color(hex: "DDFFB7"))
+                    menuElement("Take off the shelf", color: Color(hex: "C9F3FF"))
+                    menuElement("Delete", color: Color(hex: "FFC8C8"))
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func menuElement(_ text: String, color: Color) -> some View {
+        TextureView(insets: .init(top: 2, leading: 4, bottom: 2, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
+            Text(text)
+                .font(.myTitle(14))
+                .foregroundStyle(.black)
+        }
+    }
 }
 
 
@@ -102,7 +217,7 @@ struct PlantDetailView: View {
                                  offsetY: 200,
                                  offsetX: 200,
                                  notes: [
-                                    Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                    Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
                                     Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
                                  ]
     ))

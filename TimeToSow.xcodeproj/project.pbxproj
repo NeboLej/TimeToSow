@@ -10,6 +10,8 @@
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
 		8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */; };
+		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
+		8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -75,6 +77,8 @@
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
+		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
+		8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRow.swift; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */,
 				8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */,
 				8EAF68072EF4800300780BB9 /* Int + extension.swift */,
+				8E5B33F82EFDD59000354CAB /* Date + extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				8EA1C9B92EFC546600DF690F /* RarityView.swift */,
 				8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */,
 				8EA1C9D82EFDB34C00DF690F /* PieChartView.swift */,
+				8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */,
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
+				8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
 				8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */,
@@ -492,6 +499,7 @@
 				8EAF67D22EF352E300780BB9 /* RoomViewState.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
+				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8EAF67CB2EF3520200780BB9 /* AppActions.swift in Sources */,
 				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */,
