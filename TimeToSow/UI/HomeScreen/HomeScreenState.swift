@@ -13,6 +13,7 @@ struct HomeScreenState {
     let headerColor: Color
     let plantCount: Int
     let loggedMinutesCount: Int
+    let allNotes: [Note]
     
     let selectedPlant: Plant?
     
@@ -22,6 +23,7 @@ struct HomeScreenState {
         headerColor = Color.averageTopRowColor(from: UIImage(named: room.image))
         plantCount = appStore.currentRoom.plants.count
         loggedMinutesCount = appStore.currentRoom.plants.reduce(0) { $0 + $1.value.time }
+        allNotes = appStore.currentRoom.plants.flatMap(\.value.notes)
         
         selectedPlant = appStore.selectedPlant
     }

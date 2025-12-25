@@ -43,6 +43,10 @@ struct PlantDetailView: View {
                         .foregroundStyle(.black)
                         .padding(.horizontal, 10)
                         .padding(.top, 8)
+                    
+                    tagStatisticsSection()
+                        .padding(.top, 10)
+                        .shadow(color: .black.opacity(0.1), radius: 1, x: -0.5, y: -0.5)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -74,6 +78,13 @@ struct PlantDetailView: View {
         .padding(.vertical, 12)
     }
     
+    @ViewBuilder
+    private func tagStatisticsSection() -> some View {
+        TextureView(insets: .zero) {
+            TagStatisticsView(notes: plant.notes)
+        }.padding(.all, 10)
+    }
+    
 }
 
 
@@ -88,9 +99,11 @@ struct PlantDetailView: View {
                                           name: "potOleg",
                                           image: "pot21",
                                           height: 24),
-                                 tag: Tag(name: "bebebe",
-                                          color: ""),
-                                 offsetX: 200,
                                  offsetY: 200,
-                                 time: 200))
+                                 offsetX: 200,
+                                 notes: [
+                                    Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                    Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
+                                 ]
+    ))
 }

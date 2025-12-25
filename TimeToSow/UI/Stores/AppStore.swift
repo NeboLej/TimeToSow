@@ -20,6 +20,8 @@ class AppStore {
     private let seedRepository: SeedRepositoryProtocol
     @ObservationIgnored
     private let potRepository: PotRepositoryProtocol
+    @ObservationIgnored
+    private let tagRepository: TagRepositoryProtocol
     
     var currentRoom: UserMonthRoom
     var selectedPlant: Plant?
@@ -29,12 +31,14 @@ class AppStore {
          roomRepository: RoomRepositoryProtocol,
          shelfRepository: ShelfRepositoryProtocol,
          seedRepository: SeedRepositoryProtocol,
-         potRepository: PotRepositoryProtocol) {
+         potRepository: PotRepositoryProtocol,
+         tagRepository: TagRepositoryProtocol) {
         self.myRoomRepository = myRoomRepository
         self.roomRepository = roomRepository
         self.shelfRepository = shelfRepository
         self.seedRepository = seedRepository
         self.potRepository = potRepository
+        self.tagRepository = tagRepository
         
         currentRoom = myRoomRepository.getCurrentRoom()
     }
@@ -44,7 +48,9 @@ class AppStore {
         case .selectPlant(let plant):
             selectedPlant = plant
         case .movePlant(plant: let plant, newPosition: let newPosition):
-            currentRoom.plants[plant.id] = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
+            guard let plant = currentRoom.plants[plant.id] else { return }
+            let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
+            currentRoom.plants[plant.id] = newPlant
         case .changedRoomType:
             setRandomRoom()
         case .changedShelfType:
@@ -52,7 +58,16 @@ class AppStore {
         case .addRandomPlant:
             addRandomPlantToShelf()
         case .detailPlant(let plant):
+            guard let plant = currentRoom.plants[plant.id] else { return }
             appCoordinator.navigate(to: .plantDetails(plant), modal: true)
+        case .addRandomNote:
+            guard let selectedPlant else { return }
+            let newNotes = getRandomNote()
+            var notes = selectedPlant.notes
+            notes.append(newNotes)
+            let newPlant = selectedPlant.copy(notes: notes)
+            self.selectedPlant = newPlant
+            currentRoom.plants[selectedPlant.id] = newPlant
         }
     }
     
@@ -82,12 +97,16 @@ class AppStore {
     func getRandomPlant() -> Plant {
         let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
                                 pot: potRepository.getRandomPot(),
-                                tag: .init(name: "", color: ""),
-                                offsetX: Double((10...350).randomElement()!),
                                 offsetY: Double((10...250).randomElement()!),
-                                time: (10...300).randomElement()!)
+                                offsetX: Double((10...350).randomElement()!),
+                                notes: [getRandomNote()])
         updatePlant(with: randomPlant)
         return randomPlant
+    }
+    
+    
+    func getRandomNote() -> Note {
+        Note(date: Date(), time: (10...300).randomElement()!, tag: tagRepository.getRandomTag())
     }
     
     func newRandomPlant() {
@@ -110,10 +129,9 @@ extension AppStore {
     func addRandomPlantToShelf()  {
         let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
                                 pot: potRepository.getRandomPot(),
-                                tag: .init(name: "", color: ""),
-                                offsetX: Double((10...350).randomElement()!),
                                 offsetY: Double((10...250).randomElement()!),
-                                time: (10...300).randomElement()!)
+                                offsetX: Double((10...350).randomElement()!),
+                                notes: [getRandomNote()])
         updatePlant(with: randomPlant)
     }
 }

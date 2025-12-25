@@ -8,10 +8,9 @@
 import Foundation
 
 struct PlantViewState: Identifiable {
-    let id: UUID
+    let id: String
     let seed: Seed
     let pot: Pot
-    let tag: Tag
     
     let offsetY: Double
     let offsetX: Double
@@ -24,7 +23,6 @@ struct PlantViewState: Identifiable {
         id = plant.id
         seed = plant.seed
         pot = plant.pot
-        tag = plant.tag
         offsetY = plant.offsetY
         offsetX = plant.offsetX
         

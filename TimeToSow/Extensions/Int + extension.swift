@@ -28,4 +28,10 @@ extension Int {
         
         return result
     }
+    
+    func percentBy(_ fullPiece: Int) -> String {
+        let onePercent = 100 / Double(fullPiece)
+        let result: Double = Double(self) * onePercent
+        return String(format: "%.1f", result) + "%"
+    }
 }

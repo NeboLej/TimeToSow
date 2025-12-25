@@ -41,6 +41,7 @@ struct HomeScreen: View {
                     }
                     
                     newPlantSection()
+                    tagStatisticsSection()
                     
 #if DEBUG
                     debugConsole()
@@ -135,7 +136,10 @@ struct HomeScreen: View {
                 store.send(.changedShelfType, animation: nil)
             }
             Button("Plant") {
-                store.send(.addRandomPlant, animation: nil)
+                store.send(.addRandomPlant)
+            }
+            Button("Note") {
+                store.send(.addRandomNote)
             }
         }.padding(.vertical, 30)
     }
@@ -185,6 +189,13 @@ struct HomeScreen: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, 10)
+    }
+    
+    @ViewBuilder
+    private func tagStatisticsSection() -> some View {
+        TextureView(insets: .zero) {
+            TagStatisticsView(notes: store.state.allNotes)
+        }.padding(.all, 10)
     }
 }
 

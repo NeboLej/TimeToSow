@@ -13,7 +13,8 @@ struct ScreenBuilderKey: EnvironmentKey {
                                                                roomRepository: RoomRepository(),
                                                                shelfRepository: ShelfRepository(),
                                                                seedRepository: SeedRepository(),
-                                                               potRepository: PotRepository()))
+                                                               potRepository: PotRepository(),
+                                                               tagRepository: TagRepository()))
 }
 
 struct AppStoreKey: EnvironmentKey {
@@ -21,7 +22,8 @@ struct AppStoreKey: EnvironmentKey {
                                        roomRepository: RoomRepository(),
                                        shelfRepository: ShelfRepository(),
                                        seedRepository: SeedRepository(),
-                                       potRepository: PotRepository())
+                                       potRepository: PotRepository(),
+                                       tagRepository: TagRepository())
 }
 
 

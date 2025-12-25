@@ -11,6 +11,7 @@ enum HomeScreenAction {
     case changedRoomType
     case changedShelfType
     case addRandomPlant
+    case addRandomNote
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -26,6 +27,8 @@ extension AppStore: HomeScreenDelegate {
             send(.changedShelfType)
         case .addRandomPlant:
             send(.addRandomPlant)
+        case .addRandomNote:
+            send(.addRandomNote)
         }
     }
 }

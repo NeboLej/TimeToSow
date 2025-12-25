@@ -147,11 +147,9 @@ struct PlantPreview: View {
                                        name: "potOleg",
                                        image: "pot21",
                                        height: 24),
-                              tag: Tag(name: "bebebe",
-                                       color: ""),
-                              offsetX: 200,
                               offsetY: 200,
-                              time: 200))
+                              offsetX: 200,
+                             notes: []))
 }
 
 

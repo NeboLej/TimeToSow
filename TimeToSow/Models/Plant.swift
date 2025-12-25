@@ -8,34 +8,44 @@
 import Foundation
 
 struct Plant: Hashable, Identifiable {
-    let id: UUID
+    let id: String
     let seed: Seed
     let pot: Pot
-    let tag: Tag
     
     let offsetY: Double
     let offsetX: Double
     let time: Int
     
+    let notes: [Note]
+    
     static func == (lhs: Plant, rhs: Plant) -> Bool {
-        lhs.id == rhs.id &&
-        lhs.seed == rhs.seed &&
-        lhs.pot == rhs.pot &&
-        lhs.tag == rhs.tag &&
-        lhs.time == rhs.time
+        lhs.id == rhs.id
     }
     
-    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0) {
+    init(id: String = UUID().uuidString, seed: Seed, pot: Pot, offsetY: Double, offsetX: Double, notes: [Note]) {
         self.id = id
         self.seed = seed
         self.pot = pot
-        self.tag = tag
-        self.offsetX = offsetX
         self.offsetY = offsetY
-        self.time = time
+        self.offsetX = offsetX
+        self.time = notes.reduce(0) { $0 + $1.time }
+        self.notes = notes
     }
     
-    func copy(offsetX: Double? = nil, offsetY: Double? = nil) -> Plant {
-        Plant(id: self.id, seed: self.seed, pot: self.pot, tag: self.tag, offsetX: offsetX ?? self.offsetX, offsetY: offsetY ?? self.offsetY, time: self.time)
+//    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0, notes: [Note] = []) {
+//        self.id = id
+//        self.seed = seed
+//        self.pot = pot
+//        self.tag = tag
+//        self.offsetX = offsetX
+//        self.offsetY = offsetY
+//        self.time = time
+//        self.notes = notes
+//    }
+    
+    func copy(offsetX: Double? = nil, offsetY: Double? = nil, notes: [Note]? = nil) -> Plant {
+        Plant(id: self.id, seed: self.seed, pot: self.pot,
+              offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX,
+              notes: notes ?? self.notes)
     }
 }

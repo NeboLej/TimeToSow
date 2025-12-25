@@ -22,6 +22,10 @@ extension Font {
         Font.custom("K2D-ExtraLightItalic", size: size)
     }
     
+    static func myRegular(_ size: CGFloat) -> Font {
+        Font.custom("K2D-Light.ttf", size: size)
+    }
+    
     static func myNumber(_ size: CGFloat) -> Font {
         Font.custom("K2D-MediumItalic", size: size)
     }

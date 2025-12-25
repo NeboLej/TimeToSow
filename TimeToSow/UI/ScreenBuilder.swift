@@ -16,7 +16,7 @@ enum ScreenType: Identifiable, Hashable {
         case .home: "home"
         case .editRoom: "editRoom"
         case .progress: "progress"
-        case .plantDetails(let plant): "plantDetails - \(plant.id.uuidString)"
+        case .plantDetails(let plant): "plantDetails - \(plant.id)"
         }
     }
 }
