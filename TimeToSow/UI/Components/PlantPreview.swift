@@ -49,12 +49,12 @@ struct PlantPreview: View {
             
             
             if isShowPlantRating {
-                plantRating(rating: 5)
+                plantRating(rating: plant.seed.rarity.starCount)
                     .zIndex(2)
             }
             
             if isShowPotRating {
-                potRating(rating: 2)
+                potRating(rating: plant.pot.rarity.starCount)
             }
         }.offset(x: -offetX, y: -offsetY)
     }
@@ -130,23 +130,24 @@ struct PlantPreview: View {
                      availavlePotTypes: PotType.allCases,
                      image: "seed26",
                      height: 90,
-                     rootCoordinateCoef: .init(x: 0, y: 0.93),
-                     startTimeInterval: 10,
-                     endTimeInterval: 100)
+                     rarity: .uncommon,
+                     rootCoordinateCoef: .init(x: 0, y: 0.93))
     
     let seed2 = Seed(name: "qwe",
                      availavlePotTypes: PotType.allCases,
                      image: "seed25",
                      height: 30,
-                     rootCoordinateCoef: .init(x: 0.1, y: 0),
-                     startTimeInterval: 10,
-                     endTimeInterval: 100)
+                     rarity: .rare,
+                     rootCoordinateCoef: .init(x: 0.1, y: 0))
     
     PlantPreview(plant: Plant(seed: seed2,
                               pot: Pot(potType: .large,
                                        name: "potOleg",
                                        image: "pot21",
-                                       height: 24),
+                                       height: 24,
+                                       rarity: .uncommon),
+                              name: "test",
+                              description: "",
                               offsetY: 200,
                               offsetX: 200,
                              notes: []))

@@ -12,6 +12,8 @@ struct Plant: Hashable, Identifiable {
     let seed: Seed
     let pot: Pot
     
+    let name: String
+    let description: String
     let offsetY: Double
     let offsetX: Double
     let time: Int
@@ -22,10 +24,12 @@ struct Plant: Hashable, Identifiable {
         lhs.id == rhs.id
     }
     
-    init(id: String = UUID().uuidString, seed: Seed, pot: Pot, offsetY: Double, offsetX: Double, notes: [Note]) {
+    init(id: String = UUID().uuidString, seed: Seed, pot: Pot, name: String, description: String, offsetY: Double, offsetX: Double, notes: [Note]) {
         self.id = id
         self.seed = seed
         self.pot = pot
+        self.name = name
+        self.description = description
         self.offsetY = offsetY
         self.offsetX = offsetX
         self.time = notes.reduce(0) { $0 + $1.time }
@@ -44,7 +48,7 @@ struct Plant: Hashable, Identifiable {
 //    }
     
     func copy(offsetX: Double? = nil, offsetY: Double? = nil, notes: [Note]? = nil) -> Plant {
-        Plant(id: self.id, seed: self.seed, pot: self.pot,
+        Plant(id: self.id, seed: self.seed, pot: self.pot, name: self.name, description: self.description,
               offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX,
               notes: notes ?? self.notes)
     }

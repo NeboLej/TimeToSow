@@ -13,19 +13,17 @@ struct Seed: Hashable {
     var availavlePotTypes: [PotType] = []
     var image: String = ""
     var height: Int
+    let rarity: Rarity
     var rootCoordinateCoef: CGPoint?
-    var startTimeInterval: Int
-    var endTimeInterval: Int
     var width: CGFloat
     
-    init(name: String, availavlePotTypes: [PotType], image: String, height: Int, rootCoordinateCoef: CGPoint? = nil, startTimeInterval: Int, endTimeInterval: Int) {
+    init(name: String, availavlePotTypes: [PotType], image: String, height: Int, rarity: Rarity, rootCoordinateCoef: CGPoint? = nil) {
         self.name = name
         self.availavlePotTypes = availavlePotTypes
         self.image = image
         self.height = height
+        self.rarity = rarity
         self.rootCoordinateCoef = rootCoordinateCoef
-        self.startTimeInterval = startTimeInterval
-        self.endTimeInterval = endTimeInterval
         
         let image = UIImage(named: image)
         let originalWidth = image?.size.width

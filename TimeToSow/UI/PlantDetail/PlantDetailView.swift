@@ -27,7 +27,7 @@ struct PlantDetailView: View {
                 headerView()
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        titleLabel("Palm tree\nand cute wicker pot")
+                        titleLabel(plant.name)
                             .foregroundStyle(.black)
                             .padding(.all, 10)
                         
@@ -41,16 +41,17 @@ struct PlantDetailView: View {
                             .padding(.trailing, 14)
                             .padding(.vertical, 20)
                         }
-                        
-                        titleLabel("Description")
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-                        
-                        Text("I wrote some description for this plant. The user simply has this option, but they don't have to.")
-                            .font(.myDescription(14))
-                            .foregroundStyle(.black)
-                            .padding(.horizontal, 10)
-                            .padding(.top, 8)
+                        if !plant.description.isEmpty {
+                            titleLabel("Description")
+                                .padding(.horizontal, 10)
+                                .padding(.top, 10)
+                            
+                            Text(plant.description)
+                                .font(.myDescription(14))
+                                .foregroundStyle(.black)
+                                .padding(.horizontal, 10)
+                                .padding(.top, 8)
+                        }
                         
                         tagStatisticsSection()
                             .padding(.top, 10)
@@ -207,12 +208,14 @@ struct PlantDetailView: View {
                                             availavlePotTypes: [.large, .medium],
                                             image: "seed23",
                                             height: 45,
-                                            startTimeInterval: 10,
-                                            endTimeInterval: 100),
+                                            rarity: .common),
                                  pot: Pot(potType: .large,
                                           name: "potOleg",
                                           image: "pot21",
-                                          height: 24),
+                                          height: 24,
+                                          rarity: .common),
+                                 name: "Oleg",
+                                 description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
                                  offsetY: 200,
                                  offsetX: 200,
                                  notes: [

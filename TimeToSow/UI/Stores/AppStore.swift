@@ -95,8 +95,14 @@ class AppStore {
     }
     
     func getRandomPlant() -> Plant {
-        let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
-                                pot: potRepository.getRandomPot(),
+        let randomSeed = seedRepository.getRandomSeed()
+        let randomPot = potRepository.getRandomPot()
+        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
+        
+        let randomPlant = Plant(seed: randomSeed,
+                                pot: randomPot,
+                                name: name,
+                                description: "",
                                 offsetY: Double((10...250).randomElement()!),
                                 offsetX: Double((10...350).randomElement()!),
                                 notes: [getRandomNote()])
@@ -129,8 +135,14 @@ extension AppStore {
     }
     
     func addRandomPlantToShelf()  {
-        let randomPlant = Plant(seed: seedRepository.getRandomSeed(),
-                                pot: potRepository.getRandomPot(),
+        let randomSeed = seedRepository.getRandomSeed()
+        let randomPot = potRepository.getRandomPot()
+        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
+        
+        let randomPlant = Plant(seed: randomSeed,
+                                pot: randomPot,
+                                name: name,
+                                description: "",
                                 offsetY: Double((10...250).randomElement()!),
                                 offsetX: Double((10...350).randomElement()!),
                                 notes: [getRandomNote()])

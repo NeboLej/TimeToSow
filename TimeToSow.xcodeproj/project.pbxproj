@@ -12,6 +12,7 @@
 		8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */; };
 		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
 		8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */; };
+		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -79,6 +80,7 @@
 		8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
 		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
 		8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRow.swift; sourceTree = "<group>"; };
+		8E5B34182EFEADD200354CAB /* Rarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarity.swift; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				8EF575662DCE435800AEC31A /* Tag.swift */,
 				8EC86E142E06C75400AA6AFA /* RoomType.swift */,
 				8EA1C9D22EFD836700DF690F /* Note.swift */,
+				8E5B34182EFEADD200354CAB /* Rarity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,
+				8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */,
 				8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */,
 				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
 				8EAF67C52EF33AB500780BB9 /* RoomFeatureStore.swift in Sources */,

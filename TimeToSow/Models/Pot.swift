@@ -18,14 +18,16 @@ struct Pot: Hashable {
     let name: String
     let image: String
     let height: Int
+    let rarity: Rarity
     let anchorPointCoefficient: CGPoint?
     let width: CGFloat
     
-    init(potType: PotType, name: String, image: String, height: Int, anchorPointCoefficient: CGPoint? = nil) {
+    init(potType: PotType, name: String, image: String, height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
         self.potType = potType
         self.name = name
         self.image = image
         self.height = height
+        self.rarity = rarity
         self.anchorPointCoefficient = anchorPointCoefficient
         
         let image = UIImage(named: image)
