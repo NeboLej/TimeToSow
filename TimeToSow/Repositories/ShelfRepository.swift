@@ -55,11 +55,11 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
         
         ShelfType(name: "3", image: "shelf3", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
-            ShelfPosition(coefOffsetY: 0.679, paddingLeading: 30, paddingTrailing: 266),
-            ShelfPosition(coefOffsetY: 0.466, paddingLeading: 190, paddingTrailing: 28),
-            ShelfPosition(coefOffsetY: 0.458, paddingLeading: 20, paddingTrailing: 260),
+            ShelfPosition(coefOffsetY: 0.682, paddingLeading: 30, paddingTrailing: 266),
+            ShelfPosition(coefOffsetY: 0.468, paddingLeading: 190, paddingTrailing: 28),
+            ShelfPosition(coefOffsetY: 0.46, paddingLeading: 20, paddingTrailing: 260),
             ShelfPosition(coefOffsetY: 0.256, paddingLeading: 39, paddingTrailing: 170),
-            ShelfPosition(coefOffsetY: 0.252, paddingLeading: 280, paddingTrailing: 19),
-        ])
+            ShelfPosition(coefOffsetY: 0.254, paddingLeading: 280, paddingTrailing: 19),
+           ])
     ]
 }

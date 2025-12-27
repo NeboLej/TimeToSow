@@ -9,12 +9,17 @@ import Foundation
 
 protocol SeedRepositoryProtocol {
     func getRandomSeed() -> Seed
+    func getRandomSeedBy(rarity: Rarity) -> Seed
 }
 
 final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
     
     func getRandomSeed() -> Seed {
         seeds.randomElement()!
+    }
+    
+    func getRandomSeedBy(rarity: Rarity) -> Seed {
+        seeds.filter{ $0.rarity == rarity }.randomElement()!
     }
     
     private let seeds: [Seed] = [

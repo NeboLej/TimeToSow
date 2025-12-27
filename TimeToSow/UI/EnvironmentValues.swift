@@ -8,22 +8,30 @@
 import Foundation
 import SwiftUI
 
+fileprivate let appStore: AppStore  = {
+    let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository()
+    let roomRepository: RoomRepositoryProtocol = RoomRepository()
+    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
+    let seedRepository: SeedRepositoryProtocol = SeedRepository()
+    let potRepository: PotRepositoryProtocol = PotRepository()
+    let tagRepository: TagRepositoryProtocol = TagRepository()
+    let plantRepository: PlantRepositoryProtocol = PlantRepository(seedRepository: seedRepository,
+                                                                   potRepository: potRepository)
+    
+    let appStore = AppStore(myRoomRepository: myRoomRepository,
+                            roomRepository: roomRepository,
+                            shelfRepository: shelfRepository,
+                            plantRepository: plantRepository,
+                            tagRepository: tagRepository)
+    return appStore
+}()
+
 struct ScreenBuilderKey: EnvironmentKey {
-    static var defaultValue = ScreenBuilder(appStore: AppStore(myRoomRepository: MyRoomRepository(),
-                                                               roomRepository: RoomRepository(),
-                                                               shelfRepository: ShelfRepository(),
-                                                               seedRepository: SeedRepository(),
-                                                               potRepository: PotRepository(),
-                                                               tagRepository: TagRepository()))
+    static var defaultValue = ScreenBuilder(appStore: appStore)
 }
 
 struct AppStoreKey: EnvironmentKey {
-    static var defaultValue = AppStore(myRoomRepository: MyRoomRepository(),
-                                       roomRepository: RoomRepository(),
-                                       shelfRepository: ShelfRepository(),
-                                       seedRepository: SeedRepository(),
-                                       potRepository: PotRepository(),
-                                       tagRepository: TagRepository())
+    static var defaultValue = appStore
 }
 
 

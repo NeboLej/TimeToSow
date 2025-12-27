@@ -9,12 +9,17 @@ import Foundation
 
 protocol PotRepositoryProtocol {
     func getRandomPot() -> Pot
+    func getRandomPotBy(rarity: Rarity) -> Pot
 }
 
 final class PotRepository: BaseRepository, PotRepositoryProtocol {
     
     func getRandomPot() -> Pot {
         pots.randomElement()!
+    }
+    
+    func getRandomPotBy(rarity: Rarity) -> Pot {
+        pots.filter{ $0.rarity == rarity }.randomElement()!
     }
     
     private let pots: [Pot] = [

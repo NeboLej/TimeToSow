@@ -17,9 +17,7 @@ class AppStore {
     @ObservationIgnored
     private let shelfRepository: ShelfRepositoryProtocol
     @ObservationIgnored
-    private let seedRepository: SeedRepositoryProtocol
-    @ObservationIgnored
-    private let potRepository: PotRepositoryProtocol
+    private let plantRepository: PlantRepositoryProtocol
     @ObservationIgnored
     private let tagRepository: TagRepositoryProtocol
     
@@ -30,14 +28,12 @@ class AppStore {
     init(myRoomRepository: MyRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
          shelfRepository: ShelfRepositoryProtocol,
-         seedRepository: SeedRepositoryProtocol,
-         potRepository: PotRepositoryProtocol,
+         plantRepository: PlantRepositoryProtocol,
          tagRepository: TagRepositoryProtocol) {
         self.myRoomRepository = myRoomRepository
         self.roomRepository = roomRepository
         self.shelfRepository = shelfRepository
-        self.seedRepository = seedRepository
-        self.potRepository = potRepository
+        self.plantRepository = plantRepository
         self.tagRepository = tagRepository
         
         currentRoom = myRoomRepository.getCurrentRoom()
@@ -95,25 +91,14 @@ class AppStore {
     }
     
     func getRandomPlant() -> Plant {
-        let randomSeed = seedRepository.getRandomSeed()
-        let randomPot = potRepository.getRandomPot()
-        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
-        
-        let randomPlant = Plant(seed: randomSeed,
-                                pot: randomPot,
-                                name: name,
-                                description: "",
-                                offsetY: Double((10...250).randomElement()!),
-                                offsetX: Double((10...350).randomElement()!),
-                                notes: [getRandomNote()])
+        let randomPlant = plantRepository.getRandomPlant(note: getRandomNote())
         updatePlant(with: randomPlant)
         return randomPlant
     }
     
-    
     func getRandomNote() -> Note {
         Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
-             time: (10...300).randomElement()!,
+             time: (10...360).randomElement()!,
              tag: tagRepository.getRandomTag())
     }
     
@@ -135,17 +120,7 @@ extension AppStore {
     }
     
     func addRandomPlantToShelf()  {
-        let randomSeed = seedRepository.getRandomSeed()
-        let randomPot = potRepository.getRandomPot()
-        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
-        
-        let randomPlant = Plant(seed: randomSeed,
-                                pot: randomPot,
-                                name: name,
-                                description: "",
-                                offsetY: Double((10...250).randomElement()!),
-                                offsetX: Double((10...350).randomElement()!),
-                                notes: [getRandomNote()])
+        let randomPlant = plantRepository.getRandomPlant(note: getRandomNote())
         updatePlant(with: randomPlant)
     }
 }

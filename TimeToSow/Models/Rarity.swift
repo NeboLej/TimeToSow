@@ -14,6 +14,8 @@ enum Rarity {
     case epic
     case legendary
     
+    static let SCALE_DIVISION_VALUE: Int = 30
+    
     var starCount: Int {
         switch self {
         case .common: 1

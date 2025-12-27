@@ -19,12 +19,13 @@ struct TimeToSowApp: App {
         let seedRepository: SeedRepositoryProtocol = SeedRepository()
         let potRepository: PotRepositoryProtocol = PotRepository()
         let tagRepository: TagRepositoryProtocol = TagRepository()
+        let plantRepository: PlantRepositoryProtocol = PlantRepository(seedRepository: seedRepository,
+                                                                       potRepository: potRepository)
         
         let appStore = AppStore(myRoomRepository: myRoomRepository,
                                 roomRepository: roomRepository,
                                 shelfRepository: shelfRepository,
-                                seedRepository: seedRepository,
-                                potRepository: potRepository,
+                                plantRepository: plantRepository,
                                 tagRepository: tagRepository)
         screenBuilder = ScreenBuilder(appStore: appStore)
     }
@@ -44,12 +45,13 @@ let screenBuilderMock: ScreenBuilder = {
     let seedRepository: SeedRepositoryProtocol = SeedRepository()
     let potRepository: PotRepositoryProtocol = PotRepository()
     let tagRepository: TagRepositoryProtocol = TagRepository()
+    let plantRepository: PlantRepositoryProtocol = PlantRepository(seedRepository: seedRepository,
+                                                                   potRepository: potRepository)
     
     let appStore = AppStore(myRoomRepository: myRoomRepository,
                             roomRepository: roomRepository,
                             shelfRepository: shelfRepository,
-                            seedRepository: seedRepository,
-                            potRepository: potRepository,
+                            plantRepository: plantRepository,
                             tagRepository: tagRepository)
     return ScreenBuilder(appStore: appStore)
 }()

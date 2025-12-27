@@ -8,10 +8,76 @@
 import Foundation
 
 protocol PlantRepositoryProtocol {
-    
+    func getRandomPlant(note: Note) -> Plant
+    //    func updatePlant(oldPlant: Plant, newNote: Note) -> Plant
 }
 
 final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     
+    private let seedRepository: SeedRepositoryProtocol
+    private let potRepository: PotRepositoryProtocol
     
+    init(seedRepository: SeedRepositoryProtocol, potRepository: PotRepositoryProtocol) {
+        self.potRepository = potRepository
+        self.seedRepository = seedRepository
+        super.init()
+    }
+    
+    func getRandomPlant(note: Note) -> Plant {
+        let distributedTime = distributeTime(fullTime: note.time)
+        let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
+        let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot)
+        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
+        
+        return Plant(seed: randomSeed,
+                     pot: randomPot,
+                     name: name,
+                     description: "",
+                     offsetY: Double((10...250).randomElement()!),
+                     offsetX: Double((10...350).randomElement()!),
+                     notes: [note])
+    }
+    
+    //MARK: - Private func
+    
+    func distributeTime(fullTime: Int) -> (seed: Rarity, pot: Rarity) {
+        if fullTime < Rarity.SCALE_DIVISION_VALUE * 2 {
+            return (seed: .common, pot: .common)
+        }
+        
+        if fullTime >= Rarity.SCALE_DIVISION_VALUE * 10 {
+            return (seed: .legendary, pot: .legendary)
+        }
+        
+        let countDivisionValue: Int = fullTime / Rarity.SCALE_DIVISION_VALUE
+        
+        var variants: [[Int]] = []
+        
+        for first in 1...5 {
+            for second in 1...5 {
+                if first + second == countDivisionValue {
+                    variants.append([first, second])
+                }
+            }
+        }
+        print(variants)
+        
+        if variants.count == 0 { return (seed: .legendary, pot: .legendary) }
+        let randomCombo = variants.randomElement()!
+        
+        return (seed: getRarity(randomCombo[0]), pot: getRarity(randomCombo[1]))
+    }
+    
+    
+    func getRarity(_ value: Int) -> Rarity {
+        if value <= 0 { return .common }
+        
+        return switch value {
+        case 1: .common
+        case 2: .uncommon
+        case 3: .rare
+        case 4: .epic
+        default: .legendary
+        }
+    }
 }
