@@ -15,11 +15,7 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
     
     func getCurrentRoom() -> UserMonthRoom {
         
-        let plants = [ Plant(seed: Seed(name: "qwe",
-                                     availavlePotTypes: PotType.allCases,
-                                     image: "seed28",
-                                     height: 130,
-                                     rarity: .common),
+        let plants = [ Plant(seed: tmpSeed,
                              pot: Pot(potType: .small,
                                    name: "aeded",
                                    image: "pot15",

@@ -214,6 +214,12 @@ fileprivate struct NumericText: View {
     }
 }
 
+var tmpSeed = Seed(name: "qwe",
+                   availavlePotTypes: PotType.allCases,
+                   image: "seed21",
+                   height: 32,
+                   rarity: .common)
+
 #Preview {
     screenBuilderMock.getScreen(type: .home)
 }
