@@ -42,6 +42,7 @@ struct RoomView: View {
             proxy.size
         } action: { newValue in
             roomViewWidth = newValue.width
+            height = newValue.width
         }
         .onTapGesture {
             store.send(.roomTapped)
@@ -62,8 +63,8 @@ struct RoomView: View {
                 .fill(.red)
                 .frame(height: 12)
                 .offset(y: $0.coefOffsetY * height)
-                .padding(.leading, $0.paddingLeading)
-                .padding(.trailing, $0.paddingTrailing)
+                .padding(.leading, $0.paddingLeading * (height / 400))
+                .padding(.trailing, $0.paddingTrailing * (height / 400))
                 .opacity(0.4)
         }
     }

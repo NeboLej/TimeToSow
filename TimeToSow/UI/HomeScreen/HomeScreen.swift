@@ -41,6 +41,7 @@ struct HomeScreen: View {
                     }
                     
                     newPlantSection()
+                    monthStatisticSection()
                     tagStatisticsSection()
                     
 #if DEBUG
@@ -85,13 +86,13 @@ struct HomeScreen: View {
                 DrawText(text: "\(store.state.plantCount)",
                          font: UIFont.myTitle(18),
                          duration: 1)
-                    .foregroundStyle(.black)
+                .foregroundStyle(.black)
                 Image(.seedIcon)
                     .padding(.trailing, 20)
                 DrawText(text: store.state.loggedMinutesCount.toHoursAndMinutes(),
                          font: UIFont.myTitle(18),
                          duration: 1)
-                    .foregroundStyle(.black)
+                .foregroundStyle(.black)
             }
         }
         .padding(.horizontal, 10)
@@ -100,16 +101,30 @@ struct HomeScreen: View {
     
     @ViewBuilder
     private func  menuView() -> some View {
-        HStack {
-            Circle()
-                .foregroundStyle(.red)
-                .frame(width: 32, height: 32)
-            Circle()
-                .foregroundStyle(.blue)
-                .frame(width: 32, height: 32)
+        HStack(spacing: 6) {
+            menuElement(colorHex: "D17474", icon: "square.and.arrow.up")
+            menuElement(colorHex: "7482D1", icon: "info.circle")
+            menuElement(colorHex: "6E916A", icon: "paintbrush")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 12)
+    }
+    
+    @ViewBuilder
+    private func menuElement(colorHex: String, icon: String) -> some View {
+        TextureView(insets: .zero, texture: Image(.smallTexture1), color: Color(hex: colorHex),
+                    cornerRadius: 16) {
+            Circle()
+                .fill(Color.clear)
+                .frame(height: 32)
+                .overlay {
+                    Image(systemName: icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 16)
+                        .foregroundStyle(.white)
+                }
+        }
     }
     
     @ViewBuilder
@@ -117,11 +132,11 @@ struct HomeScreen: View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
             screenBuilder.getComponent(type: .roomView)
-            .textureOverlay()
-            .offset(y: minY > 0 ? -minY : 0)
-            .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,
-                         y: minY > 0 ? 1 + minY / 1000 : 1,
-                         anchor: .top)
+                .textureOverlay()
+                .offset(y: minY > 0 ? -minY : 0)
+                .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,
+                             y: minY > 0 ? 1 + minY / 1000 : 1,
+                             anchor: .top)
         }
         .frame(height: 400)
     }
@@ -141,9 +156,9 @@ struct HomeScreen: View {
             Button("Note") {
                 store.send(.addRandomNote)
             }
-        }.padding(.vertical, 30)
+        }
     }
-        
+    
     @ViewBuilder
     private func newPlantSection() -> some View {
         TextureView(insets: .zero) {
@@ -197,6 +212,73 @@ struct HomeScreen: View {
             TagStatisticsView(notes: store.state.allNotes)
         }.padding(.all, 10)
     }
+    
+    @ViewBuilder
+    private func monthStatisticSection() -> some View {
+        TextureView(insets: .zero) {
+            HStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(store.state.roomName)
+                        .font(.myTitle(28))
+                        .foregroundStyle(.black)
+                        .padding(.top, 16)
+                        .padding(.bottom, 8)
+                    
+                    lineStatisticView(title: "Plants count",
+                                      view: Text(String(store.state.plantCount))
+                        .font(.myRegular(14))
+                        .foregroundStyle(.black)
+                    )
+                    
+                    lineStatisticView(title: "Bonuses count",
+                                      view: Text("1")
+                        .font(.myRegular(14))
+                        .foregroundStyle(.black)
+                    )
+                    
+                    if let topPlant = store.state.topPlant {
+                        lineStatisticView(title: "Top Plant",
+                                          view: RarityView(count: topPlant.seed.rarity.starCount + topPlant.pot.rarity.starCount)
+                            .frame(height: 12)
+                        )
+                    }
+                    
+                    if let topTag = store.state.topTag {
+                        lineStatisticView(title: "Top tag",
+                                          view: TagView(tag: topTag)
+                        )
+                    }
+                    
+                    Spacer()
+
+                }
+                Spacer()
+                if let topPlant = store.state.topPlant {
+                    let height = topPlant.pot.height + topPlant.seed.height
+                    let width = topPlant.pot.width + topPlant.seed.width
+                    
+                    PlantPreview(zoomCoef: (height >= 100 || width >= 100) ? 1 : 2, plant: topPlant)
+                        .padding(.vertical, 40)
+                        .id(store.state.topPlant)
+                    
+                }
+            }.padding(.horizontal, 14)
+            
+        }.padding([.horizontal, .top], 10)
+    }
+    
+    
+    @ViewBuilder
+    func lineStatisticView(title: String, view: some View) -> some View {
+        HStack {
+            Text(title)
+                .font(.myRegular(14))
+                .foregroundStyle(.black)
+            Spacer()
+            view
+        }
+    }
+    
 }
 
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeScreenState {
+    let roomName: String
     let shelf: ShelfType
     let room: RoomType
     let headerColor: Color
@@ -16,8 +17,11 @@ struct HomeScreenState {
     let allNotes: [Note]
     
     let selectedPlant: Plant?
+    let topPlant: Plant?
+    let topTag: Tag?
     
     init(appStore: AppStore) {
+        roomName = appStore.currentRoom.name
         shelf = appStore.currentRoom.shelfType
         room = appStore.currentRoom.roomType
         headerColor = Color.averageTopRowColor(from: UIImage(named: room.image))
@@ -26,5 +30,12 @@ struct HomeScreenState {
         allNotes = appStore.currentRoom.plants.flatMap(\.value.notes)
         
         selectedPlant = appStore.selectedPlant
+        topPlant = appStore.currentRoom.plants.map { $0.value }.max(by: { $0.time < $1.time })
+        
+        let dict = allNotes.reduce(into: [:]) { result, note in
+            result[note.tag, default: 0] += note.time
+        }
+        topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
+        
     }
 }

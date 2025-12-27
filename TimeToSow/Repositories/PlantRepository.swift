@@ -27,7 +27,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         let distributedTime = distributeTime(fullTime: note.time)
         let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
         let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot)
-        let name = [randomSeed.name, "and", randomPot.name].joined(separator: " ")
+        let name = [randomSeed.name, "\nand", randomPot.name].joined(separator: " ")
         
         return Plant(seed: randomSeed,
                      pot: randomPot,
@@ -41,11 +41,11 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     //MARK: - Private func
     
     func distributeTime(fullTime: Int) -> (seed: Rarity, pot: Rarity) {
-        if fullTime < Rarity.SCALE_DIVISION_VALUE * 2 {
+        if fullTime < Rarity.SCALE_DIVISION_VALUE {
             return (seed: .common, pot: .common)
         }
         
-        if fullTime >= Rarity.SCALE_DIVISION_VALUE * 10 {
+        if fullTime >= Rarity.SCALE_DIVISION_VALUE * 8 {
             return (seed: .legendary, pot: .legendary)
         }
         
@@ -53,8 +53,8 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         
         var variants: [[Int]] = []
         
-        for first in 1...5 {
-            for second in 1...5 {
+        for first in 0...4 {
+            for second in 0...4 {
                 if first + second == countDivisionValue {
                     variants.append([first, second])
                 }
@@ -73,10 +73,10 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         if value <= 0 { return .common }
         
         return switch value {
-        case 1: .common
-        case 2: .uncommon
-        case 3: .rare
-        case 4: .epic
+        case 1: .uncommon
+        case 2: .rare
+        case 3: .epic
+        case 4: .legendary
         default: .legendary
         }
     }

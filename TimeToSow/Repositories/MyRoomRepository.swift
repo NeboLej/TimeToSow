@@ -26,18 +26,19 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
     
     func getCurrentRoom() -> UserMonthRoom {
         
-        let plants = [ Plant(seed: tmpSeed,
-                             pot: Pot(potType: .small,
-                                   name: "aeded",
-                                   image: "pot15",
-                                   height: 20,
-                                      rarity: .common,
-                                   anchorPointCoefficient: .init(x: -0.15, y: 0)),
-                             name: "test",
-                             description: "",
-                             offsetY: 200,
-                             offsetX: 0,
-                             notes: [Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9"))])
+        let plants: [Plant] = [
+//            Plant(seed: tmpSeed,
+//                             pot: Pot(potType: .small,
+//                                   name: "aeded",
+//                                   image: "pot15",
+//                                   height: 20,
+//                                      rarity: .common,
+//                                   anchorPointCoefficient: .init(x: -0.15, y: 0)),
+//                             name: "test",
+//                             description: "",
+//                             offsetY: 200,
+//                             offsetX: 0,
+//                             notes: [Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9"))])
           ]
         var plantDict: [String: Plant] = [:]
         plants.forEach {
@@ -46,7 +47,7 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
         
         return UserMonthRoom(shelfType: tmpShelf,
                       roomType: .init(name: "May", image: "room8"),
-                      name: "May",
+                      name: "December",
                       dateCreate: Date(),
                       plants: plantDict
         )

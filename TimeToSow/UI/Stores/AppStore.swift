@@ -37,12 +37,17 @@ class AppStore {
         self.tagRepository = tagRepository
         
         currentRoom = myRoomRepository.getCurrentRoom()
+        addRandomPlantToShelf()
     }
     
     func send(_ action: AppAction) {
         switch action {
         case .selectPlant(let plant):
-            selectedPlant = plant
+            if let plant {
+                selectedPlant = currentRoom.plants[plant.id]
+            } else {
+                selectedPlant = nil
+            }
         case .movePlant(plant: let plant, newPosition: let newPosition):
             guard let plant = currentRoom.plants[plant.id] else { return }
             let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
@@ -98,7 +103,7 @@ class AppStore {
     
     func getRandomNote() -> Note {
         Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
-             time: (10...360).randomElement()!,
+             time: (5...300).randomElement()!,
              tag: tagRepository.getRandomTag())
     }
     
