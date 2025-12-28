@@ -114,5 +114,12 @@ extension RoomView: PositionPlantDelegate {
 //}
 
 #Preview {
-    screenBuilderMock.getScreen(type: .home)
+    VStack {
+        screenBuilderMock.getComponent(type: .roomView)
+        Spacer()
+    }.ignoresSafeArea()
 }
+
+//#Preview {
+//    screenBuilderMock.getScreen(type: .home)
+//}
