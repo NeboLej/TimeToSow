@@ -173,7 +173,89 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
         Pot(potType: .small,
             name: "aeded",
             image: "pot25",
+            height: 22,
+            rarity: .uncommon),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot26",
             height: 25,
-            rarity: .uncommon)
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot27",
+            height: 18,
+            rarity: .common,
+            anchorPointCoefficient: .init(x: 0, y: 0.05)),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot28",
+            height: 24,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot29",
+            height: 20,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot30",
+            height: 15,
+            rarity: .common,
+            anchorPointCoefficient: .init(x: -0.42, y: 0.15)),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot31",
+            height: 26,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot32",
+            height: 23,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot33",
+            height: 23,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot34",
+            height: 23,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot35",
+            height: 23,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot36",
+            height: 25,
+            rarity: .common,
+            anchorPointCoefficient: .init(x: -0.32,
+                                          y: 0.08)),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot37",
+            height: 29,
+            rarity: .common),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot38",
+            height: 10,
+            rarity: .common)
     ]
 }

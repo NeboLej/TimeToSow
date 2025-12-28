@@ -150,8 +150,8 @@ struct PlantPreview: View {
 
     var tmpPot = Pot(potType: .small,
                      name: "aeded",
-                     image: "pot24",
-                     height: 22,
+                     image: "pot38",
+                     height: 10,
                      rarity: .common)
     VStack {
         PlantPreview(plant: Plant(seed: tmpSeed,
@@ -161,6 +161,7 @@ struct PlantPreview: View {
                                   offsetY: 200,
                                   offsetX: 200,
                                  notes: []))
+        .padding(.top, 40)
         Spacer()
     }
     
