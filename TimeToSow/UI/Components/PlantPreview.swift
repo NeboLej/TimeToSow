@@ -142,11 +142,11 @@ struct PlantPreview: View {
     
     var tmpSeed = Seed(name: "qwe",
                        availavlePotTypes: PotType.allCases,
-                       image: "seed33",
-                       height: 40,
-                       rarity: .common,
-                       rootCoordinateCoef: .init(x: 0.1,
-                                                 y: 0.19))
+                       image: "seed21",
+                       height: 32,
+                       rarity: .epic,
+                       rootCoordinateCoef: .init(x: 0,
+                                                 y: 0.03))
 
     var tmpPot = Pot(potType: .small,
                      name: "aeded",

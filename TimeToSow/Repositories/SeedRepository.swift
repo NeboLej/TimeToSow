@@ -84,7 +84,7 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         Seed(name: "asasd2",
              availavlePotTypes: [.large],
              image: "seed11",
-             height: 100,
+             height: 70,
              rarity: .rare),
         
         Seed(name: "asasd2",
@@ -148,7 +148,9 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              availavlePotTypes: PotType.allCases,
              image: "seed21",
              height: 32,
-             rarity: .epic),
+             rarity: .epic,
+             rootCoordinateCoef: .init(x: 0,
+                                       y: 0.03)),
         
         Seed(name: "qwe",
              availavlePotTypes: PotType.allCases,
