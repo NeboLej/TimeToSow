@@ -28,16 +28,11 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
         
         let plants: [Plant] = [
 //            Plant(seed: tmpSeed,
-//                             pot: Pot(potType: .small,
-//                                   name: "aeded",
-//                                   image: "pot15",
-//                                   height: 20,
-//                                      rarity: .common,
-//                                   anchorPointCoefficient: .init(x: -0.15, y: 0)),
+//                             pot: tmpPot,
 //                             name: "test",
 //                             description: "",
 //                             offsetY: 200,
-//                             offsetX: 0,
+//                             offsetX: 150,
 //                             notes: [Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9"))])
           ]
         var plantDict: [String: Plant] = [:]

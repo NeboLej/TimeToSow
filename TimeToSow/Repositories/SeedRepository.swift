@@ -219,6 +219,26 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              availavlePotTypes: PotType.allCases,
              image: "seed32",
              height: 28,
-             rarity: .common)
+             rarity: .common),
+        
+        Seed(name: "qwe",
+             availavlePotTypes: PotType.allCases,
+             image: "seed33",
+             height: 45,
+             rarity: .rare,
+             rootCoordinateCoef: .init(x: 0.1,
+                                       y: 0.19)),
+        
+        Seed(name: "qwe",
+             availavlePotTypes: PotType.allCases,
+             image: "seed34",
+             height: 45,
+             rarity: .legendary),
+        
+        Seed(name: "qwe",
+             availavlePotTypes: PotType.allCases,
+             image: "seed35",
+             height: 30,
+             rarity: .rare)
     ]
 }

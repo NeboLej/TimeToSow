@@ -70,6 +70,7 @@ struct PlantDetailView: View {
                 .padding()
                 
         }.background(.mainBackground)
+            
     }
     
     @ViewBuilder

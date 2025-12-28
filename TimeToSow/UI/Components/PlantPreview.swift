@@ -140,17 +140,32 @@ struct PlantPreview: View {
                      rarity: .rare,
                      rootCoordinateCoef: .init(x: 0.1, y: 0))
     
-    PlantPreview(plant: Plant(seed: seed2,
-                              pot: Pot(potType: .large,
-                                       name: "potOleg",
-                                       image: "pot21",
-                                       height: 24,
-                                       rarity: .uncommon),
-                              name: "test",
-                              description: "",
-                              offsetY: 200,
-                              offsetX: 200,
-                             notes: []))
+    var tmpSeed = Seed(name: "qwe",
+                       availavlePotTypes: PotType.allCases,
+                       image: "seed33",
+                       height: 40,
+                       rarity: .common,
+                       rootCoordinateCoef: .init(x: 0.1,
+                                                 y: 0.19))
+
+    var tmpPot = Pot(potType: .small,
+                     name: "aeded",
+                     image: "pot24",
+                     height: 22,
+                     rarity: .common)
+    VStack {
+        PlantPreview(plant: Plant(seed: tmpSeed,
+                                  pot: tmpPot,
+                                  name: "test",
+                                  description: "",
+                                  offsetY: 200,
+                                  offsetX: 200,
+                                 notes: []))
+        Spacer()
+    }
+    
+
 }
+
 
 

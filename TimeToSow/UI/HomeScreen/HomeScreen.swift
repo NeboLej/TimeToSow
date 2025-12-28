@@ -156,7 +156,7 @@ struct HomeScreen: View {
             Button("Note") {
                 store.send(.addRandomNote)
             }
-        }
+        }.padding(.bottom, 50)
     }
     
     @ViewBuilder
@@ -298,9 +298,15 @@ fileprivate struct NumericText: View {
 
 var tmpSeed = Seed(name: "qwe",
                    availavlePotTypes: PotType.allCases,
-                   image: "seed21",
-                   height: 32,
-                   rarity: .common)
+                   image: "seed33",
+                   height: 50,
+                   rarity: .epic)
+
+var tmpPot = Pot(potType: .small,
+                 name: "aeded",
+                 image: "pot25",
+                 height: 27,
+                 rarity: .common)
 
 #Preview {
     screenBuilderMock.getScreen(type: .home)

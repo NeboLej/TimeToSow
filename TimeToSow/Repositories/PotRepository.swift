@@ -150,6 +150,30 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
             name: "aeded",
             image: "pot21",
             height: 24,
-            rarity: .legendary)
+            rarity: .legendary),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot22",
+            height: 26,
+            rarity: .uncommon),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot23",
+            height: 20,
+            rarity: .rare),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot24",
+            height: 22,
+            rarity: .legendary),
+        
+        Pot(potType: .small,
+            name: "aeded",
+            image: "pot25",
+            height: 25,
+            rarity: .uncommon)
     ]
 }
