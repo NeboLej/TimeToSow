@@ -84,13 +84,13 @@ struct HomeScreen: View {
         TextureView(insets: .init(top: 6, leading: 15, bottom: 6, trailing: 15), texture: Image(.smallTexture1), cornerRadius: 12) {
             HStack(spacing: 0) {
                 DrawText(text: "\(store.state.plantCount)",
-                         font: UIFont.myTitle(18),
+                         font: UIFont.myNumber(18),
                          duration: 1)
                 .foregroundStyle(.black)
                 Image(.seedIcon)
                     .padding(.trailing, 20)
                 DrawText(text: store.state.loggedMinutesCount.toHoursAndMinutes(),
-                         font: UIFont.myTitle(18),
+                         font: UIFont.myNumber(18),
                          duration: 1)
                 .foregroundStyle(.black)
             }
@@ -165,9 +165,10 @@ struct HomeScreen: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text(store.state.selectedPlant == nil ? "New Plant" : "Upgrade plant")
+                        Text(store.state.selectedPlant == nil ? "New plant" : "Upgrade plant")
                             .font(.myTitle(30))
                             .foregroundStyle(.black)
+                        
                         
                         NumericText(text: $selectedTime)
                             .foregroundStyle(.black)
@@ -250,7 +251,7 @@ struct HomeScreen: View {
                     }
                     
                     Spacer()
-
+                    
                 }
                 Spacer()
                 if let topPlant = store.state.topPlant {
@@ -288,7 +289,8 @@ fileprivate struct NumericText: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: 10) {
             Text("\(text)")
-                .font(.myTitle(50))
+                .font(.myNumber(50))
+                .opacity(0.8)
             Text("min")
                 .font(.myTitle(22))
                 .padding(.bottom, 7)

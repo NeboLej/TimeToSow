@@ -13,6 +13,8 @@
 		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
 		8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */; };
 		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
+		8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */; };
+		8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34662F02789200354CAB /* Underdog-Regular.ttf */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -37,7 +39,6 @@
 		8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF68052EF471E300780BB9 /* HomeScreenAction.swift */; };
 		8EAF68082EF4800300780BB9 /* Int + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF68072EF4800300780BB9 /* Int + extension.swift */; };
 		8EBF147A2DE657A700422876 /* Font +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF14792DE657A700422876 /* Font +.swift */; };
-		8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */; };
 		8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */; };
 		8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */; };
 		8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */; };
@@ -81,6 +82,8 @@
 		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
 		8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRow.swift; sourceTree = "<group>"; };
 		8E5B34182EFEADD200354CAB /* Rarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarity.swift; sourceTree = "<group>"; };
+		8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StampatelloFaceto.otf; sourceTree = "<group>"; };
+		8E5B34662F02789200354CAB /* Underdog-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Underdog-Regular.ttf"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
@@ -106,7 +109,6 @@
 		8EAF68072EF4800300780BB9 /* Int + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + extension.swift"; sourceTree = "<group>"; };
 		8EBF14782DE6577800422876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8EBF14792DE657A700422876 /* Font +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font +.swift"; sourceTree = "<group>"; };
-		8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LoveYaLikeASister-Regular.ttf"; sourceTree = "<group>"; };
 		8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SedgwickAve-Regular.ttf"; sourceTree = "<group>"; };
 		8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "K2D-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -284,13 +286,14 @@
 		8EF575422DCE3F3A00AEC31A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E5B34662F02789200354CAB /* Underdog-Regular.ttf */,
+				8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */,
 				8EA1C9D62EFD909900DF690F /* K2D-Light.ttf */,
 				8EF575402DCE3F3A00AEC31A /* Preview Content */,
 				8EF575412DCE3F3A00AEC31A /* Assets.xcassets */,
 				8EBF147F2DE6689E00422876 /* K2D-ExtraLightItalic.ttf */,
 				8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */,
 				8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */,
-				8EBF147B2DE667A100422876 /* LoveYaLikeASister-Regular.ttf */,
 				8EBF14792DE657A700422876 /* Font +.swift */,
 			);
 			path = Resources;
@@ -437,11 +440,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EBF147C2DE667A100422876 /* LoveYaLikeASister-Regular.ttf in Resources */,
 				8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */,
+				8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */,
 				8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */,
 				8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */,
 				8EF575512DCE3F3A00AEC31A /* Preview Assets.xcassets in Resources */,
+				8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */,
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
 				8EA1C9D72EFD909900DF690F /* K2D-Light.ttf in Resources */,
 			);

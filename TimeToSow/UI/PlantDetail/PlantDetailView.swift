@@ -100,7 +100,7 @@ struct PlantDetailView: View {
         TextureView(insets: .init(top: 6, leading: 15, bottom: 6, trailing: 15),
                     texture: Image(.smallTexture1), cornerRadius: 12) {
             DrawText(text: plant.time.toHoursAndMinutes(),
-                     font: UIFont.myTitle(18),
+                     font: UIFont.myNumber(18),
                      duration: 1)
             .foregroundStyle(.black)
         }

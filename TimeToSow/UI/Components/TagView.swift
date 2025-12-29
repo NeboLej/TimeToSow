@@ -19,7 +19,7 @@ struct TagView: View {
                 .frame(width: 10, height: 10)
                 .foregroundStyle(color)
             Text(tag.name)
-                .font(.myTitle(13))
+                .font(.myNumber(13))
                 .foregroundStyle(.black)
             
         }
