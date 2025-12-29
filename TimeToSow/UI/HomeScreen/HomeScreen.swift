@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+fileprivate enum L: LocalizedStringKey {
+    case newPlantTitle = "HomeScreen.newPlantTitle"
+    case updatePlantTitle = "HomeScreen.upgradePlantTitle"
+    case startButton = "HomeScreen.startButton"
+    case monthStatistic_PlantCount = "HomeScreen.MonthStatistic.plantCountText"
+    case monthStatistic_BonusCount = "HomeScreen.MonthStatistic.bonusCountText"
+    case monthStatistic_TopPlant = "HomeScreen.MonthStatistic.topPlantText"
+    case monthStatistic_TopTag = "HomeScreen.MonthStatistic.topTagText"
+    
+    var loc: LocalizedStringKey { rawValue }
+}
+
 struct HomeScreen: View {
     
     @Environment(\.appStore) var appStore: AppStore
@@ -165,10 +177,9 @@ struct HomeScreen: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text(store.state.selectedPlant == nil ? "New plant" : "Upgrade plant")
-                            .font(.myTitle(30))
+                        Text((store.state.selectedPlant == nil ? L.newPlantTitle : L.updatePlantTitle).loc)
+                            .font(.myTitle(28))
                             .foregroundStyle(.black)
-                        
                         
                         NumericText(text: $selectedTime)
                             .foregroundStyle(.black)
@@ -179,7 +190,7 @@ struct HomeScreen: View {
                     Spacer()
                     
                     VStack(alignment: .trailing, spacing: 18) {
-                        TextureButton(label: "Start", color: .strokeAcsent1, icon: Image(.iconPlay)) {
+                        TextureButton(label: L.startButton.loc, color: .strokeAcsent1, icon: Image(.iconPlay)) {
                             print("start")
                             isProgress = true
                         }
@@ -225,27 +236,27 @@ struct HomeScreen: View {
                         .padding(.top, 16)
                         .padding(.bottom, 8)
                     
-                    lineStatisticView(title: "Plants count",
+                    lineStatisticView(title: L.monthStatistic_PlantCount.loc,
                                       view: Text(String(store.state.plantCount))
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
-                    lineStatisticView(title: "Bonuses count",
+                    lineStatisticView(title: L.monthStatistic_BonusCount.loc,
                                       view: Text("1")
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
                     if let topPlant = store.state.topPlant {
-                        lineStatisticView(title: "Top Plant",
+                        lineStatisticView(title: L.monthStatistic_TopPlant.loc,
                                           view: RarityView(count: topPlant.seed.rarity.starCount + topPlant.pot.rarity.starCount)
                             .frame(height: 12)
                         )
                     }
                     
                     if let topTag = store.state.topTag {
-                        lineStatisticView(title: "Top tag",
+                        lineStatisticView(title: L.monthStatistic_TopTag.loc,
                                           view: TagView(tag: topTag)
                         )
                     }
@@ -270,7 +281,7 @@ struct HomeScreen: View {
     
     
     @ViewBuilder
-    func lineStatisticView(title: String, view: some View) -> some View {
+    func lineStatisticView(title: LocalizedStringKey, view: some View) -> some View {
         HStack {
             Text(title)
                 .font(.myRegular(14))
@@ -291,7 +302,7 @@ fileprivate struct NumericText: View {
             Text("\(text)")
                 .font(.myNumber(50))
                 .opacity(0.8)
-            Text("min")
+            Text(TimeLocalized.minute.loc)
                 .font(.myTitle(22))
                 .padding(.bottom, 7)
         }
@@ -312,4 +323,5 @@ var tmpPot = Pot(potType: .small,
 
 #Preview {
     screenBuilderMock.getScreen(type: .home)
+//        .environment(\.locale, .init(identifier: "en"))
 }

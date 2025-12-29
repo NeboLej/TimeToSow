@@ -115,7 +115,7 @@ struct ProgressScreen: View {
                 if localStore.state == .completed {
                     VStack(alignment: .center, spacing: 0) {
                         Text("\(Int(localStore.minutes))")
-                        Text("min")
+                        Text(TimeLocalized.minute.loc)
                     }
                     .offset(y: -10)
                     .foregroundColor(.white)

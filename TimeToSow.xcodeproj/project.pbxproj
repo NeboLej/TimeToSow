@@ -54,6 +54,9 @@
 		8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */; };
 		8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */; };
 		8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F522E18547600AA6AFA /* Color + extension.swift */; };
+		8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */; };
+		8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */; };
+		8ED72C432F02E2E1008E6869 /* remote_localization.json in Resources */ = {isa = PBXBuildFile; fileRef = 8ED72C422F02E2E1008E6869 /* remote_localization.json */; };
 		8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */; };
 		8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C5A12E7A126600818D95 /* TextureButton.swift */; };
 		8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB2E882E7B54CF00D0F736 /* TagView.swift */; };
@@ -124,6 +127,9 @@
 		8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatShadow.swift; sourceTree = "<group>"; };
 		8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingFramesView.swift; sourceTree = "<group>"; };
 		8EC86F522E18547600AA6AFA /* Color + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extension.swift"; sourceTree = "<group>"; };
+		8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLocalizationService.swift; sourceTree = "<group>"; };
+		8ED72C422F02E2E1008E6869 /* remote_localization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = remote_localization.json; sourceTree = "<group>"; };
 		8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets + extension.swift"; sourceTree = "<group>"; };
 		8EE4C5A12E7A126600818D95 /* TextureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureButton.swift; sourceTree = "<group>"; };
 		8EEB2E882E7B54CF00D0F736 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -295,6 +301,9 @@
 				8EBF14802DE6689E00422876 /* K2D-MediumItalic.ttf */,
 				8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */,
 				8EBF14792DE657A700422876 /* Font +.swift */,
+				8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */,
+				8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */,
+				8ED72C422F02E2E1008E6869 /* remote_localization.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 8EF574E32DCCEEAE00AEC31A;
 			minimizedProjectReferenceProxies = 1;
@@ -444,10 +454,12 @@
 				8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */,
 				8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */,
 				8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */,
+				8ED72C432F02E2E1008E6869 /* remote_localization.json in Resources */,
 				8EF575512DCE3F3A00AEC31A /* Preview Assets.xcassets in Resources */,
 				8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */,
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
 				8EA1C9D72EFD909900DF690F /* K2D-Light.ttf in Resources */,
+				8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +525,7 @@
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
 				8E75DE162E5A351B0004C3D3 /* ProgressView.swift in Sources */,
+				8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */,
 				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,
@@ -581,6 +594,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -637,6 +651,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

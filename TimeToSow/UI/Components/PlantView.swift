@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+fileprivate enum L: LocalizedStringKey {
+    case info = "PlantView.info"
+    
+    var loc: LocalizedStringKey { rawValue }
+}
+
 struct PlantView: View {
     
     @State private var plant: PlantViewState
@@ -126,7 +132,7 @@ struct PlantView: View {
                 .frame(width: 60)
                 .rotationEffect(.degrees(isLeft ? 180 : 0))
                 .overlay {
-                    Text("Info")
+                    Text(L.info.loc)
                         .font(.myTitle(14))
                         .foregroundStyle(.white)
                         .offset(x: isLeft ? -8 : 8)

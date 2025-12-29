@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TextureButton: View {
     
-    private let label: String?
+    private let label: LocalizedStringKey?
     private let icon: Image?
     private let color: Color
     private let action: () -> ()
@@ -17,7 +17,7 @@ struct TextureButton: View {
     @GestureState private var isPressed = false
     @State private var animation: Bool = false
     
-    init(label: String, color: Color = .white, icon: Image? = nil, action: @escaping () -> ()) {
+    init(label: LocalizedStringKey, color: Color = .white, icon: Image? = nil, action: @escaping () -> ()) {
         self.color = color
         self.icon = icon
         self.label = label
@@ -41,7 +41,7 @@ struct TextureButton: View {
                     }
                     if let label {
                         Text(label)
-                            .font(.myTitle(24))
+                            .font(.myTitle(22))
                             .foregroundStyle(.white)
                     }
                 }

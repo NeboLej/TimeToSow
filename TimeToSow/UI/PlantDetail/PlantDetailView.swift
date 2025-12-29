@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+fileprivate enum L: LocalizedStringKey {
+    case desctiprionTitle = "PlantDetailScreen.descriptionTitle"
+    case recordsHistoryTitle = "PlantDetailScreen.recordsHistoryTitle"
+    case editButton = "PlantDetailScreen.editButton"
+    case toShelfButton = "PlantDetailScreen.toShelfButton"
+    case deleteButton = "PlantDetailScreen.deleteButton"
+    
+    var loc: LocalizedStringKey { rawValue }
+}
+
 struct PlantDetailView: View {
     
     let plant: Plant
@@ -27,7 +37,7 @@ struct PlantDetailView: View {
                 headerView()
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        titleLabel(plant.name)
+                        titleLabel(Text(plant.name))
                             .foregroundStyle(.black)
                             .padding(.all, 10)
                         
@@ -42,7 +52,7 @@ struct PlantDetailView: View {
                             .padding(.vertical, 20)
                         }
                         if !plant.description.isEmpty {
-                            titleLabel("Description")
+                            titleLabel(Text(L.desctiprionTitle.loc))
                                 .padding(.horizontal, 10)
                                 .padding(.top, 10)
                             
@@ -74,8 +84,8 @@ struct PlantDetailView: View {
     }
     
     @ViewBuilder
-    private func titleLabel(_ text: String) -> some View {
-        Text(text)
+    private func titleLabel(_ text: Text) -> some View {
+        text
             .font(.myTitle(20))
             .foregroundStyle(.black)
     }
@@ -118,7 +128,7 @@ struct PlantDetailView: View {
     @ViewBuilder
     private func recordsHistorySection() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            titleLabel("Records History")
+            titleLabel(Text(L.recordsHistoryTitle.loc))
                 .foregroundStyle(.black)
                 .padding(.bottom, -6)
             
@@ -185,16 +195,16 @@ struct PlantDetailView: View {
             }
             if isMenuOpen {
                 VStack(alignment: .leading, spacing: 12) {
-                    menuElement("Edit", color: Color(hex: "DDFFB7"))
-                    menuElement("Take off the shelf", color: Color(hex: "C9F3FF"))
-                    menuElement("Delete", color: Color(hex: "FFC8C8"))
+                    menuElement(L.editButton.loc, color: Color(hex: "DDFFB7"))
+                    menuElement(L.toShelfButton.loc, color: Color(hex: "C9F3FF"))
+                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8"))
                 }
             }
         }
     }
     
     @ViewBuilder
-    private func menuElement(_ text: String, color: Color) -> some View {
+    private func menuElement(_ text: LocalizedStringKey, color: Color) -> some View {
         TextureView(insets: .init(top: 4, leading: 6, bottom: 4, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
             Text(text)
                 .font(.myTitle(16))
@@ -205,13 +215,13 @@ struct PlantDetailView: View {
 
 
 #Preview {
-    PlantDetailView(plant: Plant(seed: Seed(name: "Oleg",
+    PlantDetailView(plant: Plant(seed: Seed(name: "seed1.name",
                                             availavlePotTypes: [.large, .medium],
                                             image: "seed23",
                                             height: 45,
                                             rarity: .common),
                                  pot: Pot(potType: .large,
-                                          name: "potOleg",
+                                          name: "pot1.name",
                                           image: "pot21",
                                           height: 24,
                                           rarity: .common),

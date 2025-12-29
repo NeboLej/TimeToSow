@@ -1,0 +1,11 @@
+
+{
+  "ru": {
+    "seed1.name": "Скидка 30%",
+    "pot1.name": "Только сегодня",
+  },
+  "en": {
+    "seed1.name": "30% off",
+    "pot1.name": "Today only",
+  }
+}
