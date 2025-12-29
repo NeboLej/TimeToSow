@@ -11,9 +11,9 @@ import SwiftUI
 struct DrawText: View {
     
     var text: String
-    var font: UIFont = UIFont.myTitle(18)
+    var font: UIFont = UIFont.myNumber(18)
     var duration: Double = 1
-    var stroke: Double = 0.5
+    var stroke: Double = 0.8
     
     @State private var resultText: String = ""
     @State private var animate: Bool = false

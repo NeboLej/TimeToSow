@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum TimeLocalized: String {
+    case hour = "Time.h"
+    case minute = "Time.min"
+    
+    var loc: String { NSLocalizedString(rawValue, comment: "") }
+}
+
 extension Int {
     func toHoursAndMinutes() -> String {
         let hours = self / 60
@@ -15,15 +22,15 @@ extension Int {
         var result: String = ""
         
         if hours > 0 {
-            result.append("\(hours)h")
+            result.append("\(hours)\(TimeLocalized.hour.loc)")
         }
         
         if minutes > 0 {
-            result.append(" \(minutes)min")
+            result.append(" \(minutes)\(TimeLocalized.minute.loc)")
         }
         
         if result.isEmpty {
-            result.append("0 min")
+            result.append("0 \(TimeLocalized.minute.loc)")
         }
         
         return result

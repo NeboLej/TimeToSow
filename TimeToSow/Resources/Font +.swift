@@ -11,7 +11,11 @@ import SwiftUI
 extension Font {
     
     static func myTitle(_ size: CGFloat) -> Font {
-        Font.custom("LoveYaLikeASister-Regular", size: size)
+        Font.custom("StampatelloFaceto", size: size)
+    }
+    
+    static func myNumber(_ size: CGFloat) -> Font {
+        Font.custom("Underdog-Regular", size: size)
     }
     
     static func myButton(_ size: CGFloat) -> Font {
@@ -23,17 +27,17 @@ extension Font {
     }
     
     static func myRegular(_ size: CGFloat) -> Font {
-        Font.custom("K2D-Light.ttf", size: size)
-    }
-    
-    static func myNumber(_ size: CGFloat) -> Font {
-        Font.custom("K2D-MediumItalic", size: size)
+        Font.custom("K2D-Light", size: size)
     }
 }
 
 extension UIFont {
     static func myTitle(_ size: CGFloat) -> UIFont {
-        UIFont(name: "LoveYaLikeASister-Regular", size: size) ?? .systemFont(ofSize: size)
+        UIFont(name: "StampatelloFaceto", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func myNumber(_ size: CGFloat) -> UIFont {
+        UIFont(name: "Underdog-Regular", size: size) ?? .systemFont(ofSize: size)
     }
     
     static func myButton(_ size: CGFloat) -> UIFont {
@@ -43,8 +47,8 @@ extension UIFont {
     static func myDescription(_ size: CGFloat) -> UIFont {
         UIFont(name: "K2D-ExtraLightItalic", size: size) ?? .systemFont(ofSize: size)
     }
-    
-    static func myNumber(_ size: CGFloat) -> UIFont {
-        UIFont(name: "K2D-MediumItalic", size: size) ?? .systemFont(ofSize: size)
-    }
+}
+
+#Preview {
+    screenBuilderMock.getScreen(type: .home)
 }

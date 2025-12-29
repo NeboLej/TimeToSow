@@ -28,11 +28,27 @@ struct TimeToSowApp: App {
                                 plantRepository: plantRepository,
                                 tagRepository: tagRepository)
         screenBuilder = ScreenBuilder(appStore: appStore)
+        
+        loadLocalJSONLocalization()
     }
     
     var body: some Scene {
         WindowGroup {
             screenBuilder.getScreen(type: .home)
+        }
+    }
+    
+    private func loadLocalJSONLocalization() {
+        guard let url = Bundle.main.url(forResource: "remote_localization", withExtension: "json") else {
+            assertionFailure("Localization JSON not found")
+            return
+        }
+
+        do {
+            let data = try Data(contentsOf: url)
+            try JSONLocalizationService.shared.load(from: data)
+        } catch {
+            assertionFailure("Failed to load localization: \(error)")
         }
     }
 }

@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+fileprivate enum L: LocalizedStringKey {
+    case title = "TagStatistic.title"
+    
+    var loc: LocalizedStringKey { rawValue }
+}
+
 struct TagStatisticsView: View {
     
     var notes: [Note]
@@ -42,7 +48,7 @@ struct TagStatisticsView: View {
     var body: some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading) {
-                Text("Tags info")
+                Text(L.title.loc)
                     .font(.myTitle(28))
                     .foregroundStyle(.black)
                 tagsTable()
