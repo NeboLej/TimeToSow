@@ -27,7 +27,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         let distributedTime = distributeTime(fullTime: note.time)
         let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
         let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot)
-        let name = [RemoteText.text(randomSeed.name), "\nand", RemoteText.text(randomPot.name)].joined(separator: " ")
+        let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
         
         return Plant(seed: randomSeed,
                      pot: randomPot,
