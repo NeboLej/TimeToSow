@@ -77,7 +77,7 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         Seed(name: "seed10.name",
              availavlePotTypes: [.large],
              image: "seed10",
-             height: 100,
+             height: 90,
              rarity: .epic,
              rootCoordinateCoef: .init(x: -0.06, y: 0)),
         
@@ -114,7 +114,7 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         Seed(name: "seed16.name",
              availavlePotTypes: [.large],
              image: "seed16",
-             height: 100,
+             height: 90,
              rarity: .legendary),
         
         Seed(name: "seed17.name",
@@ -195,7 +195,7 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         Seed(name: "seed28.name",
              availavlePotTypes: PotType.allCases,
              image: "seed28",
-             height: 130,
+             height: 110,
              rarity: .epic),
         
         Seed(name: "seed29.name",
@@ -241,6 +241,71 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
              availavlePotTypes: PotType.allCases,
              image: "seed35",
              height: 30,
-             rarity: .rare)
+             rarity: .rare),
+        
+        Seed(name: "seed36.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed36",
+             height: 30,
+             rarity: .uncommon),
+        
+        Seed(name: "seed37.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed37",
+             height: 50,
+             rarity: .epic,
+             rootCoordinateCoef: .init(x: -0.05, y: 0)),
+        
+        
+        Seed(name: "seed38.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed38",
+             height: 27,
+             rarity: .common),
+        
+        Seed(name: "seed39.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed39",
+             height: 40,
+             rarity: .uncommon,
+             rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        
+        Seed(name: "seed40.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed40",
+             height: 26,
+             rarity: .common),
+        
+        Seed(name: "seed41.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed41",
+             height: 26,
+             rarity: .common,
+             rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        
+        Seed(name: "seed42.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed42",
+             height: 22,
+             rarity: .common),
+        
+        Seed(name: "seed43.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed43",
+             height: 23,
+             rarity: .uncommon),
+        
+        Seed(name: "seed44.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed44",
+             height: 38,
+             rarity: .epic,
+             rootCoordinateCoef: .init(x: -0.03, y: 0.13)),
+        
+        Seed(name: "seed45.name",
+             availavlePotTypes: PotType.allCases,
+             image: "seed45",
+             height: 44,
+             rarity: .uncommon),
     ]
 }
