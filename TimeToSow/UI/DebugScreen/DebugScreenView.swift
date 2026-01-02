@@ -70,7 +70,7 @@ struct DebugScreenView: View {
                     Spacer()
                 }
                 
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal,showsIndicators: false) {
                     HStack(alignment: .bottom) {
                         ForEach(filtredSeeds, id: \.self) {
                             seedCell(seed: $0)
@@ -78,11 +78,12 @@ struct DebugScreenView: View {
                     }
                 }
                 Text("Seed count: \(filtredSeeds.count)")
+                    .foregroundStyle(.black)
                     .padding(.top, 8)
                     .padding(.horizontal, 10)
                     .padding(.bottom, 30)
                 
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .bottom) {
                         ForEach(filtredPods, id: \.self) {
                             potCell(pot: $0)
@@ -90,6 +91,7 @@ struct DebugScreenView: View {
                     }
                 }
                 Text("Pot count: \(filtredPods.count)")
+                    .foregroundStyle(.black)
                     .padding(.top, 8)
                     .padding(.horizontal, 10)
                     .padding(.bottom, 30)
@@ -97,6 +99,7 @@ struct DebugScreenView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Pots")
+                            .foregroundStyle(.black)
                         potRarityView(rarity: .common)
                         potRarityView(rarity: .uncommon)
                         potRarityView(rarity: .rare)
@@ -107,6 +110,7 @@ struct DebugScreenView: View {
                     
                     VStack(alignment: .leading) {
                         Text("Seeds")
+                            .foregroundStyle(.black)
                         seedRarityView(rarity: .common)
                         seedRarityView(rarity: .uncommon)
                         seedRarityView(rarity: .rare)
@@ -120,7 +124,9 @@ struct DebugScreenView: View {
                 
                 Group {
                     Text("all variants combo: \(allVariantsCount)")
+                        .foregroundStyle(.black)
                     Text("count with time")
+                        .foregroundStyle(.black)
                     countWithTimeView(time: 1)
                     countWithTimeView(time: Rarity.SCALE_DIVISION_VALUE * 1 + 1)
                     countWithTimeView(time: Rarity.SCALE_DIVISION_VALUE * 2 + 1)
@@ -135,7 +141,9 @@ struct DebugScreenView: View {
                 .padding(.vertical, 2)
                 
                 
-            }.onAppear {
+            }
+            .background(.mainBackground)
+            .onAppear {
                 allPots = potRepository.pots.reversed()
                 allSeeds = seedRepository.seeds.reversed()
             }
@@ -158,9 +166,11 @@ struct DebugScreenView: View {
             HStack {
                 Text("\(time) min -")
                 Text("\(count) variants")
-            }
-            Text("\(variants.map { "\($0.seed.starCount) : \($0.pot.starCount)" })")
+            }.foregroundStyle(.black)
+//            Text("\(variants.map { "\($0.seed.starCount) : \($0.pot.starCount)" })")
+                .foregroundStyle(.black)
             Rectangle()
+                .foregroundStyle(.black)
                 .frame(height: 1)
                 .opacity(0.5)
         }
@@ -171,6 +181,7 @@ struct DebugScreenView: View {
         HStack {
             RarityView(count: rarity.starCount).frame(height: 12)
             Text("\(allPots.filter{ $0.rarity == rarity}.count)")
+                .foregroundStyle(.black)
         }
     }
     
@@ -179,6 +190,7 @@ struct DebugScreenView: View {
         HStack {
             RarityView(count: rarity.starCount).frame(height: 12)
             Text("\(allSeeds.filter{ $0.rarity == rarity}.count)")
+                .foregroundStyle(.black)
         }
     }
     

@@ -138,15 +138,19 @@ struct PlantPreview: View {
                      rarity: .rare,
                      rootCoordinateCoef: .init(x: 0.1, y: 0))
     
-    var tmpSeed = Seed(name: "qwe",
-                       image: "seed45",
-                       height: 44,
-                       rarity: .epic)
-
-    var tmpPot = Pot(name: "aeded",
-                     image: "pot44",
-                     height: 25,
-                     rarity: .epic)
+    var tmpSeed =  Seed(name: "seed6.name",
+                              unavailavlePotTypes: [],
+                              image: "seed6",
+                              height: 40,
+                              rarity: .common,
+                              rootCoordinateCoef: CGPoint(x: 0, y: 0.28))
+    
+//rootCoordinateCoef: .init(x: 0.08, y: 0)
+    var tmpPot = Pot(potFeatures: [],
+                     name: "pot50.name",
+                     image: "pot50",
+                     height: 40,
+                     rarity: .legendary)
     VStack {
         PlantPreview(plant: Plant(seed: tmpSeed,
                                   pot: tmpPot,
@@ -162,67 +166,6 @@ struct PlantPreview: View {
 
 }
 /*
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed36",
-                    height: 30,
-                    rarity: .epic)
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed37",
-                    height: 50,
-                    rarity: .epic,
-                    rootCoordinateCoef: .init(x: -0.05, y: 0))
  
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed38",
-                    height: 27,
-                    rarity: .epic)
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed39",
-                    height: 40,
-                    rarity: .epic,
-                    rootCoordinateCoef: .init(x: 0.05, y: 0))
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed40",
-                    height: 24,
-                    rarity: .epic)
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed41",
-                    height: 25,
-                    rarity: .epic,
-                    rootCoordinateCoef: .init(x: 0.05, y: 0))
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed42",
-                    height: 22,
-                    rarity: .epic)
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed43",
-                    height: 23,
-                    rarity: .epic)
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed44",
-                    height: 38,
-                    rarity: .epic,
-                    rootCoordinateCoef: .init(x: -0.03, y: 0.13))
- 
- Seed(name: "qwe",
-                    availavlePotTypes: PotType.allCases,
-                    image: "seed45",
-                    height: 44,
-                    rarity: .epic)
  */
 
