@@ -69,6 +69,8 @@ class AppStore {
             let newPlant = selectedPlant.copy(notes: notes)
             self.selectedPlant = newPlant
             currentRoom.plants[selectedPlant.id] = newPlant
+        case .toDebugScreen:
+            appCoordinator.activeSheet = .debugScreen
         }
     }
     
@@ -103,7 +105,7 @@ class AppStore {
     
     func getRandomNote() -> Note {
         Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
-             time: (5...260).randomElement()!,
+             time: (5...240).randomElement()!,
              tag: tagRepository.getRandomTag())
     }
     

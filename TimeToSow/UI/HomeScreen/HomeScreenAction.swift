@@ -12,6 +12,7 @@ enum HomeScreenAction {
     case changedShelfType
     case addRandomPlant
     case addRandomNote
+    case toDebugScreen
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -29,6 +30,8 @@ extension AppStore: HomeScreenDelegate {
             send(.addRandomPlant)
         case .addRandomNote:
             send(.addRandomNote)
+        case .toDebugScreen:
+            send(.toDebugScreen)
         }
     }
 }

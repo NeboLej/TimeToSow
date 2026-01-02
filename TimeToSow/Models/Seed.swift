@@ -10,16 +10,16 @@ import UIKit
 struct Seed: Hashable {
     var id: UUID = UUID.init()
     var name: String = ""
-    var availavlePotTypes: [PotType] = []
+    var unavailavlePotTypes: [PotFeaturesType] = []
     var image: String = ""
     var height: Int
     let rarity: Rarity
     var rootCoordinateCoef: CGPoint?
     var width: CGFloat
     
-    init(name: String, availavlePotTypes: [PotType], image: String, height: Int, rarity: Rarity, rootCoordinateCoef: CGPoint? = nil) {
+    init(name: String, unavailavlePotTypes: [PotFeaturesType] = [], image: String, height: Int, rarity: Rarity, rootCoordinateCoef: CGPoint? = nil) {
         self.name = name
-        self.availavlePotTypes = availavlePotTypes
+        self.unavailavlePotTypes = unavailavlePotTypes
         self.image = image
         self.height = height
         self.rarity = rarity

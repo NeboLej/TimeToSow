@@ -26,7 +26,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     func getRandomPlant(note: Note) -> Plant {
         let distributedTime = distributeTime(fullTime: note.time)
         let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
-        let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot)
+        let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
         let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
         
         return Plant(seed: randomSeed,
@@ -41,12 +41,41 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     //MARK: - Private func
     
     func distributeTime(fullTime: Int) -> (seed: Rarity, pot: Rarity) {
+//        if fullTime < Rarity.SCALE_DIVISION_VALUE {
+//            return (seed: .common, pot: .common)
+//        }
+//        
+//        if fullTime >= Rarity.SCALE_DIVISION_VALUE * 8 {
+//            return (seed: .legendary, pot: .legendary)
+//        }
+//        
+//        let countDivisionValue: Int = fullTime / Rarity.SCALE_DIVISION_VALUE
+//        
+//        var variants: [[Int]] = []
+//        
+//        for first in 0...4 {
+//            for second in 0...4 {
+//                if first + second == countDivisionValue {
+//                    variants.append([first, second])
+//                }
+//            }
+//        }
+//        
+//        if variants.count == 0 { return (seed: .legendary, pot: .legendary) }
+        
+        let variants = allVariantsRatityCombo(fullTime: fullTime)
+//        let randomCombo = variants.randomElement()!
+        
+        return variants.randomElement()!
+    }
+    
+    func allVariantsRatityCombo(fullTime: Int) -> [(seed: Rarity, pot: Rarity)] {
         if fullTime < Rarity.SCALE_DIVISION_VALUE {
-            return (seed: .common, pot: .common)
+            return [(seed: .common, pot: .common)]
         }
         
         if fullTime >= Rarity.SCALE_DIVISION_VALUE * 8 {
-            return (seed: .legendary, pot: .legendary)
+            return [(seed: .legendary, pot: .legendary)]
         }
         
         let countDivisionValue: Int = fullTime / Rarity.SCALE_DIVISION_VALUE
@@ -60,11 +89,9 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                 }
             }
         }
+        if variants.count == 0 { return [(seed: .legendary, pot: .legendary)] }
         
-        if variants.count == 0 { return (seed: .legendary, pot: .legendary) }
-        let randomCombo = variants.randomElement()!
-        
-        return (seed: getRarity(randomCombo[0]), pot: getRarity(randomCombo[1]))
+        return variants.map { (seed: getRarity($0[0]), pot: getRarity($0[1])) }
     }
     
     

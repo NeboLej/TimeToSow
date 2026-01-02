@@ -15,4 +15,5 @@ enum AppAction {
     case addRandomPlant
     case detailPlant(Plant)
     case addRandomNote
+    case toDebugScreen
 }

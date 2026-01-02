@@ -115,6 +115,9 @@ struct HomeScreen: View {
     private func  menuView() -> some View {
         HStack(spacing: 6) {
             menuElement(colorHex: "D17474", icon: "square.and.arrow.up")
+                .onTapGesture {
+                    store.send(.toDebugScreen)
+                }
             menuElement(colorHex: "7482D1", icon: "info.circle")
             menuElement(colorHex: "6E916A", icon: "paintbrush")
         }
@@ -310,13 +313,11 @@ fileprivate struct NumericText: View {
 }
 
 var tmpSeed = Seed(name: "qwe",
-                   availavlePotTypes: PotType.allCases,
                    image: "seed33",
                    height: 50,
                    rarity: .epic)
 
-var tmpPot = Pot(potType: .small,
-                 name: "aeded",
+var tmpPot = Pot(name: "aeded",
                  image: "pot25",
                  height: 27,
                  rarity: .common)

@@ -216,12 +216,10 @@ struct PlantDetailView: View {
 
 #Preview {
     PlantDetailView(plant: Plant(seed: Seed(name: "seed1.name",
-                                            availavlePotTypes: [.large, .medium],
                                             image: "seed23",
                                             height: 45,
                                             rarity: .common),
-                                 pot: Pot(potType: .large,
-                                          name: "pot1.name",
+                                 pot: Pot(name: "pot1.name",
                                           image: "pot21",
                                           height: 24,
                                           rarity: .common),

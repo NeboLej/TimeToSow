@@ -8,13 +8,14 @@
 import Foundation
 import UIKit
 
-enum PotType: Hashable, Equatable, CaseIterable {
-    case small, medium, large
+enum PotFeaturesType: Hashable, Equatable, CaseIterable {
+    //узкий
+    case narrow
 }
 
 struct Pot: Hashable {
     let id: UUID = UUID.init()
-    let potType: PotType
+    let potFeatures: [PotFeaturesType]
     let name: String
     let image: String
     let height: Int
@@ -22,8 +23,8 @@ struct Pot: Hashable {
     let anchorPointCoefficient: CGPoint?
     let width: CGFloat
     
-    init(potType: PotType, name: String, image: String, height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
-        self.potType = potType
+    init(potFeatures: [PotFeaturesType] = [], name: String, image: String, height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
+        self.potFeatures = potFeatures
         self.name = name
         self.image = image
         self.height = height
