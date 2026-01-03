@@ -24,18 +24,18 @@ struct RoomView: View {
     var store: RoomFeatureStore
     
     var body: some View {
-            GeometryReader { proxy in
-                ZStack(alignment: .topLeading) {
-                    Image(store.state.roomType.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    Image(store.state.shelfType.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    
-                    plants()
-                        .id(store.state.shelfType)
-                }
+        GeometryReader { proxy in
+            ZStack(alignment: .topLeading) {
+                Image(store.state.roomType.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                Image(store.state.shelfType.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                
+                plants()
+                    .id(store.state.shelfType)
+            }
         }
         .frame(height: height)
         .onGeometryChange(for: CGSize.self) { proxy in

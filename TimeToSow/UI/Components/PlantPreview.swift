@@ -138,19 +138,31 @@ struct PlantPreview: View {
                      rarity: .rare,
                      rootCoordinateCoef: .init(x: 0.1, y: 0))
     
-    var tmpSeed =  Seed(name: "seed6.name",
-                              unavailavlePotTypes: [],
-                              image: "seed6",
-                              height: 40,
-                              rarity: .common,
-                              rootCoordinateCoef: CGPoint(x: 0, y: 0.28))
+    let seed3 = Seed(name: "seed48.name",
+                     image: "seed48",
+                     height: 24,
+                     rarity: .uncommon)
     
-//rootCoordinateCoef: .init(x: 0.08, y: 0)
-    var tmpPot = Pot(potFeatures: [],
-                     name: "pot50.name",
-                     image: "pot50",
+    let seed4 = Seed(name: "seed17.name",
+                     unavailavlePotTypes: [.narrow],
+                     image: "seed17",
                      height: 40,
-                     rarity: .legendary)
+                     rarity: .legendary,
+                     rootCoordinateCoef: .init(x: 0.05, y: 0))
+    
+    var tmpSeed = Seed(name: "seed4.name",
+                       unavailavlePotTypes: [],
+                       image: "seed4",
+                       height: 45,
+                       rarity: .rare,
+                       rootCoordinateCoef: .init(x: 0.05, y: 0))
+    
+    //rootCoordinateCoef: .init(x: 0.08, y: 0)
+    var tmpPot = Pot(name: "pot58.name",
+                     image: "pot58",
+                     height: 24,
+                     rarity: .rare)
+    
     VStack {
         PlantPreview(plant: Plant(seed: tmpSeed,
                                   pot: tmpPot,
@@ -158,14 +170,28 @@ struct PlantPreview: View {
                                   description: "",
                                   offsetY: 200,
                                   offsetX: 200,
-                                 notes: []))
+                                  notes: []))
         .padding(.top, 40)
         Spacer()
     }
     
-
+    
 }
 /*
+ Pot(name: "pot56.name",
+                  image: "pot56",
+                  height: 35,
+                  rarity: .rare),
+ 
+ Pot(name: "pot57.name",
+                  image: "pot57",
+                  height: 18,
+                  rarity: .epic),
+ 
+ Pot(name: "pot58.name",
+                  image: "pot58",
+                  height: 24,
+                  rarity: .rare)
  
  */
 

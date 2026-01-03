@@ -13,16 +13,13 @@ protocol MyRoomRepositoryProtocol {
 
 final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
     
-    let tmpShelf = ShelfType(name: "First",
-                          image: "shelf3",
-                          shelfPositions: [
-                            ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
-                            ShelfPosition(coefOffsetY: 0.682, paddingLeading: 30, paddingTrailing: 266),
-                            ShelfPosition(coefOffsetY: 0.468, paddingLeading: 190, paddingTrailing: 28),
-                            ShelfPosition(coefOffsetY: 0.46, paddingLeading: 20, paddingTrailing: 260),
-                            ShelfPosition(coefOffsetY: 0.256, paddingLeading: 39, paddingTrailing: 170),
-                            ShelfPosition(coefOffsetY: 0.254, paddingLeading: 280, paddingTrailing: 19),
-                           ])
+    let tmpShelf = ShelfType(name: "3", image: "shelf6", shelfPositions: [
+        ShelfPosition(coefOffsetY: 0.208, paddingLeading: 28, paddingTrailing: 35),
+        ShelfPosition(coefOffsetY: 0.43, paddingLeading: 212, paddingTrailing: 40),
+        ShelfPosition(coefOffsetY: 0.525, paddingLeading: 36, paddingTrailing: 236),
+        ShelfPosition(coefOffsetY: 0.606, paddingLeading: 195, paddingTrailing: 5),
+        ShelfPosition(coefOffsetY: 0.935, paddingLeading: 5, paddingTrailing: 5),
+       ])
     
     func getCurrentRoom() -> UserMonthRoom {
         
