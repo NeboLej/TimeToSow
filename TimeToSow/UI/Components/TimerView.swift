@@ -22,7 +22,7 @@ struct TimerView: View {
     var body: some View {
         
         Text(vm.time)
-            .font(.myTitle(70))
+            .font(.myNumber(70))
             .foregroundStyle(.black)
             .onReceive(vm.timer) { _ in
                 vm.updateCountdown()

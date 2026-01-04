@@ -48,7 +48,7 @@ struct TimePickerView: View {
                         .frame(height: 30)
                         .mask(alignment: .leading, {
                             Rectangle()
-                                .fill(.red)
+//                                .fill(.red)
                                 .frame(width: widthInOneTime * CGFloat(selectedTime - minInterval) + pointWidth / 2 , height: 30)
                         })
    

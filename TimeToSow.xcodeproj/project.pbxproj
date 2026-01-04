@@ -77,6 +77,7 @@
 		8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575882DDA00E200AEC31A /* TimePickerView.swift */; };
 		8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758A2DDA125A00AEC31A /* StrokeText.swift */; };
 		8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */; };
+		8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +153,7 @@
 		8EF575882DDA00E200AEC31A /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		8EF5758A2DDA125A00AEC31A /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
 		8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPickerView.swift; sourceTree = "<group>"; };
+		8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -392,6 +394,7 @@
 				8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */,
 				8EA1C9D82EFDB34C00DF690F /* PieChartView.swift */,
 				8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */,
+				8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
 				8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */,
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
+				8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,

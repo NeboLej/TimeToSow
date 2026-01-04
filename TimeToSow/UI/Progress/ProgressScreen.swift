@@ -21,8 +21,8 @@ struct ProgressScreen: View {
     
     var body: some View {
         ZStack {
-            Image(.sectionBackground)
-                .resizable()
+            Color(.mainBackground)
+                .textureOverlay()
             VStack {
                 switch localStore.state {
                 case .progress:
@@ -43,7 +43,7 @@ struct ProgressScreen: View {
     @ViewBuilder
     func processView() -> some View {
         GeometryReader { proxy in
-            VStack {
+            VStack(alignment: .center) {
                 HStack{
                     Button { isShowAlert = true }
                 label: {
@@ -56,15 +56,24 @@ struct ProgressScreen: View {
                 }
                 .padding(.top, 50)
                 .padding(.leading, 30)
-                LoopingFramesView(frames: ["updateAnimation1", "updateAnimation2", "updateAnimation3", "updateAnimation4"], speed: 0.5)
-                    .frame(width: proxy.size.width * 0.7, height: proxy.size.width * 0.7 * 9 / 12)
-                    .padding(.top, 10)
+//                LoopingFramesView(frames: ["updateAnimation1", "updateAnimation2", "updateAnimation3", "updateAnimation4"], speed: 0.5)
+//                    .frame(width: proxy.size.width * 0.7, height: proxy.size.width * 0.7 * 9 / 12)
+//                    .padding(.top, 10)
+                Spacer()
+                
+                SendTimerView(progress: CGFloat(localStore.progress))
+                    .frame(width: 120)
+                
                 TimerView(vm: localStore.timerVM)
-                progressCircleView()
-                Text("do it now")
-                    .font(.myDescription(25))
-                    .foregroundColor(.black)
-                    .padding(.top, 20)
+                    .padding(.bottom, 8)
+                
+
+//                progressCircleView()
+//                Text("do it now")
+//                    .font(.myDescription(25))
+//                    .foregroundColor(.black)
+//                    .padding(.top, 20)
+                Spacer()
             }
         }
         .alert("При закрытии этого экрана таймер будет остановлен", isPresented: $isShowAlert) {

@@ -99,7 +99,7 @@ class AppStore {
     
     func getRandomPlant() -> Plant {
         let randomPlant = plantRepository.getRandomPlant(note: getRandomNote())
-        updatePlant(with: randomPlant)
+//        updatePlant(with: randomPlant)
         return randomPlant
     }
     

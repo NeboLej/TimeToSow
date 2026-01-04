@@ -362,18 +362,18 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         
         Seed(name: "seed62.name",
              image: "seed62",
-             height: 30,
+             height: 60,
              rarity: .rare),
         
         Seed(name: "seed63.name",
              image: "seed63",
-             height: 60,
+             height: 80,
              rarity: .epic),
         
         Seed(name: "seed64.name",
              unavailavlePotTypes: [.narrow],
              image: "seed64",
-             height: 45,
+             height: 65,
              rarity: .epic,
              rootCoordinateCoef: .init(x: 0.08, y: 0)),
         
