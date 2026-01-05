@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension View {
-    func textureOverlay() -> some View {
-        self.modifier(TextureOverlay())
+    func textureOverlay(opacity: CGFloat = 0.7) -> some View {
+        self.modifier(TextureOverlay(opacity: opacity))
     }
     
     func rainShimmer(if active: Bool, height: CGFloat) -> some View {

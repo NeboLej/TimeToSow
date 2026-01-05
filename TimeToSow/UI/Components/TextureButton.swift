@@ -41,7 +41,7 @@ struct TextureButton: View {
                     }
                     if let label {
                         Text(label)
-                            .font(.myTitle(22))
+                            .font(.myNumber(24))
                             .foregroundStyle(.white)
                     }
                 }

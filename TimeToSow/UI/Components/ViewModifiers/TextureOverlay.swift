@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct TextureOverlay: ViewModifier {
+    
+    let opacity: CGFloat
+    
     func body(content: Content) -> some View {
         content
             .overlay {
@@ -16,7 +19,7 @@ struct TextureOverlay: ViewModifier {
                     Image(.texture1)
                         .resizable()
                         .scaledToFill()
-                        .opacity(0.7)
+                        .opacity(opacity)
                         .blendMode(.multiply)
                         .frame(width: geo.size.width, height: geo.size.height)
                         .clipped()

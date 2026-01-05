@@ -18,7 +18,15 @@ class ProgressScreenLocalStore: TimerListenerProtocol {
     var progress: Float = 0.0
     var minutes: Int
     var timerVM: TimerVM!
-    var newPlant: Plant?
+    var newPlant: Plant? = nil
+//    Plant(seed: tmpSeed,
+//                                                 pot: tmpPot,
+//                                                 name: "test",
+//                                                 description: "",
+//                                                 offsetY: 200,
+//                                                 offsetX: 150,
+//                                                 notes: [Note(date: Date(), time: 100, tag: Tag(name: "Name", color: "#3D90D9"))])
+
     
     init(minutes: Int) {
         self.minutes = minutes

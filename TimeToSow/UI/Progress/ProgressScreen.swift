@@ -21,8 +21,34 @@ struct ProgressScreen: View {
     
     var body: some View {
         ZStack {
-            Color(.mainBackground)
-                .textureOverlay()
+            GeometryReader { proxy in
+                Color(hex: "E6FBFF")
+                
+                Group {
+                    Image(.imageCloud)
+                        .resizable()
+                        .offset(x: proxy.size.width * 0.75, y: proxy.size.height * 0.05)
+                    
+                    
+                    Image(.imageCloud)
+                        .resizable()
+                        .offset(x: proxy.size.width * -0.1, y: proxy.size.height * 0.25)
+                    
+                    Image(.imageCloud)
+                        .resizable()
+                        .offset(x: 0, y: proxy.size.height * 0.67)
+                    
+                    Image(.imageCloud)
+                        .resizable()
+                        .offset(x: proxy.size.width * 0.68, y: proxy.size.height * 0.83)
+                }
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 140)
+                .opacity(0.4)
+                
+            }
+            .textureOverlay(opacity: 0.3)
+            
             VStack {
                 switch localStore.state {
                 case .progress:
@@ -32,54 +58,49 @@ struct ProgressScreen: View {
                 }
             }
         }
-
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background { LinearGradient(colors: [Color.gray.opacity(1), Color.gray.opacity(1)], startPoint: .top, endPoint: .bottom) }
-//        .background(Color.gray)
         .ignoresSafeArea(.all)
         .animation(.easeIn, value: localStore.state)
     }
     
     @ViewBuilder
     func processView() -> some View {
-        GeometryReader { proxy in
-            VStack(alignment: .center) {
-                HStack{
-                    Button { isShowAlert = true }
-                label: {
+        VStack(alignment: .center, spacing: 0) {
+            HStack {
+                Button {
+                    isShowAlert = true
+                } label: {
                     Image("iconClose")
                         .resizable()
                         .foregroundColor(.black)
                         .frame(width: 40, height: 40)
                 }
-                    Spacer()
-                }
-                .padding(.top, 50)
-                .padding(.leading, 30)
-//                LoopingFramesView(frames: ["updateAnimation1", "updateAnimation2", "updateAnimation3", "updateAnimation4"], speed: 0.5)
-//                    .frame(width: proxy.size.width * 0.7, height: proxy.size.width * 0.7 * 9 / 12)
-//                    .padding(.top, 10)
-                Spacer()
-                
-                SendTimerView(progress: CGFloat(localStore.progress))
-                    .frame(width: 120)
-                
-                TimerView(vm: localStore.timerVM)
-                    .padding(.bottom, 8)
-                
-
-//                progressCircleView()
-//                Text("do it now")
-//                    .font(.myDescription(25))
-//                    .foregroundColor(.black)
-//                    .padding(.top, 20)
                 Spacer()
             }
+            .padding(.top, 50)
+            .padding(.leading, 20)
+            
+            SendTimerView(progress: CGFloat(localStore.progress))
+                .frame(width: 112)
+                .padding(.top, 70)
+            
+            
+            TimerView(vm: localStore.timerVM)
+                .padding(.bottom, 8)
+                .padding(.top, 45)
+            
+            Text("Ученые доказали, что дела лучше делаются если не смотреть на экран")
+                .multilineTextAlignment(.center)
+                .font(.myNumber(20))
+                .padding(.horizontal, 16)
+                .padding(.top, 50)
+            
+            Spacer()
         }
         .alert("При закрытии этого экрана таймер будет остановлен", isPresented: $isShowAlert) {
             Button(role: .destructive) {
                 dismiss()
-//                vm.close()
+                //                vm.close()
             } label: {
                 Text("Закрыть")
             }
@@ -91,45 +112,34 @@ struct ProgressScreen: View {
     
     @ViewBuilder
     func completedView() -> some View {
-        GeometryReader { proxy in
-            VStack(spacing: 0) {
-                Spacer()
-                let newPlant = appStore.getRandomPlant()
-                PlantPreview(zoomCoef: 2, plant: newPlant)
-                
-                Text("Completed!")
-                    .font(.myDescription(27))
-                    .foregroundColor(.black)
-                    .padding(.vertical, 30)
-                
-                progressCircleView()
-                
-                Button {
-                    dismiss()
-                } label: {
-                    TextEllipseStrokeView(text: "Place", font: .myButton(30), isSelected: true)
-                        .foregroundStyle(Color(UIColor.systemPink))
-                        .frame(width: 140, height: 80)
-                }
-                .padding(.vertical, 30)
-                Spacer()
-            }.frame(maxWidth: .infinity)
-        }
-    }
-    
-    @ViewBuilder
-    func progressCircleView() -> some View {
-        CircleProgressView(progress: localStore.progress)
-            .overlay(alignment: .bottom) {
-                if localStore.state == .completed {
-                    VStack(alignment: .center, spacing: 0) {
-                        Text("\(Int(localStore.minutes))")
-                        Text(TimeLocalized.minute.loc)
-                    }
-                    .offset(y: -10)
-                    .foregroundColor(.white)
-                }
+        VStack(alignment: .center, spacing: 0) {
+            if localStore.newPlant != nil {
+                PlantPreview(zoomCoef: 2,
+                             plant: localStore.newPlant!,
+                             isShowPlantRating: true,
+                             isShowPotRating: true)
+                .padding(.top, 120)
             }
+            
+            Text("Успех!")
+                .font(.myNumber(50))
+                .foregroundStyle(.black)
+                .padding(.top, 45)
+                .padding(.bottom, 8)
+            
+            let seedName = "\(RemoteText.text(localStore.newPlant?.seed.name ?? ""))"
+            let potName = "\(RemoteText.text(localStore.newPlant?.pot.name ?? ""))"
+
+            Text("Теперь у вас есть \n \(seedName) \(potName)")
+                .multilineTextAlignment(.center)
+                .font(.myNumber(20))
+                .padding(.horizontal, 16)
+                .padding(.top, 50)
+            
+            TextureButton(label: "поместить на полку", color: .strokeAcsent1, icon: nil) {
+                print("")
+            }.padding(.top, 150)
+        }
     }
 }
 
