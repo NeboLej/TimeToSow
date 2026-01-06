@@ -19,9 +19,8 @@
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
 		8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */; };
-		8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */; };
+		8E75DE122E5A2EE60004C3D3 /* ProgressScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE112E5A2EE50004C3D3 /* ProgressScreenStore.swift */; };
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
-		8E75DE162E5A351B0004C3D3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE152E5A351B0004C3D3 /* ProgressView.swift */; };
 		8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */; };
 		8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* DrawText.swift */; };
 		8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9B92EFC546600DF690F /* RarityView.swift */; };
@@ -78,6 +77,7 @@
 		8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758A2DDA125A00AEC31A /* StrokeText.swift */; };
 		8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */; };
 		8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */; };
+		8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,9 +93,8 @@
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
 		8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreen.swift; sourceTree = "<group>"; };
-		8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenLocalStore.swift; sourceTree = "<group>"; };
+		8E75DE112E5A2EE50004C3D3 /* ProgressScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenStore.swift; sourceTree = "<group>"; };
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		8E75DE152E5A351B0004C3D3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPreview.swift; sourceTree = "<group>"; };
 		8E7A7FE12EDF959400575A81 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
 		8EA1C9B92EFC546600DF690F /* RarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarityView.swift; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		8EF5758A2DDA125A00AEC31A /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
 		8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPickerView.swift; sourceTree = "<group>"; };
 		8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimerView.swift; sourceTree = "<group>"; };
+		8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -197,8 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */,
-				8E75DE152E5A351B0004C3D3 /* ProgressView.swift */,
-				8E75DE112E5A2EE50004C3D3 /* ProgressScreenLocalStore.swift */,
+				8E75DE112E5A2EE50004C3D3 /* ProgressScreenStore.swift */,
+				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -538,9 +538,9 @@
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8EAF67CB2EF3520200780BB9 /* AppActions.swift in Sources */,
 				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
-				8E75DE122E5A2EE60004C3D3 /* ProgressScreenLocalStore.swift in Sources */,
+				8E75DE122E5A2EE60004C3D3 /* ProgressScreenStore.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
-				8E75DE162E5A351B0004C3D3 /* ProgressView.swift in Sources */,
+				8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */,
 				8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */,
 				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,

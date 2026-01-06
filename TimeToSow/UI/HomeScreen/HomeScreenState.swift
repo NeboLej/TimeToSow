@@ -17,6 +17,7 @@ struct HomeScreenState {
     let allNotes: [Note]
     
     let selectedPlant: Plant?
+    let selectedTag: Tag
     let topPlant: Plant?
     let topTag: Tag?
     
@@ -36,6 +37,6 @@ struct HomeScreenState {
             result[note.tag, default: 0] += note.time
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
-        
+        selectedTag = appStore.selectedTag
     }
 }

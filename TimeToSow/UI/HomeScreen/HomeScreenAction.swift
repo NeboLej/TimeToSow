@@ -13,6 +13,7 @@ enum HomeScreenAction {
     case addRandomPlant
     case addRandomNote
     case toDebugScreen
+    case toProgressScreen(time: Int)
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -32,6 +33,8 @@ extension AppStore: HomeScreenDelegate {
             send(.addRandomNote)
         case .toDebugScreen:
             send(.toDebugScreen)
+        case .toProgressScreen(let time):
+            appCoordinator.navigate(to: .progress(time), modal: false)
         }
     }
 }

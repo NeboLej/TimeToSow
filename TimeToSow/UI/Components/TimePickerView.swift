@@ -85,5 +85,4 @@ struct TimePickerView: View {
         TimePickerView(selectedTime: $time, step: 1)
         Text("\(time)")
     }
-   
 }

@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ProgressScreen: View {
     
-    @Environment(\.appStore) var appStore: AppStore
     @Environment(\.dismiss) var dismiss
     
-    @State private var localStore: ProgressScreenLocalStore
+    @State private var store: ProgressScreenStore
     @State var isShowAlert = false
     
-    init(minutes: Int) {
-        localStore = ProgressScreenLocalStore(minutes: minutes)
+    init(store: ProgressScreenStore) {
+        self.store = store
     }
     
     var body: some View {
@@ -50,7 +49,7 @@ struct ProgressScreen: View {
             .textureOverlay(opacity: 0.3)
             
             VStack {
-                switch localStore.state {
+                switch store.state {
                 case .progress:
                     processView()
                 case .completed:
@@ -60,7 +59,10 @@ struct ProgressScreen: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .animation(.easeIn, value: localStore.state)
+        .animation(.easeIn, value: store.state)
+        .onAppear {
+            store.send(.startProgress)
+        }
     }
     
     @ViewBuilder
@@ -80,12 +82,12 @@ struct ProgressScreen: View {
             .padding(.top, 50)
             .padding(.leading, 20)
             
-            SendTimerView(progress: CGFloat(localStore.progress))
+            SendTimerView(progress: CGFloat(store.progress))
                 .frame(width: 112)
                 .padding(.top, 70)
             
             
-            TimerView(vm: localStore.timerVM)
+            TimerView(vm: store.timerVM)
                 .padding(.bottom, 8)
                 .padding(.top, 45)
             
@@ -99,8 +101,8 @@ struct ProgressScreen: View {
         }
         .alert("При закрытии этого экрана таймер будет остановлен", isPresented: $isShowAlert) {
             Button(role: .destructive) {
+                store.send(.stopProgress)
                 dismiss()
-                //                vm.close()
             } label: {
                 Text("Закрыть")
             }
@@ -113,9 +115,9 @@ struct ProgressScreen: View {
     @ViewBuilder
     func completedView() -> some View {
         VStack(alignment: .center, spacing: 0) {
-            if localStore.newPlant != nil {
+            if store.newPlant != nil {
                 PlantPreview(zoomCoef: 2,
-                             plant: localStore.newPlant!,
+                             plant: store.newPlant!,
                              isShowPlantRating: true,
                              isShowPotRating: true)
                 .padding(.top, 120)
@@ -127,8 +129,8 @@ struct ProgressScreen: View {
                 .padding(.top, 45)
                 .padding(.bottom, 8)
             
-            let seedName = "\(RemoteText.text(localStore.newPlant?.seed.name ?? ""))"
-            let potName = "\(RemoteText.text(localStore.newPlant?.pot.name ?? ""))"
+            let seedName = "\(RemoteText.text(store.newPlant?.seed.name ?? ""))"
+            let potName = "\(RemoteText.text(store.newPlant?.pot.name ?? ""))"
 
             Text("Теперь у вас есть \n \(seedName) \(potName)")
                 .multilineTextAlignment(.center)
@@ -137,12 +139,13 @@ struct ProgressScreen: View {
                 .padding(.top, 50)
             
             TextureButton(label: "поместить на полку", color: .strokeAcsent1, icon: nil) {
-                print("")
+                store.newPlantToShelf()
+                dismiss()
             }.padding(.top, 150)
         }
     }
 }
 
 #Preview {
-    ProgressScreen(minutes: 1)
+    screenBuilderMock.getScreen(type: .progress(1))
 }

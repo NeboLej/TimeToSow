@@ -37,6 +37,7 @@ class HomeScreenStore: FeatureStore {
         withObservationTracking {
             _ = appStore.currentRoom
             _ = appStore.selectedPlant
+            _ = appStore.selectedTag
         } onChange: { [weak self] in
             self?.rebuildState()
         }

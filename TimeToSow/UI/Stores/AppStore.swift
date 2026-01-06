@@ -24,6 +24,7 @@ class AppStore {
     var currentRoom: UserMonthRoom
     var selectedPlant: Plant?
     var appCoordinator: AppCoordinator = AppCoordinator()
+    var selectedTag: Tag
     
     init(myRoomRepository: MyRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
@@ -37,6 +38,7 @@ class AppStore {
         self.tagRepository = tagRepository
         
         currentRoom = myRoomRepository.getCurrentRoom()
+        selectedTag = tagRepository.getRandomTag()
         addRandomPlantToShelf()
     }
     
@@ -71,6 +73,8 @@ class AppStore {
             currentRoom.plants[selectedPlant.id] = newPlant
         case .toDebugScreen:
             appCoordinator.activeSheet = .debugScreen
+        case .addNewPlant(let plant):
+            updatePlant(with: plant)
         }
     }
     
@@ -97,8 +101,8 @@ class AppStore {
         currentRoom.plants[newPlant.id] = newPlant
     }
     
-    func getRandomPlant() -> Plant {
-        let randomPlant = plantRepository.getRandomPlant(note: getRandomNote())
+    func getRandomPlant(note: Note) -> Plant {
+        let randomPlant = plantRepository.getRandomPlant(note: note)
 //        updatePlant(with: randomPlant)
         return randomPlant
     }

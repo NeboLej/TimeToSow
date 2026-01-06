@@ -45,8 +45,7 @@ final class ScreenBuilder {
             EditRoomScreen()
                 .environment(\.appStore, appStore)
         case .progress(let minutes):
-            ProgressScreen(minutes: minutes)
-                .environment(\.appStore, appStore)
+            ProgressScreen(store: ProgressScreenStore(appStore: appStore, minutes: minutes))
         case .plantDetails(let plant):
             PlantDetailView(plant: plant)
                 .ignoresSafeArea()

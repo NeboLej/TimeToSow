@@ -23,17 +23,17 @@ struct HomeScreen: View {
     
     @Environment(\.appStore) var appStore: AppStore
     @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
-    
     @Environment(\.safeAreaInsets) private var safeAreaInsets
-    @State private var activityType: Int = 0
-    @State private var selectedTime: Int = 50
-    @State private var isShowEditRoom = false
+    
+    @State private var selectedTime: Int
     @State private var isProgress = false
+    @State private var progressTime: Int?
     
     private var store: HomeScreenStore
     
     init(store: HomeScreenStore) {
         self.store = store
+        selectedTime = 50
     }
     
     var body: some View {
@@ -77,11 +77,14 @@ struct HomeScreen: View {
         }, content: { screenType in
             screenBuilder.getScreen(type: screenType)
         })
-        .fullScreenCover(isPresented: $isProgress, onDismiss: {
-            isProgress = false
-        }, content: {
-            screenBuilder.getScreen(type: .progress(selectedTime))
+        .fullScreenCover(item: coordinator.fullScreenCover, content: { screenType in
+            screenBuilder.getScreen(type: screenType)
         })
+//        .fullScreenCover(isPresented: $isProgress, onDismiss: {
+//            isProgress = false
+//        }, content: {
+//            screenBuilder.getScreen(type: .progress(selectedTime))
+//        })
     }
     
     @ViewBuilder
@@ -195,7 +198,8 @@ struct HomeScreen: View {
                     VStack(alignment: .trailing, spacing: 18) {
                         TextureButton(label: L.startButton.loc, color: .strokeAcsent1, icon: Image(.iconPlay)) {
                             print("start")
-                            isProgress = true
+//                            isProgress = true
+                            store.send(.toProgressScreen(time: selectedTime))
                         }
                         
                         HStack(spacing: 10) {
@@ -204,7 +208,7 @@ struct HomeScreen: View {
                                 .scaledToFit()
                                 .frame(width: 15)
                                 .foregroundStyle(.black)
-                            TagView(tag: Tag(name: "Programming", color: "7C37B5"))
+                            TagView(tag: store.state.selectedTag)
                         }
                     }.padding(.trailing, 14)
                         .padding(.top, 48)
