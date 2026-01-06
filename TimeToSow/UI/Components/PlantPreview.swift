@@ -158,10 +158,11 @@ struct PlantPreview: View {
                        rootCoordinateCoef: .init(x: 0.05, y: 0))
     
     //rootCoordinateCoef: .init(x: 0.08, y: 0)
-    var tmpPot = Pot(name: "pot58.name",
-                     image: "pot58",
-                     height: 24,
-                     rarity: .rare)
+    var tmpPot = Pot(name: "pot59.name",
+                     image: "pot61",
+                     height: 22,
+                     rarity: .rare,
+                     anchorPointCoefficient: .init(x: 0, y: 0.006))
     
     VStack {
         PlantPreview(plant: Plant(seed: tmpSeed,

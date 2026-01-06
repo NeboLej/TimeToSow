@@ -88,6 +88,21 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
             ShelfPosition(coefOffsetY: 0.525, paddingLeading: 36, paddingTrailing: 236),
             ShelfPosition(coefOffsetY: 0.606, paddingLeading: 195, paddingTrailing: 5),
             ShelfPosition(coefOffsetY: 0.935, paddingLeading: 5, paddingTrailing: 5),
+           ]),
+        
+        ShelfType(name: "3", image: "shelf7", shelfPositions: [
+            ShelfPosition(coefOffsetY: 0.206, paddingLeading: 200, paddingTrailing: 20),
+            ShelfPosition(coefOffsetY: 0.363, paddingLeading: 245, paddingTrailing: 30),
+            ShelfPosition(coefOffsetY: 0.544, paddingLeading: 24, paddingTrailing: 150),
+            ShelfPosition(coefOffsetY: 0.94, paddingLeading: 5, paddingTrailing: 5)
+           ]),
+        
+        ShelfType(name: "3", image: "shelf8", shelfPositions: [
+            ShelfPosition(coefOffsetY: 0.206, paddingLeading: 16, paddingTrailing: 110),
+            ShelfPosition(coefOffsetY: 0.418, paddingLeading: 114, paddingTrailing: 12),
+            ShelfPosition(coefOffsetY: 0.668, paddingLeading: 30, paddingTrailing: 283),
+            ShelfPosition(coefOffsetY: 0.77, paddingLeading: 230, paddingTrailing: 20),
+            ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
            ])
     ]
 }

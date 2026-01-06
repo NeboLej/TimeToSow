@@ -349,6 +349,24 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
             name: "pot58.name",
             image: "pot58",
             height: 24,
-            rarity: .rare)
+            rarity: .rare),
+        
+        Pot(name: "pot59.name",
+            image: "pot59",
+            height: 22,
+            rarity: .rare,
+            anchorPointCoefficient: .init(x: 0, y: 0.006)),
+        
+        Pot(name: "pot60.name",
+            image: "pot60",
+            height: 22,
+            rarity: .rare,
+            anchorPointCoefficient: .init(x: 0, y: 0.006)),
+        
+        Pot(name: "pot61.name",
+            image: "pot61",
+            height: 22,
+            rarity: .epic,
+            anchorPointCoefficient: .init(x: 0, y: 0.006))
     ]
 }
