@@ -21,8 +21,6 @@ fileprivate enum L: LocalizedStringKey {
 
 struct HomeScreen: View {
     
-    @Environment(\.appStore) var appStore: AppStore
-    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     
     @State private var selectedTime: Int
@@ -30,9 +28,11 @@ struct HomeScreen: View {
     @State private var progressTime: Int?
     
     private var store: HomeScreenStore
+    private var screenBuilder: ScreenBuilder
     
-    init(store: HomeScreenStore) {
+    init(store: HomeScreenStore, screenBuilder: ScreenBuilder) {
         self.store = store
+        self.screenBuilder = screenBuilder
         selectedTime = 50
     }
     
@@ -205,7 +205,9 @@ struct HomeScreen: View {
                                 .scaledToFit()
                                 .frame(width: 15)
                                 .foregroundStyle(.black)
-                            TagView(tag: store.state.selectedTag)
+                            if store.state.selectedTag != nil {
+                                TagView(tag: store.state.selectedTag!)
+                            }
                         }
                     }.padding(.trailing, 14)
                         .padding(.top, 48)

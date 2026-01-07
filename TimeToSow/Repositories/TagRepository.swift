@@ -8,14 +8,40 @@
 import Foundation
 
 protocol TagRepositoryProtocol {
-    func getRandomTag() -> Tag
+    func getRandomTag() async -> Tag
 }
 
 final class TagRepository: BaseRepository, TagRepositoryProtocol {
     
-    func getRandomTag() -> Tag {
-        tags.randomElement()!
+    override init(database: DatabaseRepositoryProtocol) {
+        super.init(database: database)
+//        addData()
     }
+    
+//    func addData() {
+//        Task {
+//            try await database.insert(TagModel(id: UUID(), name: "asd", color: "#fff333"))
+//        }
+//    }
+    
+    func getAllTags() async throws -> [Tag] {
+        let tagModels: [TagModel] = try await database.fetchAll(TagModel.self)
+        print(tagModels)
+        return tagModels.map { Tag(from: $0) }
+    }
+    
+    func getRandomTag() async -> Tag {
+        do {
+//            try await database.insert(TagModel(id: UUID(), name: "asd", color: "#fff333"))
+            return try await getAllTags().randomElement()!
+        } catch {
+            fatalError()
+        }
+    }
+//    
+//    func getRandomTag() -> Tag {
+//        tags.randomElement()!
+//    }
     
     private var tags: [Tag] = [
         Tag(name: "Job", color: "#EE05F2"),

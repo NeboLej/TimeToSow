@@ -8,5 +8,9 @@
 import Foundation
 
 class BaseRepository {
+    let database: DatabaseRepositoryProtocol
     
+    init(database: DatabaseRepositoryProtocol) {
+        self.database = database
+    }
 }

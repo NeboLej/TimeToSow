@@ -17,10 +17,10 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
     private let seedRepository: SeedRepositoryProtocol
     private let potRepository: PotRepositoryProtocol
     
-    init(seedRepository: SeedRepositoryProtocol, potRepository: PotRepositoryProtocol) {
+    init(seedRepository: SeedRepositoryProtocol, potRepository: PotRepositoryProtocol, database: DatabaseRepositoryProtocol) {
         self.potRepository = potRepository
         self.seedRepository = seedRepository
-        super.init()
+        super.init(database: database)
     }
     
     func getRandomPlant(note: Note) -> Plant {

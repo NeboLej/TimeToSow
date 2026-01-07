@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct DebugScreenView: View {
+    private let mockdata = MockDatabaseRepository()
     
-    @State var potRepository = PotRepository()
-    @State var seedRepository = SeedRepository()
+    var potRepository : PotRepository {
+        PotRepository(database: mockdata)
+    }
+    var seedRepository: SeedRepository {
+        SeedRepository(database: mockdata)
+    }
+
     var plantRepository: PlantRepository {
         PlantRepository(seedRepository: seedRepository,
-                        potRepository: potRepository)
+                        potRepository: potRepository,
+                        database: mockdata)
     }
     
     

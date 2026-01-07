@@ -24,7 +24,7 @@ class AppStore {
     var currentRoom: UserMonthRoom
     var selectedPlant: Plant?
     var appCoordinator: AppCoordinator = AppCoordinator()
-    var selectedTag: Tag
+    var selectedTag: Tag?
     
     init(myRoomRepository: MyRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
@@ -38,8 +38,18 @@ class AppStore {
         self.tagRepository = tagRepository
         
         currentRoom = myRoomRepository.getCurrentRoom()
-        selectedTag = tagRepository.getRandomTag()
-        addRandomPlantToShelf()
+        
+        getData()
+        
+        
+
+//        addRandomPlantToShelf()
+    }
+    
+    func getData() {
+        Task { 
+            selectedTag = await tagRepository.getRandomTag()
+        }
     }
     
     func send(_ action: AppAction) {
@@ -108,9 +118,10 @@ class AppStore {
     }
     
     func getRandomNote() -> Note {
-        Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
+        guard let selectedTag else { fatalError() }
+        return Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
              time: (5...240).randomElement()!,
-             tag: tagRepository.getRandomTag())
+             tag: selectedTag)
     }
     
     func newRandomPlant() {

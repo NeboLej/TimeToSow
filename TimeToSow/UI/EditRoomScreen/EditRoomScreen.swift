@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditRoomScreen: View {
     
-    @Environment(\.appStore) var appStore: AppStore
+//    @Environment(\.appStore) var appStore: AppStore
     @State private var currentRoomType: RoomType?
     @State private var currentShelfType: ShelfType?
     @Environment(\.dismiss) var dismiss
@@ -37,7 +37,7 @@ struct EditRoomScreen: View {
                 }
                 
                 Button {
-                    appStore.setShelf(roomType: currentRoomType, shelfType: currentShelfType)
+//                    appStore.setShelf(roomType: currentRoomType, shelfType: currentShelfType)
                     dismiss()
                 } label: {
                     TextEllipseStrokeView(text: "Done", font: .myButton(25), isSelected: true)
@@ -49,8 +49,8 @@ struct EditRoomScreen: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            currentRoomType = appStore.currentRoom.roomType
-            currentShelfType = appStore.currentRoom.shelfType
+//            currentRoomType = appStore.currentRoom.roomType
+//            currentShelfType = appStore.currentRoom.shelfType
         }
     }
     
@@ -62,13 +62,13 @@ struct EditRoomScreen: View {
             HStack {
                 Image(systemName: "chevron.left")
                     .onTapGesture {
-                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: false)
+//                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: false)
                     }
                 Text(currentRoomType?.name ?? "")
                     .font(.myTitle(20))
                 Image(systemName: "chevron.right")
                     .onTapGesture {
-                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: true)
+//                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: true)
                     }
             }
         }
@@ -82,13 +82,13 @@ struct EditRoomScreen: View {
             HStack {
                 Image(systemName: "chevron.left")
                     .onTapGesture {
-                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: false)
+//                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: false)
                     }
                 Text(currentShelfType?.name ?? "")
                     .font(.myTitle(20))
                 Image(systemName: "chevron.right")
                     .onTapGesture {
-                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: true)
+//                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: true)
                     }
             }
         }

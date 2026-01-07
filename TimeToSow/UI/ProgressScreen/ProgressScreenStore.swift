@@ -28,7 +28,7 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     init(appStore: AppStore&ProgressScreenDelegate, minutes: Int) {
         delegate = appStore
         self.minutes = minutes
-        selectedTag = appStore.selectedTag
+        selectedTag = appStore.selectedTag!
         startDate = Date()
         super.init(appStore: appStore)
         
@@ -72,7 +72,7 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     }
     
     private func rebuildState() {
-        selectedTag = appStore.selectedTag
+        selectedTag = appStore.selectedTag!
         observeAppState()
     }
     

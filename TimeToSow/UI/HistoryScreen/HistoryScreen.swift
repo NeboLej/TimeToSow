@@ -21,15 +21,17 @@ fileprivate enum L: LocalizedStringKey {
 
 struct HistoryScreen: View {
     
-    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
+//    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     
     private var store: HistoryScreenStore
+    private var screenBuilder: ScreenBuilder
     
     @State private var isShowHeader = true
     
-    init(store: HistoryScreenStore) {
+    init(store: HistoryScreenStore, screenBuilder: ScreenBuilder) {
         self.store = store
+        self.screenBuilder = screenBuilder
     }
     
     var body: some View {

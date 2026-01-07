@@ -6,6 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
+
+var sharedModelContainer: ModelContainer = {
+    let schema = Schema([TagModel.self])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    do {
+        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
+    }
+}()
+
 
 @main
 struct TimeToSowApp: App {
@@ -14,14 +26,24 @@ struct TimeToSowApp: App {
     private var appStore: AppStore
     
     init() {
-        let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository()
-        let roomRepository: RoomRepositoryProtocol = RoomRepository()
-        let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
-        let seedRepository: SeedRepositoryProtocol = SeedRepository()
-        let potRepository: PotRepositoryProtocol = PotRepository()
-        let tagRepository: TagRepositoryProtocol = TagRepository()
+        let database: DatabaseRepositoryProtocol = DatabaseRepository(modelContainer: sharedModelContainer)
+//        do {
+//            let container: ModelContainer = try ModelContainer(for: TagModel.self, DummyModel.self)
+//            database = DatabaseRepository(modelContainer: container)
+//        } catch {
+//            fatalError("Failed to create container: \(error)")
+//        }
+        
+        
+        let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository(database: database)
+        let roomRepository: RoomRepositoryProtocol = RoomRepository(database: database)
+        let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(database: database)
+        let seedRepository: SeedRepositoryProtocol = SeedRepository(database: database)
+        let potRepository: PotRepositoryProtocol = PotRepository(database: database)
+        let tagRepository: TagRepositoryProtocol = TagRepository(database: database)
         let plantRepository: PlantRepositoryProtocol = PlantRepository(seedRepository: seedRepository,
-                                                                       potRepository: potRepository)
+                                                                       potRepository: potRepository,
+                                                                       database: database)
         
         let appStore = AppStore(myRoomRepository: myRoomRepository,
                                 roomRepository: roomRepository,
@@ -82,14 +104,17 @@ struct TimeToSowApp: App {
 
 #if DEBUG
 let screenBuilderMock: ScreenBuilder = {
-    let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository()
-    let roomRepository: RoomRepositoryProtocol = RoomRepository()
-    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository()
-    let seedRepository: SeedRepositoryProtocol = SeedRepository()
-    let potRepository: PotRepositoryProtocol = PotRepository()
-    let tagRepository: TagRepositoryProtocol = TagRepository()
+    let database: DatabaseRepositoryProtocol = MockDatabaseRepository()
+    
+    let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository(database: database)
+    let roomRepository: RoomRepositoryProtocol = RoomRepository(database: database)
+    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(database: database)
+    let seedRepository: SeedRepositoryProtocol = SeedRepository(database: database)
+    let potRepository: PotRepositoryProtocol = PotRepository(database: database)
+    let tagRepository: TagRepositoryProtocol = TagRepository(database: database)
     let plantRepository: PlantRepositoryProtocol = PlantRepository(seedRepository: seedRepository,
-                                                                   potRepository: potRepository)
+                                                                   potRepository: potRepository,
+                                                                   database: database)
     
     let appStore = AppStore(myRoomRepository: myRoomRepository,
                             roomRepository: roomRepository,
