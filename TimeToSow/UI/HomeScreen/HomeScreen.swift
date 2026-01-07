@@ -37,61 +37,47 @@ struct HomeScreen: View {
     }
     
     var body: some View {
-        let coordinator = Bindable(appStore.appCoordinator)
-        
-        NavigationStack(path: coordinator.path) {
-            VStack(spacing: 0) {
-                header()
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        roomView()
-                            .zIndex(100)
-                        
-                        HStack {
-                            statisticsView()
-                            Spacer()
-                            menuView()
-                        }
-                        
-                        newPlantSection()
-                        monthStatisticSection()
-                        tagStatisticsSection()
-                        
-#if DEBUG
-                        debugConsole()
-#endif
+        VStack(spacing: 0) {
+            header()
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
+                    roomView()
+                        .zIndex(100)
+                    
+                    HStack {
+                        statisticsView()
+                        Spacer()
+                        menuView()
                     }
-                }.coordinateSpace(name: "SCROLL")
-            }
-            .background(
-                Color(hex: "FFF9EE")
-                    .overlay(
-                        Image(.texture2)
-                            .resizable()
-                            .blendMode(.multiply)
-                            .opacity(0.9)
-                    )
-            )
-            .ignoresSafeArea(.all)
-            .sheet(item: coordinator.activeSheet, onDismiss: {
-                print("dismiss")
-            }, content: { screenType in
-                screenBuilder.getScreen(type: screenType)
-            })
-            .fullScreenCover(item: coordinator.fullScreenCover, content: { screenType in
-                screenBuilder.getScreen(type: screenType)
-            })
-            .navigationDestination(for: ScreenType.self) {
-                screenBuilder.getScreen(type: $0)
-            }
-        }.transaction { transaction in
-            if disableRootAnimation {
-                transaction.animation = nil
-            }
+                    
+                    newPlantSection()
+                    monthStatisticSection()
+                    tagStatisticsSection()
+                    
+#if DEBUG
+                    debugConsole()
+#endif
+                }
+            }.coordinateSpace(name: "SCROLL")
         }
-        .task {
-            disableRootAnimation = false
-        }
+        .background(
+            Color(hex: "FFF9EE")
+                .overlay(
+                    Image(.texture2)
+                        .resizable()
+                        .blendMode(.multiply)
+                        .opacity(0.9)
+                )
+        )
+        .ignoresSafeArea(.all)
+//        .transaction { transaction in
+//            if disableRootAnimation {
+//                transaction.animation = nil
+//            }
+//        }
+//        .task {
+//            disableRootAnimation = false
+//        }
     }
     
     @State private var disableRootAnimation = true
@@ -210,7 +196,6 @@ struct HomeScreen: View {
                     VStack(alignment: .trailing, spacing: 18) {
                         TextureButton(label: L.startButton.loc, color: .strokeAcsent1, icon: Image(.iconPlay)) {
                             print("start")
-//                            isProgress = true
                             store.send(.toProgressScreen(time: selectedTime))
                         }
                         
@@ -340,5 +325,5 @@ var tmpPot = Pot(name: "aeded",
 
 #Preview {
     screenBuilderMock.getScreen(type: .home)
-//        .environment(\.locale, .init(identifier: "en"))
+    //        .environment(\.locale, .init(identifier: "en"))
 }
