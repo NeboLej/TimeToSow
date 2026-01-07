@@ -12,6 +12,7 @@ class AppCoordinator {
     var currentScreen: ScreenType?
     var activeSheet: ScreenType? = nil
     var fullScreenCover: ScreenType? = nil
+    var path = NavigationPath()
     
     private var screenStack: [ScreenType] = []
     

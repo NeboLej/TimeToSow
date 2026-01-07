@@ -14,6 +14,7 @@ enum HomeScreenAction {
     case addRandomNote
     case toDebugScreen
     case toProgressScreen(time: Int)
+    case toHistoryScreen
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -35,6 +36,8 @@ extension AppStore: HomeScreenDelegate {
             send(.toDebugScreen)
         case .toProgressScreen(let time):
             appCoordinator.navigate(to: .progress(time), modal: false)
+        case .toHistoryScreen:
+            appCoordinator.path.append(ScreenType.history)
         }
     }
 }

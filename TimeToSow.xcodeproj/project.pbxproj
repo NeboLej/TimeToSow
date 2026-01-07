@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
-		8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */; };
+		8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */; };
 		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
 		8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */; };
 		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
@@ -78,12 +78,17 @@
 		8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */; };
 		8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */; };
 		8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */; };
+		8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEF22F0E587600857A23 /* HistoryScreen.swift */; };
+		8EFEEEF52F0E589100857A23 /* HistoryScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEF42F0E589100857A23 /* HistoryScreenState.swift */; };
+		8EFEEEF72F0E589C00857A23 /* HistoryScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEF62F0E589C00857A23 /* HistoryScreenStore.swift */; };
+		8EFEEEF92F0E58A700857A23 /* HistoryScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEF82F0E58A700857A23 /* HistoryScreenAction.swift */; };
+		8EFEEEFB2F0E805E00857A23 /* RecordsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEFA2F0E805E00857A23 /* RecordsHistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
+		8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreen.swift; sourceTree = "<group>"; };
 		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
 		8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRow.swift; sourceTree = "<group>"; };
 		8E5B34182EFEADD200354CAB /* Rarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarity.swift; sourceTree = "<group>"; };
@@ -154,6 +159,11 @@
 		8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPickerView.swift; sourceTree = "<group>"; };
 		8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimerView.swift; sourceTree = "<group>"; };
 		8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenAction.swift; sourceTree = "<group>"; };
+		8EFEEEF22F0E587600857A23 /* HistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreen.swift; sourceTree = "<group>"; };
+		8EFEEEF42F0E589100857A23 /* HistoryScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreenState.swift; sourceTree = "<group>"; };
+		8EFEEEF62F0E589C00857A23 /* HistoryScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreenStore.swift; sourceTree = "<group>"; };
+		8EFEEEF82F0E58A700857A23 /* HistoryScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreenAction.swift; sourceTree = "<group>"; };
+		8EFEEEFA2F0E805E00857A23 /* RecordsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -175,12 +185,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E2E5EE52EF8544200B91347 /* PlantDetail */ = {
+		8E2E5EE52EF8544200B91347 /* PlantDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				8E2E5EE62EF8546000B91347 /* PlantDetailView.swift */,
+				8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */,
 			);
-			path = PlantDetail;
+			path = PlantDetailScreen;
 			sourceTree = "<group>";
 		};
 		8E7240C42EE23CD300D08CE7 /* ViewModifiers */ = {
@@ -193,14 +203,14 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
-		8E75DE0E2E5A2EAF0004C3D3 /* Progress */ = {
+		8E75DE0E2E5A2EAF0004C3D3 /* ProgressScreen */ = {
 			isa = PBXGroup;
 			children = (
 				8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */,
 				8E75DE112E5A2EE50004C3D3 /* ProgressScreenStore.swift */,
 				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
-			path = Progress;
+			path = ProgressScreen;
 			sourceTree = "<group>";
 		};
 		8EAF67C32EF33A9100780BB9 /* FeatureStores */ = {
@@ -345,9 +355,10 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8EFEEEF12F0E53D300857A23 /* HistoryScreen */,
 				8ED72C842F07D4F7008E6869 /* DebugScreen */,
-				8E2E5EE52EF8544200B91347 /* PlantDetail */,
-				8E75DE0E2E5A2EAF0004C3D3 /* Progress */,
+				8E2E5EE52EF8544200B91347 /* PlantDetailScreen */,
+				8E75DE0E2E5A2EAF0004C3D3 /* ProgressScreen */,
 				8EC86E322E06E82B00AA6AFA /* EditRoomScreen */,
 				8EF5756A2DCE4E6700AEC31A /* Components */,
 				8EF575442DCE3F3A00AEC31A /* HomeScreen */,
@@ -377,6 +388,7 @@
 			children = (
 				8E7240C42EE23CD300D08CE7 /* ViewModifiers */,
 				8EF5756C2DCE4E8700AEC31A /* RoomView.swift */,
+				8EFEEEFA2F0E805E00857A23 /* RecordsHistoryView.swift */,
 				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
 				8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */,
@@ -397,6 +409,17 @@
 				8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		8EFEEEF12F0E53D300857A23 /* HistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8EFEEEF22F0E587600857A23 /* HistoryScreen.swift */,
+				8EFEEEF42F0E589100857A23 /* HistoryScreenState.swift */,
+				8EFEEEF62F0E589C00857A23 /* HistoryScreenStore.swift */,
+				8EFEEEF82F0E58A700857A23 /* HistoryScreenAction.swift */,
+			);
+			path = HistoryScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA1C9D92EFDB34C00DF690F /* PieChartView.swift in Sources */,
+				8EFEEEF92F0E58A700857A23 /* HistoryScreenAction.swift in Sources */,
 				8EC86E272E06D01B00AA6AFA /* HomeScreenStore.swift in Sources */,
 				8EC86DF72E06208600AA6AFA /* PlantView.swift in Sources */,
 				8EAF67CE2EF3529000780BB9 /* RoomFeatureAction.swift in Sources */,
@@ -507,6 +531,7 @@
 				8EF5754C2DCE3F3A00AEC31A /* UserMonthRoom.swift in Sources */,
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
 				8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */,
+				8EFEEEFB2F0E805E00857A23 /* RecordsHistoryView.swift in Sources */,
 				8EA1C9D32EFD836700DF690F /* Note.swift in Sources */,
 				8EAF68082EF4800300780BB9 /* Int + extension.swift in Sources */,
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
@@ -518,6 +543,7 @@
 				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
 				8EAF67C52EF33AB500780BB9 /* RoomFeatureStore.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
+				8EFEEEF52F0E589100857A23 /* HistoryScreenState.swift in Sources */,
 				8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */,
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */,
@@ -525,13 +551,14 @@
 				8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
-				8E2E5EE72EF8546000B91347 /* PlantDetailView.swift in Sources */,
+				8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */,
 				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */,
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
 				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,
+				8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */,
 				8EAF67D22EF352E300780BB9 /* RoomViewState.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
@@ -540,6 +567,7 @@
 				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenStore.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,
+				8EFEEEF72F0E589C00857A23 /* HistoryScreenStore.swift in Sources */,
 				8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */,
 				8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */,
 				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
@@ -689,7 +717,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,7 +752,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

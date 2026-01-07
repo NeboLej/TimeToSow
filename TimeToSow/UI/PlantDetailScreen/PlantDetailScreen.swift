@@ -1,5 +1,5 @@
 //
-//  PlantDetailView.swift
+//  PlantDetailScreen.swift
 //  TimeToSow
 //
 //  Created by Nebo on 21.12.2025.
@@ -17,7 +17,7 @@ fileprivate enum L: LocalizedStringKey {
     var loc: LocalizedStringKey { rawValue }
 }
 
-struct PlantDetailView: View {
+struct PlantDetailScreen: View {
     
     let plant: Plant
     
@@ -67,10 +67,15 @@ struct PlantDetailView: View {
                             .padding(.top, 10)
                             .shadow(color: .black.opacity(0.2), radius: 2, x: -1, y: -1)
                         
-                        recordsHistorySection()
+                        titleLabel(Text(L.recordsHistoryTitle.loc))
+                            .foregroundStyle(.black)
+                            .padding(.bottom, -6)
+                            .padding(.horizontal, 10)
+                            .padding(.top, 20)
+                        
+                        RecordsHistoryView(notes: plant.notes)
                             .padding(.horizontal, 10)
                             .padding(.bottom, 100)
-                            .padding(.top, 16)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -78,9 +83,9 @@ struct PlantDetailView: View {
             
             menuView()
                 .padding()
-                
-        }.background(.mainBackground)
             
+        }.background(.mainBackground)
+        
     }
     
     @ViewBuilder
@@ -125,53 +130,6 @@ struct PlantDetailView: View {
         }.padding(.all, 10)
     }
     
-    @ViewBuilder
-    private func recordsHistorySection() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            titleLabel(Text(L.recordsHistoryTitle.loc))
-                .foregroundStyle(.black)
-                .padding(.bottom, -6)
-            
-            ForEach(groupNotesByDay, id: \.self) { dayNotes in
-                VStack(alignment: .leading) {
-                    Text(dayNotes.first?.date.toReadableDate() ?? "")
-                        .font(.myRegular(12))
-                        .foregroundStyle(.black.opacity(0.6))
-                        .padding(.top, 16)
-                        .padding(.leading, 10)
-                    
-                    ForEach(dayNotes) { note in
-                        SwipeableRow {
-                            recordRow(note)
-                        } actions: {
-                            Image(systemName: "trash")
-                                .frame(width: 60, height: 46)
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func recordRow(_ note: Note) -> some View {
-        HStack(spacing: 10) {
-            Rectangle()
-                .frame(width: 10)
-                .foregroundStyle(Color(hex: note.tag.color))
-            Text(note.time.toHoursAndMinutes())
-                .font(.myRegular(16))
-                .foregroundStyle(.black)
-            Spacer()
-            TagView(tag: note.tag)
-                .padding(.trailing, 10)
-        }
-        .frame(height: 46)
-        .background(Color(hex: "E7E7E7"))
-        .cornerRadius(20, corners: [.bottomRight, .topRight])
-    }
-    
     @State private var isMenuOpen: Bool = false
     
     @ViewBuilder
@@ -213,23 +171,22 @@ struct PlantDetailView: View {
     }
 }
 
-
 #Preview {
-    PlantDetailView(plant: Plant(seed: Seed(name: "seed1.name",
-                                            image: "seed23",
-                                            height: 45,
+    PlantDetailScreen(plant: Plant(seed: Seed(name: "seed1.name",
+                                              image: "seed23",
+                                              height: 45,
+                                              rarity: .common),
+                                   pot: Pot(name: "pot1.name",
+                                            image: "pot21",
+                                            height: 24,
                                             rarity: .common),
-                                 pot: Pot(name: "pot1.name",
-                                          image: "pot21",
-                                          height: 24,
-                                          rarity: .common),
-                                 name: "Oleg",
-                                 description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
-                                 offsetY: 200,
-                                 offsetX: 200,
-                                 notes: [
+                                   name: "Oleg",
+                                   description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
+                                   offsetY: 200,
+                                   offsetX: 200,
+                                   notes: [
                                     Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
                                     Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
-                                 ]
+                                   ]
     ))
 }

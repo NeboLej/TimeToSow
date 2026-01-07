@@ -39,54 +39,62 @@ struct HomeScreen: View {
     var body: some View {
         let coordinator = Bindable(appStore.appCoordinator)
         
-        VStack(spacing: 0) {
-            header()
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
-                    roomView()
-                        .zIndex(100)
-                    
-                    HStack {
-                        statisticsView()
-                        Spacer()
-                        menuView()
-                    }
-                    
-                    newPlantSection()
-                    monthStatisticSection()
-                    tagStatisticsSection()
-                    
+        NavigationStack(path: coordinator.path) {
+            VStack(spacing: 0) {
+                header()
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        roomView()
+                            .zIndex(100)
+                        
+                        HStack {
+                            statisticsView()
+                            Spacer()
+                            menuView()
+                        }
+                        
+                        newPlantSection()
+                        monthStatisticSection()
+                        tagStatisticsSection()
+                        
 #if DEBUG
-                    debugConsole()
+                        debugConsole()
 #endif
-                }
-            }.coordinateSpace(name: "SCROLL")
+                    }
+                }.coordinateSpace(name: "SCROLL")
+            }
+            .background(
+                Color(hex: "FFF9EE")
+                    .overlay(
+                        Image(.texture2)
+                            .resizable()
+                            .blendMode(.multiply)
+                            .opacity(0.9)
+                    )
+            )
+            .ignoresSafeArea(.all)
+            .sheet(item: coordinator.activeSheet, onDismiss: {
+                print("dismiss")
+            }, content: { screenType in
+                screenBuilder.getScreen(type: screenType)
+            })
+            .fullScreenCover(item: coordinator.fullScreenCover, content: { screenType in
+                screenBuilder.getScreen(type: screenType)
+            })
+            .navigationDestination(for: ScreenType.self) {
+                screenBuilder.getScreen(type: $0)
+            }
+        }.transaction { transaction in
+            if disableRootAnimation {
+                transaction.animation = nil
+            }
         }
-        .background(
-            Color(hex: "FFF9EE")
-                .overlay(
-                    Image(.texture2)
-                        .resizable()
-                        .blendMode(.multiply)
-                        .opacity(0.9)
-                )
-        )
-        .ignoresSafeArea(.all)
-        .sheet(item: coordinator.activeSheet, onDismiss: {
-            print("dismiss")
-        }, content: { screenType in
-            screenBuilder.getScreen(type: screenType)
-        })
-        .fullScreenCover(item: coordinator.fullScreenCover, content: { screenType in
-            screenBuilder.getScreen(type: screenType)
-        })
-//        .fullScreenCover(isPresented: $isProgress, onDismiss: {
-//            isProgress = false
-//        }, content: {
-//            screenBuilder.getScreen(type: .progress(selectedTime))
-//        })
+        .task {
+            disableRootAnimation = false
+        }
     }
     
+    @State private var disableRootAnimation = true
     @ViewBuilder
     private func header() -> some View {
         Color(store.state.headerColor)
@@ -120,6 +128,10 @@ struct HomeScreen: View {
             menuElement(colorHex: "D17474", icon: "square.and.arrow.up")
                 .onTapGesture {
                     store.send(.toDebugScreen)
+                }
+            menuElement(colorHex: "D17474", icon: "square.and.arrow.down")
+                .onTapGesture {
+                    store.send(.toHistoryScreen)
                 }
             menuElement(colorHex: "7482D1", icon: "info.circle")
             menuElement(colorHex: "6E916A", icon: "paintbrush")
