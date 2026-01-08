@@ -10,7 +10,6 @@ import SwiftData
 
 var sharedModelContainer: ModelContainer = {
     let schema = Schema([TagModel.self, ShelfModel.self, SeedModel.self])
-//    ShelfPositionsJSONTransformer.register()
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     do {
         return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -28,13 +27,6 @@ struct TimeToSowApp: App {
     
     init() {
         let database: DatabaseRepositoryProtocol = DatabaseRepository(modelContainer: sharedModelContainer)
-//        do {
-//            let container: ModelContainer = try ModelContainer(for: TagModel.self, DummyModel.self)
-//            database = DatabaseRepository(modelContainer: container)
-//        } catch {
-//            fatalError("Failed to create container: \(error)")
-//        }
-        
         
         let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository(database: database)
         let roomRepository: RoomRepositoryProtocol = RoomRepository(database: database)

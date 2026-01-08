@@ -26,12 +26,3 @@ final class TagModel {
         color = from.color
     }
 }
-
-@Model
-final class DummyModel {
-    var dummy: String
-    
-    init(dummy: String = "dummy") {
-        self.dummy = dummy
-    }
-}

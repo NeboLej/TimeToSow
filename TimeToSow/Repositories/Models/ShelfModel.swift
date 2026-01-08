@@ -14,7 +14,6 @@ final class ShelfModel {
     var name: String
     var image: String
     
-//    @Attribute(.transformable(by: ShelfPositionsJSONTransformer.self))
     var shelfPositions: [ShelfPosition] = []
     
     init(id: UUID = UUID(), name: String, image: String, shelfPositions: [ShelfPosition] = []) {
@@ -31,8 +30,3 @@ final class ShelfModel {
         shelfPositions = from.shelfPositions
     }
 }
-
-//@Model
-//final class Position {
-//
-//}
