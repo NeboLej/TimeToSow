@@ -20,7 +20,7 @@ struct PlantViewState: Identifiable {
     
     init(plant: Plant, isSelected: Bool) {
         original = plant
-        id = plant.id
+        id = plant.id.uuidString
         seed = plant.seed
         pot = plant.pot
         offsetY = plant.offsetY

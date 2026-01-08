@@ -20,6 +20,7 @@ protocol DatabaseRepositoryProtocol {
     
     // MARK: Fetch
     func fetchAll<T: PersistentModel>(_ type: T.Type) async throws -> [T]
+    func fetchAll<T: PersistentModel>(predicate: Predicate<T>?) async throws -> [T]
     
 //    func fetchByID<T: PersistentModel>(_ id: PersistentIdentifier) async throws -> T?
 //    func fetchByUUID<T: PersistentModel>(_ uuid: UUID) async throws -> T? where T.ID == UUID
@@ -63,6 +64,11 @@ actor DatabaseRepository: DatabaseRepositoryProtocol {
         let result = try modelContext.fetch(descriptor)
         print("💿DatabaseRepository: --- success get models \(type): \(result.count)")
         return result
+    }
+    
+    func fetchAll<T: PersistentModel>(predicate: Predicate<T>? = nil) async throws -> [T] {
+        let descriptor = FetchDescriptor<T>(predicate: predicate)
+        return try modelContext.fetch(descriptor)
     }
     
 //    func fetchByID<T: PersistentModel>(_ id: PersistentIdentifier) async throws -> T? {

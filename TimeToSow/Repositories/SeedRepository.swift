@@ -9,7 +9,8 @@ import Foundation
 
 protocol SeedRepositoryProtocol {
     func getRandomSeed() -> Seed
-    func getRandomSeedBy(rarity: Rarity) -> Seed
+//    func getRandomSeedBy(rarity: Rarity) -> Seed
+    func getRandomSeedBy(rarity: Rarity) async -> Seed
 }
 
 final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
@@ -28,6 +29,17 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
         }
     }
     
+    func getRandomSeedBy(rarity: Rarity) async -> Seed {
+        do {
+            let predicate = #Predicate<SeedModel> { seed in
+                seed.rarityRaw == rarity.rawValue
+            }
+            let seeds: [SeedModel] = try await database.fetchAll(predicate: predicate)
+            return Seed(from: seeds.randomElement()!) 
+        } catch {
+            fatalError()
+        }
+    }
     
     func getRandomSeed() -> Seed {
         DefaultModels.seeds.randomElement()!

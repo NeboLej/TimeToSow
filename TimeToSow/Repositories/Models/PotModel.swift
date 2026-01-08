@@ -10,25 +10,25 @@ import SwiftData
 
 @Model
 final class PotModel {
-    var id: UUID
-    var potFeatures: [PotFeaturesType]
+    @Attribute(.unique) var id: UUID
+    var potFeaturesTypeRow: [Int]
     var name: String
     var image: String
     var height: Int
-    var rarity: Rarity
+    var rarityRaw: Int
     var anchorPointCoefficientX: CGFloat?
     var anchorPointCoefficientY: CGFloat?
     var width: CGFloat
     
-    init(id: UUID, potFeatures: [PotFeaturesType], name: String, image: String,
-         height: Int, rarity: Rarity, anchorPointCoefficientX: CGFloat? = nil,
-         anchorPointCoefficientY: CGFloat? = nil, width: CGFloat) {
+    init(id: UUID, potFeaturesTypeRow: [Int], name: String, image: String,
+         height: Int, rarityRaw: Int, anchorPointCoefficientX: CGFloat?,
+         anchorPointCoefficientY: CGFloat?, width: CGFloat) {
         self.id = id
-        self.potFeatures = potFeatures
+        self.potFeaturesTypeRow = potFeaturesTypeRow
         self.name = name
         self.image = image
         self.height = height
-        self.rarity = rarity
+        self.rarityRaw = rarityRaw
         self.anchorPointCoefficientX = anchorPointCoefficientX
         self.anchorPointCoefficientY = anchorPointCoefficientY
         self.width = width
@@ -36,11 +36,11 @@ final class PotModel {
     
     init(from: Pot) {
         id = from.id
-        potFeatures = from.potFeatures
+        potFeaturesTypeRow = from.potFeatures.map { $0.rawValue }
         image = from.image
         name = from.name
         height = from.height
-        rarity = from.rarity
+        rarityRaw = from.rarity.starCount
         anchorPointCoefficientX = from.anchorPointCoefficient?.x
         anchorPointCoefficientY = from.anchorPointCoefficient?.y
         width = from.width

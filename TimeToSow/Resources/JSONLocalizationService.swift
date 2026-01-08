@@ -16,7 +16,6 @@ class RemoteText {
     }
 }
 
-
 fileprivate struct JSONLocalization: Decodable {
     let data: [LanguageCode: [LocalizationKey: String]]
 

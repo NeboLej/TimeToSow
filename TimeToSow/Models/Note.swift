@@ -8,8 +8,22 @@
 import Foundation
 
 struct Note: Identifiable, Hashable {
-    let id: String = UUID().uuidString
+    let id: UUID
     let date: Date
     let time: Int
     let tag: Tag
+    
+    init(id: UUID = UUID(), date: Date, time: Int, tag: Tag) {
+        self.id = id
+        self.date = date
+        self.time = time
+        self.tag = tag
+    }
+    
+    init(from: NoteModel) {
+        id = from.id
+        date = from.date
+        time = from.time
+        tag = Tag(from: from.tag)
+    }
 }

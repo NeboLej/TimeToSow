@@ -9,7 +9,8 @@ import Foundation
 
 protocol PotRepositoryProtocol {
     func getRandomPot() -> Pot
-    func getRandomPotBy(rarity: Rarity, unavailablePotFeatures: [PotFeaturesType]) -> Pot
+    func getRandomPotBy(rarity: Rarity, unavailablePotFeatures: [PotFeaturesType]) async -> Pot
+//    func getRandomPotBy(rarity: Rarity, unavailablePotFeatures: [PotFeaturesType]) -> Pot
 }
 
 final class PotRepository: BaseRepository, PotRepositoryProtocol {
@@ -25,6 +26,19 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
                 try await database.insert(DefaultModels.pots.map { PotModel(from: $0) })
                 print("💿 PotRepository: --- default PotModels added")
             }
+        }
+    }
+    
+    func getRandomPotBy(rarity: Rarity, unavailablePotFeatures: [PotFeaturesType]) async -> Pot {
+        do {
+            let predicate = #Predicate<PotModel> {
+                $0.rarityRaw == rarity.starCount 
+            }
+            let pots: [PotModel] = try await database.fetchAll(predicate: predicate)
+            let unavailablePotFeaturesRaw = unavailablePotFeatures.map(\.rawValue)
+            return Pot(from: pots.filter { !$0.potFeaturesTypeRow.contains(where: unavailablePotFeaturesRaw.contains) }.randomElement()!)
+        } catch {
+            fatalError()
         }
     }
     

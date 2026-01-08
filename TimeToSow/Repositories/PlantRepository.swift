@@ -8,7 +8,8 @@
 import Foundation
 
 protocol PlantRepositoryProtocol {
-    func getRandomPlant(note: Note) -> Plant
+//    func getRandomPlant(note: Note) -> Plant
+    func getRandomPlant(note: Note) async -> Plant
     //    func updatePlant(oldPlant: Plant, newNote: Note) -> Plant
 }
 
@@ -23,12 +24,11 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         super.init(database: database)
     }
     
-    func getRandomPlant(note: Note) -> Plant {
+    func getRandomPlant(note: Note) async -> Plant {
         let distributedTime = distributeTime(fullTime: note.time)
-        let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
-        let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
+        let randomSeed = await seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
+        let randomPot = await potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
         let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
-        
         return Plant(seed: randomSeed,
                      pot: randomPot,
                      name: name,
@@ -37,6 +37,21 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                      offsetX: Double((10...350).randomElement()!),
                      notes: [note])
     }
+    
+//    func getRandomPlant(note: Note) -> Plant {
+//        let distributedTime = distributeTime(fullTime: note.time)
+//        let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
+//        let randomPot = potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
+//        let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
+//        
+//        return Plant(seed: randomSeed,
+//                     pot: randomPot,
+//                     name: name,
+//                     description: "",
+//                     offsetY: Double((10...250).randomElement()!),
+//                     offsetX: Double((10...350).randomElement()!),
+//                     notes: [note])
+//    }
     
     //MARK: - Private func
     

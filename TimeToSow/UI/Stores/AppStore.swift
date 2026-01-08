@@ -111,8 +111,8 @@ class AppStore {
         currentRoom.plants[newPlant.id] = newPlant
     }
     
-    func getRandomPlant(note: Note) -> Plant {
-        let randomPlant = plantRepository.getRandomPlant(note: note)
+    func getRandomPlant(note: Note) async -> Plant {
+        let randomPlant = await plantRepository.getRandomPlant(note: note)
 //        updatePlant(with: randomPlant)
         return randomPlant
     }
@@ -146,8 +146,10 @@ extension AppStore {
         
     }
     
-    func addRandomPlantToShelf()  {
-        let randomPlant = plantRepository.getRandomPlant(note: getRandomNote())
-        updatePlant(with: randomPlant)
+    func addRandomPlantToShelf() {
+        Task {
+            let randomPlant = await plantRepository.getRandomPlant(note: getRandomNote())
+            updatePlant(with: randomPlant)
+        }
     }
 }

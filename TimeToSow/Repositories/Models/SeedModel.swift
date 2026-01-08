@@ -12,23 +12,23 @@ import SwiftData
 final class SeedModel {
     @Attribute(.unique) var id: UUID
     var name: String = ""
-    var unavailavlePotTypes: [PotFeaturesType] = []
+    var unavailavlePotTypesRaw: [Int] = []
     var image: String = ""
     var height: Int
-    var rarity: Rarity
+    var rarityRaw: Int
     
     var rootCoordinateCoefX: CGFloat?
     var rootCoordinateCoefY: CGFloat?
     
     var width: CGFloat
     
-    init(id: UUID, name: String, unavailavlePotTypes: [PotFeaturesType], image: String, height: Int, rarity: Rarity, rootCoordinateCoefX: CGFloat? = nil, rootCoordinateCoefY: CGFloat? = nil, width: CGFloat) {
+    init(id: UUID, name: String, unavailavlePotTypesRaw: [Int], image: String, height: Int, rarityRaw: Int, rootCoordinateCoefX: CGFloat?, rootCoordinateCoefY: CGFloat?, width: CGFloat) {
         self.id = id
         self.name = name
-        self.unavailavlePotTypes = unavailavlePotTypes
+        self.unavailavlePotTypesRaw = unavailavlePotTypesRaw
         self.image = image
         self.height = height
-        self.rarity = rarity
+        self.rarityRaw = rarityRaw
         self.rootCoordinateCoefX = rootCoordinateCoefX
         self.rootCoordinateCoefY = rootCoordinateCoefY
         self.width = width
@@ -37,10 +37,10 @@ final class SeedModel {
     init(from: Seed) {
         id = from.id
         name = from.name
-        unavailavlePotTypes = from.unavailavlePotTypes
+        unavailavlePotTypesRaw = from.unavailavlePotTypes.map { $0.rawValue }
         image = from.image
         height = from.height
-        rarity = from.rarity
+        rarityRaw = from.rarity.starCount
         rootCoordinateCoefX = from.rootCoordinateCoef?.x
         rootCoordinateCoefY = from.rootCoordinateCoef?.y
         width = from.width

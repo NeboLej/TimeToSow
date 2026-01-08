@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-enum PotFeaturesType: String, Hashable, Equatable, CaseIterable, Codable {
+enum PotFeaturesType: Int, Hashable, Equatable, CaseIterable, Codable {
     //узкий
-    case narrow
+    case narrow = 0
 }
 
 struct Pot: Hashable {
@@ -46,11 +46,11 @@ struct Pot: Hashable {
     
     init(from: PotModel) {
         id = from.id
-        potFeatures = from.potFeatures
+        potFeatures = from.potFeaturesTypeRow.compactMap { PotFeaturesType(rawValue: $0) }
         name = from.name
         image = from.image
         height = from.height
-        rarity = from.rarity
+        rarity =  Rarity(rawValue: from.rarityRaw) ?? .common
         anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
         width = from.width
     }

@@ -39,11 +39,13 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     
     func getNewPlant() {
         let note = Note(date: Date(), time: minutes, tag: selectedTag)
-        newPlant = appStore.getRandomPlant(note: note)
+        Task {
+            newPlant = await appStore.getRandomPlant(note: note)
+        }
     }
     
     func newPlantToShelf() {
-        let plant = newPlant ?? appStore.getRandomPlant(note: appStore.getRandomNote())
+        let plant = newPlant!
         send(.finishProgress(plant: plant))
     }
     

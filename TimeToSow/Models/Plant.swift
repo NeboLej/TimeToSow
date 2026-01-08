@@ -8,7 +8,7 @@
 import Foundation
 
 struct Plant: Hashable, Identifiable {
-    let id: String
+    let id: UUID
     let seed: Seed
     let pot: Pot
     
@@ -24,7 +24,8 @@ struct Plant: Hashable, Identifiable {
         lhs.id == rhs.id
     }
     
-    init(id: String = UUID().uuidString, seed: Seed, pot: Pot, name: String, description: String, offsetY: Double, offsetX: Double, notes: [Note]) {
+    init(id: UUID = UUID(), seed: Seed, pot: Pot, name: String, description: String,
+         offsetY: Double, offsetX: Double, notes: [Note]) {
         self.id = id
         self.seed = seed
         self.pot = pot
@@ -34,6 +35,18 @@ struct Plant: Hashable, Identifiable {
         self.offsetX = offsetX
         self.time = notes.reduce(0) { $0 + $1.time }
         self.notes = notes
+    }
+    
+    init(from: PlantModel) {
+        id = from.id
+        seed = Seed(from: from.seed)
+        pot = Pot(from: from.pot)
+        name = from.name
+        description = from.userDescription
+        offsetX = from.offsetX
+        offsetY = from.offsetY
+        notes = from.notes.map { Note(from: $0) }
+        time = notes.reduce(0) { $0 + $1.time }
     }
     
 //    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0, notes: [Note] = []) {

@@ -41,11 +41,11 @@ struct Seed: Hashable {
     init(from: SeedModel) {
         id = from.id
         name = from.name
-        unavailavlePotTypes = from.unavailavlePotTypes
+        unavailavlePotTypes = from.unavailavlePotTypesRaw.compactMap { PotFeaturesType(rawValue: $0) }
         image = from.image
         height = from.height
-        rarity = from.rarity
-        rootCoordinateCoef = CGPoint(x: rootCoordinateCoef?.x ?? 0, y: rootCoordinateCoef?.y ?? 0)
+        rarity = Rarity(rawValue: from.rarityRaw) ?? .common
+        rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
         width = from.width
     }
 }

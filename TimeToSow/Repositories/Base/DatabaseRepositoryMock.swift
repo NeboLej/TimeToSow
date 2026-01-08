@@ -9,6 +9,8 @@ import Foundation
 import SwiftData
 
 actor MockDatabaseRepository: DatabaseRepositoryProtocol {
+
+    
     
     private var storage: [String: Any] = [:] // Простое in-memory хранилище по типу
     
@@ -43,7 +45,19 @@ actor MockDatabaseRepository: DatabaseRepositoryProtocol {
         
         return array
     }
-//    
+    
+    func fetchAll<T>(predicate: Predicate<T>?) async throws -> [T] where T : PersistentModel {
+        let key = String(describing: T.self)
+        var array = (storage[key] as? [T]) ?? []
+        
+        if let predicate = predicate {
+            array = try array.filter { try predicate.evaluate($0) }
+        }
+        
+        return array
+    }
+    
+//
 //    func fetchByID<T: PersistentModel>(_ id: PersistentIdentifier) async throws -> T? {
 //        return try await fetchAll().first { $0.persistentModelID == id }
 //    }
