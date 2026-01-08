@@ -1,16 +1,18 @@
 //
-//  Room.swift
+//  RoomModel.swift
 //  TimeToSow
 //
-//  Created by Nebo on 21.06.2025.
+//  Created by Nebo on 08.01.2026.
 //
 
 import Foundation
+import SwiftData
 
-struct RoomType: Hashable {
-    let id: UUID
-    let name: String
-    let image: String
+@Model
+final class RoomModel {
+    @Attribute(.unique) var id: UUID
+    var name: String
+    var image: String
     
     init(id: UUID = UUID(), name: String, image: String) {
         self.id = id
@@ -18,9 +20,9 @@ struct RoomType: Hashable {
         self.image = image
     }
     
-    init(from: RoomModel) {
+    init(from: RoomType) {
         id = from.id
-        name = from.name
         image = from.image
+        name = from.name
     }
 }

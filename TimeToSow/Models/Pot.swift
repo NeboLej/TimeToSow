@@ -14,7 +14,7 @@ enum PotFeaturesType: String, Hashable, Equatable, CaseIterable, Codable {
 }
 
 struct Pot: Hashable {
-    let id: UUID = UUID.init()
+    let id: UUID
     let potFeatures: [PotFeaturesType]
     let name: String
     let image: String
@@ -23,7 +23,9 @@ struct Pot: Hashable {
     let anchorPointCoefficient: CGPoint?
     let width: CGFloat
     
-    init(potFeatures: [PotFeaturesType] = [], name: String, image: String, height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
+    init(id: UUID = UUID.init(), potFeatures: [PotFeaturesType] = [], name: String, image: String,
+         height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
+        self.id = id
         self.potFeatures = potFeatures
         self.name = name
         self.image = image
@@ -40,6 +42,16 @@ struct Pot: Hashable {
         } else {
             width =  CGFloat(height)
         }
-        
+    }
+    
+    init(from: PotModel) {
+        id = from.id
+        potFeatures = from.potFeatures
+        name = from.name
+        image = from.image
+        height = from.height
+        rarity = from.rarity
+        anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
+        width = from.width
     }
 }

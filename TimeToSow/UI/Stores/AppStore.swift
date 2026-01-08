@@ -99,9 +99,9 @@ class AppStore {
         currentRoom.roomType = roomType ?? currentRoom.roomType
     }
     
-    func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
-        roomRepository.getNextRoom(curent: currentRoom, isNext: isNext)
-    }
+//    func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
+//        roomRepository.getNextRoom(curent: currentRoom, isNext: isNext)
+//    }
     
 //    func getNextShelf(currentShelf: ShelfType, isNext: Bool) -> ShelfType {
 //        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
@@ -134,7 +134,9 @@ class AppStore {
 //MARK: Test -
 extension AppStore {
     func setRandomRoom() {
-        currentRoom.roomType = roomRepository.getRandomRoom(except: currentRoom.roomType)
+        Task {
+            currentRoom.roomType = await roomRepository.getRandomRoom(except: currentRoom.roomType)
+        }
     }
     
     func setRandomShelf() {

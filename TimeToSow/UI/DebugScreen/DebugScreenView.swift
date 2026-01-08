@@ -151,8 +151,8 @@ struct DebugScreenView: View {
             }
             .background(.mainBackground)
             .onAppear {
-                allPots = potRepository.pots.reversed()
-                allSeeds = seedRepository.seeds.reversed()
+                allPots = DefaultModels.pots.reversed()
+                allSeeds = DefaultModels.seeds.reversed()
             }
         }
     }
