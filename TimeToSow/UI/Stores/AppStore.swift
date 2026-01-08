@@ -39,7 +39,7 @@ class AppStore {
         
         currentRoom = myRoomRepository.getCurrentRoom()
         
-        getData()
+//        getData()
         
         
 
@@ -103,9 +103,9 @@ class AppStore {
         roomRepository.getNextRoom(curent: currentRoom, isNext: isNext)
     }
     
-    func getNextShelf(currentShelf: ShelfType, isNext: Bool) -> ShelfType {
-        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
-    }
+//    func getNextShelf(currentShelf: ShelfType, isNext: Bool) -> ShelfType {
+//        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
+//    }
     
     func updatePlant(with newPlant: Plant) {
         currentRoom.plants[newPlant.id] = newPlant
@@ -138,7 +138,10 @@ extension AppStore {
     }
     
     func setRandomShelf() {
-        currentRoom.shelfType = shelfRepository.getRandomShelf(except: currentRoom.shelfType)
+        Task {
+            currentRoom.shelfType = await shelfRepository.getRandomShelf(except: currentRoom.shelfType)
+        }
+        
     }
     
     func addRandomPlantToShelf()  {

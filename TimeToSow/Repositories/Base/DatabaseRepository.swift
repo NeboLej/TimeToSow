@@ -16,7 +16,7 @@ protocol PersistentModelProtocol: PersistentModel & Identifiable { }
 protocol DatabaseRepositoryProtocol {
     // MARK: Insert
     func insert<T: PersistentModel>(_ model: T) async throws
-//    func insert<T: PersistentModel>(_ models: [T]) async throws
+    func insert<T: PersistentModel>(_ models: [T]) async throws
     
     // MARK: Fetch
     func fetchAll<T: PersistentModel>(_ type: T.Type) async throws -> [T]
@@ -46,19 +46,23 @@ actor DatabaseRepository: DatabaseRepositoryProtocol {
     func insert<T: PersistentModel>(_ model: T) async throws {
         modelContext.insert(model)
         try modelContext.save()
+        print("💿DatabaseRepository: --- success save 1 \(model)")
     }
     
-//    func insert<T: PersistentModel>(_ models: [T]) async throws {
-//        for model in models {
-//            context.insert(model)
-//        }
-//        try context.save()
-//    }
+    func insert<T: PersistentModel>(_ models: [T]) async throws {
+        for model in models {
+            modelContext.insert(model)
+        }
+        try modelContext.save()
+        print("💿DatabaseRepository: --- success save \(models.count) \(models.first.self)")
+    }
     
     // MARK: Fetch
     func fetchAll<T: PersistentModel>(_ type: T.Type) async throws -> [T] {
         let descriptor = FetchDescriptor<T>()
-        return try modelContext.fetch(descriptor)
+        let result = try modelContext.fetch(descriptor)
+        print("💿DatabaseRepository: --- success get models \(type): \(result.count)")
+        return result
     }
     
 //    func fetchByID<T: PersistentModel>(_ id: PersistentIdentifier) async throws -> T? {

@@ -1,0 +1,38 @@
+//
+//  ShelfModel.swift
+//  TimeToSow
+//
+//  Created by Nebo on 08.01.2026.
+//
+
+import Foundation
+import SwiftData
+
+@Model
+final class ShelfModel {
+    @Attribute(.unique) var id: UUID
+    var name: String
+    var image: String
+    
+//    @Attribute(.transformable(by: ShelfPositionsJSONTransformer.self))
+    var shelfPositions: [ShelfPosition] = []
+    
+    init(id: UUID = UUID(), name: String, image: String, shelfPositions: [ShelfPosition] = []) {
+        self.id = id
+        self.name = name
+        self.image = image
+        self.shelfPositions = shelfPositions
+    }
+    
+    init(from: ShelfType) {
+        id = from.id
+        name = from.name
+        image = from.image
+        shelfPositions = from.shelfPositions
+    }
+}
+
+//@Model
+//final class Position {
+//
+//}

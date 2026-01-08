@@ -19,6 +19,12 @@ final class TagModel {
         self.name = name
         self.color = color
     }
+    
+    init(from: Tag) {
+        id = from.id
+        name = from.name
+        color = from.color
+    }
 }
 
 @Model

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Rarity {
+enum Rarity: String, Codable {
     case common
     case uncommon
     case rare

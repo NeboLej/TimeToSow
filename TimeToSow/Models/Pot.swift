@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum PotFeaturesType: Hashable, Equatable, CaseIterable {
+enum PotFeaturesType: String, Hashable, Equatable, CaseIterable, Codable {
     //узкий
     case narrow
 }

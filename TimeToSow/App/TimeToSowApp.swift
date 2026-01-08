@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 var sharedModelContainer: ModelContainer = {
-    let schema = Schema([TagModel.self])
+    let schema = Schema([TagModel.self, ShelfModel.self, SeedModel.self])
+//    ShelfPositionsJSONTransformer.register()
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     do {
         return try ModelContainer(for: schema, configurations: [modelConfiguration])
