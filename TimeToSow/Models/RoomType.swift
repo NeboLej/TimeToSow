@@ -21,6 +21,6 @@ struct RoomType: Hashable {
     init(from: RoomModel) {
         id = from.id
         name = from.name
-        image = from.image
+        image = from.image 
     }
 }

@@ -10,19 +10,17 @@ import SwiftData
 
 @Model
 final class RoomModel {
-    @Attribute(.unique) var id: UUID
-    var name: String
-    var image: String
+    @Attribute(.unique) var id: UUID = UUID()
+    var name: String = ""
+    var image: String = ""
     
-    init(id: UUID = UUID(), name: String, image: String) {
+    init(id: UUID, name: String, image: String) {
         self.id = id
         self.name = name
         self.image = image
     }
     
-    init(from: RoomType) {
-        id = from.id
-        image = from.image
-        name = from.name
+    convenience init(from: RoomType) {
+        self.init(id: from.id, name: from.name, image: from.image)
     }
 }

@@ -10,23 +10,27 @@ import SwiftData
 
 @Model
 final class ShelfModel {
-    @Attribute(.unique) var id: UUID
-    var name: String
-    var image: String
+    @Attribute(.unique) var id: UUID = UUID()
+    var name: String = ""
+    var image: String = ""
     
     var shelfPositions: [ShelfPosition] = []
     
-    init(id: UUID = UUID(), name: String, image: String, shelfPositions: [ShelfPosition] = []) {
+    init(id: UUID, name: String, image: String, shelfPositions: [ShelfPosition] = []) {
         self.id = id
         self.name = name
         self.image = image
         self.shelfPositions = shelfPositions
     }
     
-    init(from: ShelfType) {
-        id = from.id
-        name = from.name
-        image = from.image
-        shelfPositions = from.shelfPositions
+    convenience init(from: ShelfType) {
+        self.init(id: from.id, name: from.name, image: from.image, shelfPositions: from.shelfPositions)
     }
+    
+//    init(from: ShelfType) {
+//        id = from.id
+//        name = from.name
+//        image = from.image
+//        shelfPositions = from.shelfPositions
+//    }
 }

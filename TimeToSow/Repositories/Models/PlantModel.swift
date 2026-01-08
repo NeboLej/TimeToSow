@@ -11,18 +11,19 @@ import SwiftData
 @Model
 final class PlantModel {
     @Attribute(.unique) var id: UUID
-    @Relationship(deleteRule: .nullify, inverse: .none) var seed: SeedModel
-    @Relationship(deleteRule: .nullify, inverse: .none) var pot: PotModel
-    @Relationship(deleteRule: .cascade, inverse: \NoteModel.plant) var notes: [NoteModel] = []
+    @Relationship(deleteRule: .nullify, inverse: \SeedModel.plants) var seed: SeedModel?
+    @Relationship(deleteRule: .nullify, inverse: \PotModel.plants) var pot: PotModel?
+    @Relationship(deleteRule: .cascade, inverse: \NoteModel.plant) var notes: [NoteModel]
     
     var name: String
     var userDescription: String
     var offsetY: Double
     var offsetX: Double
     var time: Int
+    var rootRoom: MonthRoomModel?
     
-    init(id: UUID, seed: SeedModel, pot: PotModel, notes: [NoteModel], name: String,
-         userDescription: String, offsetY: Double, offsetX: Double, time: Int) {
+    init(id: UUID, seed: SeedModel?, pot: PotModel?, notes: [NoteModel], name: String,
+         userDescription: String, offsetY: Double, offsetX: Double, time: Int, rootRoom: MonthRoomModel? = nil) {
         self.id = id
         self.seed = seed
         self.pot = pot
@@ -32,17 +33,18 @@ final class PlantModel {
         self.offsetY = offsetY
         self.offsetX = offsetX
         self.time = time
+        self.rootRoom = rootRoom
     }
     
-    init(from: Plant) {
-        id = from.id
-        seed = SeedModel(from: from.seed)
-        pot = PotModel(from: from.pot)
-        name = from.name
-        userDescription = from.description
-        offsetX = from.offsetX
-        offsetY = from.offsetY
-        time = from.time
-        notes = from.notes.map { NoteModel(from: $0) }
+    convenience init(from: Plant) {
+        self.init(id: from.id,
+                  seed: SeedModel(from: from.seed),
+                  pot: PotModel(from: from.pot),
+                  notes: from.notes.map { NoteModel(from: $0) },
+                  name: from.name,
+                  userDescription: from.description,
+                  offsetY: from.offsetX,
+                  offsetX: from.offsetY,
+                  time: from.time)
     }
 }

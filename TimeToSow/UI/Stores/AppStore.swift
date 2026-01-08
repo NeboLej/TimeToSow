@@ -21,7 +21,7 @@ class AppStore {
     @ObservationIgnored
     private let tagRepository: TagRepositoryProtocol
     
-    var currentRoom: UserMonthRoom
+    var currentRoom: UserMonthRoom = .empty
     var selectedPlant: Plant?
     var appCoordinator: AppCoordinator = AppCoordinator()
     var selectedTag: Tag?
@@ -37,7 +37,7 @@ class AppStore {
         self.plantRepository = plantRepository
         self.tagRepository = tagRepository
         
-        currentRoom = myRoomRepository.getCurrentRoom()
+        
         
 //        getData()
         
@@ -49,6 +49,20 @@ class AppStore {
     func getData() {
         Task { 
             selectedTag = await tagRepository.getRandomTag()
+            let lastRoom = await myRoomRepository.getCurrentRoom()
+            let allPlants = await plantRepository.getAllPlants()
+            
+            if let lastRoom {
+                currentRoom = lastRoom
+            } else {
+                currentRoom = await createNewMonthRoom()
+//                await myRoomRepository.saveNewRoom(currentRoom)
+            }
+            
+            allPlants.forEach {
+                currentRoom.plants[$0.id] = $0
+            }
+            
         }
     }
     
@@ -84,20 +98,27 @@ class AppStore {
         case .toDebugScreen:
             appCoordinator.activeSheet = .debugScreen
         case .addNewPlant(let plant):
-            updatePlant(with: plant)
+            addNewPlant(plant)
         }
+    }
+    
+    func createNewMonthRoom() async -> UserMonthRoom {
+        let randomRoom = await roomRepository.getRandomRoom(except: nil)
+        let randomShelf = await shelfRepository.getRandomShelf(except: nil)
+        
+        return UserMonthRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date(), plants: [:])
     }
     
     // MARK: - TMP
     
-    func updateShelf() {
-        currentRoom = myRoomRepository.getCurrentRoom()
-    }
+//    func updateShelf() {
+//        currentRoom = myRoomRepository.getCurrentRoom()
+//    }
     
-    func setShelf(roomType: RoomType? = nil, shelfType: ShelfType? = nil) {
-        currentRoom.shelfType = shelfType ?? currentRoom.shelfType
-        currentRoom.roomType = roomType ?? currentRoom.roomType
-    }
+//    func setShelf(roomType: RoomType? = nil, shelfType: ShelfType? = nil) {
+//        currentRoom?.shelfType = shelfType ?? currentRoom?.shelfType
+//        currentRoom?.roomType = roomType ?? currentRoom?.roomType
+//    }
     
 //    func getNextRoom(currentRoom: RoomType, isNext: Bool) -> RoomType {
 //        roomRepository.getNextRoom(curent: currentRoom, isNext: isNext)
@@ -107,13 +128,15 @@ class AppStore {
 //        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
 //    }
     
-    func updatePlant(with newPlant: Plant) {
+    func addNewPlant(_ newPlant: Plant) {
         currentRoom.plants[newPlant.id] = newPlant
+        Task {
+            await plantRepository.saveNewPlant(newPlant)
+        }
     }
     
     func getRandomPlant(note: Note) async -> Plant {
         let randomPlant = await plantRepository.getRandomPlant(note: note)
-//        updatePlant(with: randomPlant)
         return randomPlant
     }
     
@@ -149,7 +172,7 @@ extension AppStore {
     func addRandomPlantToShelf() {
         Task {
             let randomPlant = await plantRepository.getRandomPlant(note: getRandomNote())
-            updatePlant(with: randomPlant)
+            addNewPlant(randomPlant)
         }
     }
 }

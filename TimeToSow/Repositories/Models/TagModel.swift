@@ -10,11 +10,13 @@ import SwiftData
 
 @Model
 final class TagModel {
-    @Attribute(.unique) var id: UUID
-    var name: String
-    var color: String
+    @Attribute(.unique) var id: UUID = UUID()
+    var name: String = ""
+    var color: String = ""
     
-    init(id: UUID = UUID(), name: String = "", color: String = "") {
+    var notes: [NoteModel] = []
+    
+    init(id: UUID, name: String, color: String ) {
         self.id = id
         self.name = name
         self.color = color

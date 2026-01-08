@@ -10,15 +10,17 @@ import SwiftData
 
 @Model
 final class PotModel {
-    @Attribute(.unique) var id: UUID
-    var potFeaturesTypeRow: [Int]
-    var name: String
-    var image: String
-    var height: Int
-    var rarityRaw: Int
+    @Attribute(.unique) var id: UUID = UUID()
+    var potFeaturesTypeRow: [Int] = []
+    var name: String = ""
+    var image: String = ""
+    var height: Int = 0
+    var rarityRaw: Int = 0
     var anchorPointCoefficientX: CGFloat?
     var anchorPointCoefficientY: CGFloat?
-    var width: CGFloat
+    var width: CGFloat = 0
+    
+    var plants: [PlantModel] = []
     
     init(id: UUID, potFeaturesTypeRow: [Int], name: String, image: String,
          height: Int, rarityRaw: Int, anchorPointCoefficientX: CGFloat?,

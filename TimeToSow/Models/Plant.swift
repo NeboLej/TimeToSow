@@ -39,8 +39,8 @@ struct Plant: Hashable, Identifiable {
     
     init(from: PlantModel) {
         id = from.id
-        seed = Seed(from: from.seed)
-        pot = Pot(from: from.pot)
+        seed = Seed(from: from.seed!)
+        pot = Pot(from: from.pot!)
         name = from.name
         description = from.userDescription
         offsetX = from.offsetX

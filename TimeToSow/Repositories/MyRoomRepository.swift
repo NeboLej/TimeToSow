@@ -6,12 +6,39 @@
 //
 
 import Foundation
+import SwiftData
 
 protocol MyRoomRepositoryProtocol {
-    func getCurrentRoom() -> UserMonthRoom
+//    func getCurrentRoom() -> UserMonthRoom
+    func getCurrentRoom() async -> UserMonthRoom?
+    func saveNewRoom(_ room: UserMonthRoom) async
 }
 
 final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
+    
+    func getCurrentRoom() async -> UserMonthRoom? {
+        do {
+            var models: [MonthRoomModel] = try await database.fetchAll(MonthRoomModel.self)
+            models.sort { $0.dateCreate > $1.dateCreate }
+            if let model = models.first {
+                return UserMonthRoom(from: model)
+            } else {
+                return nil
+            }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func saveNewRoom(_ room: UserMonthRoom) async {
+        do {
+            let model = MonthRoomModel(from: room)
+            print(model.roomType.id, model.roomType.name, model.roomType.image)
+            try await database.insert(model)
+        } catch {
+            fatalError()
+        }
+    }
     
     let tmpShelf = ShelfType(name: "3", image: "shelf6", shelfPositions: [
         ShelfPosition(coefOffsetY: 0.208, paddingLeading: 28, paddingTrailing: 35),

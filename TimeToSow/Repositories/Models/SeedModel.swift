@@ -10,17 +10,19 @@ import SwiftData
 
 @Model
 final class SeedModel {
-    @Attribute(.unique) var id: UUID
+    @Attribute(.unique) var id: UUID = UUID()
     var name: String = ""
     var unavailavlePotTypesRaw: [Int] = []
     var image: String = ""
-    var height: Int
-    var rarityRaw: Int
+    var height: Int = 0
+    var rarityRaw: Int = 0
+    
+    var plants: [PlantModel] = []
     
     var rootCoordinateCoefX: CGFloat?
     var rootCoordinateCoefY: CGFloat?
     
-    var width: CGFloat
+    var width: CGFloat = 0
     
     init(id: UUID, name: String, unavailavlePotTypesRaw: [Int], image: String, height: Int, rarityRaw: Int, rootCoordinateCoefX: CGFloat?, rootCoordinateCoefY: CGFloat?, width: CGFloat) {
         self.id = id

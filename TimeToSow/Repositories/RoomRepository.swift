@@ -9,6 +9,7 @@ import Foundation
 
 protocol RoomRepositoryProtocol {
     func getRandomRoom(except: RoomType?) async -> RoomType
+    func getAllRooms() async throws -> [RoomType]
 //    func getRandomRoom(except: RoomType?) -> RoomType
 //    func getNextRoom(curent: RoomType, isNext: Bool) -> RoomType
 }

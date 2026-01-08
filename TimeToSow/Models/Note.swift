@@ -24,6 +24,6 @@ struct Note: Identifiable, Hashable {
         id = from.id
         date = from.date
         time = from.time
-        tag = Tag(from: from.tag)
+        tag = Tag(from: from.tag!)
     }
 }

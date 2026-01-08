@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 var sharedModelContainer: ModelContainer = {
-    let schema = Schema([TagModel.self, ShelfModel.self, SeedModel.self, RoomModel.self, PotModel.self, NoteModel.self, PlantModel.self])
+    let schema = Schema([TagModel.self, ShelfModel.self, SeedModel.self, RoomModel.self,
+                         PotModel.self, NoteModel.self, PlantModel.self, MonthRoomModel.self])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     do {
         return try ModelContainer(for: schema, configurations: [modelConfiguration])

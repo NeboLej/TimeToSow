@@ -68,7 +68,9 @@ actor DatabaseRepository: DatabaseRepositoryProtocol {
     
     func fetchAll<T: PersistentModel>(predicate: Predicate<T>? = nil) async throws -> [T] {
         let descriptor = FetchDescriptor<T>(predicate: predicate)
-        return try modelContext.fetch(descriptor)
+        let result = try modelContext.fetch(descriptor)
+        print("💿DatabaseRepository: --- success get models \(T.self): \(result.count)")
+        return result
     }
     
 //    func fetchByID<T: PersistentModel>(_ id: PersistentIdentifier) async throws -> T? {

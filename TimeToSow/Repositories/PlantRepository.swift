@@ -10,6 +10,8 @@ import Foundation
 protocol PlantRepositoryProtocol {
 //    func getRandomPlant(note: Note) -> Plant
     func getRandomPlant(note: Note) async -> Plant
+    func saveNewPlant(_ plant: Plant) async
+    func getAllPlants() async -> [Plant]
     //    func updatePlant(oldPlant: Plant, newNote: Note) -> Plant
 }
 
@@ -24,10 +26,21 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         super.init(database: database)
     }
     
+    func getAllPlants() async -> [Plant] {
+        do {
+            let plants = try await database.fetchAll(PlantModel.self)
+            return plants.map { Plant(from: $0) }
+        } catch {
+            fatalError()
+        }
+        
+    }
+    
     func getRandomPlant(note: Note) async -> Plant {
         let distributedTime = distributeTime(fullTime: note.time)
         let randomSeed = await seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
         let randomPot = await potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
+        
         let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
         return Plant(seed: randomSeed,
                      pot: randomPot,
@@ -38,6 +51,13 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                      notes: [note])
     }
     
+    func saveNewPlant(_ plant: Plant) async {
+        do {
+            try await database.insert(PlantModel(from: plant))
+        } catch {
+            fatalError()
+        }
+    }
 //    func getRandomPlant(note: Note) -> Plant {
 //        let distributedTime = distributeTime(fullTime: note.time)
 //        let randomSeed = seedRepository.getRandomSeedBy(rarity: distributedTime.seed)

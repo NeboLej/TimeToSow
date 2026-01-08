@@ -38,6 +38,20 @@ class UserMonthRoom: Hashable {
         self.plants = plants
     }
     
+    init(from: MonthRoomModel) {
+        id = from.id
+        shelfType = ShelfType(from: from.shelfType)
+        roomType = RoomType(from: from.roomType)
+        name = from.name
+        dateCreate = from.dateCreate
+        let plantsArray = from.plants.map { Plant(from: $0) }
+        var plantsDict: [UUID: Plant] = [:]
+        plantsArray.forEach {
+            plantsDict[$0.id] = $0
+        }
+        plants = plantsDict
+    }
+    
     func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserMonthRoom {
         UserMonthRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
                       roomType: roomType ?? self.roomType, name: name ?? self.name,
