@@ -10,9 +10,11 @@ import SwiftData
 
 @Model
 final class RoomModel {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var name: String = ""
     var image: String = ""
+    
+    var parents: [MonthRoomModel] = []
     
     init(id: UUID, name: String, image: String) {
         self.id = id

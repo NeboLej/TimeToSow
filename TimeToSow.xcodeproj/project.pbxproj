@@ -15,6 +15,7 @@
 		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
 		8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */; };
 		8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34662F02789200354CAB /* Underdog-Regular.ttf */; };
+		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -179,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +444,7 @@
 			);
 			name = TimeToSow;
 			packageProductDependencies = (
+				8E6C3E9D2F1137630074CD4E /* GRDB */,
 			);
 			productName = TimeToSow;
 			productReference = 8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */;
@@ -472,6 +475,9 @@
 			);
 			mainGroup = 8EF574E32DCCEEAE00AEC31A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF574ED2DCCEEAE00AEC31A /* Products */;
 			projectDirPath = "";
@@ -792,6 +798,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E6C3E9D2F1137630074CD4E /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8EF574E42DCCEEAE00AEC31A /* Project object */;
 }

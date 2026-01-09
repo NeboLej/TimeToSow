@@ -26,7 +26,7 @@ protocol DatabaseRepositoryProtocol {
 //    func fetchByUUID<T: PersistentModel>(_ uuid: UUID) async throws -> T? where T.ID == UUID
     
     // MARK: Update
-//    func update<T: PersistentModel>(_ model: T) async throws
+    func update<T: PersistentModel>(_ model: T) async throws
     
     // MARK: Delete
 //    func delete<T: PersistentModel>(_ model: T) async throws
@@ -83,10 +83,10 @@ actor DatabaseRepository: DatabaseRepositoryProtocol {
 //        return try context.fetch(descriptor).first
 //    }
     
-    // MARK: Update
-//    func update<T: PersistentModel>(_ model: T) async throws {
-//        try context.save() // SwiftData отслеживает изменения автоматически
-//    }
+     //MARK: Update
+    func update<T: PersistentModel>(_ model: T) async throws {
+        try modelContext.save() // SwiftData отслеживает изменения автоматически
+    }
     
     // MARK: Delete
 //    func delete<T: PersistentModel>(_ model: T) async throws {

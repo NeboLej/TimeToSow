@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class PotModel {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var potFeaturesTypeRow: [Int] = []
     var name: String = ""
     var image: String = ""

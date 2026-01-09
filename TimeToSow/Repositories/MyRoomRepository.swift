@@ -33,7 +33,6 @@ final class MyRoomRepository: BaseRepository, MyRoomRepositoryProtocol {
     func saveNewRoom(_ room: UserMonthRoom) async {
         do {
             let model = MonthRoomModel(from: room)
-            print(model.roomType.id, model.roomType.name, model.roomType.image)
             try await database.insert(model)
         } catch {
             fatalError()

@@ -50,18 +50,18 @@ class AppStore {
         Task { 
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
-            let allPlants = await plantRepository.getAllPlants()
+//            let allPlants = await plantRepository.getAllPlants()
             
             if let lastRoom {
                 currentRoom = lastRoom
             } else {
                 currentRoom = await createNewMonthRoom()
-//                await myRoomRepository.saveNewRoom(currentRoom)
+                await myRoomRepository.saveNewRoom(currentRoom)
             }
             
-            allPlants.forEach {
-                currentRoom.plants[$0.id] = $0
-            }
+//            allPlants.forEach {
+//                currentRoom.plants[$0.id] = $0
+//            }
             
         }
     }
@@ -77,7 +77,7 @@ class AppStore {
         case .movePlant(plant: let plant, newPosition: let newPosition):
             guard let plant = currentRoom.plants[plant.id] else { return }
             let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
-            currentRoom.plants[plant.id] = newPlant
+            saveNewPlant(newPlant)
         case .changedRoomType:
             setRandomRoom()
         case .changedShelfType:
@@ -98,7 +98,7 @@ class AppStore {
         case .toDebugScreen:
             appCoordinator.activeSheet = .debugScreen
         case .addNewPlant(let plant):
-            addNewPlant(plant)
+            saveNewPlant(plant)
         }
     }
     
@@ -128,10 +128,15 @@ class AppStore {
 //        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
 //    }
     
-    func addNewPlant(_ newPlant: Plant) {
+    func updateCurrentRoom() {
+        
+    }
+    
+    func saveNewPlant(_ newPlant: Plant) {
         currentRoom.plants[newPlant.id] = newPlant
         Task {
-            await plantRepository.saveNewPlant(newPlant)
+            await myRoomRepository.saveNewRoom(currentRoom)
+//            await plantRepository.saveNewPlant(newPlant)
         }
     }
     
@@ -172,7 +177,7 @@ extension AppStore {
     func addRandomPlantToShelf() {
         Task {
             let randomPlant = await plantRepository.getRandomPlant(note: getRandomNote())
-            addNewPlant(randomPlant)
+            saveNewPlant(randomPlant)
         }
     }
 }

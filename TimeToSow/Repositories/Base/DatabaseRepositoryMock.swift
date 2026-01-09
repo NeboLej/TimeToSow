@@ -66,8 +66,8 @@ actor MockDatabaseRepository: DatabaseRepositoryProtocol {
 //        return try await fetchAll().first { $0.id == uuid }
 //    }
 //    
-//    // MARK: Update — в моках обычно не нужно, но можно просто игнорировать
-//    func update<T: PersistentModel>(_ model: T) async throws { }
+    // MARK: Update — в моках обычно не нужно, но можно просто игнорировать
+    func update<T: PersistentModel>(_ model: T) async throws { }
 //    
 //    // MARK: Delete
 //    func delete<T: PersistentModel>(_ model: T) async throws {

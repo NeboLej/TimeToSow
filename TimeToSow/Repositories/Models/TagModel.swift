@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class TagModel {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var name: String = ""
     var color: String = ""
     
@@ -22,9 +22,7 @@ final class TagModel {
         self.color = color
     }
     
-    init(from: Tag) {
-        id = from.id
-        name = from.name
-        color = from.color
+    convenience init(from: Tag) {
+        self.init(id: from.id, name: from.name, color: from.color)
     }
 }

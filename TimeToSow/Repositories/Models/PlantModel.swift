@@ -43,8 +43,8 @@ final class PlantModel {
                   notes: from.notes.map { NoteModel(from: $0) },
                   name: from.name,
                   userDescription: from.description,
-                  offsetY: from.offsetX,
-                  offsetX: from.offsetY,
+                  offsetY: from.offsetY,
+                  offsetX: from.offsetX,
                   time: from.time)
     }
 }

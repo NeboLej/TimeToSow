@@ -10,11 +10,12 @@ import SwiftData
 
 @Model
 final class ShelfModel {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var name: String = ""
     var image: String = ""
     
     var shelfPositions: [ShelfPosition] = []
+    var parents: [MonthRoomModel] = []
     
     init(id: UUID, name: String, image: String, shelfPositions: [ShelfPosition] = []) {
         self.id = id

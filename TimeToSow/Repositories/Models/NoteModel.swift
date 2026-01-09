@@ -24,10 +24,7 @@ final class NoteModel {
         self.tag = tag
     }
     
-    init(from: Note) {
-        id = from.id
-        date = from.date
-        time = from.time
-        tag = TagModel(from: from.tag)
+    convenience init(from: Note) {
+        self.init(id: from.id, date: from.date, time: from.time, tag: TagModel(from: from.tag))
     }
 }

@@ -12,7 +12,7 @@ struct Tag: Hashable {
     let name: String
     let color: String
     
-    init(id: UUID = UUID.init(), name: String, color: String) {
+    init(id: UUID = UUID(), name: String, color: String) {
         self.id = id
         self.name = name
         self.color = color

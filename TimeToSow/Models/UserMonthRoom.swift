@@ -13,13 +13,15 @@ class UserMonthRoom: Hashable {
     static func == (lhs: UserMonthRoom, rhs: UserMonthRoom) -> Bool {
         lhs.id == rhs.id &&
         lhs.plants == rhs.plants &&
-        lhs.shelfType == rhs.shelfType
+        lhs.shelfType == rhs.shelfType &&
+        lhs.roomType == rhs.roomType
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(shelfType)
         hasher.combine(plants)
+        hasher.combine(roomType)
     }
     
     var id: UUID
@@ -40,8 +42,8 @@ class UserMonthRoom: Hashable {
     
     init(from: MonthRoomModel) {
         id = from.id
-        shelfType = ShelfType(from: from.shelfType)
-        roomType = RoomType(from: from.roomType)
+        shelfType = ShelfType(from: from.shelfType!)
+        roomType = RoomType(from: from.roomType!)
         name = from.name
         dateCreate = from.dateCreate
         let plantsArray = from.plants.map { Plant(from: $0) }

@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class SeedModel {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var name: String = ""
     var unavailavlePotTypesRaw: [Int] = []
     var image: String = ""

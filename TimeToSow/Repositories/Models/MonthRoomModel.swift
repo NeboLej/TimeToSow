@@ -10,9 +10,9 @@ import SwiftData
 
 @Model
 final class MonthRoomModel {
-    @Attribute(.unique) var id: UUID = UUID()
-    @Relationship(deleteRule: .noAction, inverse: .none) var shelfType: ShelfModel
-    @Relationship(deleteRule: .noAction, inverse: .none) var roomType: RoomModel
+    @Attribute(.unique) var id: UUID
+    @Relationship(deleteRule: .nullify, inverse: \ShelfModel.parents) var shelfType: ShelfModel?
+    @Relationship(deleteRule: .nullify, inverse: \RoomModel.parents) var roomType: RoomModel?
     
     @Relationship(deleteRule: .cascade, inverse: \PlantModel.rootRoom) var plants: [PlantModel]
     
@@ -32,7 +32,7 @@ final class MonthRoomModel {
         id = from.id
         shelfType = ShelfModel(from: from.shelfType)
         roomType = RoomModel(from: from.roomType)
-        plants = from.plants.map { PlantModel(from: $0.value) }
+        plants = from.plants.map { PlantModel(from: $0.value) }.sorted(by: { $0.name < $1.name} )
         name = from.name
         dateCreate = from.dateCreate
     }
