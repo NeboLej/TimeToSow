@@ -13,6 +13,18 @@ enum PotFeaturesType: Int, Hashable, Equatable, CaseIterable, Codable {
     case narrow = 0
 }
 
+protocol PotProtocol {
+    var id: UUID { get }
+    var potFeatures: [PotFeaturesType] { get }
+    var name: String { get }
+    var image: String { get }
+    var height: Int { get }
+    var rarity: Rarity { get }
+    var anchorPointCoefficientX: CGFloat? { get }
+    var anchorPointCoefficientY: CGFloat? { get }
+    var width: CGFloat { get }
+}
+
 struct Pot: Hashable {
     let id: UUID
     let potFeatures: [PotFeaturesType]
@@ -44,13 +56,24 @@ struct Pot: Hashable {
         }
     }
     
-    init(from: PotModel) {
+    init(from: PotProtocol) {
         id = from.id
-        potFeatures = from.potFeaturesTypeRow.compactMap { PotFeaturesType(rawValue: $0) }
+        potFeatures = from.potFeatures
         name = from.name
         image = from.image
         height = from.height
-        rarity =  Rarity(rawValue: from.rarityRaw) ?? .common
+        rarity = from.rarity
+        anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
+        width = from.width
+    }
+    
+    init(from: PotModelGRDB) {
+        id = from.id
+        potFeatures = from.potFeatures
+        name = from.name
+        image = from.image
+        height = from.height
+        rarity = from.rarity
         anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
         width = from.width
     }

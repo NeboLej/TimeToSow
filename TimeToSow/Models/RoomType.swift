@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol RoomProtocol {
+    var id: UUID { get }
+    var name: String { get }
+    var image: String { get }
+}
+
 struct RoomType: Hashable {
     let id: UUID
     let name: String
@@ -18,7 +24,7 @@ struct RoomType: Hashable {
         self.image = image
     }
     
-    init(from: RoomModel) {
+    init(from: RoomProtocol) {
         id = from.id
         name = from.name
         image = from.image 

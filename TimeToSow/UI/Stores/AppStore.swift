@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GRDB
 
 @Observable
 class AppStore {
@@ -47,21 +48,39 @@ class AppStore {
     }
     
     func getData() {
-        Task { 
+        Task {
+            
+            do {
+                try await DatabaseManager.shared.dbPool.read { db in
+                    let rows = try Row.fetchAll(db, sql: "PRAGMA table_info(seed);")
+                    for row in rows {
+                        print(row)
+                    }
+                }
+            }
+            
+            try await DatabaseManager.shared.dbPool.read { db in
+                let rows = try Row.fetchAll(db, sql: "PRAGMA table_info(plant);")
+                for row in rows {
+                    print(row)
+                }
+            }
+            
+            
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
-//            let allPlants = await plantRepository.getAllPlants()
+            let allPlants = await plantRepository.getAllPlants()
             
             if let lastRoom {
                 currentRoom = lastRoom
             } else {
                 currentRoom = await createNewMonthRoom()
-                await myRoomRepository.saveNewRoom(currentRoom)
+//                await myRoomRepository.saveNewRoom(currentRoom)
             }
             
-//            allPlants.forEach {
-//                currentRoom.plants[$0.id] = $0
-//            }
+            allPlants.forEach {
+                currentRoom.plants[$0.id] = $0
+            }
             
         }
     }
@@ -103,8 +122,8 @@ class AppStore {
     }
     
     func createNewMonthRoom() async -> UserMonthRoom {
-        let randomRoom = await roomRepository.getRandomRoom(except: nil)
-        let randomShelf = await shelfRepository.getRandomShelf(except: nil)
+        let randomRoom = await roomRepository.getRandomRoom()
+        let randomShelf = await shelfRepository.getRandomShelf()
         
         return UserMonthRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date(), plants: [:])
     }
@@ -136,12 +155,12 @@ class AppStore {
         currentRoom.plants[newPlant.id] = newPlant
         Task {
             await myRoomRepository.saveNewRoom(currentRoom)
-//            await plantRepository.saveNewPlant(newPlant)
+            await plantRepository.saveNewPlant(newPlant)
         }
     }
     
     func getRandomPlant(note: Note) async -> Plant {
-        let randomPlant = await plantRepository.getRandomPlant(note: note)
+        let randomPlant = await plantRepository.createRandomPlant(note: note)
         return randomPlant
     }
     
@@ -163,20 +182,20 @@ class AppStore {
 extension AppStore {
     func setRandomRoom() {
         Task {
-            currentRoom.roomType = await roomRepository.getRandomRoom(except: currentRoom.roomType)
+//            currentRoom.roomType = await roomRepository.getRandomRoom(except: currentRoom.roomType)
         }
     }
     
     func setRandomShelf() {
         Task {
-            currentRoom.shelfType = await shelfRepository.getRandomShelf(except: currentRoom.shelfType)
+//            currentRoom.shelfType = await shelfRepository.getRandomShelf(except: currentRoom.shelfType)
         }
         
     }
     
     func addRandomPlantToShelf() {
         Task {
-            let randomPlant = await plantRepository.getRandomPlant(note: getRandomNote())
+            let randomPlant = await plantRepository.createRandomPlant(note: getRandomNote())
             saveNewPlant(randomPlant)
         }
     }

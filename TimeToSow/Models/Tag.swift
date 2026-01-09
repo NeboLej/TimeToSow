@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol TagProtocol {
+    var id: UUID { get }
+    var name: String { get }
+    var color: String { get }
+}
+
 struct Tag: Hashable {
     let id: UUID
     let name: String
@@ -18,7 +24,13 @@ struct Tag: Hashable {
         self.color = color
     }
     
-    init(from: TagModel) {
+    init(from: TagProtocol) {
+        id = from.id
+        name = from.name
+        color = from.color
+    }
+    
+    init(from: TagModelGRDB) {
         id = from.id
         name = from.name
         color = from.color

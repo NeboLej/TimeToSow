@@ -26,4 +26,11 @@ struct Note: Identifiable, Hashable {
         time = from.time
         tag = Tag(from: from.tag!)
     }
+    
+    init(from: NoteModelGRDB) {
+        id = from.id
+        date = from.date
+        time = from.time
+        tag = Tag(from: from.tag!)
+    }
 }

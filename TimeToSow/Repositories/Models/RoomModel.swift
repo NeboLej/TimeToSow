@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class RoomModel {
+final class RoomModel: RoomProtocol {
     @Attribute(.unique) var id: UUID
     var name: String = ""
     var image: String = ""
@@ -24,5 +24,24 @@ final class RoomModel {
     
     convenience init(from: RoomType) {
         self.init(id: from.id, name: from.name, image: from.image)
+    }
+}
+
+
+import GRDB
+
+struct RoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord, RoomProtocol {
+    static let databaseTableName = "room"
+    
+    var id: UUID
+    var name: String
+    var image: String
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
+    
+    init(from: RoomType) {
+        id = from.id
+        name = from.name
+        image = from.image
     }
 }

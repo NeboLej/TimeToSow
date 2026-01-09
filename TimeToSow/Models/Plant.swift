@@ -20,6 +20,21 @@ struct Plant: Hashable, Identifiable {
     
     let notes: [Note]
     
+    init(from: PlantModelGRDB) {
+        guard let seedDB = from.seed, let potDB = from.pot else {
+            fatalError("Failed to create Plant from PlantModelGRDB: missing seed or pot")
+        }
+        id = from.id
+        seed = Seed(from: seedDB)
+        pot = Pot(from: potDB)
+        name = from.name
+        description = from.userDescription
+        offsetX = from.offsetX
+        offsetY = from.offsetY
+        notes = from.notes.map { Note(from: $0) }
+        time = notes.reduce(0) { $0 + $1.time }
+    }
+    
     static func == (lhs: Plant, rhs: Plant) -> Bool {
         lhs.id == rhs.id
     }
@@ -48,6 +63,8 @@ struct Plant: Hashable, Identifiable {
         notes = from.notes.map { Note(from: $0) }
         time = notes.reduce(0) { $0 + $1.time }
     }
+    
+
     
 //    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0, notes: [Note] = []) {
 //        self.id = id

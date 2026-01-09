@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class SeedModel {
+final class SeedModel: SeedProtocol {
     @Attribute(.unique) var id: UUID
     var name: String = ""
     var unavailavlePotTypesRaw: [Int] = []
@@ -23,6 +23,14 @@ final class SeedModel {
     var rootCoordinateCoefY: CGFloat?
     
     var width: CGFloat = 0
+    
+    var unavailavlePotTypes: [PotFeaturesType] {
+        unavailavlePotTypesRaw.compactMap { PotFeaturesType(rawValue: $0) }
+    }
+    
+    var rarity: Rarity {
+        Rarity(rawValue: rarityRaw) ?? .common
+    }
     
     init(id: UUID, name: String, unavailavlePotTypesRaw: [Int], image: String, height: Int, rarityRaw: Int, rootCoordinateCoefX: CGFloat?, rootCoordinateCoefY: CGFloat?, width: CGFloat) {
         self.id = id
@@ -46,5 +54,35 @@ final class SeedModel {
         rootCoordinateCoefX = from.rootCoordinateCoef?.x
         rootCoordinateCoefY = from.rootCoordinateCoef?.y
         width = from.width
+    }
+}
+
+import GRDB
+
+struct SeedModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord, SeedProtocol {
+    static let databaseTableName = "seed"
+    
+    var id: UUID
+    var name: String
+    var unavailavlePotTypes: [PotFeaturesType]
+    var image: String
+    var height: Int
+    var rarity: Rarity
+    var rootCoordinateCoefX: CGFloat?
+    var rootCoordinateCoefY: CGFloat?
+    var width: CGFloat
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
+    
+    init(from1: Seed) {
+        id = from1.id
+        name = from1.name
+        unavailavlePotTypes = from1.unavailavlePotTypes
+        image = from1.image
+        height = from1.height
+        rarity = from1.rarity
+        rootCoordinateCoefX = from1.rootCoordinateCoef?.x
+        rootCoordinateCoefY = from1.rootCoordinateCoef?.y
+        width = from1.width
     }
 }

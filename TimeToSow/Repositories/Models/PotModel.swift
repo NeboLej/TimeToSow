@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class PotModel {
+final class PotModel: PotProtocol {
     @Attribute(.unique) var id: UUID
     var potFeaturesTypeRow: [Int] = []
     var name: String = ""
@@ -21,6 +21,14 @@ final class PotModel {
     var width: CGFloat = 0
     
     var plants: [PlantModel] = []
+    
+    var potFeatures: [PotFeaturesType] {
+        potFeaturesTypeRow.compactMap { PotFeaturesType(rawValue: $0) }
+    }
+    
+    var rarity: Rarity {
+        Rarity(rawValue: rarityRaw) ?? .common
+    }
     
     init(id: UUID, potFeaturesTypeRow: [Int], name: String, image: String,
          height: Int, rarityRaw: Int, anchorPointCoefficientX: CGFloat?,
@@ -43,6 +51,37 @@ final class PotModel {
         name = from.name
         height = from.height
         rarityRaw = from.rarity.starCount
+        anchorPointCoefficientX = from.anchorPointCoefficient?.x
+        anchorPointCoefficientY = from.anchorPointCoefficient?.y
+        width = from.width
+    }
+}
+
+
+import GRDB
+
+struct PotModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord, PotProtocol {
+    static let databaseTableName = "pot"
+    
+    var id: UUID
+    var potFeatures: [PotFeaturesType]
+    var name: String
+    var image: String
+    var height: Int
+    var rarity: Rarity
+    var anchorPointCoefficientX: CGFloat?
+    var anchorPointCoefficientY: CGFloat?
+    var width: CGFloat
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
+    
+    init(from: Pot) {
+        id = from.id
+        potFeatures = from.potFeatures
+        image = from.image
+        name = from.name
+        height = from.height
+        rarity = from.rarity
         anchorPointCoefficientX = from.anchorPointCoefficient?.x
         anchorPointCoefficientY = from.anchorPointCoefficient?.y
         width = from.width

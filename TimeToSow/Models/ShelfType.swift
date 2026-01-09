@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ShelfProtocol {
+    var id: UUID { get }
+    var name: String { get }
+    var image: String { get }
+    var shelfPositions: [ShelfPosition] { get }
+}
+
 struct ShelfType: Hashable {
     let id: UUID
     let name: String
@@ -20,7 +27,7 @@ struct ShelfType: Hashable {
         self.shelfPositions = shelfPositions
     }
     
-    init(from: ShelfModel) {
+    init(from: ShelfProtocol) {
         id = from.id
         name = from.name
         image = from.image

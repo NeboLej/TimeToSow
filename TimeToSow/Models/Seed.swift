@@ -7,6 +7,18 @@
 
 import UIKit
 
+protocol SeedProtocol {
+    var id: UUID { get }
+    var name: String { get }
+    var unavailavlePotTypes: [PotFeaturesType] { get }
+    var image: String { get }
+    var height: Int { get }
+    var rarity: Rarity { get }
+    var rootCoordinateCoefX: CGFloat? { get }
+    var rootCoordinateCoefY: CGFloat? { get }
+    var width: CGFloat { get }
+}
+
 struct Seed: Hashable {
     var id: UUID
     var name: String = ""
@@ -38,13 +50,24 @@ struct Seed: Hashable {
         }
     }
     
-    init(from: SeedModel) {
+    init(from: SeedProtocol) {
         id = from.id
         name = from.name
-        unavailavlePotTypes = from.unavailavlePotTypesRaw.compactMap { PotFeaturesType(rawValue: $0) }
+        unavailavlePotTypes = from.unavailavlePotTypes
         image = from.image
         height = from.height
-        rarity = Rarity(rawValue: from.rarityRaw) ?? .common
+        rarity = from.rarity
+        rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
+        width = from.width
+    }
+    
+    init(from: SeedModelGRDB) {
+        id = from.id
+        name = from.name
+        unavailavlePotTypes = from.unavailavlePotTypes
+        image = from.image
+        height = from.height
+        rarity = from.rarity
         rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
         width = from.width
     }

@@ -14,3 +14,13 @@ class BaseRepository {
         self.database = database
     }
 }
+
+import GRDB
+
+class BaseRepository1 {
+    let dbPool: DatabasePool
+    
+    init(dbPool: DatabasePool) {
+        self.dbPool = dbPool
+    }
+}

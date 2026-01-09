@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class TagModel {
+final class TagModel: TagProtocol {
     @Attribute(.unique) var id: UUID
     var name: String = ""
     var color: String = ""
@@ -24,5 +24,23 @@ final class TagModel {
     
     convenience init(from: Tag) {
         self.init(id: from.id, name: from.name, color: from.color)
+    }
+}
+
+import GRDB
+
+struct TagModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord, TagProtocol {
+    static let databaseTableName = "tag"
+    
+    var id: UUID
+    var name: String
+    var color: String
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
+    
+    init(from: Tag) {
+        id = from.id
+        name = from.name
+        color = from.color
     }
 }

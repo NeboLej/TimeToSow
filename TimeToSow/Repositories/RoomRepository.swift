@@ -8,10 +8,8 @@
 import Foundation
 
 protocol RoomRepositoryProtocol {
-    func getRandomRoom(except: RoomType?) async -> RoomType
+    func getRandomRoom() async -> RoomType
     func getAllRooms() async throws -> [RoomType]
-//    func getRandomRoom(except: RoomType?) -> RoomType
-//    func getNextRoom(curent: RoomType, isNext: Bool) -> RoomType
 }
 
 class RoomRepository: BaseRepository, RoomRepositoryProtocol {
@@ -35,37 +33,64 @@ class RoomRepository: BaseRepository, RoomRepositoryProtocol {
         return roomModels.map { RoomType(from: $0) }
     }
     
-    func getRandomRoom(except: RoomType?) async -> RoomType {
+    func getRandomRoom() async -> RoomType {
         do {
-            let newShelf = try await getAllRooms().randomElement()!
-            return newShelf != except ? newShelf : await getRandomRoom(except: except)
+            return try await getAllRooms().randomElement()!
         } catch {
             fatalError()
         }
     }
+}
+
+
+import GRDB
+
+class RoomRepository1: BaseRepository1, RoomRepositoryProtocol {
     
+    override init(dbPool: DatabasePool) {
+        super.init(dbPool: dbPool)
+        
+        Task {
+            await setDefaultValues()
+        }
+    }
     
-//    func getRandomRoom(except: RoomType?) -> RoomType {
-//        let newRoom = rooms.randomElement()!
-//        return newRoom != except ? newRoom : getRandomRoom(except: except)
-//    }
+    private func setDefaultValues() async {
+        do {
+            let count = try await dbPool.read { db in
+                try RoomModelGRDB.fetchCount(db)
+            }
+            
+            if count == 0 {
+                try await dbPool.write { db in
+                    for defaultModel in DefaultModels.rooms {
+                        var model = RoomModelGRDB(from: defaultModel)
+                        try model.insert(db)
+                    }
+                }
+                print("💿 ShelfRepository: --- default Shelfs added")
+            }
+        } catch {
+            print("💿 ShelfRepository: failed to set default shelfs — \(error)")
+        }
+    }
     
-//    func getNextRoom(curent: RoomType, isNext: Bool) -> RoomType {
-//        guard let index = rooms.firstIndex(of: curent) else { return rooms.first! }
-//        
-//        print(index)
-//        if isNext {
-//            if index + 1 <= rooms.count - 1 {
-//                return rooms[index + 1]
-//            } else {
-//                return rooms[0]
-//            }
-//        } else {
-//            if index - 1 >= 0 {
-//                return rooms[index - 1]
-//            } else {
-//                return rooms.last!
-//            }
-//        }
-//    }
+    func getAllRooms() async throws -> [RoomType] {
+        try await dbPool.read { db in
+            try RoomModelGRDB.fetchAll(db).map { RoomType(from: $0) }
+        }
+    }
+    
+    func getRandomRoom() async -> RoomType {
+        do {
+            let models = try await getAllRooms()
+            guard let randomModel = models.randomElement() else {
+                throw NSError(domain: "RoomRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: "No room available"])
+            }
+            return randomModel
+        } catch {
+            fatalError()
+        }
+    }
+
 }
