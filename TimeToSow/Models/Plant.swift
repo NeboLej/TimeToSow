@@ -55,32 +55,6 @@ struct Plant: Hashable, Identifiable {
         self.rootRoomID = rootRoomID
     }
     
-    init(from: PlantModel) {
-        id = from.id
-        seed = Seed(from: from.seed!)
-        pot = Pot(from: from.pot!)
-        name = from.name
-        description = from.userDescription
-        offsetX = from.offsetX
-        offsetY = from.offsetY
-        notes = from.notes.map { Note(from: $0) }
-        time = notes.reduce(0) { $0 + $1.time }
-        rootRoomID = UUID()
-    }
-    
-
-    
-//    init(id: UUID = UUID.init(), seed: Seed, pot: Pot, tag: Tag, offsetX: Double = 40, offsetY: Double = 100, time: Int = 0, notes: [Note] = []) {
-//        self.id = id
-//        self.seed = seed
-//        self.pot = pot
-//        self.tag = tag
-//        self.offsetX = offsetX
-//        self.offsetY = offsetY
-//        self.time = time
-//        self.notes = notes
-//    }
-    
     func copy(offsetX: Double? = nil, offsetY: Double? = nil, notes: [Note]? = nil) -> Plant {
         Plant(id: self.id, rootRoomID: self.rootRoomID, seed: self.seed, pot: self.pot, name: self.name, description: self.description,
               offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX,

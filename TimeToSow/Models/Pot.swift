@@ -66,15 +66,4 @@ struct Pot: Hashable {
         anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
         width = from.width
     }
-    
-    init(from: PotModelGRDB) {
-        id = from.id
-        potFeatures = from.potFeatures
-        name = from.name
-        image = from.image
-        height = from.height
-        rarity = from.rarity
-        anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
-        width = from.width
-    }
 }

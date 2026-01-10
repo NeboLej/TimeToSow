@@ -12,7 +12,7 @@ import GRDB
 class AppStore {
     
     @ObservationIgnored
-    private let myRoomRepository: MyRoomRepositoryProtocol
+    private let myRoomRepository: UserRoomRepositoryProtocol
     @ObservationIgnored
     private let roomRepository: RoomRepositoryProtocol
     @ObservationIgnored
@@ -27,7 +27,7 @@ class AppStore {
     var appCoordinator: AppCoordinator = AppCoordinator()
     var selectedTag: Tag?
     
-    init(myRoomRepository: MyRoomRepositoryProtocol,
+    init(myRoomRepository: UserRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
          shelfRepository: ShelfRepositoryProtocol,
          plantRepository: PlantRepositoryProtocol,

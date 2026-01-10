@@ -40,20 +40,6 @@ class UserMonthRoom: Hashable {
         self.plants = plants
     }
     
-    init(from: MonthRoomModel) {
-        id = from.id
-        shelfType = ShelfType(from: from.shelfType!)
-        roomType = RoomType(from: from.roomType!)
-        name = from.name
-        dateCreate = from.dateCreate
-        let plantsArray = from.plants.map { Plant(from: $0) }
-        var plantsDict: [UUID: Plant] = [:]
-        plantsArray.forEach {
-            plantsDict[$0.id] = $0
-        }
-        plants = plantsDict
-    }
-    
     init(from: UserRoomModelGRDB) {
         guard let shelf = from.shelf, let room = from.room else {
             fatalError("Shelf is nil")

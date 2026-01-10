@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GRDB
 
 protocol RoomRepositoryProtocol {
     func getRandomRoom() async -> RoomType
@@ -13,39 +14,6 @@ protocol RoomRepositoryProtocol {
 }
 
 class RoomRepository: BaseRepository, RoomRepositoryProtocol {
-    
-    override init(database: DatabaseRepositoryProtocol) {
-        super.init(database: database)
-        setDefaultValues()
-    }
-    
-    private func setDefaultValues() {
-        Task {
-            if try await database.fetchAll(RoomModel.self).isEmpty {
-                try await database.insert(DefaultModels.rooms.map { RoomModel(from: $0) })
-                print("💿 RoomRepository: --- default RoomModels added")
-            }
-        }
-    }
-    
-    func getAllRooms() async throws -> [RoomType] {
-        let roomModels: [RoomModel] = try await database.fetchAll(RoomModel.self)
-        return roomModels.map { RoomType(from: $0) }
-    }
-    
-    func getRandomRoom() async -> RoomType {
-        do {
-            return try await getAllRooms().randomElement()!
-        } catch {
-            fatalError()
-        }
-    }
-}
-
-
-import GRDB
-
-class RoomRepository1: BaseRepository1, RoomRepositoryProtocol {
     
     override init(dbPool: DatabasePool) {
         super.init(dbPool: dbPool)

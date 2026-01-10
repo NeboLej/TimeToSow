@@ -6,66 +6,17 @@
 //
 
 import Foundation
+import GRDB
 
 protocol SeedRepositoryProtocol {
-//    func getRandomSeed() -> Seed
     func getRandomSeedBy(rarity: Rarity) async -> Seed
 }
 
 final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
     
-    override init(database: DatabaseRepositoryProtocol) {
-        super.init(database: database)
-        setDefaultValues()
-    }
-    
-    private func setDefaultValues() {
-        Task {
-            if try await database.fetchAll(SeedModel.self).isEmpty {
-                try await database.insert(DefaultModels.seeds.map { SeedModel(from: $0) })
-                print("💿 SeedRepository: --- default SeedModels added")
-            }
-        }
-    }
-    
-    func getRandomSeedBy(rarity: Rarity) async -> Seed {
-        do {
-            let predicate = #Predicate<SeedModel> { seed in
-                seed.rarityRaw == rarity.rawValue
-            }
-            let seeds: [SeedModel] = try await database.fetchAll(predicate: predicate)
-            return Seed(from: seeds.randomElement()!) 
-        } catch {
-            fatalError()
-        }
-    }
-    
-    func getRandomSeed() -> Seed {
-        DefaultModels.seeds.randomElement()!
-    }
-    
-    func getRandomSeedBy(rarity: Rarity) -> Seed {
-        DefaultModels.seeds.filter{ $0.rarity == rarity }.randomElement()!
-    }
-}
-
-import GRDB
-
-// MARK: - Протокол
-
-protocol SeedRepositoryProtocol1 {
-    func getAllSeeds() async throws -> [Seed]
-    func getRandomSeed() async throws -> Seed
-    func getRandomSeed(by rarity: Rarity) async throws -> Seed
-}
-
-// MARK: - Реализация
-
-final class SeedRepository1: SeedRepositoryProtocol {
-    private let dbPool: DatabasePool
-    
-    init(dbPool: DatabasePool) {
-        self.dbPool = dbPool
+    override init(dbPool: DatabasePool) {
+        super.init(dbPool: dbPool)
+        
         Task {
             await setDefaultValues()
         }

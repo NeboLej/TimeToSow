@@ -6,18 +6,9 @@
 //
 
 import Foundation
-
-class BaseRepository {
-    let database: DatabaseRepositoryProtocol
-    
-    init(database: DatabaseRepositoryProtocol) {
-        self.database = database
-    }
-}
-
 import GRDB
 
-class BaseRepository1 {
+class BaseRepository {
     let dbPool: DatabasePool
     
     init(dbPool: DatabasePool) {

@@ -6,44 +6,13 @@
 //
 
 import Foundation
+import GRDB
 
 protocol ShelfRepositoryProtocol {
     func getRandomShelf() async -> ShelfType
 }
 
 class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
-    
-    override init(database: DatabaseRepositoryProtocol) {
-        super.init(database: database)
-        setDefaultValues()
-    }
-    
-    private func setDefaultValues() {
-        Task {
-            if try await database.fetchAll(ShelfModel.self).isEmpty {
-                try await database.insert(DefaultModels.shelfs.map { ShelfModel(from: $0) })
-                print("💿 ShelfRepository: --- default ShelfModels added")
-            }
-        }
-    }
-    
-    func getAllShelfs() async throws -> [ShelfType] {
-        let shelfModels = try await database.fetchAll(ShelfModel.self)
-        return shelfModels.map { ShelfType(from: $0) }
-    }
-    
-    func getRandomShelf() async -> ShelfType {
-        do {
-            return try await getAllShelfs().randomElement()!
-        } catch {
-            fatalError()
-        }
-    }
-}
-
-import GRDB
-
-class ShelfRepository1: BaseRepository1, ShelfRepositoryProtocol {
     
     override init(dbPool: DatabasePool) {
         super.init(dbPool: dbPool)

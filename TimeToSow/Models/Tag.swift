@@ -29,10 +29,4 @@ struct Tag: Hashable {
         name = from.name
         color = from.color
     }
-    
-    init(from: TagModelGRDB) {
-        id = from.id
-        name = from.name
-        color = from.color
-    }
 }

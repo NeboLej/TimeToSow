@@ -60,15 +60,4 @@ struct Seed: Hashable {
         rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
         width = from.width
     }
-    
-    init(from: SeedModelGRDB) {
-        id = from.id
-        name = from.name
-        unavailavlePotTypes = from.unavailavlePotTypes
-        image = from.image
-        height = from.height
-        rarity = from.rarity
-        rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
-        width = from.width
-    }
 }

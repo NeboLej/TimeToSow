@@ -8,22 +8,6 @@
 import SwiftUI
 
 struct DebugScreenView: View {
-    private let mockdata = MockDatabaseRepository()
-    
-    var potRepository : PotRepository {
-        PotRepository(database: mockdata)
-    }
-    var seedRepository: SeedRepository {
-        SeedRepository(database: mockdata)
-    }
-
-    var plantRepository: PlantRepository {
-        PlantRepository(seedRepository: seedRepository,
-                        potRepository: potRepository,
-                        database: mockdata)
-    }
-    
-    
     @State var selectedPot: Pot?
     @State var selectedSeed: Seed?
     
@@ -32,8 +16,41 @@ struct DebugScreenView: View {
     @State var selectedPlant: Plant?
     @State var text = ""
     
-    func getAllVariantsBy(fullTime: Int) -> [(seed: Rarity, pot: Rarity)] {
-        self.plantRepository.allVariantsRatityCombo(fullTime: fullTime)
+    func allVariantsRatityCombo(fullTime: Int) -> [(seed: Rarity, pot: Rarity)] {
+        if fullTime < Rarity.SCALE_DIVISION_VALUE {
+            return [(seed: .common, pot: .common)]
+        }
+        
+        if fullTime >= Rarity.SCALE_DIVISION_VALUE * 8 {
+            return [(seed: .legendary, pot: .legendary)]
+        }
+        
+        let countDivisionValue: Int = fullTime / Rarity.SCALE_DIVISION_VALUE
+        
+        var variants: [[Int]] = []
+        
+        for first in 0...4 {
+            for second in 0...4 {
+                if first + second == countDivisionValue {
+                    variants.append([first, second])
+                }
+            }
+        }
+        if variants.count == 0 { return [(seed: .legendary, pot: .legendary)] }
+        
+        return variants.map { (seed: getRarity($0[0]), pot: getRarity($0[1])) }
+    }
+    
+    func getRarity(_ value: Int) -> Rarity {
+        if value <= 0 { return .common }
+        
+        return switch value {
+        case 1: .uncommon
+        case 2: .rare
+        case 3: .epic
+        case 4: .legendary
+        default: .legendary
+        }
     }
     
     var filtredPods: [Pot] {
@@ -159,7 +176,7 @@ struct DebugScreenView: View {
     
     @ViewBuilder
     func countWithTimeView(time: Int) -> some View {
-        let variants = getAllVariantsBy(fullTime: time)
+        let variants = allVariantsRatityCombo(fullTime: time)
         var count = 0
         variants.forEach { (seedRarity, potRarity) in
             let filtredPots = allPots.filter { $0.rarity == potRarity }
