@@ -14,14 +14,7 @@ protocol PotRepositoryProtocol {
 
 final class PotRepository: BaseRepository, PotRepositoryProtocol {
     
-    override init(dbPool: DatabasePool) {
-        super.init(dbPool: dbPool)
-        Task {
-            await setDefaultValues()
-        }
-    }
-
-    private func setDefaultValues() async {
+    override func setDefaultValues() async {
         do {
             let count = try await dbPool.read { db in
                 try PotModelGRDB.fetchCount(db)
@@ -34,16 +27,18 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
                         try pot.insert(db)
                     }
                 }
-                print("💿 PotRepository: --- default Pots added")
+                Logger.log("default \(DefaultModels.pots.count) Pots added", location: .GRDB, event: .success)
             }
         } catch {
-            print("💿 PotRepository: failed to set default pots — \(error)")
+            Logger.log("Failed to set default pots", location: .GRDB, event: .error(error))
         }
     }
     
     private func getAllPots() async throws -> [Pot] {
         try await dbPool.read { db in
-            try PotModelGRDB.fetchAll(db).map { Pot(from: $0) }
+            let pots = try PotModelGRDB.fetchAll(db).map { Pot(from: $0) }
+            Logger.log("get \(pots.count) Pots", location: .GRDB, event: .success)
+            return pots
         }
     }
     
@@ -54,25 +49,19 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
                     .filter(Column("rarity") == rarity.rawValue)
                     .fetchAll(db)
             }
-            
             let availablePots = matchingPots.filter { pot in
                 !pot.potFeatures.contains(where: unavailablePotFeatures.contains)
             }
-            
             guard let randomPot = availablePots.randomElement() else {
-                throw NSError(
-                    domain: "PotRepository",
-                    code: 1,
-                    userInfo: [
-                        NSLocalizedDescriptionKey: "No available pot found for rarity \(rarity) excluding features \(unavailablePotFeatures)"
-                    ]
+                throw NSError(domain: "PotRepository", code: 1,
+                              userInfo: [NSLocalizedDescriptionKey: "No available pot found for rarity \(rarity) excluding features \(unavailablePotFeatures)"]
                 )
             }
-            
+            Logger.log("get pot by rarity", location: .GRDB, event: .success)
             return Pot(from: randomPot)
         } catch {
+            Logger.log("Failed to get random Pot for rarity: \(rarity)", location: .GRDB, event: .error(error))
             fatalError()
         }
-
     }
 }

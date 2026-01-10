@@ -71,7 +71,7 @@ struct HomeScreen: View {
         )
         .ignoresSafeArea(.all)
         .onAppear {
-            store.send(.loadData)
+//            store.send(.loadData)
         }
 //        .transaction { transaction in
 //            if disableRootAnimation {

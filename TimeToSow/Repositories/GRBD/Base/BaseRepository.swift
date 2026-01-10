@@ -13,5 +13,11 @@ class BaseRepository {
     
     init(dbPool: DatabasePool) {
         self.dbPool = dbPool
+        Task {
+            await setDefaultValues()
+        }
     }
+    
+    //override
+    func setDefaultValues() async { }
 }

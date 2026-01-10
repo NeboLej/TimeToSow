@@ -12,17 +12,9 @@ protocol ShelfRepositoryProtocol {
     func getRandomShelf() async -> ShelfType
 }
 
-class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
+final class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
     
-    override init(dbPool: DatabasePool) {
-        super.init(dbPool: dbPool)
-        
-        Task {
-            await setDefaultValues()
-        }
-    }
-    
-    private func setDefaultValues() async {
+    override func setDefaultValues() async {
         do {
             let count = try await dbPool.read { db in
                 try ShelfModelGRDB.fetchCount(db)
@@ -35,16 +27,18 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
                         try shelf.insert(db)
                     }
                 }
-                print("💿 ShelfRepository: --- default Shelfs added")
+                Logger.log("default \(DefaultModels.shelfs.count) Shelfs added", location: .GRDB, event: .success)
             }
         } catch {
-            print("💿 ShelfRepository: failed to set default shelfs — \(error)")
+            Logger.log("Failed to set default shelfs", location: .GRDB, event: .error(error))
         }
     }
     
     func getAllShelfs() async throws -> [ShelfType] {
         try await dbPool.read { db in
-            try ShelfModelGRDB.fetchAll(db).map { ShelfType(from: $0) }
+            let shelfs = try ShelfModelGRDB.fetchAll(db).map { ShelfType(from: $0) }
+            Logger.log("get \(shelfs.count) Shelf", location: .GRDB, event: .success)
+            return shelfs
         }
     }
     
@@ -55,8 +49,10 @@ class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
             guard let randomModel = models.randomElement() else {
                 throw NSError(domain: "ShelfRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: "No shelf available"])
             }
+            Logger.log("get random shelf", location: .GRDB, event: .success)
             return randomModel
         } catch {
+            Logger.log("Failed to get random Shelf", location: .GRDB, event: .error(error))
             fatalError()
         }
     }

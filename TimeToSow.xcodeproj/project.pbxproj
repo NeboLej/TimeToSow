@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
+		8E201B552F127718002B49A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E201B542F127718002B49A1 /* Logger.swift */; };
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
 		8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */; };
 		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
@@ -106,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
+		8E201B542F127718002B49A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreen.swift; sourceTree = "<group>"; };
 		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
@@ -215,6 +217,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E201B532F1276F7002B49A1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */,
+				8E201B542F127718002B49A1 /* Logger.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		8E2E5EE52EF8544200B91347 /* PlantDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,7 +414,6 @@
 				8EBF147D2DE667F900422876 /* SedgwickAve-Regular.ttf */,
 				8EBF14792DE657A700422876 /* Font +.swift */,
 				8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */,
-				8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */,
 				8ED72C422F02E2E1008E6869 /* remote_localization.json */,
 			);
 			path = Resources;
@@ -451,6 +461,7 @@
 		8EF5754A2DCE3F3A00AEC31A /* TimeToSow */ = {
 			isa = PBXGroup;
 			children = (
+				8E201B532F1276F7002B49A1 /* Services */,
 				8EBF14782DE6577800422876 /* Info.plist */,
 				8ED63A862F1273780013632F /* Repositories */,
 				8EF5753B2DCE3F3A00AEC31A /* App */,
@@ -612,6 +623,7 @@
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
 				8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */,
 				8EFEEEFB2F0E805E00857A23 /* RecordsHistoryView.swift in Sources */,
+				8E201B552F127718002B49A1 /* Logger.swift in Sources */,
 				8EA1C9D32EFD836700DF690F /* Note.swift in Sources */,
 				8EAF68082EF4800300780BB9 /* Int + extension.swift in Sources */,
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,

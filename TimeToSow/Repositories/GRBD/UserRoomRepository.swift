@@ -25,7 +25,7 @@ final class UserRoomRepository: UserRoomRepositoryProtocol {
         do {
             let latest = try await dbPool.read { db in
                 try UserRoomModelGRDB
-//                    .order(Column("dateCreate").desc)
+                    .order(Column("dateCreate").desc)
                     .limit(1)
                     .including(required: UserRoomModelGRDB.shelf)
                     .including(required: UserRoomModelGRDB.room)
@@ -51,8 +51,10 @@ final class UserRoomRepository: UserRoomRepositoryProtocol {
             try await dbPool.write { db in
                 var room = UserRoomModelGRDB(from1: room)
                 try room.insert(db)
+                Logger.log("save new user room", location: .GRDB, event: .success)
             }
         } catch {
+            Logger.log("Error saved new user room", location: .GRDB, event: .error(error))
             fatalError()
         }
     }

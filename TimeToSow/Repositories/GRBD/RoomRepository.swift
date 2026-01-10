@@ -13,17 +13,9 @@ protocol RoomRepositoryProtocol {
     func getAllRooms() async throws -> [RoomType]
 }
 
-class RoomRepository: BaseRepository, RoomRepositoryProtocol {
-    
-    override init(dbPool: DatabasePool) {
-        super.init(dbPool: dbPool)
+final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
         
-        Task {
-            await setDefaultValues()
-        }
-    }
-    
-    private func setDefaultValues() async {
+    override func setDefaultValues() async {
         do {
             let count = try await dbPool.read { db in
                 try RoomModelGRDB.fetchCount(db)
@@ -36,16 +28,18 @@ class RoomRepository: BaseRepository, RoomRepositoryProtocol {
                         try model.insert(db)
                     }
                 }
-                print("💿 ShelfRepository: --- default Shelfs added")
+                Logger.log("default \(DefaultModels.rooms.count) Rooms added", location: .GRDB, event: .success)
             }
         } catch {
-            print("💿 ShelfRepository: failed to set default shelfs — \(error)")
+            Logger.log("Failed to set default rooms", location: .GRDB, event: .error(error))
         }
     }
     
     func getAllRooms() async throws -> [RoomType] {
         try await dbPool.read { db in
-            try RoomModelGRDB.fetchAll(db).map { RoomType(from: $0) }
+            let rooms = try RoomModelGRDB.fetchAll(db).map { RoomType(from: $0) }
+            Logger.log("get \(rooms.count) Rooms", location: .GRDB, event: .success)
+            return rooms
         }
     }
     
@@ -55,8 +49,10 @@ class RoomRepository: BaseRepository, RoomRepositoryProtocol {
             guard let randomModel = models.randomElement() else {
                 throw NSError(domain: "RoomRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: "No room available"])
             }
+            Logger.log("get random room", location: .GRDB, event: .success)
             return randomModel
         } catch {
+            Logger.log("Failed to get random Room", location: .GRDB, event: .error(error))
             fatalError()
         }
     }

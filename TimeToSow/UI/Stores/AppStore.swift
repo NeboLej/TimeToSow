@@ -38,32 +38,19 @@ class AppStore {
         self.plantRepository = plantRepository
         self.tagRepository = tagRepository
         
-        
-        
-//        getData()
-        
-        
-
-//        addRandomPlantToShelf()
+        getData()
     }
     
     func getData() {
         Task {
-            
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
-//            let allPlants = await plantRepository.getAllPlants()
-            
             if let lastRoom {
                 currentRoom = lastRoom
             } else {
                 currentRoom = await createNewMonthRoom()
                 await myRoomRepository.saveNewRoom(currentRoom)
             }
-            
-//            allPlants.forEach {
-//                currentRoom.plants[$0.id] = $0
-//            }
         }
     }
     
@@ -77,10 +64,6 @@ class AppStore {
             }
         case .movePlant(plant: let plant, newPosition: let newPosition):
             updatePlantPosition(plant, newPosition: newPosition)
-//            guard let plant = currentRoom.plants[plant.id] else { return }
-//            if newPosition == CGPoint(x: plant.offsetX, y: plant.offsetY) { return }
-//            let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
-//            saveNewPlant(newPlant)
         case .changedRoomType:
             setRandomRoom()
         case .changedShelfType:
@@ -147,7 +130,6 @@ class AppStore {
     func saveNewPlant(_ newPlant: Plant) {
         currentRoom.plants[newPlant.id] = newPlant
         Task {
-//            await myRoomRepository.saveNewRoom(currentRoom)
             await plantRepository.saveNewPlant(newPlant)
         }
     }
@@ -175,13 +157,13 @@ class AppStore {
 extension AppStore {
     func setRandomRoom() {
         Task {
-//            currentRoom.roomType = await roomRepository.getRandomRoom(except: currentRoom.roomType)
+            currentRoom.roomType = await roomRepository.getRandomRoom()
         }
     }
     
     func setRandomShelf() {
         Task {
-//            currentRoom.shelfType = await shelfRepository.getRandomShelf(except: currentRoom.shelfType)
+            currentRoom.shelfType = await shelfRepository.getRandomShelf()
         }
         
     }

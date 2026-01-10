@@ -62,11 +62,9 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         do {
             try await dbPool.write { db in
                 if try PlantModelGRDB.filter(key: plant.id).fetchCount(db) != 0 {
-                    var mutablePlant = PlantModelGRDB(from1: plant)
-                    print(mutablePlant.seedID)
-                    print(mutablePlant.potID)
-                    
+                    let mutablePlant = PlantModelGRDB(from1: plant)
                     try mutablePlant.update(db)
+                    Logger.log("update plant", location: .GRDB, event: .success)
                 }
             }
         } catch {
@@ -78,6 +76,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         try await dbPool.write { db in
             var modelNote = NoteModelGRDB(from: note, plantID: plantID)
             try modelNote.insert(db)
+            Logger.log("save new note", location: .GRDB, event: .success)
         }
     }
     
@@ -87,10 +86,10 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                 if try PlantModelGRDB.filter(key: plant.id).fetchCount(db) == 0 {
                     var mutablePlant = PlantModelGRDB(from1: plant)
                     try mutablePlant.insert(db)
+                    Logger.log("save new plant", location: .GRDB, event: .success)
                 } else {
-                    print("🌱 New Plant ERROR")
+                    Logger.log("save new plant error, plant not uniqe", location: .GRDB, event: .success)
                 }
-                print("🌱 New Plant saved")
             }
             
             if let note = plant.notes.first {
@@ -99,52 +98,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         } catch {
             fatalError()
         }
-        
     }
-    
-    
-    //    func getAllPlants() async throws -> [Plant] {
-    //        try await dbPool.read { db in
-    //            // Сначала загружаем обычные растения (без связанных объектов)
-    //            var plantsGRDB = try PlantModelGRDB.fetchAll(db)
-    //
-    //            // Подгружаем связанные объекты (эффективно, пачками)
-    //            try plantsGRDB.preload(db, PlantModelGRDB.seed)   // seed обязателен
-    //            try plantsGRDB.preload(db, PlantModelGRDB.pot)    // pot обязателен
-    //            try plantsGRDB.preload(db, PlantModelGRDB.notes.preloading(optional: NoteModelGRBD.tag))
-    //
-    //            // Теперь у каждого PlantModelGRDB есть заполненные свойства seed, pot, notes!
-    //            return plantsGRDB.map { Plant(from: $0) }
-    //        }
-    //    }
-    //    // Генерация случайного растения на основе заметки (как было раньше)
-    //    func getRandomPlant(from note: Note) async throws -> Plant {
-    //        let distributedTime = distributeTime(fullTime: note.time)  // твоя функция распределения
-    //
-    //        let randomSeed = try await seedRepository.getRandomSeed(by: distributedTime.seed)
-    //        let randomPot = try await potRepository.getRandomPot(
-    //            by: distributedTime.pot,
-    //            excluding: randomSeed.unavailavlePotTypes
-    //        )
-    //
-    //        let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)]
-    //            .joined(separator: " ")
-    //
-    //        return Plant(
-    //            id: UUID(),
-    //            seedID: randomSeed.id,
-    //            potID: randomPot.id,
-    //            name: name,
-    //            userDescription: "",
-    //            offsetY: Double((10...250).randomElement()!),
-    //            offsetX: Double((10...350).randomElement()!),
-    //            time: note.time,
-    //            rootRoomID: nil
-    //            // notes добавим при сохранении
-    //        )
-    //    }
-    
-    
     
     //MARK: - Private func
     

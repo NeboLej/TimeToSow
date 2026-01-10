@@ -33,7 +33,6 @@ final class DatabaseManager {
     }
     
     private static func createTablesIfNeeded(in db: Database) throws {
-        // Список всех таблиц — создаём по порядку (сначала те, на которые нет ссылок)
         try db.create(table: "tag", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
             t.column("name", .text).notNull()
