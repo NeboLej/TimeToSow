@@ -90,6 +90,17 @@ final class DatabaseManager {
             t.column("width", .double).notNull()
         }
         
+        try db.create(table: "userRoom", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("shelfID", .blob).notNull()
+            t.column("roomID", .blob).notNull()
+            t.column("name", .text).notNull()
+            t.column("dateCreate", .double).notNull()
+            
+            t.foreignKey(["shelfID"], references: "shelf", onDelete: .restrict, onUpdate: .cascade)
+            t.foreignKey(["roomID"], references: "room", onDelete: .restrict, onUpdate: .cascade)
+        }
+        
         try db.create(table: "plant", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
             t.column("seedID", .blob).notNull()
@@ -99,10 +110,11 @@ final class DatabaseManager {
             t.column("offsetY", .double).notNull()
             t.column("offsetX", .double).notNull()
             t.column("time", .integer).notNull()
-            t.column("rootRoomID", .blob)
+            t.column("rootRoomID", .blob).notNull()
             
             t.foreignKey(["seedID"], references: "seed", onDelete: .restrict, onUpdate: .cascade)
             t.foreignKey(["potID"], references: "pot", onDelete: .restrict, onUpdate: .cascade)
+            t.foreignKey(["rootRoomID"], references: "userRoom", onDelete: .cascade, onUpdate: .cascade)
         }
         
         try db.create(table: "note", ifNotExists: true) { t in
@@ -134,11 +146,10 @@ struct TimeToSowApp: App {
         let roomRepository: RoomRepositoryProtocol = RoomRepository1(dbPool: DatabaseManager.shared.dbPool)
         let seedRepository: SeedRepositoryProtocol = SeedRepository1(dbPool: DatabaseManager.shared.dbPool)
         let potRepository: PotRepositoryProtocol = PotRepository1(dbPool: DatabaseManager.shared.dbPool)
+        let myRoomRepository: MyRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
         let plantRepository: PlantRepositoryProtocol = PlantRepository1(dbPool: DatabaseManager.shared.dbPool,
                                                                         seedRepository: seedRepository,
                                                                         potRepository: potRepository)
-        
-        let myRoomRepository: MyRoomRepositoryProtocol = MyRoomRepository(database: mock)
 
         
         let appStore = AppStore(myRoomRepository: myRoomRepository,

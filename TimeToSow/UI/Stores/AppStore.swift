@@ -69,19 +69,18 @@ class AppStore {
             
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
-            let allPlants = await plantRepository.getAllPlants()
+//            let allPlants = await plantRepository.getAllPlants()
             
             if let lastRoom {
                 currentRoom = lastRoom
             } else {
                 currentRoom = await createNewMonthRoom()
-//                await myRoomRepository.saveNewRoom(currentRoom)
+                await myRoomRepository.saveNewRoom(currentRoom)
             }
             
-            allPlants.forEach {
-                currentRoom.plants[$0.id] = $0
-            }
-            
+//            allPlants.forEach {
+//                currentRoom.plants[$0.id] = $0
+//            }
         }
     }
     
@@ -94,9 +93,11 @@ class AppStore {
                 selectedPlant = nil
             }
         case .movePlant(plant: let plant, newPosition: let newPosition):
-            guard let plant = currentRoom.plants[plant.id] else { return }
-            let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
-            saveNewPlant(newPlant)
+            updatePlantPosition(plant, newPosition: newPosition)
+//            guard let plant = currentRoom.plants[plant.id] else { return }
+//            if newPosition == CGPoint(x: plant.offsetX, y: plant.offsetY) { return }
+//            let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
+//            saveNewPlant(newPlant)
         case .changedRoomType:
             setRandomRoom()
         case .changedShelfType:
@@ -151,16 +152,25 @@ class AppStore {
         
     }
     
+    func updatePlantPosition(_ plant: Plant, newPosition: CGPoint) {
+        guard let plant = currentRoom.plants[plant.id] else { return }
+        if newPosition == CGPoint(x: plant.offsetX, y: plant.offsetY) { return }
+        let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
+        Task {
+            await plantRepository.updatePlant(newPlant)
+        }
+    }
+    
     func saveNewPlant(_ newPlant: Plant) {
         currentRoom.plants[newPlant.id] = newPlant
         Task {
-            await myRoomRepository.saveNewRoom(currentRoom)
+//            await myRoomRepository.saveNewRoom(currentRoom)
             await plantRepository.saveNewPlant(newPlant)
         }
     }
     
     func getRandomPlant(note: Note) async -> Plant {
-        let randomPlant = await plantRepository.createRandomPlant(note: note)
+        let randomPlant = await plantRepository.createRandomPlant(note: note, roomID: currentRoom.id)
         return randomPlant
     }
     
@@ -195,7 +205,7 @@ extension AppStore {
     
     func addRandomPlantToShelf() {
         Task {
-            let randomPlant = await plantRepository.createRandomPlant(note: getRandomNote())
+            let randomPlant = await plantRepository.createRandomPlant(note: getRandomNote(), roomID: currentRoom.id)
             saveNewPlant(randomPlant)
         }
     }

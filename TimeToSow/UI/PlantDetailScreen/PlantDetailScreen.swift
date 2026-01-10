@@ -172,7 +172,8 @@ struct PlantDetailScreen: View {
 }
 
 #Preview {
-    PlantDetailScreen(plant: Plant(seed: Seed(name: "seed1.name",
+    PlantDetailScreen(plant: Plant(rootRoomID: UUID(),
+                                   seed: Seed(name: "seed1.name",
                                               image: "seed23",
                                               height: 45,
                                               rarity: .common),
@@ -188,5 +189,5 @@ struct PlantDetailScreen: View {
                                     Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
                                     Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
                                    ]
-    ))
+                                  ))
 }

@@ -165,7 +165,8 @@ struct PlantPreview: View {
                      anchorPointCoefficient: .init(x: 0, y: 0.006))
     
     VStack {
-        PlantPreview(plant: Plant(seed: tmpSeed,
+        PlantPreview(plant: Plant(rootRoomID: UUID(),
+                                  seed: tmpSeed,
                                   pot: tmpPot,
                                   name: "test",
                                   description: "",
@@ -180,19 +181,19 @@ struct PlantPreview: View {
 }
 /*
  Pot(name: "pot56.name",
-                  image: "pot56",
-                  height: 35,
-                  rarity: .rare),
+ image: "pot56",
+ height: 35,
+ rarity: .rare),
  
  Pot(name: "pot57.name",
-                  image: "pot57",
-                  height: 18,
-                  rarity: .epic),
+ image: "pot57",
+ height: 18,
+ rarity: .epic),
  
  Pot(name: "pot58.name",
-                  image: "pot58",
-                  height: 24,
-                  rarity: .rare)
+ image: "pot58",
+ height: 24,
+ rarity: .rare)
  
  */
 

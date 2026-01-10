@@ -19,6 +19,7 @@ struct Plant: Hashable, Identifiable {
     let time: Int
     
     let notes: [Note]
+    let rootRoomID: UUID
     
     init(from: PlantModelGRDB) {
         guard let seedDB = from.seed, let potDB = from.pot else {
@@ -33,13 +34,14 @@ struct Plant: Hashable, Identifiable {
         offsetY = from.offsetY
         notes = from.notes.map { Note(from: $0) }
         time = notes.reduce(0) { $0 + $1.time }
+        rootRoomID = from.id
     }
     
     static func == (lhs: Plant, rhs: Plant) -> Bool {
         lhs.id == rhs.id
     }
     
-    init(id: UUID = UUID(), seed: Seed, pot: Pot, name: String, description: String,
+    init(id: UUID = UUID(), rootRoomID: UUID, seed: Seed, pot: Pot, name: String, description: String,
          offsetY: Double, offsetX: Double, notes: [Note]) {
         self.id = id
         self.seed = seed
@@ -50,6 +52,7 @@ struct Plant: Hashable, Identifiable {
         self.offsetX = offsetX
         self.time = notes.reduce(0) { $0 + $1.time }
         self.notes = notes
+        self.rootRoomID = rootRoomID
     }
     
     init(from: PlantModel) {
@@ -62,6 +65,7 @@ struct Plant: Hashable, Identifiable {
         offsetY = from.offsetY
         notes = from.notes.map { Note(from: $0) }
         time = notes.reduce(0) { $0 + $1.time }
+        rootRoomID = UUID()
     }
     
 
@@ -78,7 +82,7 @@ struct Plant: Hashable, Identifiable {
 //    }
     
     func copy(offsetX: Double? = nil, offsetY: Double? = nil, notes: [Note]? = nil) -> Plant {
-        Plant(id: self.id, seed: self.seed, pot: self.pot, name: self.name, description: self.description,
+        Plant(id: self.id, rootRoomID: self.rootRoomID, seed: self.seed, pot: self.pot, name: self.name, description: self.description,
               offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX,
               notes: notes ?? self.notes)
     }

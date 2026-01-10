@@ -76,7 +76,7 @@ struct PlantModelGRDB:  Codable, FetchableRecord, MutablePersistableRecord, Tabl
         id = from1.id
         seedID = from1.seed.id
         potID = from1.pot.id
-        rootRoomID = UUID()
+        rootRoomID = from1.rootRoomID
         name = from1.name
         userDescription = from1.description
         offsetY = from1.offsetY
