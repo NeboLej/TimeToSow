@@ -13,7 +13,7 @@ struct HistoryScreenState {
     let monthsName: [String] = ["One", "Two", "Three", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
     let plantCount = 12
     let loggedMinutesCount = 230
-    let topPlant: Plant? = Plant(seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
+    let topPlant: Plant? = Plant(rootRoomID: UUID(), seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
     let topTag: Tag? = Tag(name: "asdad", color: "FFDD55")
     let headerColor: Color
     let isCurrentMonth: Bool = true

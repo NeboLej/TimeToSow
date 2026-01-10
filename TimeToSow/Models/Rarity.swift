@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Rarity {
-    case common
-    case uncommon
-    case rare
-    case epic
-    case legendary
+enum Rarity: Int, Codable {
+    case common = 1
+    case uncommon = 2
+    case rare = 3
+    case epic = 4
+    case legendary = 5
     
     static let SCALE_DIVISION_VALUE: Int = 30
     

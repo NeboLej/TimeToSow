@@ -15,6 +15,7 @@
 		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
 		8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */; };
 		8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34662F02789200354CAB /* Underdog-Regular.ttf */; };
+		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -53,6 +54,24 @@
 		8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */; };
 		8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */; };
 		8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC86F522E18547600AA6AFA /* Color + extension.swift */; };
+		8ED63A872F1273780013632F /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A712F1273780013632F /* BaseRepository.swift */; };
+		8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A722F1273780013632F /* DatabaseManager.swift */; };
+		8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A742F1273780013632F /* NoteModelGRDB.swift */; };
+		8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A752F1273780013632F /* PlantModelGRDB.swift */; };
+		8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A762F1273780013632F /* PotModelGRDB.swift */; };
+		8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A772F1273780013632F /* RoomModelGRDB.swift */; };
+		8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A782F1273780013632F /* SeedModelGRDB.swift */; };
+		8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A792F1273780013632F /* ShelfModelGRDB.swift */; };
+		8ED63A8F2F1273780013632F /* TagModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A7A2F1273780013632F /* TagModelGRDB.swift */; };
+		8ED63A902F1273780013632F /* UserRoomModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A7B2F1273780013632F /* UserRoomModelGRDB.swift */; };
+		8ED63A912F1273780013632F /* PlantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A7D2F1273780013632F /* PlantRepository.swift */; };
+		8ED63A922F1273780013632F /* PotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A7E2F1273780013632F /* PotRepository.swift */; };
+		8ED63A932F1273780013632F /* RoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A7F2F1273780013632F /* RoomRepository.swift */; };
+		8ED63A942F1273780013632F /* SeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A802F1273780013632F /* SeedRepository.swift */; };
+		8ED63A952F1273780013632F /* ShelfRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A812F1273780013632F /* ShelfRepository.swift */; };
+		8ED63A962F1273780013632F /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A822F1273780013632F /* TagRepository.swift */; };
+		8ED63A972F1273780013632F /* UserRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A832F1273780013632F /* UserRoomRepository.swift */; };
+		8ED63A982F1273780013632F /* DefaultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED63A852F1273780013632F /* DefaultModels.swift */; };
 		8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */; };
 		8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */; };
 		8ED72C432F02E2E1008E6869 /* remote_localization.json in Resources */ = {isa = PBXBuildFile; fileRef = 8ED72C422F02E2E1008E6869 /* remote_localization.json */; };
@@ -133,6 +152,24 @@
 		8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatShadow.swift; sourceTree = "<group>"; };
 		8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingFramesView.swift; sourceTree = "<group>"; };
 		8EC86F522E18547600AA6AFA /* Color + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + extension.swift"; sourceTree = "<group>"; };
+		8ED63A712F1273780013632F /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		8ED63A722F1273780013632F /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		8ED63A742F1273780013632F /* NoteModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A752F1273780013632F /* PlantModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A762F1273780013632F /* PotModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A772F1273780013632F /* RoomModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A782F1273780013632F /* SeedModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A792F1273780013632F /* ShelfModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A7A2F1273780013632F /* TagModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A7B2F1273780013632F /* UserRoomModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoomModelGRDB.swift; sourceTree = "<group>"; };
+		8ED63A7D2F1273780013632F /* PlantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRepository.swift; sourceTree = "<group>"; };
+		8ED63A7E2F1273780013632F /* PotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotRepository.swift; sourceTree = "<group>"; };
+		8ED63A7F2F1273780013632F /* RoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomRepository.swift; sourceTree = "<group>"; };
+		8ED63A802F1273780013632F /* SeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedRepository.swift; sourceTree = "<group>"; };
+		8ED63A812F1273780013632F /* ShelfRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfRepository.swift; sourceTree = "<group>"; };
+		8ED63A822F1273780013632F /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
+		8ED63A832F1273780013632F /* UserRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoomRepository.swift; sourceTree = "<group>"; };
+		8ED63A852F1273780013632F /* DefaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultModels.swift; sourceTree = "<group>"; };
 		8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLocalizationService.swift; sourceTree = "<group>"; };
 		8ED72C422F02E2E1008E6869 /* remote_localization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = remote_localization.json; sourceTree = "<group>"; };
@@ -166,19 +203,12 @@
 		8EFEEEFA2F0E805E00857A23 /* RecordsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8EF575532DCE3F4600AEC31A /* Repositories */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		8EF574E92DCCEEAE00AEC31A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +269,55 @@
 				8EC86E302E06E81F00AA6AFA /* EditRoomScreen.swift */,
 			);
 			path = EditRoomScreen;
+			sourceTree = "<group>";
+		};
+		8ED63A732F1273780013632F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8ED63A712F1273780013632F /* BaseRepository.swift */,
+				8ED63A722F1273780013632F /* DatabaseManager.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		8ED63A7C2F1273780013632F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8ED63A742F1273780013632F /* NoteModelGRDB.swift */,
+				8ED63A752F1273780013632F /* PlantModelGRDB.swift */,
+				8ED63A762F1273780013632F /* PotModelGRDB.swift */,
+				8ED63A772F1273780013632F /* RoomModelGRDB.swift */,
+				8ED63A782F1273780013632F /* SeedModelGRDB.swift */,
+				8ED63A792F1273780013632F /* ShelfModelGRDB.swift */,
+				8ED63A7A2F1273780013632F /* TagModelGRDB.swift */,
+				8ED63A7B2F1273780013632F /* UserRoomModelGRDB.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8ED63A842F1273780013632F /* GRBD */ = {
+			isa = PBXGroup;
+			children = (
+				8ED63A732F1273780013632F /* Base */,
+				8ED63A7C2F1273780013632F /* Models */,
+				8ED63A7D2F1273780013632F /* PlantRepository.swift */,
+				8ED63A7E2F1273780013632F /* PotRepository.swift */,
+				8ED63A7F2F1273780013632F /* RoomRepository.swift */,
+				8ED63A802F1273780013632F /* SeedRepository.swift */,
+				8ED63A812F1273780013632F /* ShelfRepository.swift */,
+				8ED63A822F1273780013632F /* TagRepository.swift */,
+				8ED63A832F1273780013632F /* UserRoomRepository.swift */,
+			);
+			path = GRBD;
+			sourceTree = "<group>";
+		};
+		8ED63A862F1273780013632F /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				8ED63A842F1273780013632F /* GRBD */,
+				8ED63A852F1273780013632F /* DefaultModels.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		8ED72C842F07D4F7008E6869 /* DebugScreen */ = {
@@ -373,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				8EBF14782DE6577800422876 /* Info.plist */,
-				8EF575532DCE3F4600AEC31A /* Repositories */,
+				8ED63A862F1273780013632F /* Repositories */,
 				8EF5753B2DCE3F3A00AEC31A /* App */,
 				8EF5753C2DCE3F3A00AEC31A /* Extensions */,
 				8EF5753E2DCE3F3A00AEC31A /* Models */,
@@ -437,11 +516,9 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				8EF575532DCE3F4600AEC31A /* Repositories */,
-			);
 			name = TimeToSow;
 			packageProductDependencies = (
+				8E6C3E9D2F1137630074CD4E /* GRDB */,
 			);
 			productName = TimeToSow;
 			productReference = 8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */;
@@ -472,6 +549,9 @@
 			);
 			mainGroup = 8EF574E32DCCEEAE00AEC31A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF574ED2DCCEEAE00AEC31A /* Products */;
 			projectDirPath = "";
@@ -537,6 +617,24 @@
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
+				8ED63A872F1273780013632F /* BaseRepository.swift in Sources */,
+				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
+				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
+				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
+				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
+				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
+				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
+				8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */,
+				8ED63A8F2F1273780013632F /* TagModelGRDB.swift in Sources */,
+				8ED63A902F1273780013632F /* UserRoomModelGRDB.swift in Sources */,
+				8ED63A912F1273780013632F /* PlantRepository.swift in Sources */,
+				8ED63A922F1273780013632F /* PotRepository.swift in Sources */,
+				8ED63A932F1273780013632F /* RoomRepository.swift in Sources */,
+				8ED63A942F1273780013632F /* SeedRepository.swift in Sources */,
+				8ED63A952F1273780013632F /* ShelfRepository.swift in Sources */,
+				8ED63A962F1273780013632F /* TagRepository.swift in Sources */,
+				8ED63A972F1273780013632F /* UserRoomRepository.swift in Sources */,
+				8ED63A982F1273780013632F /* DefaultModels.swift in Sources */,
 				8EF575612DCE432300AEC31A /* Plant.swift in Sources */,
 				8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */,
 				8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */,
@@ -792,6 +890,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E6C3E9D2F1137630074CD4E /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8EF574E42DCCEEAE00AEC31A /* Project object */;
 }

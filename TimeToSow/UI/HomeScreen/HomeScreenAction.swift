@@ -8,6 +8,7 @@
 import Foundation
 
 enum HomeScreenAction {
+    case loadData
     case changedRoomType
     case changedShelfType
     case addRandomPlant
@@ -24,6 +25,8 @@ protocol HomeScreenDelegate: AnyObject {
 extension AppStore: HomeScreenDelegate {
     func send(action: HomeScreenAction) {
         switch action {
+        case .loadData:
+            getData()
         case .changedRoomType:
             send(.changedRoomType)
         case .changedShelfType:

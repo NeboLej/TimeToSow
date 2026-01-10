@@ -39,12 +39,9 @@ final class ScreenBuilder {
     func getScreen(type: ScreenType) -> some View {
         switch type {
         case .home:
-            HomeScreen(store: HomeScreenStore(appStore: appStore))
-                .environment(\.appStore, appStore)
-                .environment(\.screenBuilder, self)
+            HomeScreen(store: HomeScreenStore(appStore: appStore), screenBuilder: self)
         case .editRoom:
             EditRoomScreen()
-                .environment(\.appStore, appStore)
         case .progress(let minutes):
             ProgressScreen(store: ProgressScreenStore(appStore: appStore, minutes: minutes))
         case .plantDetails(let plant):
@@ -53,8 +50,7 @@ final class ScreenBuilder {
         case .debugScreen:
             DebugScreenView()
         case .history:
-            HistoryScreen(store: HistoryScreenStore(appStore: appStore))
-                .environment(\.screenBuilder, self)
+            HistoryScreen(store: HistoryScreenStore(appStore: appStore), screenBuilder: self)
         }
     }
     

@@ -8,13 +8,25 @@
 import Foundation
 import UIKit
 
-enum PotFeaturesType: Hashable, Equatable, CaseIterable {
+enum PotFeaturesType: Int, Hashable, Equatable, CaseIterable, Codable {
     //узкий
-    case narrow
+    case narrow = 0
+}
+
+protocol PotProtocol {
+    var id: UUID { get }
+    var potFeatures: [PotFeaturesType] { get }
+    var name: String { get }
+    var image: String { get }
+    var height: Int { get }
+    var rarity: Rarity { get }
+    var anchorPointCoefficientX: CGFloat? { get }
+    var anchorPointCoefficientY: CGFloat? { get }
+    var width: CGFloat { get }
 }
 
 struct Pot: Hashable {
-    let id: UUID = UUID.init()
+    let id: UUID
     let potFeatures: [PotFeaturesType]
     let name: String
     let image: String
@@ -23,7 +35,9 @@ struct Pot: Hashable {
     let anchorPointCoefficient: CGPoint?
     let width: CGFloat
     
-    init(potFeatures: [PotFeaturesType] = [], name: String, image: String, height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
+    init(id: UUID = UUID.init(), potFeatures: [PotFeaturesType] = [], name: String, image: String,
+         height: Int, rarity: Rarity, anchorPointCoefficient: CGPoint? = nil) {
+        self.id = id
         self.potFeatures = potFeatures
         self.name = name
         self.image = image
@@ -40,6 +54,16 @@ struct Pot: Hashable {
         } else {
             width =  CGFloat(height)
         }
-        
+    }
+    
+    init(from: PotProtocol) {
+        id = from.id
+        potFeatures = from.potFeatures
+        name = from.name
+        image = from.image
+        height = from.height
+        rarity = from.rarity
+        anchorPointCoefficient = CGPoint(x: from.anchorPointCoefficientX ?? 0, y: from.anchorPointCoefficientY ?? 0)
+        width = from.width
     }
 }

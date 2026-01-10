@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import GRDB
 
 class BaseRepository {
+    let dbPool: DatabasePool
     
+    init(dbPool: DatabasePool) {
+        self.dbPool = dbPool
+    }
 }

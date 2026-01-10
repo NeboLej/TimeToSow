@@ -7,8 +7,20 @@
 
 import UIKit
 
+protocol SeedProtocol {
+    var id: UUID { get }
+    var name: String { get }
+    var unavailavlePotTypes: [PotFeaturesType] { get }
+    var image: String { get }
+    var height: Int { get }
+    var rarity: Rarity { get }
+    var rootCoordinateCoefX: CGFloat? { get }
+    var rootCoordinateCoefY: CGFloat? { get }
+    var width: CGFloat { get }
+}
+
 struct Seed: Hashable {
-    var id: UUID = UUID.init()
+    var id: UUID
     var name: String = ""
     var unavailavlePotTypes: [PotFeaturesType] = []
     var image: String = ""
@@ -17,7 +29,9 @@ struct Seed: Hashable {
     var rootCoordinateCoef: CGPoint?
     var width: CGFloat
     
-    init(name: String, unavailavlePotTypes: [PotFeaturesType] = [], image: String, height: Int, rarity: Rarity, rootCoordinateCoef: CGPoint? = nil) {
+    init(id: UUID = UUID.init(), name: String, unavailavlePotTypes: [PotFeaturesType] = [],
+         image: String, height: Int, rarity: Rarity, rootCoordinateCoef: CGPoint? = nil) {
+        self.id = id
         self.name = name
         self.unavailavlePotTypes = unavailavlePotTypes
         self.image = image
@@ -34,5 +48,16 @@ struct Seed: Hashable {
         } else {
             width =  CGFloat(height)
         }
+    }
+    
+    init(from: SeedProtocol) {
+        id = from.id
+        name = from.name
+        unavailavlePotTypes = from.unavailavlePotTypes
+        image = from.image
+        height = from.height
+        rarity = from.rarity
+        rootCoordinateCoef = CGPoint(x: from.rootCoordinateCoefX ?? 0, y: from.rootCoordinateCoefY ?? 0)
+        width = from.width
     }
 }

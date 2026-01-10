@@ -17,7 +17,7 @@ struct HomeScreenState {
     let allNotes: [Note]
     
     let selectedPlant: Plant?
-    let selectedTag: Tag
+    let selectedTag: Tag?
     let topPlant: Plant?
     let topTag: Tag?
     

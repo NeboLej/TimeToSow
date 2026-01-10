@@ -28,7 +28,7 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     init(appStore: AppStore&ProgressScreenDelegate, minutes: Int) {
         delegate = appStore
         self.minutes = minutes
-        selectedTag = appStore.selectedTag
+        selectedTag = appStore.selectedTag!
         startDate = Date()
         super.init(appStore: appStore)
         
@@ -39,11 +39,13 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     
     func getNewPlant() {
         let note = Note(date: Date(), time: minutes, tag: selectedTag)
-        newPlant = appStore.getRandomPlant(note: note)
+        Task {
+            newPlant = await appStore.getRandomPlant(note: note)
+        }
     }
     
     func newPlantToShelf() {
-        let plant = newPlant ?? appStore.getRandomPlant(note: appStore.getRandomNote())
+        let plant = newPlant!
         send(.finishProgress(plant: plant))
     }
     
@@ -72,7 +74,7 @@ class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
     }
     
     private func rebuildState() {
-        selectedTag = appStore.selectedTag
+        selectedTag = appStore.selectedTag!
         observeAppState()
     }
     
