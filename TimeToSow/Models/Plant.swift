@@ -34,7 +34,7 @@ struct Plant: Hashable, Identifiable {
         offsetY = from.offsetY
         notes = from.notes.map { Note(from: $0) }
         time = notes.reduce(0) { $0 + $1.time }
-        rootRoomID = from.id
+        rootRoomID = from.rootRoomID
     }
     
     static func == (lhs: Plant, rhs: Plant) -> Bool {

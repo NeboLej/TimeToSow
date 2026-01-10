@@ -50,23 +50,6 @@ class AppStore {
     func getData() {
         Task {
             
-            do {
-                try await DatabaseManager.shared.dbPool.read { db in
-                    let rows = try Row.fetchAll(db, sql: "PRAGMA table_info(seed);")
-                    for row in rows {
-                        print(row)
-                    }
-                }
-            }
-            
-            try await DatabaseManager.shared.dbPool.read { db in
-                let rows = try Row.fetchAll(db, sql: "PRAGMA table_info(plant);")
-                for row in rows {
-                    print(row)
-                }
-            }
-            
-            
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
 //            let allPlants = await plantRepository.getAllPlants()
