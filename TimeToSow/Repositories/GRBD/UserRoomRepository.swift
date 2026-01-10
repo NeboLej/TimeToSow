@@ -9,8 +9,8 @@ import Foundation
 import GRDB
 
 protocol UserRoomRepositoryProtocol {
-    func getCurrentRoom() async -> UserMonthRoom?
-    func saveNewRoom(_ room: UserMonthRoom) async
+    func getCurrentRoom() async -> UserRoom?
+    func saveNewRoom(_ room: UserRoom) async
 }
 
 final class UserRoomRepository: UserRoomRepositoryProtocol {
@@ -21,7 +21,7 @@ final class UserRoomRepository: UserRoomRepositoryProtocol {
         self.dbPool = dbPool
     }
     
-    func getCurrentRoom() async -> UserMonthRoom? {
+    func getCurrentRoom() async -> UserRoom? {
         do {
             let latest = try await dbPool.read { db in
                 try UserRoomModelGRDB
@@ -37,7 +37,7 @@ final class UserRoomRepository: UserRoomRepositoryProtocol {
             }
             
             if let latest {
-                return UserMonthRoom(from: latest)
+                return UserRoom(from: latest)
             } else {
                 return nil
             }
@@ -46,7 +46,7 @@ final class UserRoomRepository: UserRoomRepositoryProtocol {
         }
     }
     
-    func saveNewRoom(_ room: UserMonthRoom) async {
+    func saveNewRoom(_ room: UserRoom) async {
         do {
             try await dbPool.write { db in
                 var room = UserRoomModelGRDB(from1: room)

@@ -22,7 +22,7 @@ class AppStore {
     @ObservationIgnored
     private let tagRepository: TagRepositoryProtocol
     
-    var currentRoom: UserMonthRoom = .empty
+    var currentRoom: UserRoom = .empty
     var selectedPlant: Plant?
     var appCoordinator: AppCoordinator = AppCoordinator()
     var selectedTag: Tag?
@@ -37,21 +37,6 @@ class AppStore {
         self.shelfRepository = shelfRepository
         self.plantRepository = plantRepository
         self.tagRepository = tagRepository
-        
-        getData()
-    }
-    
-    func getData() {
-        Task {
-            selectedTag = await tagRepository.getRandomTag()
-            let lastRoom = await myRoomRepository.getCurrentRoom()
-            if let lastRoom {
-                currentRoom = lastRoom
-            } else {
-                currentRoom = await createNewMonthRoom()
-                await myRoomRepository.saveNewRoom(currentRoom)
-            }
-        }
     }
     
     func send(_ action: AppAction) {
@@ -88,13 +73,26 @@ class AppStore {
         }
     }
     
-    func createNewMonthRoom() async -> UserMonthRoom {
+    func getData() {
+        Task {
+            selectedTag = await tagRepository.getRandomTag()
+            let lastRoom = await myRoomRepository.getCurrentRoom()
+            if let lastRoom {
+                currentRoom = lastRoom
+            } else {
+                currentRoom = await createNewUserRoom()
+                await myRoomRepository.saveNewRoom(currentRoom)
+            }
+        }
+    }
+    
+    func createNewUserRoom() async -> UserRoom {
         let randomRoom = await roomRepository.getRandomRoom()
         let randomShelf = await shelfRepository.getRandomShelf()
         
-        return UserMonthRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date(), plants: [:])
+        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date(), plants: [:])
     }
-    
+
     // MARK: - TMP
     
 //    func updateShelf() {

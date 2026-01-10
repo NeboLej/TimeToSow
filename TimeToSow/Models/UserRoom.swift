@@ -8,9 +8,9 @@
 import Foundation
 
 @Observable
-class UserMonthRoom: Hashable {
+class UserRoom: Hashable {
     
-    static func == (lhs: UserMonthRoom, rhs: UserMonthRoom) -> Bool {
+    static func == (lhs: UserRoom, rhs: UserRoom) -> Bool {
         lhs.id == rhs.id &&
         lhs.plants == rhs.plants &&
         lhs.shelfType == rhs.shelfType &&
@@ -58,11 +58,13 @@ class UserMonthRoom: Hashable {
         plants = plantsDict
     }
     
-    func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserMonthRoom {
-        UserMonthRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
+    func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserRoom {
+        UserRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
                       roomType: roomType ?? self.roomType, name: name ?? self.name,
                       dateCreate: self.dateCreate, plants: plants ?? self.plants)
     }
     
-    static var empty = UserMonthRoom(shelfType: .init(name: "", image: "", shelfPositions: []), roomType: .init(name: "", image: ""), name: "", dateCreate: Date(), plants: [:])
+    static var empty = UserRoom(shelfType: .init(name: "", image: "shelf1", shelfPositions: []),
+                                roomType: .init(name: "", image: "room1"),
+                                name: "", dateCreate: Date(), plants: [:])
 }

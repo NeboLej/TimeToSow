@@ -71,16 +71,8 @@ struct HomeScreen: View {
         )
         .ignoresSafeArea(.all)
         .onAppear {
-//            store.send(.loadData)
+            store.send(.loadData)
         }
-//        .transaction { transaction in
-//            if disableRootAnimation {
-//                transaction.animation = nil
-//            }
-//        }
-//        .task {
-//            disableRootAnimation = false
-//        }
     }
     
     @State private var disableRootAnimation = true

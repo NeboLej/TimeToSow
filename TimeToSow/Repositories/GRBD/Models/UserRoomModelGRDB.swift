@@ -29,7 +29,7 @@ struct UserRoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Ta
         case shelf, room, plants
     }
     
-    init(from1: UserMonthRoom) {
+    init(from1: UserRoom) {
         id = from1.id
         shelfID = from1.shelfType.id
         roomID = from1.roomType.id

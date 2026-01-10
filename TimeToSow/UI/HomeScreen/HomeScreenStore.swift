@@ -18,7 +18,6 @@ class HomeScreenStore: FeatureStore {
         delegate = appStore
         
         super.init(appStore: appStore)
-        
         observeAppState()
     }
     
