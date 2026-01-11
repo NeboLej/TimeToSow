@@ -23,6 +23,7 @@ struct HistoryScreen: View {
     
 //    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     @Environment(\.safeAreaInsets) private var safeAreaInsets
+    @Environment(\.dismiss) var dismiss
     
     private var store: HistoryScreenStore
     private var screenBuilder: ScreenBuilder
@@ -43,9 +44,27 @@ struct HistoryScreen: View {
             }
         .background(.mainBackground)
         .navigationTitle("History")
+        .navigationBarBackButtonHidden(true)
         .toolbarBackground(store.state.headerColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack(spacing: 4) {
+                        Circle()
+                            .foregroundStyle(.white)
+                            .frame(width: 36, height: 36)
+                            .overlay {
+                                Image(systemName: "chevron.left")
+                                    .foregroundStyle(.black)
+                            }
+                    }
+                }
+            }
+        }
     }
     
     @ViewBuilder
@@ -109,6 +128,7 @@ struct HistoryScreen: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("История записей")
                 .font(.myTitle(20))
+                .foregroundStyle(.black)
                 .padding(.bottom, -12)
             RecordsHistoryView(notes: store.state.notes)
         }.padding(.horizontal, 10)
