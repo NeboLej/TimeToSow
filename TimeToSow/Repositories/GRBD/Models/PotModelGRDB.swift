@@ -12,6 +12,7 @@ struct PotModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
     static let databaseTableName = "pot"
     
     var id: UUID
+    var stableId: String
     var potFeatures: [PotFeaturesType]
     var name: String
     var image: String
@@ -25,6 +26,7 @@ struct PotModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
     
     init(from: Pot) {
         id = from.id
+        stableId = from.stableId
         potFeatures = from.potFeatures
         image = from.image
         name = from.name

@@ -12,6 +12,7 @@ struct ShelfModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
     static let databaseTableName = "shelf"
     
     var id: UUID
+    var stableId: String
     var name: String
     var image: String
     var shelfPositions: [ShelfPosition]
@@ -20,6 +21,7 @@ struct ShelfModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
     
     init(from: ShelfType) {
         id = from.id
+        stableId = from.stableId
         name = from.name
         image = from.image
         shelfPositions = from.shelfPositions

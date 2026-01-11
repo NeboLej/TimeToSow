@@ -14,22 +14,30 @@ protocol RoomRepositoryProtocol {
 }
 
 final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
-        
+    
     override func setDefaultValues() async {
         do {
+            let existing = Set(try await dbPool.read {
+                try String.fetchAll($0, sql: "SELECT stableId FROM room")
+            })
+            
+            let toInsert = DefaultModels.rooms.filter { !existing.contains($0.stableId) }
+            if toInsert.isEmpty { return }
+            
             let count = try await dbPool.read { db in
                 try RoomModelGRDB.fetchCount(db)
             }
-            
-            if count == 0 {
-                try await dbPool.write { db in
-                    for defaultModel in DefaultModels.rooms {
-                        var model = RoomModelGRDB(from: defaultModel)
-                        try model.insert(db)
+            try await dbPool.write { db in
+                for item in toInsert {
+                    if try RoomModelGRDB.filter(key: item.id).fetchCount(db) == 0 {
+                        var room = RoomModelGRDB(from: item)
+                        try room.insert(db)
+                    } else {
+                        Logger.log("save new room error, not uniqe", location: .GRDB, event: .error(nil))
                     }
                 }
-                Logger.log("default \(DefaultModels.rooms.count) Rooms added", location: .GRDB, event: .success)
             }
+            Logger.log("default \(toInsert.count) Rooms added", location: .GRDB, event: .success)
         } catch {
             Logger.log("Failed to set default rooms", location: .GRDB, event: .error(error))
         }
@@ -56,5 +64,5 @@ final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
             fatalError()
         }
     }
-
+    
 }

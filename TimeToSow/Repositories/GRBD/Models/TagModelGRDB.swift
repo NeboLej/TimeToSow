@@ -12,6 +12,7 @@ struct TagModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
     static let databaseTableName = "tag"
     
     var id: UUID
+    var stableId: String
     var name: String
     var color: String
     
@@ -19,6 +20,7 @@ struct TagModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
     
     init(from: Tag) {
         id = from.id
+        stableId = from.stableId
         name = from.name
         color = from.color
     }

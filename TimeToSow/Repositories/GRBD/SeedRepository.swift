@@ -16,19 +16,25 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
     
     override func setDefaultValues() async {
         do {
-            let count = try await dbPool.read { db in
-                try SeedModelGRDB.fetchCount(db)
-            }
+            let existing = Set(try await dbPool.read {
+                try String.fetchAll($0, sql: "SELECT stableId FROM seed")
+            })
             
-            if count == 0 {
-                try await dbPool.write { db in
-                    for defaultModel in DefaultModels.seeds {
-                        var model = SeedModelGRDB(from1: defaultModel)
-                        try model.insert(db)
+            let toInsert = DefaultModels.seeds.filter { !existing.contains($0.stableId) }
+            if toInsert.isEmpty { return }
+            
+            try await dbPool.write { db in
+                for item in toInsert {
+                    if try SeedModelGRDB.filter(key: item.id).fetchCount(db) == 0 {
+                        var seed = SeedModelGRDB(from: item)
+                        try seed.insert(db)
+                    } else {
+                        Logger.log("save new seed error, not uniqe", location: .GRDB, event: .error(nil))
                     }
                 }
-                Logger.log("default \(DefaultModels.seeds.count) Seeds added", location: .GRDB, event: .success)
             }
+            
+            Logger.log("default \(toInsert.count) Seeds added", location: .GRDB, event: .success)
         } catch {
             Logger.log("Failed to set default Seeds", location: .GRDB, event: .error(error))
         }
@@ -61,6 +67,6 @@ final class SeedRepository: BaseRepository, SeedRepositoryProtocol {
             Logger.log("Failed to get random Seed for rarity: \(rarity)", location: .GRDB, event: .error(error))
             fatalError()
         }
-
+        
     }
 }

@@ -12,6 +12,7 @@ struct SeedModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableR
     static let databaseTableName = "seed"
     
     var id: UUID
+    var stableId: String
     var name: String
     var unavailavlePotTypes: [PotFeaturesType]
     var image: String
@@ -23,15 +24,16 @@ struct SeedModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableR
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
-    init(from1: Seed) {
-        id = from1.id
-        name = from1.name
-        unavailavlePotTypes = from1.unavailavlePotTypes
-        image = from1.image
-        height = from1.height
-        rarity = from1.rarity
-        rootCoordinateCoefX = from1.rootCoordinateCoef?.x
-        rootCoordinateCoefY = from1.rootCoordinateCoef?.y
-        width = from1.width
+    init(from: Seed) {
+        id = from.id
+        stableId = from.stableId
+        name = from.name
+        unavailavlePotTypes = from.unavailavlePotTypes
+        image = from.image
+        height = from.height
+        rarity = from.rarity
+        rootCoordinateCoefX = from.rootCoordinateCoef?.x
+        rootCoordinateCoefY = from.rootCoordinateCoef?.y
+        width = from.width
     }
 }

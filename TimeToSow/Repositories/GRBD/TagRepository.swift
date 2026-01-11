@@ -17,19 +17,24 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
     
     override func setDefaultValues() async {
         do {
-            let count = try await dbPool.read { db in
-                try TagModelGRDB.fetchCount(db)
-            }
+            let existing = Set(try await dbPool.read {
+                try String.fetchAll($0, sql: "SELECT stableId FROM tag")
+            })
             
-            if count == 0 {
-                try await dbPool.write { db in
-                    for defaultTag in DefaultModels.tags {  
-                        var tag = TagModelGRDB(from: defaultTag)
+            let toInsert = DefaultModels.tags.filter { !existing.contains($0.stableId) }
+            if toInsert.isEmpty { return }
+            
+            try await dbPool.write { db in
+                for item in toInsert {
+                    if try TagModelGRDB.filter(key: item.id).fetchCount(db) == 0 {
+                        var tag = TagModelGRDB(from: item)
                         try tag.insert(db)
+                    } else {
+                        Logger.log("save new tag error, not uniqe", location: .GRDB, event: .error(nil))
                     }
                 }
-                Logger.log("default \(DefaultModels.tags.count) Tags added", location: .GRDB, event: .success)
             }
+            Logger.log("default \(toInsert.count) Tags added", location: .GRDB, event: .success)
         } catch {
             Logger.log("Failed to set default tags", location: .GRDB, event: .error(error))
         }

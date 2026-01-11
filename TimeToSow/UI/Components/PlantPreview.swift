@@ -158,11 +158,11 @@ struct PlantPreview: View {
                        rootCoordinateCoef: .init(x: 0.05, y: 0))
     
     //rootCoordinateCoef: .init(x: 0.08, y: 0)
-    var tmpPot = Pot(name: "pot59.name",
-                     image: "pot61",
-                     height: 22,
-                     rarity: .rare,
-                     anchorPointCoefficient: .init(x: 0, y: 0.006))
+    var tmpPot = Pot(potFeatures: [.narrow],
+                     name: "pot63.name",
+                     image: "pot63",
+                     height: 28,
+                     rarity: .uncommon)
     
     VStack {
         PlantPreview(plant: Plant(rootRoomID: UUID(),
@@ -180,20 +180,17 @@ struct PlantPreview: View {
     
 }
 /*
- Pot(name: "pot56.name",
- image: "pot56",
- height: 35,
- rarity: .rare),
+ Pot(name: "pot62.name",
+                  image: "pot62",
+                  height: 20,
+                  rarity: .uncommon)
  
- Pot(name: "pot57.name",
- image: "pot57",
- height: 18,
- rarity: .epic),
- 
- Pot(name: "pot58.name",
- image: "pot58",
- height: 24,
- rarity: .rare)
+ Pot(potFeatures: [.narrow],
+                  name: "pot63.name",
+                  image: "pot63",
+                  height: 28,
+                  rarity: .uncommon)
+
  
  */
 

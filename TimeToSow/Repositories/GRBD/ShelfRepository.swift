@@ -16,19 +16,24 @@ final class ShelfRepository: BaseRepository, ShelfRepositoryProtocol {
     
     override func setDefaultValues() async {
         do {
-            let count = try await dbPool.read { db in
-                try ShelfModelGRDB.fetchCount(db)
-            }
+            let existing = Set(try await dbPool.read {
+                try String.fetchAll($0, sql: "SELECT stableId FROM shelf")
+            })
             
-            if count == 0 {
-                try await dbPool.write { db in
-                    for defaultShelf in DefaultModels.shelfs {
-                        var shelf = ShelfModelGRDB(from: defaultShelf)
+            let toInsert = DefaultModels.shelfs.filter { !existing.contains($0.stableId) }
+            if toInsert.isEmpty { return }
+            
+            try await dbPool.write { db in
+                for item in toInsert {
+                    if try ShelfModelGRDB.filter(key: item.id).fetchCount(db) == 0 {
+                        var shelf = ShelfModelGRDB(from: item)
                         try shelf.insert(db)
+                    } else {
+                        Logger.log("save new shelf error, not uniqe", location: .GRDB, event: .error(nil))
                     }
                 }
-                Logger.log("default \(DefaultModels.shelfs.count) Shelfs added", location: .GRDB, event: .success)
             }
+            Logger.log("default \(toInsert.count) Shelfs added", location: .GRDB, event: .success)
         } catch {
             Logger.log("Failed to set default shelfs", location: .GRDB, event: .error(error))
         }

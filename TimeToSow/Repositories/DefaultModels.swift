@@ -11,11 +11,11 @@ struct DefaultModels {
     
     //MARK: - TAGS
     static let tags: [Tag] = [
-        Tag(name: "Job", color: "#EE05F2"),
-        Tag(name: "Yoga", color: "#68F205"),
-        Tag(name: "Programm", color: "#F2E205"),
-        Tag(name: "Read", color: "#F25C05"),
-        Tag(name: "Run in the morning", color: "#8C8303")
+        Tag(stableId: "default_1", name: "Job", color: "#EE05F2"),
+        Tag(stableId: "default_2", name: "Yoga", color: "#68F205"),
+        Tag(stableId: "default_3", name: "Programm", color: "#F2E205"),
+        Tag(stableId: "default_4", name: "Read", color: "#F25C05"),
+        Tag(stableId: "default_5", name: "Run in the morning", color: "#8C8303")
     ]
     
     //MARK: - ROOMS
@@ -95,6 +95,15 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.668, paddingLeading: 30, paddingTrailing: 283),
             ShelfPosition(coefOffsetY: 0.77, paddingLeading: 230, paddingTrailing: 20),
             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
+        ]),
+        
+        ShelfType(name: "3", image: "shelf9", shelfPositions: [
+            ShelfPosition(coefOffsetY: 0.22, paddingLeading: 29, paddingTrailing: 232),
+            ShelfPosition(coefOffsetY: 0.22, paddingLeading: 224, paddingTrailing: 34),
+            ShelfPosition(coefOffsetY: 0.453, paddingLeading: 34, paddingTrailing: 29),
+            ShelfPosition(coefOffsetY: 0.717, paddingLeading: 70, paddingTrailing: 232),
+            ShelfPosition(coefOffsetY: 0.717, paddingLeading: 224, paddingTrailing: 84),
+            ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
         ])
     ]
     //MARK: - POTS
@@ -158,72 +167,24 @@ struct DefaultModels {
         Pot(potFeatures: [.narrow], name: "pot58.name", image: "pot58", height: 24, rarity: .rare),
         Pot(name: "pot59.name", image: "pot59", height: 22, rarity: .rare, anchorPointCoefficient: .init(x: 0, y: 0.006)),
         Pot(name: "pot60.name", image: "pot60", height: 22, rarity: .rare, anchorPointCoefficient: .init(x: 0, y: 0.006)),
-        Pot(name: "pot61.name", image: "pot61", height: 22, rarity: .epic, anchorPointCoefficient: .init(x: 0, y: 0.006))
+        Pot(name: "pot61.name", image: "pot61", height: 22, rarity: .epic, anchorPointCoefficient: .init(x: 0, y: 0.006)),
+        Pot(name: "pot62.name", image: "pot62", height: 20, rarity: .uncommon),
+        Pot(potFeatures: [.narrow], name: "pot63.name", image: "pot63", height: 28, rarity: .epic)
     ]
     
     //MARK: - SEEDS
     static let seeds: [Seed] = [
-        Seed(name: "seed2.name",
-             image: "seed2",
-             height: 40,
-             rarity: .common),
-        
-        Seed(name: "seed3.name",
-             image: "seed3",
-             height: 40,
-             rarity: .common),
-        
-        Seed(name: "seed4.name",
-             image: "seed4",
-             height: 45,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: 0.05, y: 0)),
-        
-        Seed(name: "seed5.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed5",
-             height: 40,
-             rarity: .common),
-        
-        Seed(name: "seed6.name",
-             image: "seed6",
-             height: 40,
-             rarity: .common,
-             rootCoordinateCoef: CGPoint(x: 0, y: 0.28)),
-        
-        Seed(name: "seed7.name",
-             image: "seed7",
-             height: 40,
-             rarity: .common,
-             rootCoordinateCoef: .init(x: 0.2, y: 0.85)),
-        
-        Seed(name: "seed8.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed8",
-             height: 100,
-             rarity: .legendary),
-        
-        Seed(name: "seed9.name",
-             image: "seed9",
-             height: 40,
-             rarity: .legendary),
-        
-        Seed(name: "seed10.name",
-             image: "seed10",
-             height: 90,
-             rarity: .epic,
-             rootCoordinateCoef: .init(x: -0.06, y: 0)),
-        
-        Seed(name: "seed11.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed11",
-             height: 70,
-             rarity: .rare),
-        
-        Seed(name: "seed12.name",
-             image: "seed12",
-             height: 40,
-             rarity: .rare),
+        Seed(name: "seed2.name", image: "seed2", height: 40, rarity: .common),
+        Seed(name: "seed3.name", image: "seed3", height: 40, rarity: .common),
+        Seed(name: "seed4.name", image: "seed4", height: 45, rarity: .rare, rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        Seed(name: "seed5.name", unavailavlePotTypes: [.narrow], image: "seed5", height: 40, rarity: .common),
+        Seed(name: "seed6.name", image: "seed6", height: 40, rarity: .common, rootCoordinateCoef: CGPoint(x: 0, y: 0.28)),
+        Seed(name: "seed7.name", image: "seed7", height: 40, rarity: .common, rootCoordinateCoef: .init(x: 0.2, y: 0.85)),
+        Seed(name: "seed8.name", unavailavlePotTypes: [.narrow], image: "seed8", height: 100, rarity: .legendary),
+        Seed(name: "seed9.name", image: "seed9", height: 40, rarity: .legendary),
+        Seed(name: "seed10.name", image: "seed10", height: 90, rarity: .epic, rootCoordinateCoef: .init(x: -0.06, y: 0)),
+        Seed(name: "seed11.name", unavailavlePotTypes: [.narrow], image: "seed11", height: 70, rarity: .rare),
+        Seed(name: "seed12.name", image: "seed12", height: 40, rarity: .rare),
         
         Seed(name: "seed13.name",
              unavailavlePotTypes: [.narrow],

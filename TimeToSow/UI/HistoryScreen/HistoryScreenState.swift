@@ -14,7 +14,7 @@ struct HistoryScreenState {
     let plantCount = 12
     let loggedMinutesCount = 230
     let topPlant: Plant? = Plant(rootRoomID: UUID(), seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
-    let topTag: Tag? = Tag(name: "asdad", color: "FFDD55")
+    let topTag: Tag? = Tag(stableId: "", name: "asdad", color: "FFDD55")
     let headerColor: Color
     let isCurrentMonth: Bool = true
     

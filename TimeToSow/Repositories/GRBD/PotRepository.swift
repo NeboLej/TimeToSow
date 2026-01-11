@@ -16,19 +16,25 @@ final class PotRepository: BaseRepository, PotRepositoryProtocol {
     
     override func setDefaultValues() async {
         do {
-            let count = try await dbPool.read { db in
-                try PotModelGRDB.fetchCount(db)
-            }
-            
-            if count == 0 {
-                try await dbPool.write { db in
-                    for defaultPot in DefaultModels.pots {
-                        var pot = PotModelGRDB(from: defaultPot)
+            let existing = Set(try await dbPool.read {
+                try String.fetchAll($0, sql: "SELECT stableId FROM pot")
+            })
+
+            let toInsert = DefaultModels.pots.filter { !existing.contains($0.stableId) }
+            if toInsert.isEmpty { return }
+
+            try await dbPool.write { db in
+                for item in toInsert {
+                    if try PotModelGRDB.filter(key: item.id).fetchCount(db) == 0 {
+                        var pot = PotModelGRDB(from: item)
                         try pot.insert(db)
+                    } else {
+                        Logger.log("save new pot error, not uniqe", location: .GRDB, event: .error(nil))
                     }
                 }
-                Logger.log("default \(DefaultModels.pots.count) Pots added", location: .GRDB, event: .success)
             }
+
+            Logger.log("default \(toInsert.count) Pots added", location: .GRDB, event: .success)
         } catch {
             Logger.log("Failed to set default pots", location: .GRDB, event: .error(error))
         }

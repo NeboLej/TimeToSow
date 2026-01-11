@@ -61,3 +61,9 @@ struct Seed: Hashable {
         width = from.width
     }
 }
+
+extension Seed {
+    var stableId: String {
+        name + "-" + String(rarity.rawValue) + "-" + image
+    }
+}

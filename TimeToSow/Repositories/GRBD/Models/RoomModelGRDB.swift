@@ -12,6 +12,7 @@ struct RoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableR
     static let databaseTableName = "room"
     
     var id: UUID
+    var stableId: String
     var name: String
     var image: String
     
@@ -19,6 +20,7 @@ struct RoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableR
     
     init(from: RoomType) {
         id = from.id
+        stableId = from.stableId
         name = from.name
         image = from.image
     }

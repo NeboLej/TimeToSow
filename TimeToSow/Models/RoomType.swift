@@ -30,3 +30,9 @@ struct RoomType: Hashable {
         image = from.image 
     }
 }
+
+extension RoomType {
+    var stableId: String {
+        name + "-" + image
+    }
+}

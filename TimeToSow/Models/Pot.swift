@@ -67,3 +67,9 @@ struct Pot: Hashable {
         width = from.width
     }
 }
+
+extension Pot {
+    var stableId: String {
+        name + "-" + String(rarity.rawValue) + "-" + image
+    }
+}

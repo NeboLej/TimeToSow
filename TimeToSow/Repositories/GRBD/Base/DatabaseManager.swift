@@ -35,12 +35,14 @@ final class DatabaseManager {
     private static func createTablesIfNeeded(in db: Database) throws {
         try db.create(table: "tag", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("name", .text).notNull()
             t.column("color", .text).notNull()
         }
         
         try db.create(table: "shelf", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("name", .text).notNull()
             t.column("image", .text).notNull()
             t.column("shelfPositions", .blob).notNull()
@@ -48,12 +50,14 @@ final class DatabaseManager {
         
         try db.create(table: "room", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("name", .text).notNull()
             t.column("image", .text).notNull()
         }
         
         try db.create(table: "pot", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("potFeatures", .blob).notNull()
             t.column("name", .text).notNull()
             t.column("image", .text).notNull()
@@ -66,6 +70,7 @@ final class DatabaseManager {
         
         try db.create(table: "seed", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("name", .text).notNull()
             t.column("unavailavlePotTypes", .blob).notNull()
             t.column("image", .text).notNull()

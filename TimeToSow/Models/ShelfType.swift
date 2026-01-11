@@ -40,3 +40,9 @@ struct ShelfPosition: Hashable, Codable {
     let paddingLeading: CGFloat
     let paddingTrailing: CGFloat
 }
+
+extension ShelfType {
+    var stableId: String {
+        name + "_" + image
+    }
+}
