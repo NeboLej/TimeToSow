@@ -25,8 +25,8 @@ struct HistoryScreen: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Environment(\.dismiss) var dismiss
     
-    private var store: HistoryScreenStore
-    private var screenBuilder: ScreenBuilder
+    @State private var store: HistoryScreenStore
+    @State private var screenBuilder: ScreenBuilder
     
     @State private var isShowHeader = true
     
@@ -104,7 +104,7 @@ struct HistoryScreen: View {
                         isShowHeader = true
                     }
                 }
-                print(offset)
+//                print(offset)
             }
         }
     }
@@ -211,7 +211,7 @@ struct HistoryScreen: View {
     @ViewBuilder
     private func roomView() -> some View {
         GeometryReader { proxy in
-            screenBuilder.getComponent(type: .roomView)
+            screenBuilder.getComponent(type: .roomView(id: store.state.currentRoomId))
                 .textureOverlay()
         }
         .frame(height: 400)
@@ -221,19 +221,18 @@ struct HistoryScreen: View {
     func monthsScrollView() -> some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 7) {
-                ForEach(store.state.monthsName.indices, id: \.self) { index in
-                    let text = store.state.monthsName[index]
-                    monthCell(text: text, tag: index)
+                ForEach(store.state.allRooms) { room in
+                    monthCell(text: room.name, id: room.id)
                 }
             }
         }.background(Color.blue)
     }
     
     @ViewBuilder
-    func monthCell(text: String, tag: Int) -> some View {
+    func monthCell(text: String, id: UUID) -> some View {
         Button {
             withAnimation {
-                //                vm.selectMonth(index: tag)
+                store.send(action: .selectRoom(id: id))
             }
         } label: {
             Text(text)
@@ -243,8 +242,8 @@ struct HistoryScreen: View {
                 .rotationEffect(.degrees(-90), anchor: .center)
         }
         .frame(width: 26, height: 150)
-        .background(.orange)
-        //        .background( tag == vm.selectedMonth ? Color.black : Color(hex: vm.getMonthColor(index: tag)))
+//        .background(.orange)
+        .background( id == store.selectedUserRoomId ? .mainBackground : .orange)//Color(hex: vm.getMonthColor(index: tag)))
     }
 }
 

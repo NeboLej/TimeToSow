@@ -12,6 +12,7 @@ protocol UserRoomRepositoryProtocol {
     func getCurrentRoom() async -> UserRoom?
     func saveNewRoom(_ room: UserRoom) async
     func getUserRoomBy(by id: UUID) async -> UserRoom?
+    func getAllSimpleUserRooms() async -> [SimpleUserRoom]
 }
 
 final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
@@ -25,9 +26,9 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                     .including(required: UserRoomModelGRDB.shelf)
                     .including(required: UserRoomModelGRDB.room)
                     .including(all: UserRoomModelGRDB.plants.including(required: PlantModelGRDB.seed)
-                    .including(required: PlantModelGRDB.seed)
-                    .including(required: PlantModelGRDB.pot)
-                    .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
+                        .including(required: PlantModelGRDB.seed)
+                        .including(required: PlantModelGRDB.pot)
+                        .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
                     .fetchOne(db)
             }
             
@@ -36,6 +37,20 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
             } else {
                 return nil
             }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func getAllSimpleUserRooms() async -> [SimpleUserRoom] {
+        do {
+            let rooms = try await dbPool.read { db in
+                try UserRoomModelGRDB
+                    .fetchAll(db)
+                    .map { SimpleUserRoom(from: $0) }
+            }
+            Logger.log("\(rooms.count) simple userRooms fetched", location: .GRDB, event: .success)
+            return rooms
         } catch {
             fatalError()
         }
@@ -50,9 +65,9 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                     .including(required: UserRoomModelGRDB.shelf)
                     .including(required: UserRoomModelGRDB.room)
                     .including(all: UserRoomModelGRDB.plants.including(required: PlantModelGRDB.seed)
-                    .including(required: PlantModelGRDB.seed)
-                    .including(required: PlantModelGRDB.pot)
-                    .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
+                        .including(required: PlantModelGRDB.seed)
+                        .including(required: PlantModelGRDB.pot)
+                        .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
                     .fetchOne(db)
             }
             
@@ -69,7 +84,7 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
     func saveNewRoom(_ room: UserRoom) async {
         do {
             try await dbPool.write { db in
-                var room = UserRoomModelGRDB(from1: room)
+                var room = UserRoomModelGRDB(from: room)
                 try room.insert(db)
                 Logger.log("save new user room", location: .GRDB, event: .success)
             }

@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct HistoryScreenState {
+    let currentRoomId: UUID
     let name: String
     let notes: [Note]
-    let monthsName: [String] = ["One", "Two", "Three", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
-    let plantCount = 12
-    let loggedMinutesCount = 230
-    let topPlant: Plant? = Plant(rootRoomID: UUID(), seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
+    let allRooms: [SimpleUserRoom] //= ["One", "Two", "Three", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
+    let plantCount: Int //= 12
+    let loggedMinutesCount: Int //= 230
+    let topPlant: Plant? //= Plant(rootRoomID: UUID(), seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
     let topTag: Tag? = Tag(stableId: "", name: "asdad", color: "FFDD55")
     let headerColor: Color
-    let isCurrentMonth: Bool = true
+    let isCurrentMonth: Bool// = true
     
-    init(appStore: AppStore) {
-        name = appStore.currentRoom.name
-        headerColor = Color.averageTopRowColor(from: UIImage(named: appStore.currentRoom.roomType.image))
-        notes = appStore.currentRoom.plants.flatMap { $0.value.notes }
+    init(selectedRoomId: UUID, appStore: AppStore) {
+        guard let selectedRoom = appStore.userRooms[selectedRoomId] else { fatalError() }
+        currentRoomId = selectedRoomId
+        name = selectedRoom.name
+        notes = selectedRoom.plants.flatMap { $0.value.notes }
+        allRooms = appStore.simpleUserRooms
+        plantCount = selectedRoom.plants.count
+        let plantsAttay = selectedRoom.plants.map(\.value)
+        
+        loggedMinutesCount = plantsAttay.reduce(0, {  $1.time + $0 })
+        topPlant = plantsAttay.max(by: { $0.time < $1.time })
+        headerColor = Color.averageTopRowColor(from: UIImage(named: selectedRoom.roomType.image))
+        isCurrentMonth = selectedRoomId == appStore.currentRoom.id
     }
 }

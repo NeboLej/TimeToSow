@@ -20,7 +20,7 @@ struct UserRoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Ta
     
     var shelf: ShelfModelGRDB?
     var room: RoomModelGRDB?
-    var plants: [PlantModelGRDB] = []
+    var plants: [PlantModelGRDB]?
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
@@ -29,12 +29,12 @@ struct UserRoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Ta
         case shelf, room, plants
     }
     
-    init(from1: UserRoom) {
-        id = from1.id
-        shelfID = from1.shelfType.id
-        roomID = from1.roomType.id
-        name = from1.name
-        dateCreate = from1.dateCreate
+    init(from: UserRoom) {
+        id = from.id
+        shelfID = from.shelfType.id
+        roomID = from.roomType.id
+        name = from.name
+        dateCreate = from.dateCreate
     }
 }
 

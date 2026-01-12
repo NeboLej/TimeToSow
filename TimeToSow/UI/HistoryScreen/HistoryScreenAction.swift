@@ -8,6 +8,5 @@
 import Foundation
 
 enum HistoryScreenAction {
-    
-    
+    case selectRoom(id: UUID)
 }

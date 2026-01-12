@@ -17,4 +17,5 @@ enum AppAction {
     case addRandomNote
     case toDebugScreen
     case addNewPlant(Plant)
+    case getUserRoom(id: UUID)
 }

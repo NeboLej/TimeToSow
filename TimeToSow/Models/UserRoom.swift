@@ -41,8 +41,8 @@ class UserRoom: Hashable {
     }
     
     init(from: UserRoomModelGRDB) {
-        guard let shelf = from.shelf, let room = from.room else {
-            fatalError("Shelf is nil")
+        guard let shelf = from.shelf, let room = from.room, let plants = from.plants else {
+            fatalError("requered parameter is nil")
         }
         id = from.id
         shelfType = ShelfType(from: shelf)
@@ -50,12 +50,12 @@ class UserRoom: Hashable {
         name = from.name
         dateCreate = from.dateCreate
         
-        let plantsArray = from.plants.map { Plant(from: $0) }
+        let plantsArray = plants.map { Plant(from: $0) }
         var plantsDict: [UUID: Plant] = [:]
         plantsArray.forEach {
             plantsDict[$0.id] = $0
         }
-        plants = plantsDict
+        self.plants = plantsDict
     }
     
     func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserRoom {
@@ -67,4 +67,15 @@ class UserRoom: Hashable {
     static var empty = UserRoom(shelfType: .init(name: "", image: "shelf1", shelfPositions: []),
                                 roomType: .init(name: "", image: "room1"),
                                 name: "", dateCreate: Date(), plants: [:])
+}
+
+
+struct SimpleUserRoom: Identifiable, Hashable {
+    let id: UUID
+    let name: String
+    
+    init(from: UserRoomModelGRDB) {
+        id = from.id
+        name = from.name
+    }
 }

@@ -24,7 +24,7 @@ enum ScreenType: Identifiable, Hashable {
 }
 
 enum ComponentType {
-    case roomView
+    case roomView(id: UUID? = nil)
 }
 
 final class ScreenBuilder {
@@ -57,8 +57,8 @@ final class ScreenBuilder {
     @ViewBuilder
     func getComponent(type: ComponentType) -> some View {
         switch type {
-        case .roomView:
-            RoomView(store: RoomFeatureStore(appStore: appStore))
+        case .roomView(let id):
+            RoomView(store: RoomFeatureStore(appStore: appStore, selectedRoomId: id))
         }
     }
 }

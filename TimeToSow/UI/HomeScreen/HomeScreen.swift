@@ -142,7 +142,7 @@ struct HomeScreen: View {
     private func roomView() -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
-            screenBuilder.getComponent(type: .roomView)
+            screenBuilder.getComponent(type: .roomView(id: nil))
                 .textureOverlay()
                 .offset(y: minY > 0 ? -minY : 0)
                 .scaleEffect(x: minY > 0 ? 1 + minY / 1000 : 1,

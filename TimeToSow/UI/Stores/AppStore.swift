@@ -26,6 +26,8 @@ class AppStore {
     var selectedPlant: Plant?
     var appCoordinator: AppCoordinator = AppCoordinator()
     var selectedTag: Tag?
+    var simpleUserRooms: [SimpleUserRoom] = []
+    var userRooms: [UUID: UserRoom] = [:]
     
     init(myRoomRepository: UserRoomRepositoryProtocol,
          roomRepository: RoomRepositoryProtocol,
@@ -70,11 +72,16 @@ class AppStore {
             appCoordinator.activeSheet = .debugScreen
         case .addNewPlant(let plant):
             saveNewPlant(plant)
+        case .getUserRoom(let id):
+            getUserRoom(by: id)
         }
     }
     
     func getData() {
         Task {
+//            let newRoom = await createNewUserRoom()
+//            await myRoomRepository.saveNewRoom(newRoom)
+            
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
             if let lastRoom {
@@ -83,6 +90,8 @@ class AppStore {
                 currentRoom = await createNewUserRoom()
                 await myRoomRepository.saveNewRoom(currentRoom)
             }
+            userRooms[currentRoom.id] = currentRoom
+            simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
         }
     }
     
@@ -90,7 +99,13 @@ class AppStore {
         let randomRoom = await roomRepository.getRandomRoom()
         let randomShelf = await shelfRepository.getRandomShelf()
         
-        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date(), plants: [:])
+        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date().getOffsetDate(offset: -30), plants: [:])
+    }
+    
+    func getUserRoom(by id: UUID) {
+        Task {
+            userRooms[id] = await myRoomRepository.getUserRoomBy(by: id)
+        }
     }
 
     // MARK: - TMP
