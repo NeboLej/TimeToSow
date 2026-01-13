@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HistoryScreenState {
+struct HistoryScreenState: Equatable {
     let currentRoomId: UUID
     let name: String
     let notes: [Note]
@@ -32,5 +32,12 @@ struct HistoryScreenState {
         topPlant = plantsAttay.max(by: { $0.time < $1.time })
         headerColor = Color.averageTopRowColor(from: UIImage(named: selectedRoom.roomType.image))
         isCurrentMonth = selectedRoomId == appStore.currentRoom.id
+    }
+    
+    private var monthColors = ["218B82", "F7CE76", "C54E6C", "9AD9DB", "EF874D", "A15D98"].map { Color(hex: $0) }
+    
+    func getMonthColor(by id: UUID) -> Color {
+        guard let firstIndex = allRooms.firstIndex(where: { $0.id == id }) else { return .orange }
+        return monthColors[firstIndex % monthColors.count]
     }
 }

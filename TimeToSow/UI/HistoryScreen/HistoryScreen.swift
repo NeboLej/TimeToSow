@@ -21,7 +21,7 @@ fileprivate enum L: LocalizedStringKey {
 
 struct HistoryScreen: View {
     
-//    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
+    //    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Environment(\.dismiss) var dismiss
     
@@ -36,12 +36,12 @@ struct HistoryScreen: View {
     }
     
     var body: some View {
-            VStack(spacing: 0) {
-                if isShowHeader, !store.state.isCurrentMonth {
-                    roomView()
-                }
-                contentLayer
+        VStack(spacing: 0) {
+            if !store.state.isCurrentMonth, isShowHeader {
+                roomView()
             }
+            contentLayer
+        }
         .background(.mainBackground)
         .navigationTitle("History")
         .navigationBarBackButtonHidden(true)
@@ -62,7 +62,7 @@ struct HistoryScreen: View {
                                     .foregroundStyle(.black)
                             }
                     }
-                }
+                }.buttonStyle(.plain)
             }
         }
     }
@@ -78,33 +78,47 @@ struct HistoryScreen: View {
     var contentLayer: some View {
         HStack(spacing: 0) {
             monthsScrollView()
-            
-            ScrollView {
-                HStack {
-                    statisticsView()
-                    Spacer()
+            ScrollViewReader { proxy in
+                ScrollView {
+                    Color.clear
+                        .frame(height: 1)
+                        .id("Top")
+                    HStack {
+                        statisticsView()
+                        Spacer()
+                    }
+                    monthStatisticSection()
+                    tagStatisticsSection()
+                    notesHistorySection()
                 }
-                monthStatisticSection()
-                tagStatisticsSection()
-                notesHistorySection()
-            }
-            
-            
-            .onScrollGeometryChange(for: CGFloat.self, of: \.contentOffset.y) { offset, _ in
-                if offset > 0, !isAnimate {
+                .onChange(of: store.state.currentRoomId, { oldValue, newValue in
                     isAnimate = true
-                    withAnimation(.default) {
-                        isShowHeader = false
-                    } completion: {
-                        isAnimate = false
-                    }
-                    
-                } else if offset < -120, !isAnimate {
                     withAnimation {
+                        proxy.scrollTo("Top", anchor: .top)
                         isShowHeader = true
+                    } completion: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            isAnimate = false
+                        }
+                    }
+                })
+                .onScrollGeometryChange(for: CGFloat.self, of: \.contentOffset.y) { offset, _ in
+                    if offset > 10, !isAnimate, isShowHeader {
+                        isAnimate = true
+                        withAnimation(.default) {
+                            isShowHeader = false
+                        } completion: {
+                            isAnimate = false
+                        }
+                    } else if offset < -130, !isAnimate, !isShowHeader {
+                        isAnimate = true
+                        withAnimation {
+                            isShowHeader = true
+                        } completion: {
+                            isAnimate = false
+                        }
                     }
                 }
-//                print(offset)
             }
         }
     }
@@ -206,7 +220,7 @@ struct HistoryScreen: View {
             TagStatisticsView(notes: store.state.notes)
         }.padding(.all, 10)
     }
-
+    
     
     @ViewBuilder
     private func roomView() -> some View {
@@ -225,7 +239,7 @@ struct HistoryScreen: View {
                     monthCell(text: room.name, id: room.id)
                 }
             }
-        }.background(Color.blue)
+        }.background(Color(hex: "#D7D7D7"))
     }
     
     @ViewBuilder
@@ -236,14 +250,14 @@ struct HistoryScreen: View {
             }
         } label: {
             Text(text)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
                 .padding(10)
                 .aspectRatio(contentMode: .fill)
                 .rotationEffect(.degrees(-90), anchor: .center)
+                .frame(width: 26, height: 150)
+                .background( id == store.selectedUserRoomId ? .mainBackground : store.state.getMonthColor(by: id))
+                .cornerRadius(5, corners: [.topLeft, .bottomLeft])
         }
-        .frame(width: 26, height: 150)
-//        .background(.orange)
-        .background( id == store.selectedUserRoomId ? .mainBackground : .orange)//Color(hex: vm.getMonthColor(index: tag)))
     }
 }
 

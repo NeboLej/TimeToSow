@@ -70,9 +70,6 @@ struct HomeScreen: View {
                 )
         )
         .ignoresSafeArea(.all)
-        .onAppear {
-            store.send(.loadData)
-        }
     }
     
     @State private var disableRootAnimation = true

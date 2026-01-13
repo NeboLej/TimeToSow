@@ -25,7 +25,12 @@ final class HistoryScreenStore: FeatureStore {
         switch action {
         case .selectRoom(let id):
             selectedUserRoomId = id
-            appStore.send(.getUserRoom(id: id))
+            if let _ = appStore.userRooms[id] {
+                selectedUserRoomId = id
+                state = HistoryScreenState(selectedRoomId: selectedUserRoomId, appStore: appStore)
+            } else {
+                appStore.send(.getUserRoom(id: id))
+            }
         }
     }
     
@@ -41,9 +46,7 @@ final class HistoryScreenStore: FeatureStore {
     }
     
     private func rebuildState() {
-        print("rebuildState")
         if appStore.userRooms[selectedUserRoomId] != nil {
-            print(selectedUserRoomId.uuidString)
             state = HistoryScreenState(selectedRoomId: selectedUserRoomId, appStore: appStore)
         } else {
             selectedUserRoomId = appStore.currentRoom.id
