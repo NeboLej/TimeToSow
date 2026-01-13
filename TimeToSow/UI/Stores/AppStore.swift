@@ -47,7 +47,7 @@ class AppStore {
         switch action {
         case .selectPlant(let plant):
             if let plant {
-                selectedPlant = currentRoom.plants[plant.id]
+                selectedPlant = userRooms[plant.rootRoomID]?.plants[plant.id]
             } else {
                 selectedPlant = nil
             }
@@ -60,7 +60,7 @@ class AppStore {
         case .addRandomPlant:
             addRandomPlantToShelf()
         case .detailPlant(let plant):
-            guard let plant = currentRoom.plants[plant.id] else { return }
+            guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
             appCoordinator.navigate(to: .plantDetails(plant), modal: true)
         case .addRandomNote:
             guard let selectedPlant else { return }
@@ -135,7 +135,7 @@ class AppStore {
     
     func updatePlantPosition(_ plant: Plant, newPosition: CGPoint) {
         guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
-        if newPosition == CGPoint(x: plant.offsetX, y: plant.offsetY) { return }
+        if plant.offsetX.isAlmostEqual(to: Double(newPosition.x)) && plant.offsetY.isAlmostEqual(to: Double(newPosition.y)) { return }
         let newPlant = plant.copy(offsetX: newPosition.x, offsetY: newPosition.y)
         Task {
             await plantRepository.updatePlant(newPlant)
@@ -143,13 +143,13 @@ class AppStore {
     }
     
     func saveNewPlant(_ newPlant: Plant) {
-        userRooms[newPlant.rootRoomID]?.plants[newPlant.id] = newPlant
-        if newPlant.rootRoomID == currentRoom.id {
-            currentRoom.plants[newPlant.id] = newPlant
-        }
-        
         Task {
             await plantRepository.saveNewPlant(newPlant)
+            
+            userRooms[newPlant.rootRoomID]?.plants[newPlant.id] = newPlant
+            if newPlant.rootRoomID == currentRoom.id {
+                currentRoom.plants[newPlant.id] = newPlant
+            }
         }
     }
     

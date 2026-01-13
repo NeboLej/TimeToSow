@@ -6,14 +6,13 @@
 //
 
 import Foundation
-
 import SwiftUI
 
 struct RainEffectModifier: ViewModifier {
     let isActive: Bool
     let height: CGFloat
     
-    let dropCount = 35
+    let dropCount = 30
     let fallSpeedRange: ClosedRange<Double> = 0.8...1.8
     let xWiggleAmplitude: CGFloat = 6
     
@@ -57,11 +56,9 @@ struct RainDrop: View {
         Rectangle()
             .fill(Color.blue.opacity(0.6))
             .frame(width: dropWidth, height: dropHeight)
-            .cornerRadius(dropWidth / 2)
-            .scaleEffect(1 - (fallProgress * 0.4))
             .opacity(1.0 - (fallProgress * 0.9))
             .offset(
-                x: xOffset + sin(fallProgress * 10) * xWiggleAmplitude,
+                x: xOffset, 
                 y:  -70 + fallProgress * (contentHeight * 0.5 + 70)
             )
             .onAppear {

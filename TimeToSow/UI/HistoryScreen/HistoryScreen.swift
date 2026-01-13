@@ -39,6 +39,7 @@ struct HistoryScreen: View {
         VStack(spacing: 0) {
             if !store.state.isCurrentMonth, isShowHeader {
                 roomView()
+                    .padding(.bottom, 5)
             }
             contentLayer
         }

@@ -17,6 +17,7 @@
 		8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */; };
 		8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34662F02789200354CAB /* Underdog-Regular.ttf */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
+		8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
 		8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */; };
 		8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */; };
@@ -115,6 +116,7 @@
 		8E5B34182EFEADD200354CAB /* Rarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarity.swift; sourceTree = "<group>"; };
 		8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StampatelloFaceto.otf; sourceTree = "<group>"; };
 		8E5B34662F02789200354CAB /* Underdog-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Underdog-Regular.ttf"; sourceTree = "<group>"; };
+		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
 		8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectModifier.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */,
 				8EAF68072EF4800300780BB9 /* Int + extension.swift */,
 				8E5B33F82EFDD59000354CAB /* Date + extension.swift */,
+				8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				8EF575672DCE435800AEC31A /* Tag.swift in Sources */,
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
+				8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */,
 				8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
 				8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */,

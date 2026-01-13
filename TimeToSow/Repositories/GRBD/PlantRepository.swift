@@ -65,6 +65,8 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                     let mutablePlant = PlantModelGRDB(from1: plant)
                     try mutablePlant.update(db)
                     Logger.log("update plant", location: .GRDB, event: .success)
+                } else {
+                    Logger.log("update plant error. plant not found", location: .GRDB, event: .error(nil))
                 }
             }
         } catch {
