@@ -20,7 +20,6 @@ fileprivate enum L: LocalizedStringKey {
 }
 
 struct HomeScreen: View {
-    
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     
     @State private var selectedTime: Int

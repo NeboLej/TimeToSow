@@ -68,7 +68,6 @@ struct RecordsHistoryView: View {
         .background(Color(hex: "E7E7E7"))
         .cornerRadius(20, corners: [.bottomRight, .topRight])
     }
-    
 }
 
 #Preview {

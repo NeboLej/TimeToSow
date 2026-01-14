@@ -72,9 +72,9 @@ struct PieChartView: View {
         Note(date: Date(), time: 230, tag: tag1),
         Note(date: Date(), time: 20, tag: tag3),
         Note(date: Date(), time: 120, tag: tag4),
-        //        Note(date: Date(), time: 12, tag: tag5),
-        //        Note(date: Date(), time: 80, tag: tag6),
-        //        Note(date: Date(), time: 43, tag: tag7),
+        Note(date: Date(), time: 12, tag: tag5),
+        Note(date: Date(), time: 80, tag: tag6),
+        Note(date: Date(), time: 43, tag: tag7),
     ].map { PieData(value: Double($0.time), color: Color(hex: $0.tag.color)) }
     
     PieChartView(notes: values, lineWidth: 50)

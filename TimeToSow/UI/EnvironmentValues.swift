@@ -16,12 +16,21 @@ import SwiftUI
 //    static var defaultValue = appStore
 //}
 
-
 private struct SafeAreaInsetsKey: EnvironmentKey {
     static var defaultValue: UIEdgeInsets {
-        (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero)
+        guard let scene = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first,
+              let window = scene.windows.first(where: { $0.isKeyWindow }) else { return .zero }
+        
+        return window.safeAreaInsets
     }
 }
+
+//
+//private struct SafeAreaInsetsKey: EnvironmentKey {
+//    static var defaultValue: UIEdgeInsets {
+//        (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets ?? .zero)
+//    }
+//}
 
 extension EnvironmentValues {
 //    var screenBuilder: ScreenBuilder {

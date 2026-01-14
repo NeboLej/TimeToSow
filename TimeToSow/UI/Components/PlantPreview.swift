@@ -126,31 +126,31 @@ struct PlantPreview: View {
 }
 
 #Preview {
-    let seed1 = Seed(name: "qwe",
-                     image: "seed26",
-                     height: 90,
-                     rarity: .uncommon,
-                     rootCoordinateCoef: .init(x: 0, y: 0.93))
+//    let seed1 = Seed(name: "qwe",
+//                     image: "seed26",
+//                     height: 90,
+//                     rarity: .uncommon,
+//                     rootCoordinateCoef: .init(x: 0, y: 0.93))
+//    
+//    let seed2 = Seed(name: "qwe",
+//                     image: "seed25",
+//                     height: 30,
+//                     rarity: .rare,
+//                     rootCoordinateCoef: .init(x: 0.1, y: 0))
+//    
+//    let seed3 = Seed(name: "seed48.name",
+//                     image: "seed48",
+//                     height: 24,
+//                     rarity: .uncommon)
+//    
+//    let seed4 = Seed(name: "seed17.name",
+//                     unavailavlePotTypes: [.narrow],
+//                     image: "seed17",
+//                     height: 40,
+//                     rarity: .legendary,
+//                     rootCoordinateCoef: .init(x: 0.05, y: 0))
     
-    let seed2 = Seed(name: "qwe",
-                     image: "seed25",
-                     height: 30,
-                     rarity: .rare,
-                     rootCoordinateCoef: .init(x: 0.1, y: 0))
-    
-    let seed3 = Seed(name: "seed48.name",
-                     image: "seed48",
-                     height: 24,
-                     rarity: .uncommon)
-    
-    let seed4 = Seed(name: "seed17.name",
-                     unavailavlePotTypes: [.narrow],
-                     image: "seed17",
-                     height: 40,
-                     rarity: .legendary,
-                     rootCoordinateCoef: .init(x: 0.05, y: 0))
-    
-    var tmpSeed = Seed(name: "seed4.name",
+    let tmpSeed = Seed(name: "seed4.name",
                        unavailavlePotTypes: [],
                        image: "seed4",
                        height: 45,
@@ -158,7 +158,7 @@ struct PlantPreview: View {
                        rootCoordinateCoef: .init(x: 0.05, y: 0))
     
     //rootCoordinateCoef: .init(x: 0.08, y: 0)
-    var tmpPot = Pot(potFeatures: [.narrow],
+    let tmpPot = Pot(potFeatures: [.narrow],
                      name: "pot63.name",
                      image: "pot63",
                      height: 28,
@@ -180,16 +180,6 @@ struct PlantPreview: View {
     
 }
 /*
- Pot(name: "pot62.name",
-                  image: "pot62",
-                  height: 20,
-                  rarity: .uncommon)
- 
- Pot(potFeatures: [.narrow],
-                  name: "pot63.name",
-                  image: "pot63",
-                  height: 28,
-                  rarity: .uncommon)
 
  
  */

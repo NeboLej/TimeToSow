@@ -129,10 +129,6 @@ class AppStore {
 //        shelfRepository.getNextShelf(curent: currentShelf, isNext: isNext)
 //    }
     
-    func updateCurrentRoom() {
-        
-    }
-    
     func updatePlantPosition(_ plant: Plant, newPosition: CGPoint) {
         guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
         if plant.offsetX.isAlmostEqual(to: Double(newPosition.x)) && plant.offsetY.isAlmostEqual(to: Double(newPosition.y)) { return }
@@ -140,6 +136,7 @@ class AppStore {
         Task {
             await plantRepository.updatePlant(newPlant)
         }
+        userRooms[plant.rootRoomID]?.plants[plant.id] = newPlant
     }
     
     func saveNewPlant(_ newPlant: Plant) {
@@ -189,7 +186,7 @@ extension AppStore {
     
     func addRandomPlantToShelf() {
         Task {
-            guard let roomId = userRooms.map { $0.key }.randomElement() else { return } //TMP
+            guard let roomId = userRooms.map({ $0.key }).randomElement() else { return } //TMP
             let randomPlant = await plantRepository.createRandomPlant(note: getRandomNote(), roomID: roomId)
             saveNewPlant(randomPlant)
         }

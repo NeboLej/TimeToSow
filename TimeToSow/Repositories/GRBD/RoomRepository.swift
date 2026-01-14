@@ -24,9 +24,6 @@ final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
             let toInsert = DefaultModels.rooms.filter { !existing.contains($0.stableId) }
             if toInsert.isEmpty { return }
             
-            let count = try await dbPool.read { db in
-                try RoomModelGRDB.fetchCount(db)
-            }
             try await dbPool.write { db in
                 for item in toInsert {
                     if try RoomModelGRDB.filter(key: item.id).fetchCount(db) == 0 {

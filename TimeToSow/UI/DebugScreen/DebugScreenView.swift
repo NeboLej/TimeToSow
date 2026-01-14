@@ -178,7 +178,8 @@ struct DebugScreenView: View {
     func countWithTimeView(time: Int) -> some View {
         let variants = allVariantsRatityCombo(fullTime: time)
         var count = 0
-        variants.forEach { (seedRarity, potRarity) in
+        
+        let _ = variants.forEach { (seedRarity, potRarity) in
             let filtredPots = allPots.filter { $0.rarity == potRarity }
             let filtredSeed = allSeeds.filter { $0.rarity == seedRarity }
             filtredSeed.forEach { seed in
@@ -186,7 +187,7 @@ struct DebugScreenView: View {
             }
         }
         
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             HStack {
                 Text("\(time) min -")
                 Text("\(count) variants")
