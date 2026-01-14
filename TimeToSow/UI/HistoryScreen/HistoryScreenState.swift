@@ -11,20 +11,20 @@ struct HistoryScreenState: Equatable {
     let currentRoomId: UUID
     let name: String
     let notes: [Note]
-    let allRooms: [SimpleUserRoom] //= ["One", "Two", "Three", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
-    let plantCount: Int //= 12
-    let loggedMinutesCount: Int //= 230
-    let topPlant: Plant? //= Plant(rootRoomID: UUID(), seed: tmpSeed, pot: tmpPot, name: "", description: "", offsetY: 0, offsetX: 0, notes: [])
-    let topTag: Tag? = Tag(stableId: "", name: "asdad", color: "FFDD55")
+    let allRooms: [SimpleUserRoom]
+    let plantCount: Int
+    let loggedMinutesCount: Int
+    let topPlant: Plant?
+    let topTag: Tag?
     let headerColor: Color
-    let isCurrentMonth: Bool// = true
+    let isCurrentMonth: Bool
     
     init(selectedRoomId: UUID, appStore: AppStore) {
         guard let selectedRoom = appStore.userRooms[selectedRoomId] else { fatalError() }
         currentRoomId = selectedRoomId
         name = selectedRoom.name
         notes = selectedRoom.plants.flatMap { $0.value.notes }
-        allRooms = appStore.simpleUserRooms
+        allRooms = appStore.simpleUserRooms.sorted(by: { $1.dateCreate < $0.dateCreate })
         plantCount = selectedRoom.plants.count
         let plantsAttay = selectedRoom.plants.map(\.value)
         
@@ -32,6 +32,11 @@ struct HistoryScreenState: Equatable {
         topPlant = plantsAttay.max(by: { $0.time < $1.time })
         headerColor = Color.averageTopRowColor(from: UIImage(named: selectedRoom.roomType.image))
         isCurrentMonth = selectedRoomId == appStore.currentRoom.id
+        
+        let dict = notes.reduce(into: [:]) { result, note in
+            result[note.tag, default: 0] += note.time
+        }
+        topTag = dict.map { ($0.key, $0.value) }.max(by: { $1.1 > $0.1 })?.0
     }
     
     private var monthColors = ["218B82", "F7CE76", "C54E6C", "9AD9DB", "EF874D", "A15D98"].map { Color(hex: $0) }

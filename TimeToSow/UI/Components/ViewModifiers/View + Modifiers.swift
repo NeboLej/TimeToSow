@@ -15,4 +15,8 @@ extension View {
     func rainShimmer(if active: Bool, height: CGFloat) -> some View {
         self.modifier(RainEffectModifier(isActive: active, height: height))
     }
+    
+    func enableScrollViewSwipeActionModifier() -> some View {
+        self.modifier(ScrollViewSwipeActionModifier())
+    }
 }

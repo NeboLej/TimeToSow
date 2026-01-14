@@ -183,6 +183,7 @@ struct HistoryScreen: View {
                     if let topTag = store.state.topTag {
                         lineStatisticView(title: L.monthStatistic_TopTag.loc,
                                           view: TagView(tag: topTag)
+                            .id(store.state.topTag)
                         )
                     }
                     

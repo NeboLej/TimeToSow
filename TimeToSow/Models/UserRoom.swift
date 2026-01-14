@@ -73,9 +73,11 @@ class UserRoom: Hashable {
 struct SimpleUserRoom: Identifiable, Hashable {
     let id: UUID
     let name: String
+    let dateCreate: Date
     
     init(from: UserRoomModelGRDB) {
         id = from.id
         name = from.name
+        dateCreate = from.dateCreate
     }
 }

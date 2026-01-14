@@ -37,13 +37,14 @@ struct RecordsHistoryView: View {
                         .padding(.leading, 10)
                     
                     ForEach(dayNotes) { note in
-                        SwipeableRow {
-                            recordRow(note)
-                        } actions: {
-                            Image(systemName: "trash")
-                                .frame(width: 60, height: 46)
-                                .foregroundColor(.red)
-                        }
+                        
+                        recordRow(note)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button("Delete", systemImage: "trash") {
+                                    print("delete")
+                                }.tint(.strokeAcsent2)
+                            }
+                            .enableScrollViewSwipeActionModifier()
                     }
                 }
             }
@@ -63,9 +64,30 @@ struct RecordsHistoryView: View {
             TagView(tag: note.tag)
                 .padding(.trailing, 10)
         }
-        .frame(height: 46)
+        .frame(height: 50)
         .background(Color(hex: "E7E7E7"))
         .cornerRadius(20, corners: [.bottomRight, .topRight])
     }
     
+}
+
+#Preview {
+    PlantDetailScreen(plant: Plant(rootRoomID: UUID(),
+                                   seed: Seed(name: "seed1.name",
+                                              image: "seed23",
+                                              height: 45,
+                                              rarity: .common),
+                                   pot: Pot(name: "pot1.name",
+                                            image: "pot21",
+                                            height: 24,
+                                            rarity: .common),
+                                   name: "Oleg",
+                                   description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
+                                   offsetY: 200,
+                                   offsetX: 200,
+                                   notes: [
+                                    Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                    Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
+                                   ]
+                                  ))
 }

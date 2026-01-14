@@ -12,10 +12,10 @@
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
 		8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */; };
 		8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B33F82EFDD59000354CAB /* Date + extension.swift */; };
-		8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */; };
 		8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B34182EFEADD200354CAB /* Rarity.swift */; };
 		8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */; };
 		8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B34662F02789200354CAB /* Underdog-Regular.ttf */; };
+		8E6344612F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6344602F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
@@ -112,10 +112,10 @@
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreen.swift; sourceTree = "<group>"; };
 		8E5B33F82EFDD59000354CAB /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
-		8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRow.swift; sourceTree = "<group>"; };
 		8E5B34182EFEADD200354CAB /* Rarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rarity.swift; sourceTree = "<group>"; };
 		8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StampatelloFaceto.otf; sourceTree = "<group>"; };
 		8E5B34662F02789200354CAB /* Underdog-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Underdog-Regular.ttf"; sourceTree = "<group>"; };
+		8E6344602F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewSwipeActionModifier.swift; sourceTree = "<group>"; };
 		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
@@ -242,6 +242,7 @@
 				8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */,
 				8E7240CB2EE265E800D08CE7 /* RainEffectModifier.swift */,
 				8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */,
+				8E6344602F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -498,7 +499,6 @@
 				8EA1C9B92EFC546600DF690F /* RarityView.swift */,
 				8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */,
 				8EA1C9D82EFDB34C00DF690F /* PieChartView.swift */,
-				8E5B34062EFDE3D100354CAB /* SwipeableRow.swift */,
 				8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */,
 			);
 			path = Components;
@@ -662,7 +662,6 @@
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
-				8E5B34072EFDE3D100354CAB /* SwipeableRow.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
 				8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */,
@@ -675,6 +674,7 @@
 				8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */,
 				8EAF67D22EF352E300780BB9 /* RoomViewState.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
+				8E6344612F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift in Sources */,
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8EAF67CB2EF3520200780BB9 /* AppActions.swift in Sources */,
