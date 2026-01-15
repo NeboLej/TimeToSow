@@ -41,7 +41,7 @@ struct HistoryScreen: View {
                 roomView()
                     .padding(.bottom, 5)
             }
-            contentLayer
+            content
         }
         .background(.mainBackground)
         .navigationTitle("History")
@@ -76,7 +76,7 @@ struct HistoryScreen: View {
     }
     
     @State var isAnimate = false
-    var contentLayer: some View {
+    var content: some View {
         HStack(spacing: 0) {
             monthsScrollView()
             ScrollViewReader { proxy in
@@ -89,8 +89,10 @@ struct HistoryScreen: View {
                         Spacer()
                     }
                     monthStatisticSection()
-                    tagStatisticsSection()
-                    notesHistorySection()
+                    if !store.state.notes.isEmpty {
+                        tagStatisticsSection()
+                        notesHistorySection()
+                    }
                 }
                 .onChange(of: store.state.currentRoomId, { oldValue, newValue in
                     isAnimate = true

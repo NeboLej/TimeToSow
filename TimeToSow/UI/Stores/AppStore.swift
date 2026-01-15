@@ -86,7 +86,7 @@ class AppStore {
             
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
-            if let lastRoom {
+            if let lastRoom, lastRoom.dateCreate.isCurrentMonth() {
                 currentRoom = lastRoom
             } else {
                 currentRoom = await createNewUserRoom()
@@ -100,8 +100,9 @@ class AppStore {
     func createNewUserRoom() async -> UserRoom {
         let randomRoom = await roomRepository.getRandomRoom()
         let randomShelf = await shelfRepository.getRandomShelf()
+        let dateCreate = Date()//.getOffsetDate(offset: -32)
         
-        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: Date().toReadableDate(), dateCreate: Date().getOffsetDate(offset: -30), plants: [:])
+        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: dateCreate.toMonthYearDate(), dateCreate: dateCreate, plants: [:])
     }
     
     func getUserRoom(by id: UUID) {
