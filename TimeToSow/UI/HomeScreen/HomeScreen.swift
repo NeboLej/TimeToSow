@@ -112,6 +112,9 @@ struct HomeScreen: View {
                 }
             menuElement(colorHex: "7482D1", icon: "info.circle")
             menuElement(colorHex: "6E916A", icon: "paintbrush")
+                .onTapGesture {
+                    store.send(.toEditRoomScreen)
+                }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 12)
@@ -151,12 +154,6 @@ struct HomeScreen: View {
     @ViewBuilder
     private func debugConsole() -> some View {
         HStack {
-            Button("Room") {
-                store.send(.changedRoomType, animation: nil)
-            }
-            Button("Shelf") {
-                store.send(.changedShelfType, animation: nil)
-            }
             Button("Plant") {
                 store.send(.addRandomPlant)
             }

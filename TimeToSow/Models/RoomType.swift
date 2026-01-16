@@ -13,7 +13,7 @@ protocol RoomProtocol {
     var image: String { get }
 }
 
-struct RoomType: Hashable {
+struct RoomType: Hashable, Identifiable {
     let id: UUID
     let name: String
     let image: String

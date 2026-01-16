@@ -11,7 +11,7 @@ import SwiftUI
 final class RoomFeatureStore: FeatureStore {
     var state: RoomViewState
     
-    private var delegate: RoomFeatureDelegate?
+    private var delegate: RoomFeatureDelegate
     private var selectedRoomId: UUID?
     var room: UserRoom
     
@@ -34,13 +34,13 @@ final class RoomFeatureStore: FeatureStore {
         observeAppState()
     }
     
-    func send(_ acion: RoomFeatureAction, animation: Animation? = .default) {
+    func send(_ action: RoomFeatureAction, animation: Animation? = .default) {
         if let animation {
             withAnimation(animation) {
-                delegate?.send(action: acion)
+                delegate.send(action)
             }
         } else {
-            delegate?.send(action: acion)
+            delegate.send(action)
         }
     }
     

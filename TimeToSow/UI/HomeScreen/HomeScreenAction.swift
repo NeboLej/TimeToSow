@@ -8,13 +8,12 @@
 import Foundation
 
 enum HomeScreenAction {
-    case changedRoomType
-    case changedShelfType
     case addRandomPlant
     case addRandomNote
     case toDebugScreen
     case toProgressScreen(time: Int)
     case toHistoryScreen
+    case toEditRoomScreen
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -24,10 +23,6 @@ protocol HomeScreenDelegate: AnyObject {
 extension AppStore: HomeScreenDelegate {
     func send(action: HomeScreenAction) {
         switch action {
-        case .changedRoomType:
-            send(.changedRoomType)
-        case .changedShelfType:
-            send(.changedShelfType)
         case .addRandomPlant:
             send(.addRandomPlant)
         case .addRandomNote:
@@ -38,6 +33,8 @@ extension AppStore: HomeScreenDelegate {
             appCoordinator.navigate(to: .progress(time), modal: false)
         case .toHistoryScreen:
             appCoordinator.path.append(ScreenType.history)
+        case .toEditRoomScreen:
+            appCoordinator.navigate(to: .editRoom, modal: true)
         }
     }
 }

@@ -9,23 +9,22 @@ import SwiftUI
 
 struct EditRoomScreen: View {
     
-//    @Environment(\.appStore) var appStore: AppStore
-    @State private var currentRoomType: RoomType?
-    @State private var currentShelfType: ShelfType?
     @Environment(\.dismiss) var dismiss
+    @State var store: EditRoomStore
     
     var body: some View {
         VStack {
             ZStack(alignment: .top) {
-                Image(currentRoomType?.image ?? "")
+                Image(store.state.selectedRoom.image)
                     .resizable()
-                Image(currentShelfType?.image ?? "")
+                Image(store.state.selectedShelf.image)
                     .resizable()
             }
             .frame(height: 400)
-            editRoomControl()
-            editShelfControl()
-                .padding(.top, 16)
+            roomsList()
+                .padding(.bottom, 16)
+            shelfList()
+            
             Spacer()
             HStack {
                 Button {
@@ -37,7 +36,7 @@ struct EditRoomScreen: View {
                 }
                 
                 Button {
-//                    appStore.setShelf(roomType: currentRoomType, shelfType: currentShelfType)
+                    store.send(.save)
                     dismiss()
                 } label: {
                     TextEllipseStrokeView(text: "Done", font: .myButton(25), isSelected: true)
@@ -48,53 +47,64 @@ struct EditRoomScreen: View {
             .padding(.bottom, 16)
         }
         .ignoresSafeArea()
-        .onAppear {
-//            currentRoomType = appStore.currentRoom.roomType
-//            currentShelfType = appStore.currentRoom.shelfType
-        }
     }
     
     @ViewBuilder
-    private func editRoomControl() -> some View {
-        VStack {
-            Text("Edit room")
-                .font(.myTitle(20))
+    private func roomsList() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                Image(systemName: "chevron.left")
-                    .onTapGesture {
-//                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: false)
-                    }
-                Text(currentRoomType?.name ?? "")
-                    .font(.myTitle(20))
-                Image(systemName: "chevron.right")
-                    .onTapGesture {
-//                        currentRoomType = appStore.getNextRoom(currentRoom: currentRoomType!, isNext: true)
-                    }
+                ForEach(store.state.allRooms) { room in
+                    imageCell(imageName: room.image)
+                        .overlay(alignment: .topTrailing) {
+                            if store.selectedRoom.id == room.id {
+                                Circle()
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .onTapGesture {
+                            store.send(.selectRoom(room))
+                        }
+                }
             }
         }
     }
     
     @ViewBuilder
-    private func editShelfControl() -> some View {
-        VStack {
-            Text("Edit shelf")
-                .font(.myTitle(20))
+    private func shelfList() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                Image(systemName: "chevron.left")
-                    .onTapGesture {
-//                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: false)
-                    }
-                Text(currentShelfType?.name ?? "")
-                    .font(.myTitle(20))
-                Image(systemName: "chevron.right")
-                    .onTapGesture {
-//                        currentShelfType = appStore.getNextShelf(currentShelf: currentShelfType!, isNext: true)
-                    }
+                ForEach(store.state.allShelfs) { shelf in
+                    imageCell(imageName: shelf.image)
+                        .overlay(alignment: .topTrailing) {
+                            if store.selectedShelf.id == shelf.id {
+                                Circle()
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                EmptyView()
+                            }
+                        }
+                        .onTapGesture {
+                            store.send(.selectShelf(shelf))
+                        }
+                }
             }
         }
+    }
+    
+    @ViewBuilder
+    private func imageCell(imageName: String) -> some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100)
+            .background(.gray.opacity(0.3))
+            .cornerRadius(20, corners: .allCorners)
+
     }
 }
 
 #Preview {
-    EditRoomScreen()
+    screenBuilderMock.getScreen(type: .editRoom)
 }

@@ -29,16 +29,12 @@ class AppStore {
     var simpleUserRooms: [SimpleUserRoom] = []
     var userRooms: [UUID: UserRoom] = [:]
     
-    init(myRoomRepository: UserRoomRepositoryProtocol,
-         roomRepository: RoomRepositoryProtocol,
-         shelfRepository: ShelfRepositoryProtocol,
-         plantRepository: PlantRepositoryProtocol,
-         tagRepository: TagRepositoryProtocol) {
-        self.myRoomRepository = myRoomRepository
-        self.roomRepository = roomRepository
-        self.shelfRepository = shelfRepository
-        self.plantRepository = plantRepository
-        self.tagRepository = tagRepository
+    init(factory: RepositoryFactory) {
+        self.myRoomRepository = factory.myRoomRepository
+        self.plantRepository = factory.plantRepository
+        self.tagRepository = factory.tagRepository
+        self.roomRepository = factory.roomRepository
+        self.shelfRepository = factory.shelfRepository
         
         getData()
     }
@@ -53,10 +49,10 @@ class AppStore {
             }
         case .movePlant(plant: let plant, newPosition: let newPosition):
             updatePlantPosition(plant, newPosition: newPosition)
-        case .changedRoomType:
-            setRandomRoom()
-        case .changedShelfType:
-            setRandomShelf()
+        case .changedRoomType(let newRoom):
+            setNewRoom(newRoom)
+        case .changedShelfType(let newShelf):
+            setNewShelf(newShelf)
         case .addRandomPlant:
             addRandomPlantToShelf()
         case .detailPlant(let plant):
@@ -172,15 +168,17 @@ class AppStore {
 
 //MARK: Test -
 extension AppStore {
-    func setRandomRoom() {
+    func setNewRoom(_ room: RoomType) {
         Task {
-            currentRoom.roomType = await roomRepository.getRandomRoom()
+            currentRoom.roomType = room
+            //TODO: update room
         }
     }
     
-    func setRandomShelf() {
+    func setNewShelf(_ shelf: ShelfType) {
         Task {
-            currentRoom.shelfType = await shelfRepository.getRandomShelf()
+            currentRoom.shelfType = shelf
+            //TODO: update room
         }
         
     }

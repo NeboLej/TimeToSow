@@ -29,10 +29,12 @@ enum ComponentType {
 
 final class ScreenBuilder {
     
-    var appStore: AppStore
+    private let appStore: AppStore
+    private let repositories: RepositoryFactory
     
-    init(appStore: AppStore) {
+    init(appStore: AppStore, repositoryFactory: RepositoryFactory) {
         self.appStore = appStore
+        self.repositories = repositoryFactory
     }
     
     @ViewBuilder
@@ -41,7 +43,7 @@ final class ScreenBuilder {
         case .home:
             HomeScreen(store: HomeScreenStore(appStore: appStore), screenBuilder: self)
         case .editRoom:
-            EditRoomScreen()
+            EditRoomScreen(store: EditRoomStore(appStore: appStore, roomRepository: repositories.roomRepository, shelfRepository: repositories.shelfRepository))
         case .progress(let minutes):
             ProgressScreen(store: ProgressScreenStore(appStore: appStore, minutes: minutes))
         case .plantDetails(let plant):

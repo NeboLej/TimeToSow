@@ -10,7 +10,7 @@ import GRDB
 
 protocol RoomRepositoryProtocol {
     func getRandomRoom() async -> RoomType
-    func getAllRooms() async throws -> [RoomType]
+    func getAllRooms() async -> [RoomType]
 }
 
 final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
@@ -40,17 +40,23 @@ final class RoomRepository: BaseRepository, RoomRepositoryProtocol {
         }
     }
     
-    func getAllRooms() async throws -> [RoomType] {
-        try await dbPool.read { db in
-            let rooms = try RoomModelGRDB.fetchAll(db).map { RoomType(from: $0) }
-            Logger.log("get \(rooms.count) Rooms", location: .GRDB, event: .success)
+    func getAllRooms() async -> [RoomType] {
+        do {
+            let rooms = try await dbPool.read { db in
+                let models = try RoomModelGRDB.fetchAll(db).map { RoomType(from: $0) }
+                Logger.log("get \(models.count) Rooms", location: .GRDB, event: .success)
+                return models
+            }
             return rooms
+        } catch {
+            Logger.log("Failed to get Rooms", location: .GRDB, event: .error(error))
+            return []
         }
     }
     
     func getRandomRoom() async -> RoomType {
         do {
-            let models = try await getAllRooms()
+            let models = await getAllRooms()
             guard let randomModel = models.randomElement() else {
                 throw NSError(domain: "RoomRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: "No room available"])
             }

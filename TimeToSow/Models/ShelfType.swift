@@ -14,7 +14,7 @@ protocol ShelfProtocol {
     var shelfPositions: [ShelfPosition] { get }
 }
 
-struct ShelfType: Hashable {
+struct ShelfType: Hashable, Identifiable {
     let id: UUID
     let name: String
     let image: String

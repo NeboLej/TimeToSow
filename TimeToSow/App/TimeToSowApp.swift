@@ -8,6 +8,18 @@
 import SwiftUI
 import GRDB
 
+class RepositoryFactory {
+    let tagRepository: TagRepositoryProtocol = TagRepository(dbPool: DatabaseManager.shared.dbPool)
+    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(dbPool: DatabaseManager.shared.dbPool)
+    let roomRepository: RoomRepositoryProtocol = RoomRepository(dbPool: DatabaseManager.shared.dbPool)
+    let seedRepository: SeedRepositoryProtocol = SeedRepository(dbPool: DatabaseManager.shared.dbPool)
+    let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
+    let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
+    lazy var plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
+                                                                    seedRepository: seedRepository,
+                                                                    potRepository: potRepository)
+}
+
 
 @main
 struct TimeToSowApp: App {
@@ -16,23 +28,11 @@ struct TimeToSowApp: App {
     private var appStore: AppStore
     
     init() {
-        let tagRepository: TagRepositoryProtocol = TagRepository(dbPool: DatabaseManager.shared.dbPool)
-        let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(dbPool: DatabaseManager.shared.dbPool)
-        let roomRepository: RoomRepositoryProtocol = RoomRepository(dbPool: DatabaseManager.shared.dbPool)
-        let seedRepository: SeedRepositoryProtocol = SeedRepository(dbPool: DatabaseManager.shared.dbPool)
-        let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
-        let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
-        let plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
-                                                                        seedRepository: seedRepository,
-                                                                        potRepository: potRepository)
 
+        let repositoryFactory = RepositoryFactory()
         
-        let appStore = AppStore(myRoomRepository: myRoomRepository,
-                                roomRepository: roomRepository,
-                                shelfRepository: shelfRepository,
-                                plantRepository: plantRepository,
-                                tagRepository: tagRepository)
-        screenBuilder = ScreenBuilder(appStore: appStore)
+        let appStore = AppStore(factory: repositoryFactory)
+        screenBuilder = ScreenBuilder(appStore: appStore, repositoryFactory: repositoryFactory)
         self.appStore = appStore
         
         loadLocalJSONLocalization()
@@ -86,21 +86,9 @@ struct TimeToSowApp: App {
 
 #if DEBUG
 let screenBuilderMock: ScreenBuilder = {
-    let tagRepository: TagRepositoryProtocol = TagRepository(dbPool: DatabaseManager.shared.dbPool)
-    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(dbPool: DatabaseManager.shared.dbPool)
-    let roomRepository: RoomRepositoryProtocol = RoomRepository(dbPool: DatabaseManager.shared.dbPool)
-    let seedRepository: SeedRepositoryProtocol = SeedRepository(dbPool: DatabaseManager.shared.dbPool)
-    let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
-    let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
-    let plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
-                                                                    seedRepository: seedRepository,
-                                                                    potRepository: potRepository)
+    let repositoryFactory = RepositoryFactory()
     
-    let appStore = AppStore(myRoomRepository: myRoomRepository,
-                            roomRepository: roomRepository,
-                            shelfRepository: shelfRepository,
-                            plantRepository: plantRepository,
-                            tagRepository: tagRepository)
-    return ScreenBuilder(appStore: appStore)
+    let appStore = AppStore(factory: repositoryFactory)
+    return ScreenBuilder(appStore: appStore, repositoryFactory: repositoryFactory)
 }()
 #endif

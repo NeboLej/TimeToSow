@@ -16,22 +16,22 @@ enum RoomFeatureAction {
 }
 
 protocol RoomFeatureDelegate: AnyObject {
-    func send(action: RoomFeatureAction)
+    func send(_ action: RoomFeatureAction)
 }
 
 extension AppStore: RoomFeatureDelegate {
-    func send(action: RoomFeatureAction) {
+    func send(_ action: RoomFeatureAction) {
         switch action {
         case .selectPlant(let plant):
-            send(.selectPlant(plant == selectedPlant ? nil : plant))
+            send(AppAction.selectPlant(plant == selectedPlant ? nil : plant))
         case .roomTapped:
-            send(.selectPlant(nil))
+            send(AppAction.selectPlant(nil))
         case .startMovePlant:
-            send(.selectPlant(nil))
+            send(AppAction.selectPlant(nil))
         case .movePlant(let plant, let position):
-            send(.movePlant(plant: plant, newPosition: position))
+            send(AppAction.movePlant(plant: plant, newPosition: position))
         case .detailPlant(let plant):
-            send(.detailPlant(plant))
+            send(AppAction.detailPlant(plant))
         }
     }
 }
