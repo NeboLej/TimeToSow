@@ -11,6 +11,7 @@ import GRDB
 protocol TagRepositoryProtocol {
     func getRandomTag() async -> Tag
     func getAllTags() async -> [Tag]
+    func saveNewTag(_ tag: Tag) async 
 }
 
 final class TagRepository: BaseRepository, TagRepositoryProtocol {
@@ -65,6 +66,17 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
             Logger.log("Failed to get random tag", location: .GRDB, event: .error(error))
             await setDefaultValues()
             return await getRandomTag()
+        }
+    }
+    
+    func saveNewTag(_ tag: Tag) async {
+        do {
+            try await dbPool.write { db in
+                var tagModel = TagModelGRDB(from: tag)
+                try tagModel.save(db)
+            }
+        } catch {
+            Logger.log("Failed to save new tag", location: .GRDB, event: .error(error))
         }
     }
 }

@@ -14,7 +14,7 @@ protocol TagProtocol {
     var stableId: String { get }
 }
 
-struct Tag: Hashable {
+struct Tag: Hashable, Identifiable {
     let id: UUID
     let stableId: String
     let name: String

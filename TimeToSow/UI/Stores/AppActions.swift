@@ -18,4 +18,6 @@ enum AppAction {
     case toDebugScreen
     case addNewPlant(Plant)
     case getUserRoom(id: UUID)
+    case selectTag(Tag)
+    case newTag(Tag)
 }

@@ -7,53 +7,6 @@
 
 import SwiftUI
 
-// The view that will be presented as a modal
-struct ShortModalView: View {
-    @Environment(\.dismiss) var dismiss // Environment value to dismiss the sheet
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.gray)
-                }
-                .padding()
-            }
-            
-            Text("This is a short modal screen!")
-                .padding()
-            
-            // Add the modifier to control the height
-            // .medium is a common preset for a short modal
-            // You can also use .fraction(0.2) or .height(150) for custom sizes
-        }
-        .presentationDetents([.medium, .fraction(0.3)]) //
-        .presentationDragIndicator(.visible) // Optional: adds a grab bar
-    }
-}
-
-// The main content view where the modal is triggered
-struct ContentView: View {
-    @State private var showModal = false
-    
-    var body: some View {
-        Button("Show Short Modal") {
-            showModal.toggle()
-        }
-        .sheet(isPresented: $showModal) {
-            ShortModalView()
-        }
-    }
-}
-
-
-
-
 fileprivate enum L: LocalizedStringKey {
     case newPlantTitle = "HomeScreen.newPlantTitle"
     case updatePlantTitle = "HomeScreen.upgradePlantTitle"
@@ -235,13 +188,16 @@ struct HomeScreen: View {
                         }
                         
                         if store.state.selectedTag != nil {
-                        HStack(spacing: 10) {
+                            HStack(spacing: 10) {
                                 TagView(tag: store.state.selectedTag!)
+                                    .id(store.state.selectedTag)
                                 Image(systemName: "pencil.line")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 16)
                                     .foregroundStyle(.black)
+                            }.onTapGesture {
+                                store.send(.toTagsScreen)
                             }
                         }
                     }.padding(.trailing, 14)
@@ -361,7 +317,7 @@ var tmpPot = Pot(name: "aeded",
                  rarity: .common)
 
 #Preview {
-    ContentView()
-//    screenBuilderMock.getScreen(type: .home)
+    //    ContentView()
+    screenBuilderMock.getScreen(type: .home)
     //        .environment(\.locale, .init(identifier: "en"))
 }

@@ -30,9 +30,15 @@ final class TagsScreenStore: FeatureStore {
     func send(_ action: TagsScreenAction, animation: Animation? = nil) {
         withAnimation(animation) {
             switch action {
-            case .changeMode(let mode): break
-            case .addNewTag(let name, let color): break
-            case .selectTag(let tag): break
+            case .changeMode(let mode):
+                self.mode = mode
+                rebuildState()
+            case .addNewTag(let name, let color):
+                let newTag = Tag(name: name, color: color)
+                appStore.send(.newTag(newTag))
+                appStore.send(.selectTag(newTag))
+            case .selectTag(let tag):
+                appStore.send(.selectTag(tag))
             }
         }
     }
@@ -45,6 +51,12 @@ final class TagsScreenStore: FeatureStore {
     }
     
     private func rebuildState() {
-        state = TagsScreenState(mode: mode, tagsList: allTags, selectedTag: appStore.selectedTag)
+        let sordedTags: [Tag]
+        if let currentTag = appStore.selectedTag {
+            sordedTags = [currentTag] + allTags.filter { $0.id != currentTag.id }
+        } else {
+            sordedTags = allTags
+        }
+        state = TagsScreenState(mode: mode, tagsList: sordedTags, selectedTag: appStore.selectedTag)
     }
 }

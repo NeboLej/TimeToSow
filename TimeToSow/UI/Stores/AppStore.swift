@@ -72,6 +72,10 @@ class AppStore {
             saveNewPlant(plant)
         case .getUserRoom(let id):
             getUserRoom(by: id)
+        case .selectTag(let tag):
+            selectedTag = tag
+        case .newTag(let tag):
+            saveNewTag(tag)
         }
     }
     

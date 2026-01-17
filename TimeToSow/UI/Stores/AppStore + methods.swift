@@ -85,4 +85,11 @@ extension AppStore {
         }
     }
     
+    //MARK: - Tag
+    func saveNewTag(_ tag: Tag) {
+        Task {
+            await tagRepository.saveNewTag(tag)
+        }
+    }
+    
 }

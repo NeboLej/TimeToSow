@@ -14,6 +14,7 @@ enum HomeScreenAction {
     case toProgressScreen(time: Int)
     case toHistoryScreen
     case toEditRoomScreen
+    case toTagsScreen
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -35,6 +36,8 @@ extension AppStore: HomeScreenDelegate {
             appCoordinator.path.append(ScreenType.history)
         case .toEditRoomScreen:
             appCoordinator.navigate(to: .editRoom, modal: true)
+        case .toTagsScreen:
+            appCoordinator.navigate(to: .tags, modal: true)
         }
     }
 }
