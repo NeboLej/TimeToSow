@@ -9,7 +9,7 @@ import SwiftUI
 
 enum ScreenType: Identifiable, Hashable {
     
-    case home, editRoom, progress(Int), plantDetails(Plant), debugScreen, history
+    case home, editRoom, progress(Int), plantDetails(Plant), debugScreen, history, tags
     
     var id: String {
         switch self {
@@ -19,6 +19,7 @@ enum ScreenType: Identifiable, Hashable {
         case .plantDetails(let plant): "plantDetails - \(plant.id)"
         case .debugScreen: "debugScreen"
         case .history: "history"
+        case .tags: "tags"
         }
     }
 }
@@ -53,6 +54,8 @@ final class ScreenBuilder {
             DebugScreenView()
         case .history:
             HistoryScreen(store: HistoryScreenStore(appStore: appStore), screenBuilder: self)
+        case .tags:
+            TagsScreen(store: TagsScreenStore(appStore: appStore, tagRepository: repositories.tagRepository))
         }
     }
     

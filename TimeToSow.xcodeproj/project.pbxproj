@@ -26,6 +26,11 @@
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
 		8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */; };
 		8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* DrawText.swift */; };
+		8E886B242F1BA2570001A734 /* AppStore + methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B232F1BA2570001A734 /* AppStore + methods.swift */; };
+		8E886B272F1BA82F0001A734 /* TagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B262F1BA82F0001A734 /* TagsScreen.swift */; };
+		8E886B292F1BA8580001A734 /* TagsScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B282F1BA8580001A734 /* TagsScreenState.swift */; };
+		8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */; };
+		8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */; };
 		8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9B92EFC546600DF690F /* RarityView.swift */; };
 		8EA1C9D32EFD836700DF690F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9D22EFD836700DF690F /* Note.swift */; };
 		8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */; };
@@ -128,6 +133,11 @@
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPreview.swift; sourceTree = "<group>"; };
 		8E7A7FE12EDF959400575A81 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
+		8E886B232F1BA2570001A734 /* AppStore + methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore + methods.swift"; sourceTree = "<group>"; };
+		8E886B262F1BA82F0001A734 /* TagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreen.swift; sourceTree = "<group>"; };
+		8E886B282F1BA8580001A734 /* TagsScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenState.swift; sourceTree = "<group>"; };
+		8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenStore.swift; sourceTree = "<group>"; };
+		8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenAction.swift; sourceTree = "<group>"; };
 		8EA1C9B92EFC546600DF690F /* RarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarityView.swift; sourceTree = "<group>"; };
 		8EA1C9D22EFD836700DF690F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagStatisticsView.swift; sourceTree = "<group>"; };
@@ -261,6 +271,17 @@
 				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
 			path = ProgressScreen;
+			sourceTree = "<group>";
+		};
+		8E886B252F1BA7D90001A734 /* TagsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8E886B262F1BA82F0001A734 /* TagsScreen.swift */,
+				8E886B282F1BA8580001A734 /* TagsScreenState.swift */,
+				8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */,
+				8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */,
+			);
+			path = TagsScreen;
 			sourceTree = "<group>";
 		};
 		8EAF67C32EF33A9100780BB9 /* FeatureStores */ = {
@@ -448,6 +469,7 @@
 			children = (
 				8EAF67C32EF33A9100780BB9 /* FeatureStores */,
 				8EF575452DCE3F3A00AEC31A /* AppStore.swift */,
+				8E886B232F1BA2570001A734 /* AppStore + methods.swift */,
 				8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */,
 				8EAF67CA2EF3520200780BB9 /* AppActions.swift */,
 			);
@@ -457,6 +479,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8E886B252F1BA7D90001A734 /* TagsScreen */,
 				8EFEEEF12F0E53D300857A23 /* HistoryScreen */,
 				8ED72C842F07D4F7008E6869 /* DebugScreen */,
 				8E2E5EE52EF8544200B91347 /* PlantDetailScreen */,
@@ -646,6 +669,7 @@
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
+				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,
 				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
@@ -670,6 +694,7 @@
 				8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */,
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */,
+				8E886B242F1BA2570001A734 /* AppStore + methods.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
@@ -688,8 +713,11 @@
 				8EE61D382F1AB029002E8B30 /* EditRoomState.swift in Sources */,
 				8E6344612F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift in Sources */,
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
+				8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
+				8E886B272F1BA82F0001A734 /* TagsScreen.swift in Sources */,
 				8EAF67CB2EF3520200780BB9 /* AppActions.swift in Sources */,
+				8E886B292F1BA8580001A734 /* TagsScreenState.swift in Sources */,
 				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenStore.swift in Sources */,
 				8EC86E052E06215C00AA6AFA /* Vibration.swift in Sources */,

@@ -13,6 +13,7 @@ protocol UserRoomRepositoryProtocol {
     func saveNewRoom(_ room: UserRoom) async
     func getUserRoomBy(by id: UUID) async -> UserRoom?
     func getAllSimpleUserRooms() async -> [SimpleUserRoom]
+    func updateRoom(_ room: UserRoom) async
 }
 
 final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
@@ -36,6 +37,23 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                 return UserRoom(from: latest)
             } else {
                 return nil
+            }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    
+    func updateRoom(_ room: UserRoom) async {
+        do {
+            try await dbPool.write { db in
+                if try UserRoomModelGRDB.filter(key: room.id).fetchCount(db) != 0 {
+                    let updatedRoom = UserRoomModelGRDB(from: room)
+                    try updatedRoom.update(db)
+                    Logger.log("update userRoom", location: .GRDB, event: .success)
+                } else {
+                    Logger.log("update userRoom error. user room not found", location: .GRDB, event: .error(nil))
+                }
             }
         } catch {
             fatalError()

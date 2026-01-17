@@ -10,7 +10,7 @@ import GRDB
 
 protocol TagRepositoryProtocol {
     func getRandomTag() async -> Tag
-    func getAllTags() async throws -> [Tag]
+    func getAllTags() async -> [Tag]
 }
 
 final class TagRepository: BaseRepository, TagRepositoryProtocol {
@@ -40,17 +40,22 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
         }
     }
     
-    func getAllTags() async throws -> [Tag] {
-        try await dbPool.read { db in
-            let tags = try TagModelGRDB.fetchAll(db).map { Tag(from: $0) }
-            Logger.log("get \(tags.count) Tags", location: .GRDB, event: .success)
-            return tags
+    func getAllTags() async -> [Tag] {
+        do {
+            return try await dbPool.read { db in
+                let tags = try TagModelGRDB.fetchAll(db).map { Tag(from: $0) }
+                Logger.log("get \(tags.count) Tags", location: .GRDB, event: .success)
+                return tags
+            }
+        } catch {
+            Logger.log("Failed to get all tags", location: .GRDB, event: .error(error))
+            return []
         }
     }
     
     func getRandomTag() async -> Tag {
         do {
-            let models = try await getAllTags()
+            let models = await getAllTags()
             guard let randomModel = models.randomElement() else {
                 throw NSError(domain: "TagRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: "No tags available"])
             }
