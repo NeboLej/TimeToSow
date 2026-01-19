@@ -67,7 +67,14 @@ struct TagsScreen: View {
                             .onTapGesture {
                                 isShowColorPicker = true
                             }
-                        TextField("New tag name", text: $newTagName)
+                            .listRowBackground(Color.white.opacity(0.8))
+                        
+                        TextField("", text: $newTagName,
+                                  prompt: Text("New tag name")
+                            .foregroundStyle(.black.opacity(0.5))
+                        )
+                        .foregroundStyle(.black)
+                        .listRowBackground(Color.white.opacity(0.8))
                     }
                 }
                 .scrollContentBackground(.hidden)
@@ -93,6 +100,7 @@ struct TagsScreen: View {
     @ViewBuilder func colorPicker() -> some View {
         HStack {
             Text("Choose a color")
+                .foregroundStyle(.black)
             Spacer()
             Circle()
                 .fill(newTagColor).frame(width: 30, height: 30)

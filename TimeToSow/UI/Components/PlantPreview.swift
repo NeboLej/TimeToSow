@@ -150,19 +150,10 @@ struct PlantPreview: View {
 //                     rarity: .legendary,
 //                     rootCoordinateCoef: .init(x: 0.05, y: 0))
     
-    let tmpSeed = Seed(name: "seed4.name",
-                       unavailavlePotTypes: [],
-                       image: "seed4",
-                       height: 45,
-                       rarity: .rare,
-                       rootCoordinateCoef: .init(x: 0.05, y: 0))
+    let tmpSeed = Seed(name: "see66.name", image: "seed66", height: 37, rarity: .common)
     
     //rootCoordinateCoef: .init(x: 0.08, y: 0)
-    let tmpPot = Pot(potFeatures: [.narrow],
-                     name: "pot63.name",
-                     image: "pot63",
-                     height: 28,
-                     rarity: .uncommon)
+    let tmpPot = Pot(name: "pot46.name", image: "pot46", height: 25, rarity: .legendary)
     
     VStack {
         PlantPreview(plant: Plant(rootRoomID: UUID(),
