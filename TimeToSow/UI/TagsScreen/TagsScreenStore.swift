@@ -39,6 +39,10 @@ final class TagsScreenStore: FeatureStore {
                 appStore.send(.selectTag(newTag))
             case .selectTag(let tag):
                 appStore.send(.selectTag(tag))
+            case .deleteTag(let tag):
+                allTags.removeAll(where: { $0 == tag})
+                rebuildState()
+                appStore.send(.deleteTag(tag))
             }
         }
     }

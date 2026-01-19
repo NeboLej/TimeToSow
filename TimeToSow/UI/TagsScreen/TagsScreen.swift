@@ -38,20 +38,31 @@ struct TagsScreen: View {
     var body: some View {
         VStack {
             if store.state.mode == .list {
-                HStack {
+                HStack(alignment: .center, spacing: 8) {
                     Spacer()
+                    Button {
+                        if let currentTag {
+                            store.send(.deleteTag(currentTag))
+                        }
+                    } label: {
+                        Image(systemName: "trash.circle")
+                            .resizable()
+                            .foregroundStyle(Color.red.opacity(0.8))
+                            .frame(width: 29, height: 29)
+                    }
                     Button {
                         store.send(.changeMode(.addNewTag))
                     } label: {
                         Image(systemName: "plus.circle")
                             .resizable()
                             .frame(width: 30, height: 30)
-                    }.padding(.horizontal, 24)
-                        .padding(.top, 16)
+                    }
                 }
+                .padding(.horizontal, 24)
+                .padding(.top, 16)
                 Picker(selection: $currentTag) {
-                    ForEach(store.state.tagsList) {
-                        TagView(tag: $0).tag($0)
+                    ForEach(store.state.tagsList) { tag in
+                        TagView(tag: tag).tag(tag)
                     }
                 } label: {}.pickerStyle(.inline)
             } else {

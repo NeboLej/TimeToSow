@@ -76,6 +76,8 @@ class AppStore {
             selectedTag = tag
         case .newTag(let tag):
             saveNewTag(tag)
+        case .deleteTag(let tag):
+            deleteTag(tag)
         }
     }
     

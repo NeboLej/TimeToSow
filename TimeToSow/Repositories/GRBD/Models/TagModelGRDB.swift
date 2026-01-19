@@ -15,6 +15,7 @@ struct TagModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
     var stableId: String
     var name: String
     var color: String
+    var isDeleted: Bool
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
@@ -23,5 +24,6 @@ struct TagModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRe
         stableId = from.stableId
         name = from.name
         color = from.color
+        isDeleted = from.isDeleted
     }
 }

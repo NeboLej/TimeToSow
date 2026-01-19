@@ -11,7 +11,8 @@ import GRDB
 protocol TagRepositoryProtocol {
     func getRandomTag() async -> Tag
     func getAllTags() async -> [Tag]
-    func saveNewTag(_ tag: Tag) async 
+    func saveNewTag(_ tag: Tag) async
+    func deleteTag(_ tag: Tag) async
 }
 
 final class TagRepository: BaseRepository, TagRepositoryProtocol {
@@ -44,7 +45,9 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
     func getAllTags() async -> [Tag] {
         do {
             return try await dbPool.read { db in
-                let tags = try TagModelGRDB.fetchAll(db).map { Tag(from: $0) }
+                let tags = try TagModelGRDB.fetchAll(db)
+                    .filter { $0.isDeleted == false }
+                    .map { Tag(from: $0) }
                 Logger.log("get \(tags.count) Tags", location: .GRDB, event: .success)
                 return tags
             }
@@ -77,6 +80,19 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
             }
         } catch {
             Logger.log("Failed to save new tag", location: .GRDB, event: .error(error))
+        }
+    }
+    
+    func deleteTag(_ tag: Tag) async {
+        do {
+            try await dbPool.write { db in
+                if try TagModelGRDB.filter(key: tag.id).fetchCount(db) != 0 {
+                    var deletedTag = TagModelGRDB(from: tag.copy(isDeleted: true))
+                    try deletedTag.update(db)
+                }
+            }
+        } catch {
+            Logger.log("Failed to delete tag", location: .GRDB, event: .error(error))
         }
     }
 }

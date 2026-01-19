@@ -20,4 +20,5 @@ enum AppAction {
     case getUserRoom(id: UUID)
     case selectTag(Tag)
     case newTag(Tag)
+    case deleteTag(Tag)
 }

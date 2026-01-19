@@ -38,6 +38,7 @@ final class DatabaseManager {
             t.column("stableId", .text).notNull()
             t.column("name", .text).notNull()
             t.column("color", .text).notNull()
+            t.column("isDeleted", .boolean).notNull()
         }
         
         try db.create(table: "shelf", ifNotExists: true) { t in

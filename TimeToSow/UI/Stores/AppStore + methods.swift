@@ -92,4 +92,13 @@ extension AppStore {
         }
     }
     
+    func deleteTag(_ tag: Tag) {
+        Task {
+            await tagRepository.deleteTag(tag)
+            if selectedTag == tag {
+                selectedTag = await tagRepository.getRandomTag()
+            }
+        }
+    }
+    
 }

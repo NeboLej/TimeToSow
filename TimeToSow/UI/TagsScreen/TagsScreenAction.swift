@@ -11,4 +11,5 @@ enum TagsScreenAction {
     case changeMode(TagsScreenState.Mode)
     case selectTag(Tag)
     case addNewTag(name: String, color: String)
+    case deleteTag(Tag)
 }
