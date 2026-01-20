@@ -106,8 +106,6 @@
 		8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575682DCE49D600AEC31A /* EnvironmentValues.swift */; };
 		8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5756C2DCE4E8700AEC31A /* RoomView.swift */; };
 		8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF575882DDA00E200AEC31A /* TimePickerView.swift */; };
-		8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758A2DDA125A00AEC31A /* StrokeText.swift */; };
-		8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */; };
 		8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */; };
 		8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */; };
 		8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEEEF22F0E587600857A23 /* HistoryScreen.swift */; };
@@ -218,8 +216,6 @@
 		8EF575682DCE49D600AEC31A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		8EF5756C2DCE4E8700AEC31A /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		8EF575882DDA00E200AEC31A /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
-		8EF5758A2DDA125A00AEC31A /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
-		8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPickerView.swift; sourceTree = "<group>"; };
 		8EFEEEBD2F0AE71E00857A23 /* SendTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTimerView.swift; sourceTree = "<group>"; };
 		8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenAction.swift; sourceTree = "<group>"; };
 		8EFEEEF22F0E587600857A23 /* HistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreen.swift; sourceTree = "<group>"; };
@@ -528,9 +524,7 @@
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
 				8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */,
 				8EC86E062E0628E400AA6AFA /* DustView.swift */,
-				8EF5758A2DDA125A00AEC31A /* StrokeText.swift */,
 				8EF575882DDA00E200AEC31A /* TimePickerView.swift */,
-				8EF5758C2DDA256800AEC31A /* SelectPickerView.swift */,
 				8E75DE132E5A306C0004C3D3 /* TimerView.swift */,
 				8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */,
 				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
@@ -647,7 +641,6 @@
 				8EC86E272E06D01B00AA6AFA /* HomeScreenStore.swift in Sources */,
 				8EC86DF72E06208600AA6AFA /* PlantView.swift in Sources */,
 				8EAF67CE2EF3529000780BB9 /* RoomFeatureAction.swift in Sources */,
-				8EF5758B2DDA125A00AEC31A /* StrokeText.swift in Sources */,
 				8EAF67C72EF33AC100780BB9 /* FeatureStore.swift in Sources */,
 				8EF575672DCE435800AEC31A /* Tag.swift in Sources */,
 				8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */,
@@ -716,7 +709,6 @@
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EE61D3A2F1AB034002E8B30 /* EditRoomActions.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
-				8EF5758D2DDA256800AEC31A /* SelectPickerView.swift in Sources */,
 				8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */,
 				8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */,
 				8EE61D362F1AB020002E8B30 /* EditRoomStore.swift in Sources */,

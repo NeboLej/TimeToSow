@@ -27,26 +27,18 @@ struct EditRoomScreen: View {
             
             Spacer()
             HStack {
-                Button {
+                TextureButton(label: "Cancel", color: .strokeAcsent2) {
                     dismiss()
-                } label: {
-                    TextEllipseStrokeView(text: "Cancel", font: .myButton(25), isSelected: true)
-                        .foregroundStyle(Color(UIColor.systemPink))
-                        .frame(width: 140, height: 50)
                 }
-                
-                Button {
+                TextureButton(label: "Save", color: .strokeAcsent1) {
                     store.send(.save)
                     dismiss()
-                } label: {
-                    TextEllipseStrokeView(text: "Done", font: .myButton(25), isSelected: true)
-                        .foregroundStyle(Color(UIColor.systemMint))
-                        .frame(width: 140, height: 50)
                 }
             }
             .padding(.bottom, 16)
         }
         .ignoresSafeArea()
+        .background(.mainBackground)
     }
     
     @ViewBuilder
@@ -59,6 +51,7 @@ struct EditRoomScreen: View {
                             if store.selectedRoom.id == room.id {
                                 Circle()
                                     .frame(width: 20, height: 20)
+                                    .foregroundStyle(.strokeAcsent2)
                             } else {
                                 EmptyView()
                             }
@@ -81,6 +74,7 @@ struct EditRoomScreen: View {
                             if store.selectedShelf.id == shelf.id {
                                 Circle()
                                     .frame(width: 20, height: 20)
+                                    .foregroundStyle(.strokeAcsent2)
                             } else {
                                 EmptyView()
                             }
