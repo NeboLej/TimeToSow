@@ -35,12 +35,19 @@ final class TagsScreenStore: FeatureStore {
                 rebuildState()
             case .addNewTag(let name, let color):
                 let newTag = Tag(name: name, color: color)
+                allTags.append(newTag)
                 appStore.send(.newTag(newTag))
                 appStore.send(.selectTag(newTag))
             case .selectTag(let tag):
                 appStore.send(.selectTag(tag))
             case .deleteTag(let tag):
-                allTags.removeAll(where: { $0 == tag})
+                if allTags.count == 1 {
+                    send(.addNewTag(name: "Any activity", color: "#ED553B"))
+                }
+                if tag == appStore.selectedTag, let tag = allTags.first(where: { $0 != tag }) {
+                    send(.selectTag(tag))
+                }
+                allTags.removeAll(where: { $0 == tag })
                 rebuildState()
                 appStore.send(.deleteTag(tag))
             }

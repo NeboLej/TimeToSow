@@ -28,7 +28,6 @@ struct ProgressScreen: View {
                         .resizable()
                         .offset(x: proxy.size.width * 0.75, y: proxy.size.height * 0.05)
                     
-                    
                     Image(.imageCloud)
                         .resizable()
                         .offset(x: proxy.size.width * -0.1, y: proxy.size.height * 0.25)

@@ -106,11 +106,10 @@ struct HomeScreen: View {
                 .onTapGesture {
                     store.send(.toDebugScreen)
                 }
-            menuElement(colorHex: "D17474", icon: "square.and.arrow.down")
+            menuElement(colorHex: "7482D1", icon: "info.circle")
                 .onTapGesture {
                     store.send(.toHistoryScreen)
                 }
-            menuElement(colorHex: "7482D1", icon: "info.circle")
             menuElement(colorHex: "6E916A", icon: "paintbrush")
                 .onTapGesture {
                     store.send(.toEditRoomScreen)

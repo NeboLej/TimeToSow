@@ -11,12 +11,12 @@ struct TagsScreen: View {
     @Environment(\.dismiss) var dismiss
     
     @State var store: TagsScreenStore
-    @State var currentTag: Tag? = nil
-    @State var mode: PresentationDetent = .fraction(0.4)
+    @State private var currentTag: Tag? = nil
+    @State private var mode: PresentationDetent = .fraction(0.4)
     
-    @State var newTagName: String = ""
-    @State var tagSize: CGSize = .zero
-    @State var newTagColor: Color = .blue
+    @State private var newTagName: String = ""
+    @State private var newTagColor: Color = .blue
+    @State private var isShowDeleteAllert: Bool = false
     @State private var isShowColorPicker = false {
         didSet {
             if isShowColorPicker {
@@ -41,9 +41,7 @@ struct TagsScreen: View {
                 HStack(alignment: .center, spacing: 8) {
                     Spacer()
                     Button {
-                        if let currentTag {
-                            store.send(.deleteTag(currentTag))
-                        }
+                        isShowDeleteAllert = true
                     } label: {
                         Image(systemName: "trash.circle")
                             .resizable()
@@ -62,15 +60,16 @@ struct TagsScreen: View {
                 .padding(.top, 16)
                 Picker(selection: $currentTag) {
                     ForEach(store.state.tagsList) { tag in
-                        TagView(tag: tag).tag(tag)
+                        TagView(tag: tag).tag(Optional(tag))
                     }
                 } label: {}.pickerStyle(.inline)
             } else {
-                
                 TagView(tag: newTag)
-                    .id(newTag)
+                    .background(.white)
+                    .cornerRadius(30, corners: .allCorners)
                     .padding(.top, 40)
                     .scaleEffect(1.8)
+                    .id(newTag)
                 
                 Form {
                     Section {
@@ -94,7 +93,7 @@ struct TagsScreen: View {
             
             HStack {
                 TextureButton(label: "Save", color: .accentColor) {
-                    if store.state.mode == .addNewTag {
+                    if store.state.mode == .addNewTag, !newTagName.isEmpty {
                         store.send(.addNewTag(name: newTagName, color: newTagColor.toHex()))
                     } else if store.state.mode == .list, let currentTag {
                         store.send(.selectTag(currentTag))
@@ -106,6 +105,24 @@ struct TagsScreen: View {
         .presentationDetents([.fraction(0.4), .large], selection: $mode)
         .presentationDragIndicator(.visible)
         .modifier(CustomBackgroundModifier())
+        .onAppear {
+            currentTag = store.state.selectedTag
+        }
+        .onChange(of: store.state.selectedTag) { oldValue, newValue in
+            currentTag = store.state.selectedTag
+        }
+        .alert("Удалить этот тег? \nПри удалении тэг останется истории связанных с ним записей", isPresented: $isShowDeleteAllert) {
+            Button(role: .destructive) {
+                if let currentTag {
+                    store.send(.deleteTag(currentTag))
+                }
+            } label: {
+                Text("Удалить")
+            }
+            Button(role: .cancel) { } label: {
+                Text("Отмена")
+            }
+        }
     }
     
     @ViewBuilder func colorPicker() -> some View {
@@ -122,20 +139,6 @@ struct TagsScreen: View {
                 .scrollDisabled(true)
                 .presentationDetents([.fraction(0.51)])
         })
-    }
-}
-
-fileprivate struct CustomBackgroundModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            content
-        } else {
-            content
-                .presentationBackground {
-                    SystemBlur()
-                        .ignoresSafeArea()
-                }
-        }
     }
 }
 
