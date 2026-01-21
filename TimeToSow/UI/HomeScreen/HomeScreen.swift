@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 fileprivate enum L: LocalizedStringKey {
     case newPlantTitle = "HomeScreen.newPlantTitle"
@@ -100,7 +101,7 @@ struct HomeScreen: View {
     }
     
     @ViewBuilder
-    private func  menuView() -> some View {
+    private func menuView() -> some View {
         HStack(spacing: 6) {
             menuElement(colorHex: "D17474", icon: "square.and.arrow.up")
                 .onTapGesture {
@@ -320,3 +321,25 @@ var tmpPot = Pot(name: "aeded",
     screenBuilderMock.getScreen(type: .home)
     //        .environment(\.locale, .init(identifier: "en"))
 }
+
+//struct GifView: View, Equatable {
+//    static func == (lhs: GifView, rhs: GifView) -> Bool {
+//        true
+//    }
+//
+//    let isAnimating: Bool
+//
+//    var body: some View {
+//        AnimatedImage(name: "feature2.gif", isAnimating: .constant(isAnimating))
+//            .resizable()
+//            .customLoopCount(2)
+//            .scaledToFit()
+//            .frame(height: 50)
+//    }
+//}
+//
+//GifView(isAnimating: isAnimation)
+//    .onTapGesture {
+//        isAnimation.toggle()
+//    }
+//

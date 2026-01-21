@@ -34,6 +34,8 @@
 		8E886B292F1BA8580001A734 /* TagsScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B282F1BA8580001A734 /* TagsScreenState.swift */; };
 		8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */; };
 		8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */; };
+		8E941BB12F21078D002F0B07 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */; };
+		8E941BB42F210A61002F0B07 /* feature2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E941BB32F210A61002F0B07 /* feature2.gif */; };
 		8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9B92EFC546600DF690F /* RarityView.swift */; };
 		8EA1C9D32EFD836700DF690F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9D22EFD836700DF690F /* Note.swift */; };
 		8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */; };
@@ -142,6 +144,7 @@
 		8E886B282F1BA8580001A734 /* TagsScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenState.swift; sourceTree = "<group>"; };
 		8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenStore.swift; sourceTree = "<group>"; };
 		8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenAction.swift; sourceTree = "<group>"; };
+		8E941BB32F210A61002F0B07 /* feature2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = feature2.gif; sourceTree = "<group>"; };
 		8EA1C9B92EFC546600DF690F /* RarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarityView.swift; sourceTree = "<group>"; };
 		8EA1C9D22EFD836700DF690F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		8EA1C9D42EFD84EA00DF690F /* TagStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagStatisticsView.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E941BB12F21078D002F0B07 /* SDWebImageSwiftUI in Frameworks */,
 				8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +289,14 @@
 				8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */,
 			);
 			path = TagsScreen;
+			sourceTree = "<group>";
+		};
+		8E941BB22F210A46002F0B07 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				8E941BB32F210A61002F0B07 /* feature2.gif */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		8EAF67C32EF33A9100780BB9 /* FeatureStores */ = {
@@ -441,6 +453,7 @@
 		8EF575422DCE3F3A00AEC31A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E941BB22F210A46002F0B07 /* Animations */,
 				8E5B34662F02789200354CAB /* Underdog-Regular.ttf */,
 				8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */,
 				8EA1C9D62EFD909900DF690F /* K2D-Light.ttf */,
@@ -568,6 +581,7 @@
 			name = TimeToSow;
 			packageProductDependencies = (
 				8E6C3E9D2F1137630074CD4E /* GRDB */,
+				8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */,
 			);
 			productName = TimeToSow;
 			productReference = 8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */;
@@ -600,6 +614,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF574ED2DCCEEAE00AEC31A /* Products */;
@@ -624,6 +639,7 @@
 				8EF575512DCE3F3A00AEC31A /* Preview Assets.xcassets in Resources */,
 				8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */,
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
+				8E941BB42F210A61002F0B07 /* feature2.gif in Resources */,
 				8EA1C9D72EFD909900DF690F /* K2D-Light.ttf in Resources */,
 				8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */,
 			);
@@ -960,6 +976,14 @@
 				kind = branch;
 			};
 		};
+		8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -967,6 +991,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

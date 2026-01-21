@@ -67,9 +67,8 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
             return randomModel
         } catch {
             Logger.log("Failed to get random tag", location: .GRDB, event: .error(error))
-            fatalError()
-//            await setDefaultValues()
-//            return await getRandomTag()
+            try? await Task.sleep(nanoseconds: 1_000_000_000)//1 sec
+            return await getRandomTag()
         }
     }
     

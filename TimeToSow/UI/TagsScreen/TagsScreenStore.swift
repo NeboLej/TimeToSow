@@ -42,7 +42,8 @@ final class TagsScreenStore: FeatureStore {
                 appStore.send(.selectTag(tag))
             case .deleteTag(let tag):
                 if allTags.count == 1 {
-                    send(.addNewTag(name: "Any activity", color: "#ED553B"))
+                    let defaultTag = DefaultModels.tags.first!
+                    send(.addNewTag(name: defaultTag.name, color: defaultTag.color))
                 }
                 if tag == appStore.selectedTag, let tag = allTags.first(where: { $0 != tag }) {
                     send(.selectTag(tag))

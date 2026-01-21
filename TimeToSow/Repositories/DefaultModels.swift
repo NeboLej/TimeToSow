@@ -11,6 +11,7 @@ struct DefaultModels {
     
     //MARK: - TAGS
     static let tags: [Tag] = [
+        Tag(stableId: "default_0", name: "Any activity", color: "#ED553B"),
         Tag(stableId: "default_1", name: "Job", color: "#EE05F2"),
         Tag(stableId: "default_2", name: "Yoga", color: "#68F205"),
         Tag(stableId: "default_3", name: "Programm", color: "#F2E205"),
