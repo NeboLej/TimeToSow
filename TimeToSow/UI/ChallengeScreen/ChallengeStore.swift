@@ -43,7 +43,7 @@ final class ChallengeStore: FeatureStore {
     private func rebuildState() {
         guard let season = currentSeason else { return }
         
-        state = ChallengeState(seasonName: season.title, seasonDescription: season.title, challengeProgress: progressList,
+        state = ChallengeState(seasonName: season.title, seasonDescription: "", challengeProgress: progressList,
                                seasonStartDate: season.startDate, seasonEndDate: season.endDate)
     }
 }

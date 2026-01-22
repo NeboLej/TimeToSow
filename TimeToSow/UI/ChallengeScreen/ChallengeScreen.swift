@@ -13,12 +13,20 @@ struct ChallengeScreen: View {
     @State var store: ChallengeStore
     
     var body: some View {
-        VStack {
-            Text("Испытания")
-                .font(.myTitle(24))
-                .foregroundStyle(.black)
-            challengesList()
-            Spacer()
+        ScrollView {
+            VStack {
+                Text("Испытания")
+                    .font(.myTitle(30))
+                    .foregroundStyle(.black)
+                Text(store.state.seasonName)
+                    .font(.myTitle(24))
+                    .foregroundStyle(.black)
+                Text(store.state.seasonDescription)
+                    .foregroundStyle(.black)
+
+                challengesList()
+                Spacer()
+            }
         }.background(.mainBackground)
     }
     
@@ -36,30 +44,48 @@ struct ChallengeScreen: View {
                 Text(challenge.name)
                     .font(.myNumber(20))
                     .foregroundStyle(.black)
+                    .padding(.bottom, 8)
+                    .padding(.top, 4)
                 Text(challenge.description)
                     .font(.callout)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.black.opacity(0.55))
                 ProgressView(value: challenge.progress, total: 1)
+                    .padding(.vertical, 4)
             }
             Spacer()
-            if let rewardDecor = challenge.rewardDecor {
-                let name = (challenge.rewardDecor?.resourceName ?? "") + (challenge.rewardDecor?.animationOptions != nil ? ".gif" : ".png")
+            RoundedRectangle(cornerRadius: 2)
+                .frame(width: 2)
+                .padding(.vertical, 10)
+                .foregroundStyle(.black.opacity(0.3))
+            
+            VStack {
                 
-                let _ = print(name)
-                if name.contains(".gif") {
-                    AnimatedImage(name: name, bundle: .main)
-                        .resizable()
-                        .customLoopCount(rewardDecor.animationOptions?.repeatCount ?? 1)
-                        .scaledToFit()
-                        .frame(width: rewardDecor.width, height: rewardDecor.height)
-                        
-                } else {
-                    Image(name, bundle: .main)
+                if let rewardDecor = challenge.rewardDecor {
+                    let name = (challenge.rewardDecor?.resourceName ?? "") + (challenge.rewardDecor?.animationOptions != nil ? ".gif" : ".png")
+                    
+                    let _ = print(name)
+                    if name.contains(".gif") {
+                        AnimatedImage(name: name, bundle: .main)
+                            .resizable()
+                            .customLoopCount(rewardDecor.animationOptions?.repeatCount ?? 1)
+                            .scaledToFit()
+                            .frame(width: rewardDecor.width * 2)
+                            
+                            
+                    } else {
+                        Image(name, bundle: .main)
+                    }
                 }
+                Text("Награда")
             }
+
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
+        .background(Color.strokeAcsent1.opacity(0.3))
+        .textureOverlay()
+        .cornerRadius(12, corners: .allCorners)
+        
     }
 }
 
