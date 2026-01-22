@@ -29,6 +29,12 @@
 		8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* DrawText.swift */; };
 		8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902C2F1D591500B6F614 /* SystemBlur.swift */; };
 		8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */; };
+		8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C702F225F6400DECCBF /* Сhallenge.swift */; };
+		8E869C732F226F4C00DECCBF /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C722F226F4C00DECCBF /* ChallengeService.swift */; };
+		8E869C762F2274ED00DECCBF /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C752F2274ED00DECCBF /* ChallengeScreen.swift */; };
+		8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C772F22750800DECCBF /* ChallengeState.swift */; };
+		8E869C7A2F22751500DECCBF /* ChallengeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C792F22751500DECCBF /* ChallengeStore.swift */; };
+		8E869C7C2F22751D00DECCBF /* ChallengeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C7B2F22751D00DECCBF /* ChallengeAction.swift */; };
 		8E886B242F1BA2570001A734 /* AppStore + methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B232F1BA2570001A734 /* AppStore + methods.swift */; };
 		8E886B272F1BA82F0001A734 /* TagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B262F1BA82F0001A734 /* TagsScreen.swift */; };
 		8E886B292F1BA8580001A734 /* TagsScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B282F1BA8580001A734 /* TagsScreenState.swift */; };
@@ -140,6 +146,12 @@
 		8E7A7FE12EDF959400575A81 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
 		8E85902C2F1D591500B6F614 /* SystemBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlur.swift; sourceTree = "<group>"; };
 		8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
+		8E869C702F225F6400DECCBF /* Сhallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сhallenge.swift"; sourceTree = "<group>"; };
+		8E869C722F226F4C00DECCBF /* ChallengeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
+		8E869C752F2274ED00DECCBF /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
+		8E869C772F22750800DECCBF /* ChallengeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeState.swift; sourceTree = "<group>"; };
+		8E869C792F22751500DECCBF /* ChallengeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStore.swift; sourceTree = "<group>"; };
+		8E869C7B2F22751D00DECCBF /* ChallengeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAction.swift; sourceTree = "<group>"; };
 		8E886B232F1BA2570001A734 /* AppStore + methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore + methods.swift"; sourceTree = "<group>"; };
 		8E886B262F1BA82F0001A734 /* TagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreen.swift; sourceTree = "<group>"; };
 		8E886B282F1BA8580001A734 /* TagsScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenState.swift; sourceTree = "<group>"; };
@@ -248,6 +260,7 @@
 			children = (
 				8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */,
 				8E201B542F127718002B49A1 /* Logger.swift */,
+				8E869C722F226F4C00DECCBF /* ChallengeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -280,6 +293,17 @@
 				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
 			path = ProgressScreen;
+			sourceTree = "<group>";
+		};
+		8E869C742F2274D300DECCBF /* ChallengeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8E869C752F2274ED00DECCBF /* ChallengeScreen.swift */,
+				8E869C772F22750800DECCBF /* ChallengeState.swift */,
+				8E869C792F22751500DECCBF /* ChallengeStore.swift */,
+				8E869C7B2F22751D00DECCBF /* ChallengeAction.swift */,
+			);
+			path = ChallengeScreen;
 			sourceTree = "<group>";
 		};
 		8E886B252F1BA7D90001A734 /* TagsScreen */ = {
@@ -432,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				8EF5753D2DCE3F3A00AEC31A /* UserRoom.swift */,
+				8E869C702F225F6400DECCBF /* Сhallenge.swift */,
 				8EF575602DCE432300AEC31A /* Plant.swift */,
 				8EF575622DCE433900AEC31A /* Pot.swift */,
 				8EF575642DCE434B00AEC31A /* Seed.swift */,
@@ -498,6 +523,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8E869C742F2274D300DECCBF /* ChallengeScreen */,
 				8E886B252F1BA7D90001A734 /* TagsScreen */,
 				8EFEEEF12F0E53D300857A23 /* HistoryScreen */,
 				8ED72C842F07D4F7008E6869 /* DebugScreen */,
@@ -678,6 +704,7 @@
 				8ED72C862F07D517008E6869 /* DebugScreenView.swift in Sources */,
 				8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */,
 				8EF5754C2DCE3F3A00AEC31A /* UserRoom.swift in Sources */,
+				8E869C7C2F22751D00DECCBF /* ChallengeAction.swift in Sources */,
 				8EC86E072E0628E400AA6AFA /* DustView.swift in Sources */,
 				8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */,
 				8EFEEEFB2F0E805E00857A23 /* RecordsHistoryView.swift in Sources */,
@@ -688,11 +715,14 @@
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
 				8ED63A872F1273780013632F /* BaseRepository.swift in Sources */,
+				8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */,
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
+				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
 				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,
 				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
+				8E869C732F226F4C00DECCBF /* ChallengeService.swift in Sources */,
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
 				8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */,
@@ -735,6 +765,7 @@
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 				8EE61D382F1AB029002E8B30 /* EditRoomState.swift in Sources */,
 				8E6344612F17F37900B966E0 /* ScrollViewSwipeActionModifier.swift in Sources */,
+				8E869C762F2274ED00DECCBF /* ChallengeScreen.swift in Sources */,
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
 				8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
@@ -748,6 +779,7 @@
 				8EFEEEF72F0E589C00857A23 /* HistoryScreenStore.swift in Sources */,
 				8EFEEEE02F0D201000857A23 /* ProgressScreenAction.swift in Sources */,
 				8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */,
+				8E869C7A2F22751500DECCBF /* ChallengeStore.swift in Sources */,
 				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,

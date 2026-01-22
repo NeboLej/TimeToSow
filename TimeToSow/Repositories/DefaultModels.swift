@@ -11,7 +11,7 @@ struct DefaultModels {
     
     //MARK: - TAGS
     static let tags: [Tag] = [
-        Tag(stableId: "default_0", name: "Any activity", color: "#ED553B"),
+        Tag(stableId: "default_0", name: "Other", color: "#ED553B"),
         Tag(stableId: "default_1", name: "Job", color: "#EE05F2"),
         Tag(stableId: "default_2", name: "Yoga", color: "#68F205"),
         Tag(stableId: "default_3", name: "Programm", color: "#F2E205"),
@@ -22,12 +22,12 @@ struct DefaultModels {
     //MARK: - ROOMS
     static let rooms: [RoomType] = [
         RoomType(name: "1", image: "room1"),
-        RoomType(name: "3", image: "room7"),
+        RoomType(name: "2", image: "room7"),
         RoomType(name: "3", image: "room8"),
-        RoomType(name: "3", image: "room9"),
-        RoomType(name: "3", image: "room10"),
-        RoomType(name: "3", image: "room11"),
-        RoomType(name: "3", image: "room12"),
+        RoomType(name: "4", image: "room9"),
+        RoomType(name: "5", image: "room10"),
+        RoomType(name: "6", image: "room11"),
+        RoomType(name: "7", image: "room12"),
     ]
     
     //MARK: - SHELFS
@@ -55,7 +55,7 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.254, paddingLeading: 280, paddingTrailing: 19),
         ]),
         
-        ShelfType(name: "3", image: "shelf4", shelfPositions: [
+        ShelfType(name: "4", image: "shelf4", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.253, paddingLeading: 19, paddingTrailing: 228),
             ShelfPosition(coefOffsetY: 0.389, paddingLeading: 232, paddingTrailing: 15),
             ShelfPosition(coefOffsetY: 0.538, paddingLeading: 19, paddingTrailing: 206),
@@ -63,7 +63,7 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5)
         ]),
         
-        ShelfType(name: "3", image: "shelf5", shelfPositions: [
+        ShelfType(name: "5", image: "shelf5", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.137, paddingLeading: 215, paddingTrailing: 115),
             ShelfPosition(coefOffsetY: 0.263, paddingLeading: 140, paddingTrailing: 23),
             ShelfPosition(coefOffsetY: 0.402, paddingLeading: 85, paddingTrailing: 23),
@@ -75,7 +75,7 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5)
         ]),
         
-        ShelfType(name: "3", image: "shelf6", shelfPositions: [
+        ShelfType(name: "6", image: "shelf6", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.208, paddingLeading: 28, paddingTrailing: 35),
             ShelfPosition(coefOffsetY: 0.43, paddingLeading: 212, paddingTrailing: 40),
             ShelfPosition(coefOffsetY: 0.525, paddingLeading: 36, paddingTrailing: 236),
@@ -83,14 +83,14 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.935, paddingLeading: 5, paddingTrailing: 5),
         ]),
         
-        ShelfType(name: "3", image: "shelf7", shelfPositions: [
+        ShelfType(name: "7", image: "shelf7", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.206, paddingLeading: 200, paddingTrailing: 20),
             ShelfPosition(coefOffsetY: 0.363, paddingLeading: 245, paddingTrailing: 30),
             ShelfPosition(coefOffsetY: 0.544, paddingLeading: 24, paddingTrailing: 150),
             ShelfPosition(coefOffsetY: 0.94, paddingLeading: 5, paddingTrailing: 5)
         ]),
         
-        ShelfType(name: "3", image: "shelf8", shelfPositions: [
+        ShelfType(name: "8", image: "shelf8", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.206, paddingLeading: 16, paddingTrailing: 110),
             ShelfPosition(coefOffsetY: 0.418, paddingLeading: 114, paddingTrailing: 12),
             ShelfPosition(coefOffsetY: 0.668, paddingLeading: 30, paddingTrailing: 283),
@@ -98,7 +98,7 @@ struct DefaultModels {
             ShelfPosition(coefOffsetY: 0.95, paddingLeading: 5, paddingTrailing: 5),
         ]),
         
-        ShelfType(name: "3", image: "shelf9", shelfPositions: [
+        ShelfType(name: "9", image: "shelf9", shelfPositions: [
             ShelfPosition(coefOffsetY: 0.22, paddingLeading: 29, paddingTrailing: 232),
             ShelfPosition(coefOffsetY: 0.22, paddingLeading: 224, paddingTrailing: 34),
             ShelfPosition(coefOffsetY: 0.453, paddingLeading: 34, paddingTrailing: 29),
@@ -198,84 +198,20 @@ struct DefaultModels {
         Seed(name: "seed21.name", image: "seed21", height: 32, rarity: .epic, rootCoordinateCoef: .init(x: 0, y: 0.03)),
         Seed(name: "seed22.name", image: "seed22", height: 50, rarity: .uncommon, rootCoordinateCoef: .init(x: 0, y: 0.46)),
         Seed(name: "seed23.name", image: "seed23", height: 45, rarity: .legendary),
-        
-        Seed(name: "seed24.name",
-             image: "seed24",
-             height: 50,
-             rarity: .epic),
-        
-        Seed(name: "seed25.name",
-             image: "seed25",
-             height: 30,
-             rarity: .uncommon,
-             rootCoordinateCoef: .init(x: 0.1, y: 0)),
-        
-        Seed(name: "seed26.name",
-             image: "seed26",
-             height: 90,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: 0, y: 0.93)),
-        
-        Seed(name: "seed27.name",
-             image: "seed27",
-             height: 50,
-             rarity: .epic,
-             rootCoordinateCoef: .init(x: 0, y: 0.46)),
-        
-        Seed(name: "seed28.name",
-             image: "seed28",
-             height: 110,
-             rarity: .epic),
-        
-        Seed(name: "seed29.name",
-             image: "seed29",
-             height: 35,
-             rarity: .uncommon),
-        
-        Seed(name: "seed30.name",
-             image: "seed30",
-             height: 35,
-             rarity: .common,
-             rootCoordinateCoef: .init(x: 0, y: 0.01)),
-        
-        Seed(name: "seed31.name",
-             image: "seed31",
-             height: 40,
-             rarity: .uncommon),
-        
-        Seed(name: "seed32.name",
-             image: "seed32",
-             height: 28,
-             rarity: .common),
-        
-        Seed(name: "seed33.name",
-             image: "seed33",
-             height: 45,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: 0.1, y: 0.19)),
-        
-        Seed(name: "seed34.name",
-             image: "seed34",
-             height: 45,
-             rarity: .legendary),
-        
-        Seed(name: "seed35.name",
-             image: "seed35",
-             height: 30,
-             rarity: .rare),
-        
-        Seed(name: "seed36.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed36",
-             height: 30,
-             rarity: .uncommon),
-        
-        Seed(name: "seed37.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed37",
-             height: 50,
-             rarity: .epic,
-             rootCoordinateCoef: .init(x: -0.05, y: 0)),
+        Seed(name: "seed24.name", image: "seed24", height: 50, rarity: .epic),
+        Seed(name: "seed25.name", image: "seed25", height: 30, rarity: .uncommon, rootCoordinateCoef: .init(x: 0.1, y: 0)),
+        Seed(name: "seed26.name", image: "seed26", height: 90, rarity: .rare, rootCoordinateCoef: .init(x: 0, y: 0.93)),
+        Seed(name: "seed27.name", image: "seed27", height: 50, rarity: .epic, rootCoordinateCoef: .init(x: 0, y: 0.46)),
+        Seed(name: "seed28.name", image: "seed28", height: 110, rarity: .epic),
+        Seed(name: "seed29.name", image: "seed29", height: 35, rarity: .uncommon),
+        Seed(name: "seed30.name", image: "seed30", height: 35, rarity: .common, rootCoordinateCoef: .init(x: 0, y: 0.01)),
+        Seed(name: "seed31.name", image: "seed31", height: 40, rarity: .uncommon),
+        Seed(name: "seed32.name", image: "seed32", height: 28, rarity: .common),
+        Seed(name: "seed33.name", image: "seed33", height: 45, rarity: .rare, rootCoordinateCoef: .init(x: 0.1, y: 0.19)),
+        Seed(name: "seed34.name", image: "seed34", height: 45, rarity: .legendary),
+        Seed(name: "seed35.name", image: "seed35", height: 30, rarity: .rare),
+        Seed(name: "seed36.name", unavailavlePotTypes: [.narrow], image: "seed36", height: 30, rarity: .uncommon),
+        Seed(name: "seed37.name", unavailavlePotTypes: [.narrow],  image: "seed37", height: 50, rarity: .epic, rootCoordinateCoef: .init(x: -0.05, y: 0)),
         
         Seed(name: "seed38.name",
              image: "seed38",

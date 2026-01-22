@@ -41,13 +41,7 @@ final class TagsScreenStore: FeatureStore {
             case .selectTag(let tag):
                 appStore.send(.selectTag(tag))
             case .deleteTag(let tag):
-                if allTags.count == 1 {
-                    let defaultTag = DefaultModels.tags.first!
-                    send(.addNewTag(name: defaultTag.name, color: defaultTag.color))
-                }
-                if tag == appStore.selectedTag, let tag = allTags.first(where: { $0 != tag }) {
-                    send(.selectTag(tag))
-                }
+                if tag.stableId == DefaultModels.tags.first?.stableId { return } //TODO: alert
                 allTags.removeAll(where: { $0 == tag })
                 rebuildState()
                 appStore.send(.deleteTag(tag))

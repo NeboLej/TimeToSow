@@ -13,7 +13,7 @@ enum LocationType {
 
 struct AnimationOptions: Hashable, Codable {
     let duration: Double
-    let repeatCount: Float
+    let repeatCount: UInt
     let timeRepetition: Double
 }
 

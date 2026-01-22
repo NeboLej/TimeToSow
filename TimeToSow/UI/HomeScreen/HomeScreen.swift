@@ -103,6 +103,10 @@ struct HomeScreen: View {
     @ViewBuilder
     private func menuView() -> some View {
         HStack(spacing: 6) {
+            menuElement(colorHex: "D17474", icon: "plus")
+                .onTapGesture {
+                    store.send(.toChallengeScreen)
+                }
             menuElement(colorHex: "D17474", icon: "square.and.arrow.up")
                 .onTapGesture {
                     store.send(.toDebugScreen)
