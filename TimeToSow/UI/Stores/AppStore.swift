@@ -83,10 +83,12 @@ class AppStore {
         }
     }
     
+    let fff = FFff()
     func getData() {
         Task {
 //            let newRoom = await createNewUserRoom()
 //            await myRoomRepository.saveNewRoom(newRoom)
+            await fff.ff()
             
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
@@ -101,3 +103,32 @@ class AppStore {
         }
     }
 }
+
+import Supabase
+
+class FFff {
+    
+    func ff() async {
+        
+
+        
+        let client = SupabaseClient(
+            supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
+            supabaseKey: "",
+            options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
+        )
+        
+        
+        let signedURL = try? await client
+            .storage
+            .from("plant")
+            .createSignedURL(
+                path: "pot59.png",
+                expiresIn: 60 // секунды
+            )
+
+        print(signedURL?.path())
+    }
+
+}
+

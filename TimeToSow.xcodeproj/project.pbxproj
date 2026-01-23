@@ -31,6 +31,7 @@
 		8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC682F23CF8F00D10C58 /* decor2.png */; };
 		8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC692F23CF8F00D10C58 /* decor3.png */; };
 		8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC6E2F23D34900D10C58 /* DecorView.swift */; };
+		8E7EFC762F24049700D10C58 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7EFC752F24049700D10C58 /* Supabase */; };
 		8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902C2F1D591500B6F614 /* SystemBlur.swift */; };
 		8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */; };
 		8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C702F225F6400DECCBF /* Сhallenge.swift */; };
@@ -255,6 +256,7 @@
 			files = (
 				8E941BB12F21078D002F0B07 /* SDWebImageSwiftUI in Frameworks */,
 				8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */,
+				8E7EFC762F24049700D10C58 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +630,7 @@
 			packageProductDependencies = (
 				8E6C3E9D2F1137630074CD4E /* GRDB */,
 				8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */,
+				8E7EFC752F24049700D10C58 /* Supabase */,
 			);
 			productName = TimeToSow;
 			productReference = 8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */;
@@ -661,6 +664,7 @@
 			packageReferences = (
 				8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF574ED2DCCEEAE00AEC31A /* Products */;
@@ -1032,6 +1036,14 @@
 				kind = branch;
 			};
 		};
+		8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 		8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1047,6 +1059,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		8E7EFC752F24049700D10C58 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
 		};
 		8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
