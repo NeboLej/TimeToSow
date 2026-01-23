@@ -27,6 +27,10 @@
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
 		8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */; };
 		8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* DrawText.swift */; };
+		8E7EFC6B2F23CF8F00D10C58 /* decor1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC672F23CF8F00D10C58 /* decor1.gif */; };
+		8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC682F23CF8F00D10C58 /* decor2.png */; };
+		8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC692F23CF8F00D10C58 /* decor3.png */; };
+		8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC6E2F23D34900D10C58 /* DecorView.swift */; };
 		8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902C2F1D591500B6F614 /* SystemBlur.swift */; };
 		8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */; };
 		8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C702F225F6400DECCBF /* Сhallenge.swift */; };
@@ -41,7 +45,6 @@
 		8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */; };
 		8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */; };
 		8E941BB12F21078D002F0B07 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */; };
-		8E941BB42F210A61002F0B07 /* feature2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E941BB32F210A61002F0B07 /* feature2.gif */; };
 		8E941BB62F21289C002F0B07 /* Decor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E941BB52F21289C002F0B07 /* Decor.swift */; };
 		8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9B92EFC546600DF690F /* RarityView.swift */; };
 		8EA1C9D32EFD836700DF690F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C9D22EFD836700DF690F /* Note.swift */; };
@@ -144,6 +147,10 @@
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPreview.swift; sourceTree = "<group>"; };
 		8E7A7FE12EDF959400575A81 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
+		8E7EFC672F23CF8F00D10C58 /* decor1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = decor1.gif; sourceTree = "<group>"; };
+		8E7EFC682F23CF8F00D10C58 /* decor2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor2.png; sourceTree = "<group>"; };
+		8E7EFC692F23CF8F00D10C58 /* decor3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor3.png; sourceTree = "<group>"; };
+		8E7EFC6E2F23D34900D10C58 /* DecorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorView.swift; sourceTree = "<group>"; };
 		8E85902C2F1D591500B6F614 /* SystemBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlur.swift; sourceTree = "<group>"; };
 		8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		8E869C702F225F6400DECCBF /* Сhallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сhallenge.swift"; sourceTree = "<group>"; };
@@ -157,7 +164,6 @@
 		8E886B282F1BA8580001A734 /* TagsScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenState.swift; sourceTree = "<group>"; };
 		8E886B2A2F1BA86F0001A734 /* TagsScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenStore.swift; sourceTree = "<group>"; };
 		8E886B2C2F1BA8870001A734 /* TagsScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsScreenAction.swift; sourceTree = "<group>"; };
-		8E941BB32F210A61002F0B07 /* feature2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = feature2.gif; sourceTree = "<group>"; };
 		8E941BB52F21289C002F0B07 /* Decor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decor.swift; sourceTree = "<group>"; };
 		8EA1C9B92EFC546600DF690F /* RarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarityView.swift; sourceTree = "<group>"; };
 		8EA1C9D22EFD836700DF690F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -295,6 +301,16 @@
 			path = ProgressScreen;
 			sourceTree = "<group>";
 		};
+		8E7EFC6A2F23CF8F00D10C58 /* Decor */ = {
+			isa = PBXGroup;
+			children = (
+				8E7EFC672F23CF8F00D10C58 /* decor1.gif */,
+				8E7EFC682F23CF8F00D10C58 /* decor2.png */,
+				8E7EFC692F23CF8F00D10C58 /* decor3.png */,
+			);
+			path = Decor;
+			sourceTree = "<group>";
+		};
 		8E869C742F2274D300DECCBF /* ChallengeScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,7 +336,6 @@
 		8E941BB22F210A46002F0B07 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				8E941BB32F210A61002F0B07 /* feature2.gif */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -481,6 +496,7 @@
 		8EF575422DCE3F3A00AEC31A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E7EFC6A2F23CF8F00D10C58 /* Decor */,
 				8E941BB22F210A46002F0B07 /* Animations */,
 				8E5B34662F02789200354CAB /* Underdog-Regular.ttf */,
 				8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */,
@@ -564,6 +580,7 @@
 				8E85902C2F1D591500B6F614 /* SystemBlur.swift */,
 				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
+				8E7EFC6E2F23D34900D10C58 /* DecorView.swift */,
 				8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */,
 				8EC86E062E0628E400AA6AFA /* DustView.swift */,
 				8EF575882DDA00E200AEC31A /* TimePickerView.swift */,
@@ -661,6 +678,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */,
+				8E7EFC6B2F23CF8F00D10C58 /* decor1.gif in Resources */,
+				8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */,
+				8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */,
 				8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */,
 				8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */,
 				8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */,
@@ -668,7 +688,6 @@
 				8EF575512DCE3F3A00AEC31A /* Preview Assets.xcassets in Resources */,
 				8E5B34652F0276C400354CAB /* StampatelloFaceto.otf in Resources */,
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
-				8E941BB42F210A61002F0B07 /* feature2.gif in Resources */,
 				8EA1C9D72EFD909900DF690F /* K2D-Light.ttf in Resources */,
 				8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */,
 			);
@@ -716,6 +735,7 @@
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
 				8ED63A872F1273780013632F /* BaseRepository.swift in Sources */,
 				8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */,
+				8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */,
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,

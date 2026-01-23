@@ -69,15 +69,19 @@ struct ChallengeScreen: View {
                             .resizable()
                             .customLoopCount(rewardDecor.animationOptions?.repeatCount ?? 1)
                             .scaledToFit()
-                            .frame(width: rewardDecor.width * 2)
-                            
-                            
+                            .padding()
+//                            .frame(width: rewardDecor.width * 1.7)
                     } else {
-                        Image(name, bundle: .main)
+                        Image.file(name)
+                            .resizable()
+                            .scaledToFit()
+                            .padding()
+//                            .frame(width: rewardDecor.width * 1.7)
                     }
+                    Text(rewardDecor.name)
+                        .multilineTextAlignment(.center)
                 }
-                Text("Награда")
-            }
+            }.frame(width: 100)
 
         }
         .padding(.vertical, 8)
@@ -85,10 +89,68 @@ struct ChallengeScreen: View {
         .background(Color.strokeAcsent1.opacity(0.3))
         .textureOverlay()
         .cornerRadius(12, corners: .allCorners)
-        
     }
 }
 
 #Preview {
     screenBuilderMock.getScreen(type: .challenge)
+}
+
+extension Image {
+    static func file(
+        _ name: String,
+        bundle: Bundle = .main,
+        subdirectory: String? = nil
+    ) -> Image {
+        if let uiImage = ImageFileCache.shared.image(
+            named: name,
+            bundle: bundle,
+            subdirectory: subdirectory
+        ) {
+            return Image(uiImage: uiImage)
+        }
+
+        return Image(systemName: "photo")
+    }
+}
+
+
+extension Image {
+    init?(fileName: String, ext: String) {
+        guard let path = Bundle.main.path(forResource: fileName, ofType: ext),
+              let uiImage = UIImage(contentsOfFile: path) else {
+            return nil
+        }
+        self = Image(uiImage: uiImage)
+    }
+}
+
+final class ImageFileCache {
+    static let shared = ImageFileCache()
+
+    private let cache = NSCache<NSString, UIImage>()
+
+    func image(
+        named name: String,
+        bundle: Bundle = .main,
+        subdirectory: String? = nil
+    ) -> UIImage? {
+        let key = "\(bundle.bundlePath)/\(subdirectory ?? "")/\(name)" as NSString
+
+        if let cached = cache.object(forKey: key) {
+            return cached
+        }
+
+        let parts = name.split(separator: ".", maxSplits: 1)
+        let resource = String(parts.first ?? "")
+        let ext = parts.count > 1 ? String(parts.last!) : nil
+
+        guard let url = bundle.url(forResource: resource, withExtension: ext, subdirectory: subdirectory),
+              let image = UIImage(contentsOfFile: url.path) else {
+            return nil
+        }
+
+        cache.setObject(image, forKey: key)
+        return image
+    }
 }

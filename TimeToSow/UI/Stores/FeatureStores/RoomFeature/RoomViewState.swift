@@ -12,4 +12,5 @@ struct RoomViewState {
     
     let shelfType: ShelfType
     let plants: [PlantViewState]
+    let decor: [Decor]
 }

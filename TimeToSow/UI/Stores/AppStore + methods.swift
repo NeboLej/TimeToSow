@@ -15,7 +15,7 @@ extension AppStore {
         let randomShelf = await shelfRepository.getRandomShelf()
         let dateCreate = Date()//.getOffsetDate(offset: -32)
         
-        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: dateCreate.toMonthYearDate(), dateCreate: dateCreate, plants: [:])
+        return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: dateCreate.toMonthYearDate(), dateCreate: dateCreate, plants: [:], decor: [:])
     }
     
     func getUserRoom(by id: UUID) {
@@ -99,6 +99,17 @@ extension AppStore {
                 selectedTag = await tagRepository.getRandomTag()
             }
         }
+    }
+    
+    //MARK: - Decor
+    func updateDecorPosition(_ decor: Decor, newPosition: CGPoint) {
+        guard let decor = currentRoom.decor[decor.id] else { return } //.first { $0.id == decor.id } else { return }
+//        if decor.positon.x.isAlmostEqual(to: newPosition.x) && decor.positon.y.isAlmostEqual(to: newPosition.y) { return }
+        let newDecor = decor.copy(positon: newPosition)
+//        Task {
+//            await plantRepository.updatePlant(newPlant)
+//        }
+        currentRoom.decor[decor.id] = newDecor
     }
     
 }

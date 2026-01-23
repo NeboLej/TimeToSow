@@ -16,12 +16,13 @@ class UserRoom: Hashable {
         lhs.shelfType == rhs.shelfType &&
         lhs.roomType == rhs.roomType
     }
-
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(shelfType)
         hasher.combine(plants)
         hasher.combine(roomType)
+        hasher.combine(decor)
     }
     
     var id: UUID
@@ -30,14 +31,31 @@ class UserRoom: Hashable {
     var name: String
     var dateCreate: Date
     var plants: [UUID: Plant]
+    var decor: [UUID: Decor]
     
-    init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [UUID: Plant]) {
+    init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [UUID: Plant], decor: [UUID: Decor]) {
         self.id = id
         self.shelfType = shelfType
         self.roomType = roomType
         self.name = name
         self.dateCreate = dateCreate
         self.plants = plants
+        
+        var dict = [UUID: Decor]()
+        [Decor(id: UUID(), name: "Лошадка", locationType: .stand,
+                  animationOptions: AnimationOptions(duration: 3, repeatCount: 2, timeRepetition: 30),
+                  resourceName: "decor1", positon: .zero, height: 30),
+            
+            Decor(id: UUID(), name: "Часики", locationType: .free,
+                  animationOptions: nil,
+                  resourceName: "decor2", positon: .zero, height: 40),
+            
+            Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
+                  animationOptions: nil,
+                  resourceName: "decor3", positon: .zero, height: 30)].forEach {
+            dict[$0.id] = $0
+        }
+        self.decor = dict
     }
     
     init(from: UserRoomModelGRDB) {
@@ -56,17 +74,33 @@ class UserRoom: Hashable {
             plantsDict[$0.id] = $0
         }
         self.plants = plantsDict
+        
+        var dict = [UUID: Decor]()
+        [Decor(id: UUID(), name: "Лошадка", locationType: .stand,
+                  animationOptions: AnimationOptions(duration: 3, repeatCount: 2, timeRepetition: 30),
+                  resourceName: "decor1", positon: .zero, height: 30),
+            
+            Decor(id: UUID(), name: "Часики", locationType: .free,
+                  animationOptions: nil,
+                  resourceName: "decor2", positon: .zero, height: 40),
+            
+            Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
+                  animationOptions: nil,
+                  resourceName: "decor3", positon: .zero, height: 30)].forEach {
+            dict[$0.id] = $0
+        }
+        decor = dict
     }
     
     func copy(shelfType: ShelfType? = nil, roomType: RoomType? = nil, name: String? = nil, plants: [UUID: Plant]? = nil) -> UserRoom {
         UserRoom(id: self.id, shelfType: shelfType ?? self.shelfType,
-                      roomType: roomType ?? self.roomType, name: name ?? self.name,
-                      dateCreate: self.dateCreate, plants: plants ?? self.plants)
+                 roomType: roomType ?? self.roomType, name: name ?? self.name,
+                 dateCreate: self.dateCreate, plants: plants ?? self.plants, decor: self.decor)
     }
     
     static var empty = UserRoom(shelfType: .init(name: "", image: "shelf1", shelfPositions: []),
                                 roomType: .init(name: "", image: "room1"),
-                                name: "", dateCreate: Date(), plants: [:])
+                                name: "", dateCreate: Date(), plants: [:], decor: [:])
 }
 
 

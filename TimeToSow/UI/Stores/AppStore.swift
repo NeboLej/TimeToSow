@@ -49,6 +49,8 @@ class AppStore {
             }
         case .movePlant(plant: let plant, newPosition: let newPosition):
             updatePlantPosition(plant, newPosition: newPosition)
+        case .moveDecor(decor: let decor, newPosition: let newPosition):
+            updateDecorPosition(decor, newPosition: newPosition)
         case .changedRoomType(let newRoom):
             setNewRoom(newRoom)
         case .changedShelfType(let newShelf):

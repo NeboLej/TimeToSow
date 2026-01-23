@@ -16,6 +16,14 @@ protocol PositionPlantDelegate {
     func detailPlant(_ plant: Plant)
 }
 
+protocol PositionDecorDelegate {
+    var roomViewWidth: CGFloat { get }
+    func getPositionOfDecorInFall(decor: Decor, x: CGFloat, y: CGFloat) -> CGPoint
+    func beganDecorToChangePosition()
+//    func selectPlant(_ plant: Plant)
+//    func detailPlant(_ plant: Plant)
+}
+
 struct RoomView: View {
     
     @State var height: CGFloat = 400
@@ -35,6 +43,9 @@ struct RoomView: View {
                 
                 plants()
                     .id(store.state.shelfType)
+                
+                decor()
+                    .id(store.state.shelfType)
             }
         }
         .frame(height: height)
@@ -53,6 +64,13 @@ struct RoomView: View {
     func plants() -> some View {
         ForEach(store.state.plants, id: \.id) {
             PlantView(plant: $0, positionDelegate: self)
+        }
+    }
+    
+    @ViewBuilder
+    func decor() -> some View {
+        ForEach(store.state.decor, id: \.id) {
+            DecorView(decor: $0, positionDelegate: self)
         }
     }
     
@@ -109,17 +127,74 @@ extension RoomView: PositionPlantDelegate {
     }
 }
 
+
+extension RoomView: PositionDecorDelegate {
+    
+    func getPositionOfDecorInFall(decor: Decor, x: CGFloat, y: CGFloat) -> CGPoint {
+        var result: CGPoint
+
+        defer {
+            store.send(.moveDecor(decor, result))
+        }
+        
+        let shelfs = store.state.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
+        
+        switch decor.locationType {
+        case .stand:
+            let y = y + decor.height
+            let deltaX = decor.width / 2
+            
+            for shelf in shelfs {
+                if shelf.coefOffsetY * height >= y {
+                    if x + deltaX >= shelf.paddingLeading && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
+                        result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.height)
+                        return result
+                    }
+                }
+            }
+            
+            result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - decor.height)
+        case .hand:
+            let deltaX = decor.width / 2
+            for shelf in shelfs {
+                if shelf.coefOffsetY * height >= y {
+                    if x + deltaX >= shelf.paddingLeading && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
+                        if shelf != shelfs.last {
+                            result = CGPoint(x: x, y: shelf.coefOffsetY * height)
+                        } else {
+                            result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.height)
+                        }
+                        
+                        return result
+                    }
+                }
+            }
+            
+            result = CGPoint(x: x, y: (shelfs.first?.coefOffsetY ?? 1) * height)
+        case .free:
+            let maxY = (shelfs.last?.coefOffsetY ?? 1) * height - decor.height
+            result = CGPoint(x: x, y: min(y, maxY))
+        }
+        
+        return result
+    }
+    
+    func beganDecorToChangePosition() {
+        
+    }
+    
+}
 //#Preview {
 //    ShelfView()
 //}
 
-#Preview {
-    VStack {
-        screenBuilderMock.getComponent(type: .roomView(id: nil))
-        Spacer()
-    }.ignoresSafeArea()
-}
-
 //#Preview {
-//    screenBuilderMock.getScreen(type: .home)
+//    VStack {
+//        screenBuilderMock.getComponent(type: .roomView(id: nil))
+//        Spacer()
+//    }.ignoresSafeArea()
 //}
+
+#Preview {
+    screenBuilderMock.getScreen(type: .home)
+}

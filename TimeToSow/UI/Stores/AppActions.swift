@@ -10,6 +10,7 @@ import Foundation
 enum AppAction {
     case selectPlant(Plant?)
     case movePlant(plant: Plant, newPosition: CGPoint)
+    case moveDecor(decor: Decor, newPosition: CGPoint)
     case changedRoomType(RoomType)
     case changedShelfType(ShelfType)
     case addRandomPlant

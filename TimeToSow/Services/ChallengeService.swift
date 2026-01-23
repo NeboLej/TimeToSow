@@ -15,29 +15,38 @@ class ChallengeService {
         self.currentUserRoom = currentUserRoom
     }
     
-    private let tmpRewardDecor: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand, animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
-                                              resourceName: "feature2", positon: .zero, height: 40, width: 40)
+    private let tmpRewardDecor1: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand,
+                                               animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
+                                               resourceName: "decor1", positon: .zero, height: 40)
+    
+    private let tmpRewardDecor2: Decor = Decor(id: UUID(), name: "Часики", locationType: .free,
+                                               animationOptions: nil,
+                                               resourceName: "decor2", positon: .zero, height: 40)
+    
+    private let tmpRewardDecor3: Decor = Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
+                                               animationOptions: nil,
+                                               resourceName: "decor3", positon: .zero, height: 40)
     
     func getChallegeThisSeason() -> ChallengeSeason {
         ChallengeSeason(id: UUID(), title: "Тестовый сезон!", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
                         challenges: [
                             Challenge(id: UUID(), title: "Полная загруженность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .totalLoggetTime, expectedValue: 30, expectedSecondValue: nil, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .totalLoggetTime, expectedValue: 30, expectedSecondValue: nil, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
                             
                             Challenge(id: UUID(), title: "Зеленая полка", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .numberOfPlants, expectedValue: 10, expectedSecondValue: nil, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .numberOfPlants, expectedValue: 10, expectedSecondValue: nil, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
                             
                             Challenge(id: UUID(), title: "Широкий фокус", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .differentTagsUsed, expectedValue: 3, expectedSecondValue: nil, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .differentTagsUsed, expectedValue: 3, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
                             
                             Challenge(id: UUID(), title: "Звездная коллекция", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .numberOfPlantsNRarity, expectedValue: 4, expectedSecondValue: 8, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .numberOfPlantsNRarity, expectedValue: 4, expectedSecondValue: 8, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
                             
                             Challenge(id: UUID(), title: "Стабильность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .oneTimeRecordingTime, expectedValue: 10, expectedSecondValue: 20, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .oneTimeRecordingTime, expectedValue: 10, expectedSecondValue: 20, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
                             
                             Challenge(id: UUID(), title: "Фиксируем отдых", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .weekendProductivity, expectedValue: 5, expectedSecondValue: nil, rewardDecor: tmpRewardDecor, rewardRoom: nil, rewardShelf: nil),
+                                      type: .weekendProductivity, expectedValue: 5, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
                             
                         ])
     }
