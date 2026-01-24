@@ -61,7 +61,10 @@ struct ChallengeScreen: View {
             VStack {
                 
                 if let rewardDecor = challenge.rewardDecor {
-                    let name = (challenge.rewardDecor?.resourceName ?? "") + (challenge.rewardDecor?.animationOptions != nil ? ".gif" : ".png")
+//                    let name = (challenge.rewardDecor?.resourceName ?? "") + (challenge.rewardDecor?.animationOptions != nil ? ".gif" : ".png")
+//                    
+//                    let name
+                    let name = challenge.rewardDecor?.resourceUrl ?? ""
                     
                     let _ = print(name)
                     if name.contains(".gif") {
@@ -72,11 +75,17 @@ struct ChallengeScreen: View {
                             .padding()
 //                            .frame(width: rewardDecor.width * 1.7)
                     } else {
-                        Image.file(name)
+                        WebImage(url: challenge.rewardUrl)
                             .resizable()
                             .scaledToFit()
                             .padding()
-//                            .frame(width: rewardDecor.width * 1.7)
+                            .frame(height: rewardDecor.height * 1.7)
+                        
+//                        Image.file(name)
+//                            .resizable()
+//                            .scaledToFit()
+//                            .padding()
+////                            .frame(width: rewardDecor.width * 1.7)
                     }
                     Text(rewardDecor.name)
                         .multilineTextAlignment(.center)

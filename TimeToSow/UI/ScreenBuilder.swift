@@ -59,7 +59,7 @@ final class ScreenBuilder {
             TagsScreen(store: TagsScreenStore(appStore: appStore, tagRepository: repositories.tagRepository))
         case .challenge:
             let challengeService = ChallengeService(currentUserRoom: appStore.currentRoom, challengeRepository: repositories.challengeRepository)
-            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: challengeService))
+            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: challengeService, imageRepository: repositories.remoteRepository))
         }
     }
     

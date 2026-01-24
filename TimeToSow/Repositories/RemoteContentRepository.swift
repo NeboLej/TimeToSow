@@ -8,11 +8,15 @@
 import Foundation
 import Supabase
 
-protocol RemoteContentRepositoryProtocol {
-    
+protocol RemoteContentRepositoryProtocol: ImageRepositoryProtocol {
+    func updateRemoteData()
 }
 
-class RemoteContentRepository: RemoteContentRepositoryProtocol {
+protocol ImageRepositoryProtocol {
+    func imageURL(for path: String) async -> URL?
+}
+
+final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let challengeRepository: ChallengeRepositoryProtocol
     private var version: ContentVersions?
@@ -29,6 +33,8 @@ class RemoteContentRepository: RemoteContentRepositoryProtocol {
         updateRemoteData()
     }
     
+    //MARK: RemoteContentRepositoryProtocol
+    
     func updateRemoteData() {
         Task {
             do {
@@ -41,6 +47,32 @@ class RemoteContentRepository: RemoteContentRepositoryProtocol {
         }
     }
     
+    //MARK: ImageRepositoryProtocol
+    
+    func imageURL(for path: String) async -> URL? {
+        let localStore = LocalImageStore.shared
+        let localURL = localStore.localURL(for: path)
+
+        if localStore.exists(localURL) {
+            return localURL
+        }
+
+        do {
+            let signed = try await client
+                .storage
+                .from("")
+                .createSignedURL(path: path, expiresIn: 60)
+            
+            let (data, _) = try await URLSession.shared.data(from: signed)
+            try data.write(to: localURL, options: .atomic)
+            return localURL
+        } catch {
+            return nil
+        }
+    }
+    
+    //MARK: private
+    
     private func checkChallengesSeason() async {
         let currentSeason = await challengeRepository.getCurrentChallengeSeason()
         if currentSeason == nil {
@@ -50,7 +82,7 @@ class RemoteContentRepository: RemoteContentRepositoryProtocol {
         }
     }
     
-    func updateChallengesSeason() async {
+    private func updateChallengesSeason() async {
         do {
             let challengeUrl = try await client.storage
                 .from("models")
@@ -59,15 +91,14 @@ class RemoteContentRepository: RemoteContentRepositoryProtocol {
             let data = try Data(contentsOf: challengeUrl)
             data.printJSON()
             let challengeSeason = try JSONDecoder().decode(ChallengeSeasonRemote.self, from: data)
-            print(challengeSeason)
-            print(Date())
+            await prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
             await challengeRepository.addNewChallangeSeason(challengeSeason)
         } catch {
             fatalError()
         }
     }
     
-    func fetchVersions() async throws -> ContentVersions {
+    private func fetchVersions() async throws -> ContentVersions {
         let signed = try await client.storage
             .from("models")
             .createSignedURL(path: "contentVersions.json", expiresIn: 60)
@@ -78,14 +109,14 @@ class RemoteContentRepository: RemoteContentRepositoryProtocol {
         print(version)
         return version
     }
-}
-
-extension Data {
-    func printJSON() {
-        if let jsonString = String(data: self, encoding: .utf8) {
-            print(jsonString)
-        } else {
-            print("❌ Не удалось преобразовать Data в строку")
+    
+    private func prefetchImages(imagePaths: [String]) async {
+        await withTaskGroup(of: Void.self) { group in
+            for path in imagePaths {
+                group.addTask {
+                    _ = await self.imageURL(for: path)
+                }
+            }
         }
     }
 }
@@ -94,50 +125,3 @@ struct ContentVersions: Codable {
     let challengeVersion: Int
 }
 
-struct ChallengeSeasonRemote: Codable {
-    let version: Int
-    let title: String
-    let startDate: Date
-    let endDate: Date
-    let challenges: [ChallengeModel]
-
-}
-
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        version = try container.decode(Int.self, forKey: .version)
-//        title = try container.decode(String.self, forKey: .title)
-//        let startTs = try container.decode(Double.self, forKey: .startDate)
-//        let endTs = try container.decode(Double.self, forKey: .endDate)
-//        self.startDate = Date(timeIntervalSince1970: startTs)
-//        self.endDate  = Date(timeIntervalSince1970: endTs)
-//    }
-
-//let client = SupabaseClient(
-//    supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
-//    supabaseKey: "sb_publishable_7-Jo895jGaHwZuHOs1IYRw_nen0dCG8",
-//    options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
-//)
-//
-//
-//let signedURL = try? await client
-//    .storage
-//    .from("plant")
-//    .createSignedURL(
-//        path: "pot59.png",
-//        expiresIn: 60 // секунды
-//    )
-//
-//print(signedURL?.path())
-//
-//let signed = try! await client.storage
-//    .from("models")
-//    .createSignedURL(
-//        path: "challengeList.json",
-//        expiresIn: 60
-//    )
-//
-//let data = try! Data(contentsOf: signed)
-//let config = try! JSONDecoder().decode(Config.self, from: data)
-//print(config)
-//}

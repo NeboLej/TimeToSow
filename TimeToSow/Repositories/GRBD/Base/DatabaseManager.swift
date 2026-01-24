@@ -140,16 +140,5 @@ final class DatabaseManager {
 //            t.column("width", .double).notNull()
 //            t.column("height", .integer).notNull()
 //        }
-        
-//        try db.create(table: "challenge", ifNotExists: true) { t in
-//            t.column("id", .blob).primaryKey()
-//            t.column("title", .text).notNull()
-//            t.column("type", .blob).notNull()
-//            t.column("expectedValue", .integer).notNull()
-//            t.column("expectedSecondValue", .integer)
-//            t.column("decorID", .blob)
-            
-//            t.foreignKey(["decorID"], references: "decor", onDelete: .restrict, onUpdate: .cascade)
-//        }
     }
 }
