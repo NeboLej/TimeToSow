@@ -75,11 +75,11 @@ final class DatabaseManager {
             t.column("name", .text).notNull()
             t.column("unavailavlePotTypes", .blob).notNull()
             t.column("image", .text).notNull()
-            t.column("height", .integer).notNull()
             t.column("rarity", .integer).notNull()
             t.column("rootCoordinateCoefX", .double)
             t.column("rootCoordinateCoefY", .double)
             t.column("width", .double).notNull()
+            t.column("height", .integer).notNull()
         }
         
         try db.create(table: "userRoom", ifNotExists: true) { t in
@@ -119,5 +119,37 @@ final class DatabaseManager {
             t.foreignKey(["plantID"],  references: "plant", onDelete: .cascade, onUpdate: .cascade)
             t.foreignKey(["tagID"], references: "tag", onDelete: .restrict, onUpdate: .cascade)
         }
+        
+        try db.create(table: "challangeSeason", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("version", .integer).notNull()
+            t.column("title", .text).notNull()
+            t.column("startDate", .double).notNull()
+            t.column("endDate", .double).notNull()
+            t.column("challenges", .blob).notNull()
+        }
+        
+//        try db.create(table: "decor", ifNotExists: true) { t in
+//            t.column("id", .blob).primaryKey()
+//            t.column("name", .text).notNull()
+//            t.column("locationType", .blob).notNull()
+//            t.column("animationOptions", .blob)
+//            t.column("resourceName", .text).notNull()
+//            t.column("offsetY", .double).notNull()
+//            t.column("offsetX", .double).notNull()
+//            t.column("width", .double).notNull()
+//            t.column("height", .integer).notNull()
+//        }
+        
+//        try db.create(table: "challenge", ifNotExists: true) { t in
+//            t.column("id", .blob).primaryKey()
+//            t.column("title", .text).notNull()
+//            t.column("type", .blob).notNull()
+//            t.column("expectedValue", .integer).notNull()
+//            t.column("expectedSecondValue", .integer)
+//            t.column("decorID", .blob)
+            
+//            t.foreignKey(["decorID"], references: "decor", onDelete: .restrict, onUpdate: .cascade)
+//        }
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum LocationType {
+enum LocationType: String, Codable {
     case stand, hand, free
 }
 
@@ -39,6 +39,34 @@ struct Decor: Hashable, Identifiable {
         if animationOptions == nil {
             let image: UIImage? = {
                 guard let url = Bundle.main.url(forResource: name, withExtension: "png") else { return nil }
+                return UIImage(contentsOfFile: url.path)
+            }()
+
+            let originalWidth = image?.size.width
+            let originalHeight = image?.size.height
+
+            if let originalWidth, let originalHeight, originalHeight > 0 {
+                width = CGFloat(height) * (originalWidth / originalHeight)
+            } else {
+                width = CGFloat(height)
+            }
+        } else {
+            width = (Decor.gifAspectRatio(named: name) ?? 1) * height
+        }
+    }
+    
+    init(from: DecorModel) {
+        id = UUID()
+        name = from.name
+        locationType = from.locationType
+        animationOptions = from.animationOptions
+        resourceName = from.resourceUrl
+        positon = .zero
+        height = from.height
+        
+        if from.animationOptions == nil {
+            let image: UIImage? = {
+                guard let url = Bundle.main.url(forResource: from.name, withExtension: "png") else { return nil }
                 return UIImage(contentsOfFile: url.path)
             }()
 

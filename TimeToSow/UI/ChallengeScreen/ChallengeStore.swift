@@ -25,7 +25,8 @@ final class ChallengeStore: FeatureStore {
     
     private func getData() {
         Task {
-            let currentSeason = challengeService.getChallegeThisSeason()
+            guard let currentSeason = await challengeService.getChallegeThisSeason() else { return }
+            
             self.currentSeason = currentSeason
             progressList = currentSeason.challenges.map {
                 let progress = challengeService.getProgressBy(challenge: $0)

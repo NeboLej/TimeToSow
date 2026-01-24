@@ -6,21 +6,137 @@
 //
 
 import Foundation
+import GRDB
+
+struct ChallengeSeasonModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord {
+    static let databaseTableName = "challangeSeason"
+    
+    var id: UUID
+    var version: Int
+    var title: String
+    var startDate: Date
+    var endDate: Date
+    var challenges: [ChallengeModel]
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
+    
+    init(from: ChallengeSeasonRemote) {
+        self.id = UUID()
+        self.version = from.version
+        self.title = from.title
+        self.startDate = from.startDate
+        self.endDate = from.endDate
+        self.challenges = from.challenges
+    }
+}
+
+struct ChallengeSeason: Identifiable {
+    let id: UUID
+    let version: Int
+    let title: String
+    let startDate: Date
+    let endDate: Date
+    let challenges: [Challenge]
+    
+    init(id: UUID, version: Int, title: String, startDate: Date, endDate: Date, challenges: [Challenge]) {
+        self.id = id
+        self.version = version
+        self.title = title
+        self.startDate = startDate
+        self.endDate = endDate
+        self.challenges = challenges
+    }
+    
+    init(from: ChallengeSeasonModelGRDB) {
+        self.id = from.id
+        self.version = from.version
+        self.title = from.title
+        self.startDate = from.startDate
+        self.endDate = from.endDate
+        self.challenges = from.challenges.map { Challenge(from: $0) }
+    }
+    
+//    init(from: ChallengeSeasonRemote) {
+//        self.id = UUID()
+//        self.version = from.version
+//        self.title = from.title
+//        self.startDate = from.startDate
+//        self.endDate = from.endDate
+//    }
+}
 
 struct Challenge: Identifiable {
     let id: UUID
     let title: String
-    let startDate: Date
-    let endDate: Date
     let type: ChallengeType
     let expectedValue: Int
     let expectedSecondValue: Int?
     let rewardDecor: Decor?
     let rewardRoom: RoomType?
     let rewardShelf: ShelfType?
+    
+    init(from: ChallengeModel) {
+        id = UUID()
+        title = from.title
+        type = from.type
+        expectedValue = from.expectedValue
+        expectedSecondValue = from.expectedSecondValue
+        
+//        if let decor = from.rewardDecor {
+//            rewardDecor = Decor(from: decor)
+//        } else {
+//            rewardDecor = nil
+//        }
+        
+        rewardDecor = nil
+        rewardRoom = nil
+        rewardShelf = nil
+    }
 }
 
-enum ChallengeType {
+struct ChallengeModel: Codable {
+    let title: String
+    let type: ChallengeType
+    let expectedValue: Int
+    let expectedSecondValue: Int?
+    let reward: DecorModel
+}
+
+struct DecorModel: Codable {
+    let name: String
+    let locationType: LocationType
+    let animationOptions: AnimationOptions?
+    let resourceUrl: String
+    let height: CGFloat
+}
+
+
+//struct DecorModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord {
+//    static let databaseTableName = "decor"
+//    mutating func didInsert(with rowID: Int64, for column: String?) { }
+//    
+//    var id: UUID
+//    var name: String
+//    var locationType: LocationType
+//    var animationOptions: AnimationOptions?
+//    var resourceName: String
+//    var positon: CGPoint
+//    var height: CGFloat
+//    var width: CGFloat
+//    
+//    init(from: Decor) {
+//        id = from.id
+//        name = from.name
+//        locationType = from.locationType
+//        animationOptions = from.animationOptions
+//        resourceName = from.resourceName
+//        positon = from.positon
+//        height = from.height
+//        width = from.width
+//    }
+//}
+
+enum ChallengeType: String, Codable {
     case totalLoggetTime //общее залогированное время
     case numberOfPlants //количество растений
     case differentTagsUsed //количество использованных тэгов
@@ -53,12 +169,4 @@ enum ChallengeType {
         case .sharePlant: ""
         }
     }
-}
-
-struct ChallengeSeason: Identifiable {
-    let id: UUID
-    let title: String
-    let startDate: Date
-    let endDate: Date
-    let challenges: [Challenge]
 }
