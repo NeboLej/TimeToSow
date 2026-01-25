@@ -17,6 +17,7 @@ struct TagsScreen: View {
     @State private var newTagName: String = ""
     @State private var newTagColor: Color = .blue
     @State private var isShowDeleteAllert: Bool = false
+    @State private var defaultTag = DefaultModels.tags.first
     @State private var isShowColorPicker = false {
         didSet {
             if isShowColorPicker {
@@ -40,13 +41,15 @@ struct TagsScreen: View {
             if store.state.mode == .list {
                 HStack(alignment: .center, spacing: 8) {
                     Spacer()
-                    Button {
-                        isShowDeleteAllert = true
-                    } label: {
-                        Image(systemName: "trash.circle")
-                            .resizable()
-                            .foregroundStyle(Color.red.opacity(0.8))
-                            .frame(width: 29, height: 29)
+                    if currentTag?.stableId != defaultTag?.stableId {
+                        Button {
+                            isShowDeleteAllert = true
+                        } label: {
+                            Image(systemName: "trash.circle")
+                                .resizable()
+                                .foregroundStyle(Color.red.opacity(0.8))
+                                .frame(width: 29, height: 29)
+                        }
                     }
                     Button {
                         store.send(.changeMode(.addNewTag))

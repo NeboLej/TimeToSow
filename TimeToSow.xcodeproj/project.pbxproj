@@ -31,6 +31,19 @@
 		8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC682F23CF8F00D10C58 /* decor2.png */; };
 		8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC692F23CF8F00D10C58 /* decor3.png */; };
 		8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC6E2F23D34900D10C58 /* DecorView.swift */; };
+		8E7EFC762F24049700D10C58 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7EFC752F24049700D10C58 /* Supabase */; };
+		8E7EFC782F24E87B00D10C58 /* RemoteContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC772F24E87B00D10C58 /* RemoteContentRepository.swift */; };
+		8E7EFC7A2F24F88900D10C58 /* ChallengeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC792F24F88900D10C58 /* ChallengeRepository.swift */; };
+		8E7EFC7C2F254F3300D10C58 /* LocalImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC7B2F254F3300D10C58 /* LocalImageStore.swift */; };
+		8E7EFC7E2F254F7F00D10C58 /* Data + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC7D2F254F7F00D10C58 /* Data + extension.swift */; };
+		8E7EFC832F2550BD00D10C58 /* ChallengeSeasonRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC822F2550BD00D10C58 /* ChallengeSeasonRemote.swift */; };
+		8E7EFC852F2550D300D10C58 /* ChallengeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC842F2550D300D10C58 /* ChallengeModel.swift */; };
+		8E7EFC872F2550E400D10C58 /* DecorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC862F2550E400D10C58 /* DecorModel.swift */; };
+		8E7EFC892F25511800D10C58 /* ChallengeSeasonModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */; };
+		8E7EFC8B2F25514F00D10C58 /* ChallengeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8A2F25514F00D10C58 /* ChallengeType.swift */; };
+		8E7EFC8D2F25517900D10C58 /* DecorModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */; };
+		8E7EFC8F2F26276000D10C58 /* DecorPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */; };
+		8E7EFC912F262FF200D10C58 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC902F262FF200D10C58 /* BoxView.swift */; };
 		8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902C2F1D591500B6F614 /* SystemBlur.swift */; };
 		8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */; };
 		8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C702F225F6400DECCBF /* Сhallenge.swift */; };
@@ -151,6 +164,18 @@
 		8E7EFC682F23CF8F00D10C58 /* decor2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor2.png; sourceTree = "<group>"; };
 		8E7EFC692F23CF8F00D10C58 /* decor3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor3.png; sourceTree = "<group>"; };
 		8E7EFC6E2F23D34900D10C58 /* DecorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorView.swift; sourceTree = "<group>"; };
+		8E7EFC772F24E87B00D10C58 /* RemoteContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteContentRepository.swift; sourceTree = "<group>"; };
+		8E7EFC792F24F88900D10C58 /* ChallengeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeRepository.swift; sourceTree = "<group>"; };
+		8E7EFC7B2F254F3300D10C58 /* LocalImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalImageStore.swift; sourceTree = "<group>"; };
+		8E7EFC7D2F254F7F00D10C58 /* Data + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + extension.swift"; sourceTree = "<group>"; };
+		8E7EFC822F2550BD00D10C58 /* ChallengeSeasonRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSeasonRemote.swift; sourceTree = "<group>"; };
+		8E7EFC842F2550D300D10C58 /* ChallengeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeModel.swift; sourceTree = "<group>"; };
+		8E7EFC862F2550E400D10C58 /* DecorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorModel.swift; sourceTree = "<group>"; };
+		8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSeasonModelGRDB.swift; sourceTree = "<group>"; };
+		8E7EFC8A2F25514F00D10C58 /* ChallengeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeType.swift; sourceTree = "<group>"; };
+		8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorModelGRDB.swift; sourceTree = "<group>"; };
+		8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorPreview.swift; sourceTree = "<group>"; };
+		8E7EFC902F262FF200D10C58 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
 		8E85902C2F1D591500B6F614 /* SystemBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlur.swift; sourceTree = "<group>"; };
 		8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		8E869C702F225F6400DECCBF /* Сhallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сhallenge.swift"; sourceTree = "<group>"; };
@@ -255,6 +280,7 @@
 			files = (
 				8E941BB12F21078D002F0B07 /* SDWebImageSwiftUI in Frameworks */,
 				8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */,
+				8E7EFC762F24049700D10C58 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */,
+				8E7EFC7B2F254F3300D10C58 /* LocalImageStore.swift */,
 				8E201B542F127718002B49A1 /* Logger.swift */,
 				8E869C722F226F4C00DECCBF /* ChallengeService.swift */,
 			);
@@ -309,6 +336,16 @@
 				8E7EFC692F23CF8F00D10C58 /* decor3.png */,
 			);
 			path = Decor;
+			sourceTree = "<group>";
+		};
+		8E7EFC812F2550B100D10C58 /* RemoteModels */ = {
+			isa = PBXGroup;
+			children = (
+				8E7EFC822F2550BD00D10C58 /* ChallengeSeasonRemote.swift */,
+				8E7EFC842F2550D300D10C58 /* ChallengeModel.swift */,
+				8E7EFC862F2550E400D10C58 /* DecorModel.swift */,
+			);
+			path = RemoteModels;
 			sourceTree = "<group>";
 		};
 		8E869C742F2274D300DECCBF /* ChallengeScreen */ = {
@@ -385,8 +422,10 @@
 			children = (
 				8ED63A742F1273780013632F /* NoteModelGRDB.swift */,
 				8ED63A752F1273780013632F /* PlantModelGRDB.swift */,
+				8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */,
 				8ED63A762F1273780013632F /* PotModelGRDB.swift */,
 				8ED63A772F1273780013632F /* RoomModelGRDB.swift */,
+				8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */,
 				8ED63A782F1273780013632F /* SeedModelGRDB.swift */,
 				8ED63A792F1273780013632F /* ShelfModelGRDB.swift */,
 				8ED63A7A2F1273780013632F /* TagModelGRDB.swift */,
@@ -407,6 +446,7 @@
 				8ED63A812F1273780013632F /* ShelfRepository.swift */,
 				8ED63A822F1273780013632F /* TagRepository.swift */,
 				8ED63A832F1273780013632F /* UserRoomRepository.swift */,
+				8E7EFC792F24F88900D10C58 /* ChallengeRepository.swift */,
 			);
 			path = GRBD;
 			sourceTree = "<group>";
@@ -414,6 +454,8 @@
 		8ED63A862F1273780013632F /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				8E7EFC812F2550B100D10C58 /* RemoteModels */,
+				8E7EFC772F24E87B00D10C58 /* RemoteContentRepository.swift */,
 				8ED63A842F1273780013632F /* GRBD */,
 				8ED63A852F1273780013632F /* DefaultModels.swift */,
 			);
@@ -461,6 +503,7 @@
 				8EC86E2C2E06D97B00AA6AFA /* Collection + extension.swift */,
 				8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */,
 				8EAF68072EF4800300780BB9 /* Int + extension.swift */,
+				8E7EFC7D2F254F7F00D10C58 /* Data + extension.swift */,
 				8E5B33F82EFDD59000354CAB /* Date + extension.swift */,
 				8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */,
 			);
@@ -481,6 +524,7 @@
 				8EA1C9D22EFD836700DF690F /* Note.swift */,
 				8E5B34182EFEADD200354CAB /* Rarity.swift */,
 				8E941BB52F21289C002F0B07 /* Decor.swift */,
+				8E7EFC8A2F25514F00D10C58 /* ChallengeType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -580,12 +624,14 @@
 				8E85902C2F1D591500B6F614 /* SystemBlur.swift */,
 				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
+				8E7EFC902F262FF200D10C58 /* BoxView.swift */,
 				8E7EFC6E2F23D34900D10C58 /* DecorView.swift */,
 				8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */,
 				8EC86E062E0628E400AA6AFA /* DustView.swift */,
 				8EF575882DDA00E200AEC31A /* TimePickerView.swift */,
 				8E75DE132E5A306C0004C3D3 /* TimerView.swift */,
 				8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */,
+				8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */,
 				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
 				8EE4C5A12E7A126600818D95 /* TextureButton.swift */,
 				8EEB2E882E7B54CF00D0F736 /* TagView.swift */,
@@ -628,6 +674,7 @@
 			packageProductDependencies = (
 				8E6C3E9D2F1137630074CD4E /* GRDB */,
 				8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */,
+				8E7EFC752F24049700D10C58 /* Supabase */,
 			);
 			productName = TimeToSow;
 			productReference = 8EF574EC2DCCEEAE00AEC31A /* TimeToSow.app */;
@@ -661,6 +708,7 @@
 			packageReferences = (
 				8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF574ED2DCCEEAE00AEC31A /* Products */;
@@ -716,10 +764,12 @@
 				8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */,
 				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
 				8E7240C82EE23D3100D08CE7 /* View + Modifiers.swift in Sources */,
+				8E7EFC7E2F254F7F00D10C58 /* Data + extension.swift in Sources */,
 				8EF5754B2DCE3F3A00AEC31A /* TimeToSowApp.swift in Sources */,
 				8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */,
 				8E75DE102E5A2EC50004C3D3 /* ProgressScreen.swift in Sources */,
 				8EC86F512E18442000AA6AFA /* LoopingFramesView.swift in Sources */,
+				8E7EFC872F2550E400D10C58 /* DecorModel.swift in Sources */,
 				8ED72C862F07D517008E6869 /* DebugScreenView.swift in Sources */,
 				8E7240CC2EE265E800D08CE7 /* RainEffectModifier.swift in Sources */,
 				8EF5754C2DCE3F3A00AEC31A /* UserRoom.swift in Sources */,
@@ -733,16 +783,19 @@
 				8EF575632DCE433900AEC31A /* Pot.swift in Sources */,
 				8EC86E312E06E81F00AA6AFA /* EditRoomScreen.swift in Sources */,
 				8EAF67D02EF352C700780BB9 /* PlantViewState.swift in Sources */,
+				8E7EFC8B2F25514F00D10C58 /* ChallengeType.swift in Sources */,
 				8ED63A872F1273780013632F /* BaseRepository.swift in Sources */,
 				8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */,
 				8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */,
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
+				8E7EFC912F262FF200D10C58 /* BoxView.swift in Sources */,
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
 				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,
 				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
 				8E869C732F226F4C00DECCBF /* ChallengeService.swift in Sources */,
+				8E7EFC8F2F26276000D10C58 /* DecorPreview.swift in Sources */,
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
 				8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */,
@@ -753,6 +806,7 @@
 				8ED63A932F1273780013632F /* RoomRepository.swift in Sources */,
 				8ED63A942F1273780013632F /* SeedRepository.swift in Sources */,
 				8ED63A952F1273780013632F /* ShelfRepository.swift in Sources */,
+				8E7EFC832F2550BD00D10C58 /* ChallengeSeasonRemote.swift in Sources */,
 				8ED63A962F1273780013632F /* TagRepository.swift in Sources */,
 				8ED63A972F1273780013632F /* UserRoomRepository.swift in Sources */,
 				8ED63A982F1273780013632F /* DefaultModels.swift in Sources */,
@@ -763,21 +817,26 @@
 				8EAF67C52EF33AB500780BB9 /* RoomFeatureStore.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
 				8EFEEEF52F0E589100857A23 /* HistoryScreenState.swift in Sources */,
+				8E7EFC7C2F254F3300D10C58 /* LocalImageStore.swift in Sources */,
 				8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */,
 				8EC86E2D2E06D97B00AA6AFA /* Collection + extension.swift in Sources */,
 				8EFEEEBE2F0AE71E00857A23 /* SendTimerView.swift in Sources */,
 				8E886B242F1BA2570001A734 /* AppStore + methods.swift in Sources */,
 				8EF575692DCE49D600AEC31A /* EnvironmentValues.swift in Sources */,
+				8E7EFC8D2F25517900D10C58 /* DecorModelGRDB.swift in Sources */,
 				8EA1C9BA2EFC546600DF690F /* RarityView.swift in Sources */,
 				8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */,
 				8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */,
+				8E7EFC7A2F24F88900D10C58 /* ChallengeRepository.swift in Sources */,
 				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8E4C247E2F1FE12400ADF98F /* CustomBackgroundModifier.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */,
+				8E7EFC892F25511800D10C58 /* ChallengeSeasonModelGRDB.swift in Sources */,
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EE61D3A2F1AB034002E8B30 /* EditRoomActions.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
+				8E7EFC852F2550D300D10C58 /* ChallengeModel.swift in Sources */,
 				8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */,
 				8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */,
 				8EE61D362F1AB020002E8B30 /* EditRoomStore.swift in Sources */,
@@ -803,6 +862,7 @@
 				8EAF68042EF4704600780BB9 /* HomeScreenState.swift in Sources */,
 				8EC86E2F2E06E38600AA6AFA /* View + extension.swift in Sources */,
 				8EC86E152E06C75400AA6AFA /* RoomType.swift in Sources */,
+				8E7EFC782F24E87B00D10C58 /* RemoteContentRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1092,14 @@
 				kind = branch;
 			};
 		};
+		8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 		8E941BAF2F21078D002F0B07 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1047,6 +1115,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E6C3E9C2F1137630074CD4E /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
+		};
+		8E7EFC752F24049700D10C58 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E7EFC742F24049700D10C58 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
 		};
 		8E941BB02F21078D002F0B07 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -15,6 +15,9 @@ class RepositoryFactory {
     let seedRepository: SeedRepositoryProtocol = SeedRepository(dbPool: DatabaseManager.shared.dbPool)
     let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
     let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
+    let challengeRepository: ChallengeRepositoryProtocol = ChallengeRepository(dbPool: DatabaseManager.shared.dbPool)
+    
+    lazy var remoteRepository: RemoteContentRepositoryProtocol = RemoteContentRepository(challengeRepository: challengeRepository)
     lazy var plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
                                                                     seedRepository: seedRepository,
                                                                     potRepository: potRepository)

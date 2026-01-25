@@ -10,9 +10,11 @@ import Foundation
 class ChallengeService {
     
     private let currentUserRoom: UserRoom
+    private let challengeRepository: ChallengeRepositoryProtocol
     
-    init(currentUserRoom: UserRoom) {
+    init(currentUserRoom: UserRoom, challengeRepository: ChallengeRepositoryProtocol) {
         self.currentUserRoom = currentUserRoom
+        self.challengeRepository = challengeRepository
     }
     
     private let tmpRewardDecor1: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand,
@@ -27,29 +29,34 @@ class ChallengeService {
                                                animationOptions: nil,
                                                resourceName: "decor3", positon: .zero, height: 40)
     
-    func getChallegeThisSeason() -> ChallengeSeason {
-        ChallengeSeason(id: UUID(), title: "Тестовый сезон!", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                        challenges: [
-                            Challenge(id: UUID(), title: "Полная загруженность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .totalLoggetTime, expectedValue: 30, expectedSecondValue: nil, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
-                            
-                            Challenge(id: UUID(), title: "Зеленая полка", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .numberOfPlants, expectedValue: 10, expectedSecondValue: nil, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
-                            
-                            Challenge(id: UUID(), title: "Широкий фокус", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .differentTagsUsed, expectedValue: 3, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
-                            
-                            Challenge(id: UUID(), title: "Звездная коллекция", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .numberOfPlantsNRarity, expectedValue: 4, expectedSecondValue: 8, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
-                            
-                            Challenge(id: UUID(), title: "Стабильность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .oneTimeRecordingTime, expectedValue: 10, expectedSecondValue: 20, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
-                            
-                            Challenge(id: UUID(), title: "Фиксируем отдых", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
-                                      type: .weekendProductivity, expectedValue: 5, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
-                            
-                        ])
+    func getChallegeThisSeason() async -> ChallengeSeason? {
+        return await challengeRepository.getCurrentChallengeSeason()
     }
+    
+//    func getChallegeThisSeason() -> ChallengeSeason {
+//        ChallengeSeason(id: UUID(), version: 1, title: "Тестовый сезон!", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                        challenges: [
+//                            Challenge(id: UUID(), title: "Полная загруженность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .totalLoggetTime, expectedValue: 30, expectedSecondValue: nil, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                            Challenge(id: UUID(), title: "Зеленая полка", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .numberOfPlants, expectedValue: 10, expectedSecondValue: nil, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                            Challenge(id: UUID(), title: "Широкий фокус", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .differentTagsUsed, expectedValue: 3, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                            Challenge(id: UUID(), title: "Звездная коллекция", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .numberOfPlantsNRarity, expectedValue: 4, expectedSecondValue: 8, rewardDecor: tmpRewardDecor1, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                            Challenge(id: UUID(), title: "Стабильность", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .oneTimeRecordingTime, expectedValue: 10, expectedSecondValue: 20, rewardDecor: tmpRewardDecor2, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                            Challenge(id: UUID(), title: "Фиксируем отдых", startDate: Date(), endDate: Date().getOffsetDate(offset: 30),
+//                                      type: .weekendProductivity, expectedValue: 5, expectedSecondValue: nil, rewardDecor: tmpRewardDecor3, rewardRoom: nil, rewardShelf: nil),
+//                            
+//                        ]
+//        )
+//    }
     
     func getProgressBy(challenge: Challenge) -> Double {
         if challenge.expectedValue <= 0 { return 0 }

@@ -21,6 +21,8 @@ class AppStore {
     let plantRepository: PlantRepositoryProtocol
     @ObservationIgnored
     let tagRepository: TagRepositoryProtocol
+    @ObservationIgnored
+    let remoteRepository: RemoteContentRepositoryProtocol
     
     var currentRoom: UserRoom = .empty
     var selectedPlant: Plant?
@@ -35,7 +37,12 @@ class AppStore {
         self.tagRepository = factory.tagRepository
         self.roomRepository = factory.roomRepository
         self.shelfRepository = factory.shelfRepository
-        
+        self.remoteRepository = factory.remoteRepository
+//
+//        let challengeRepository = ChallengeRepository(dbPool: DatabaseManager.shared.dbPool)
+//        
+//        let dd = RemoteContentRepository(challengeRepository: challengeRepository)
+//        
         getData()
     }
     
@@ -87,6 +94,7 @@ class AppStore {
         Task {
 //            let newRoom = await createNewUserRoom()
 //            await myRoomRepository.saveNewRoom(newRoom)
+//            await fff.ff()
             
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
@@ -100,4 +108,49 @@ class AppStore {
             simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
         }
     }
+}
+
+import Supabase
+
+class FFff {
+    
+    func ff() async {
+        
+
+        
+        let client = SupabaseClient(
+            supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
+            supabaseKey: "sb_publishable_7-Jo895jGaHwZuHOs1IYRw_nen0dCG8",
+            options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
+        )
+        
+        
+        let signedURL = try? await client
+            .storage
+            .from("plant")
+            .createSignedURL(
+                path: "pot59.png",
+                expiresIn: 60 // секунды
+            )
+
+        print(signedURL?.path())
+        
+        let signed = try! await client.storage
+            .from("models")
+            .createSignedURL(
+                path: "challengeList.json",
+                expiresIn: 60
+            )
+        
+        let data = try! Data(contentsOf: signed)
+        let config = try! JSONDecoder().decode(Config.self, from: data)
+        print(config)
+    }
+
+}
+
+struct Config: Decodable {
+    let title: String
+    let imagePath: String
+    let isEnabled: Bool
 }
