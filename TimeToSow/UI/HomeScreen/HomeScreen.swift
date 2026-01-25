@@ -26,6 +26,7 @@ struct HomeScreen: View {
     @State private var selectedTime: Int
     @State private var isProgress = false
     @State private var progressTime: Int?
+    @State private var isShowBox = false
     
     private var store: HomeScreenStore
     private var screenBuilder: ScreenBuilder
@@ -37,29 +38,47 @@ struct HomeScreen: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            header()
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
-                    roomView()
-                        .zIndex(100)
-                    
-                    HStack {
-                        statisticsView()
-                        Spacer()
-                        menuView()
-                    }
-                    
-                    newPlantSection()
-                    monthStatisticSection()
-                    tagStatisticsSection()
-                    
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 0) {
+                header()
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        ZStack(alignment: .bottomLeading) {
+                            roomView()
+                            Image(.deleteAnimation6)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60)
+                                .offset(x: 30, y: 20)
+                                .onTapGesture {
+                                    isShowBox.toggle()
+                                }
+                        }.zIndex(100)
+                        
+                        HStack {
+                            statisticsView()
+                            Spacer()
+                            menuView()
+                        }
+                        
+                        newPlantSection()
+                        monthStatisticSection()
+                        tagStatisticsSection()
+                        
 #if DEBUG
-                    debugConsole()
+                        debugConsole()
 #endif
-                }
-            }.coordinateSpace(name: "SCROLL")
+                    }
+                }.coordinateSpace(name: "SCROLL")
+            }
+            if isShowBox {
+                BoxView(plants: store.state.boxPlants, decor: store.state.boxDecor, isShowBox: $isShowBox)
+                    .frame(height: UIScreen.main.bounds.height / 2.2)
+                    .transition(.move(edge: .bottom))
+                    .zIndex(100)
+            }
         }
+        .animation(.easeInOut(duration: 0.3), value: isShowBox)
         .background(
             Color(hex: "FFF9EE")
                 .overlay(

@@ -42,6 +42,8 @@
 		8E7EFC892F25511800D10C58 /* ChallengeSeasonModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */; };
 		8E7EFC8B2F25514F00D10C58 /* ChallengeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8A2F25514F00D10C58 /* ChallengeType.swift */; };
 		8E7EFC8D2F25517900D10C58 /* DecorModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */; };
+		8E7EFC8F2F26276000D10C58 /* DecorPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */; };
+		8E7EFC912F262FF200D10C58 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC902F262FF200D10C58 /* BoxView.swift */; };
 		8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902C2F1D591500B6F614 /* SystemBlur.swift */; };
 		8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */; };
 		8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E869C702F225F6400DECCBF /* Сhallenge.swift */; };
@@ -172,6 +174,8 @@
 		8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSeasonModelGRDB.swift; sourceTree = "<group>"; };
 		8E7EFC8A2F25514F00D10C58 /* ChallengeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeType.swift; sourceTree = "<group>"; };
 		8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorModelGRDB.swift; sourceTree = "<group>"; };
+		8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorPreview.swift; sourceTree = "<group>"; };
+		8E7EFC902F262FF200D10C58 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
 		8E85902C2F1D591500B6F614 /* SystemBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlur.swift; sourceTree = "<group>"; };
 		8E85902E2F1D593700B6F614 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		8E869C702F225F6400DECCBF /* Сhallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сhallenge.swift"; sourceTree = "<group>"; };
@@ -620,12 +624,14 @@
 				8E85902C2F1D591500B6F614 /* SystemBlur.swift */,
 				8EC86F072E0F3A6000AA6AFA /* FlatShadow.swift */,
 				8EC86DF62E06208600AA6AFA /* PlantView.swift */,
+				8E7EFC902F262FF200D10C58 /* BoxView.swift */,
 				8E7EFC6E2F23D34900D10C58 /* DecorView.swift */,
 				8EC86F502E18442000AA6AFA /* LoopingFramesView.swift */,
 				8EC86E062E0628E400AA6AFA /* DustView.swift */,
 				8EF575882DDA00E200AEC31A /* TimePickerView.swift */,
 				8E75DE132E5A306C0004C3D3 /* TimerView.swift */,
 				8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */,
+				8E7EFC8E2F26276000D10C58 /* DecorPreview.swift */,
 				8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */,
 				8EE4C5A12E7A126600818D95 /* TextureButton.swift */,
 				8EEB2E882E7B54CF00D0F736 /* TagView.swift */,
@@ -784,10 +790,12 @@
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
+				8E7EFC912F262FF200D10C58 /* BoxView.swift in Sources */,
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
 				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,
 				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
 				8E869C732F226F4C00DECCBF /* ChallengeService.swift in Sources */,
+				8E7EFC8F2F26276000D10C58 /* DecorPreview.swift in Sources */,
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
 				8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */,

@@ -49,11 +49,16 @@ struct DecorView: View {
                         }
                     }
             } else {
-                Image.file(name)
+                WebImage(url: decor.resourceUrl)
                     .resizable()
                     .scaledToFit()
                     .frame(height: decor.height)
                     .offset(x: decor.positon.x, y: decor.positon.y)
+//                Image.file(name)
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(height: decor.height)
+//                    .offset(x: decor.positon.x, y: decor.positon.y)
             }
         }
         .animation(.easeInOut(duration: 0.1), value: offsetX)

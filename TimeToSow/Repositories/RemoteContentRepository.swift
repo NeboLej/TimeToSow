@@ -58,8 +58,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         }
 
         do {
-            let signed = try await client
-                .storage
+            let signed = try await client.storage
                 .from("")
                 .createSignedURL(path: path, expiresIn: 60)
             
@@ -106,7 +105,6 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         let data = try Data(contentsOf: signed)
         data.printJSON()
         let version = try JSONDecoder().decode(ContentVersions.self, from: data)
-        print(version)
         return version
     }
     

@@ -20,6 +20,8 @@ struct HomeScreenState {
     let selectedTag: Tag?
     let topPlant: Plant?
     let topTag: Tag?
+    let boxPlants: [Plant]
+    let boxDecor: [Decor]
     
     init(appStore: AppStore) {
         roomName = appStore.currentRoom.name
@@ -38,5 +40,20 @@ struct HomeScreenState {
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
         selectedTag = appStore.selectedTag
+        boxPlants = appStore.currentRoom.plants.map { $0.value }
+        
+        let tmpRewardDecor1: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand,
+                                          animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
+                                          resourceName: "decor1", positon: .zero, height: 40)
+        
+        let tmpRewardDecor2: Decor = Decor(id: UUID(), name: "Часики", locationType: .free,
+                                          animationOptions: nil,
+                                          resourceName: "decor2", positon: .zero, height: 40)
+        
+        let tmpRewardDecor3: Decor = Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
+                                                   animationOptions: nil,
+                                                   resourceName: "decor3", positon: .zero, height: 40)
+        
+        boxDecor = [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3]
     }
 }

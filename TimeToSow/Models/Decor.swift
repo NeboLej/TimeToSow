@@ -26,6 +26,9 @@ struct Decor: Hashable, Identifiable {
     let positon: CGPoint
     let height: CGFloat
     let width: CGFloat
+    var resourceUrl: URL? {
+        Bundle.main.url(forResource: resourceName, withExtension: animationOptions == nil ? "png" : "gif")
+    }
     
     init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, positon: CGPoint, height: CGFloat) {
         self.id = id
