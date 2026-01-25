@@ -17,18 +17,6 @@ class ChallengeService {
         self.challengeRepository = challengeRepository
     }
     
-    private let tmpRewardDecor1: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand,
-                                               animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
-                                               resourceName: "decor1", positon: .zero, height: 40)
-    
-    private let tmpRewardDecor2: Decor = Decor(id: UUID(), name: "Часики", locationType: .free,
-                                               animationOptions: nil,
-                                               resourceName: "decor2", positon: .zero, height: 40)
-    
-    private let tmpRewardDecor3: Decor = Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
-                                               animationOptions: nil,
-                                               resourceName: "decor3", positon: .zero, height: 40)
-    
     func getChallegeThisSeason() async -> ChallengeSeason? {
         return await challengeRepository.getCurrentChallengeSeason()
     }

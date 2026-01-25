@@ -42,17 +42,7 @@ class UserRoom: Hashable {
         self.plants = plants
         
         var dict = [UUID: Decor]()
-        [Decor(id: UUID(), name: "Лошадка", locationType: .stand,
-                  animationOptions: AnimationOptions(duration: 3, repeatCount: 2, timeRepetition: 30),
-                  resourceName: "decor1", positon: .zero, height: 30),
-            
-            Decor(id: UUID(), name: "Часики", locationType: .free,
-                  animationOptions: nil,
-                  resourceName: "decor2", positon: .zero, height: 40),
-            
-            Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
-                  animationOptions: nil,
-                  resourceName: "decor3", positon: .zero, height: 30)].forEach {
+        [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3].forEach {
             dict[$0.id] = $0
         }
         self.decor = dict
@@ -76,17 +66,7 @@ class UserRoom: Hashable {
         self.plants = plantsDict
         
         var dict = [UUID: Decor]()
-        [Decor(id: UUID(), name: "Лошадка", locationType: .stand,
-                  animationOptions: AnimationOptions(duration: 3, repeatCount: 2, timeRepetition: 30),
-                  resourceName: "decor1", positon: .zero, height: 30),
-            
-            Decor(id: UUID(), name: "Часики", locationType: .free,
-                  animationOptions: nil,
-                  resourceName: "decor2", positon: .zero, height: 40),
-            
-            Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
-                  animationOptions: nil,
-                  resourceName: "decor3", positon: .zero, height: 30)].forEach {
+        [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3].forEach {
             dict[$0.id] = $0
         }
         decor = dict

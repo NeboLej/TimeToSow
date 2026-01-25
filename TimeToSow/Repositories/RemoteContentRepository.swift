@@ -38,7 +38,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     func updateRemoteData() {
         Task {
             do {
-                version = try await fetchVersions()
+                version = try await fetch(path: "contentVersions.json", type: ContentVersions.self)
                 await checkChallengesSeason()
                 
             } catch {
@@ -52,11 +52,11 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     func imageURL(for path: String) async -> URL? {
         let localStore = LocalImageStore.shared
         let localURL = localStore.localURL(for: path)
-
+        
         if localStore.exists(localURL) {
             return localURL
         }
-
+        
         do {
             let signed = try await client.storage
                 .from("")
@@ -83,29 +83,12 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private func updateChallengesSeason() async {
         do {
-            let challengeUrl = try await client.storage
-                .from("models")
-                .createSignedURL(path: "challengeSeason.json", expiresIn: 60)
-            
-            let data = try Data(contentsOf: challengeUrl)
-            data.printJSON()
-            let challengeSeason = try JSONDecoder().decode(ChallengeSeasonRemote.self, from: data)
+            let challengeSeason = try await fetch(path: "challengeSeason.json", type: ChallengeSeasonRemote.self)
             await prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
             await challengeRepository.addNewChallangeSeason(challengeSeason)
         } catch {
             fatalError()
         }
-    }
-    
-    private func fetchVersions() async throws -> ContentVersions {
-        let signed = try await client.storage
-            .from("models")
-            .createSignedURL(path: "contentVersions.json", expiresIn: 60)
-        
-        let data = try Data(contentsOf: signed)
-        data.printJSON()
-        let version = try JSONDecoder().decode(ContentVersions.self, from: data)
-        return version
     }
     
     private func prefetchImages(imagePaths: [String]) async {
@@ -116,6 +99,17 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
                 }
             }
         }
+    }
+    
+    private func fetch<T: Decodable>(path: String, type: T.Type) async throws -> T {
+        let url = try await client.storage
+            .from("models")
+            .createSignedURL(path: "challengeSeason.json", expiresIn: 60)
+        
+        let data = try Data(contentsOf: url)
+        data.printJSON()
+        let response = try JSONDecoder().decode(type.self, from: data)
+        return response
     }
 }
 

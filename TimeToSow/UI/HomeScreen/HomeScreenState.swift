@@ -42,18 +42,37 @@ struct HomeScreenState {
         selectedTag = appStore.selectedTag
         boxPlants = appStore.currentRoom.plants.map { $0.value }
         
-        let tmpRewardDecor1: Decor = Decor(id: UUID(), name: "Лошадка", locationType: .stand,
-                                          animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
-                                          resourceName: "decor1", positon: .zero, height: 40)
-        
-        let tmpRewardDecor2: Decor = Decor(id: UUID(), name: "Часики", locationType: .free,
-                                          animationOptions: nil,
-                                          resourceName: "decor2", positon: .zero, height: 40)
-        
-        let tmpRewardDecor3: Decor = Decor(id: UUID(), name: "Колокольчик", locationType: .hand,
-                                                   animationOptions: nil,
-                                                   resourceName: "decor3", positon: .zero, height: 40)
-        
         boxDecor = [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3]
     }
 }
+
+
+let tmpRewardDecor1 = Decor(decorType: DecorType(id: UUID(),
+                                                 name: "Лошадка",
+                                                 locationType: .stand,
+                                                 animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
+                                                 resourceName: "decor1",
+                                                 height: 40),
+                             rootRoomID: UUID(),
+                             offsetY: .zero,
+                             offsetX: .zero)
+
+let tmpRewardDecor2 = Decor(decorType: DecorType(id: UUID(),
+                                                 name: "Часики",
+                                                 locationType: .free,
+                                                 animationOptions: nil,
+                                                 resourceName: "decor2",
+                                                 height: 40),
+                             rootRoomID: UUID(),
+                             offsetY: .zero,
+                             offsetX: .zero)
+
+let tmpRewardDecor3 = Decor(decorType: DecorType(id: UUID(),
+                                                 name: "Колокольчик",
+                                                 locationType: .hand,
+                                                 animationOptions: nil,
+                                                 resourceName: "decor3",
+                                                 height: 40),
+                             rootRoomID: UUID(),
+                             offsetY: .zero,
+                             offsetX: .zero)

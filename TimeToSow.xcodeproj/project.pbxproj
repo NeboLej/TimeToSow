@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E201B552F127718002B49A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E201B542F127718002B49A1 /* Logger.swift */; };
+		8E2957932F26679500EA144A /* DecorTypeModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */; };
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
 		8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */; };
 		8E4C247E2F1FE12400ADF98F /* CustomBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4C247D2F1FE12400ADF98F /* CustomBackgroundModifier.swift */; };
@@ -143,6 +144,7 @@
 /* Begin PBXFileReference section */
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E201B542F127718002B49A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorTypeModelGRDB.swift; sourceTree = "<group>"; };
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreen.swift; sourceTree = "<group>"; };
 		8E4C247D2F1FE12400ADF98F /* CustomBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundModifier.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				8ED63A742F1273780013632F /* NoteModelGRDB.swift */,
 				8ED63A752F1273780013632F /* PlantModelGRDB.swift */,
 				8E7EFC8C2F25517900D10C58 /* DecorModelGRDB.swift */,
+				8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */,
 				8ED63A762F1273780013632F /* PotModelGRDB.swift */,
 				8ED63A772F1273780013632F /* RoomModelGRDB.swift */,
 				8E7EFC882F25511800D10C58 /* ChallengeSeasonModelGRDB.swift */,
@@ -790,6 +793,7 @@
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,
+				8E2957932F26679500EA144A /* DecorTypeModelGRDB.swift in Sources */,
 				8E7EFC912F262FF200D10C58 /* BoxView.swift in Sources */,
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
 				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,

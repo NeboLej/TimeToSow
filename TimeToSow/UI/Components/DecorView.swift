@@ -24,15 +24,16 @@ struct DecorView: View {
     init(decor: Decor, positionDelegate: PositionDecorDelegate) {
         self.decor = decor
 //        self.isSelected = plant.isSelected
-        self.offsetX = decor.positon.x
-        self.offsetY = decor.positon.y
-        self.accumulatedX = decor.positon.x
-        self.accumulatedY = decor.positon.y
+        self.offsetX = decor.offsetX
+        self.offsetY = decor.offsetY
+        self.accumulatedX = decor.offsetX
+        self.accumulatedY = decor.offsetY
         self.positionDelegate = positionDelegate
     }
     
     var body: some View {
         VStack {
+            let decor = decor.decorType
             let name = decor.resourceName + (decor.animationOptions != nil ? ".gif" : ".png")
             
             if name.contains(".gif") {
@@ -41,7 +42,7 @@ struct DecorView: View {
                     .customLoopCount(decor.animationOptions?.repeatCount ?? 1)
                     .scaledToFit()
                     .frame(height: decor.height)
-                    .offset(x: decor.positon.x, y: decor.positon.y)
+                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
                     .onTapGesture {
                         isAnimating = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + (decor.animationOptions?.duration ?? 2)) {
@@ -53,7 +54,7 @@ struct DecorView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: decor.height)
-                    .offset(x: decor.positon.x, y: decor.positon.y)
+                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
 //                Image.file(name)
 //                    .resizable()
 //                    .scaledToFit()
@@ -79,8 +80,8 @@ struct DecorView: View {
                 
                 if newOffsetX < 0 {
                     offsetX = 0
-                } else if newOffsetX > positionDelegate.roomViewWidth - decor.width {
-                    offsetX = positionDelegate.roomViewWidth - decor.width
+                } else if newOffsetX > positionDelegate.roomViewWidth - decor.decorType.width {
+                    offsetX = positionDelegate.roomViewWidth - decor.decorType.width
                 } else {
                     offsetX = newOffsetX
                 }

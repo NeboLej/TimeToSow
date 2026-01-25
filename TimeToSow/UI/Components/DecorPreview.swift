@@ -14,11 +14,11 @@ struct DecorPreview: View {
     @State var decor: Decor
     
     var body: some View {
-        WebImage(url: decor.resourceUrl)
+        WebImage(url: decor.decorType.resourceUrl)
             .resizable()
             .scaledToFit()
             .padding()
-            .frame(height: decor.height * zoomCoef)
+            .frame(height: decor.decorType.height * zoomCoef)
         
 //        if name.contains(".gif") {
 //            AnimatedImage(name: name, bundle: .main)

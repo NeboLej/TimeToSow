@@ -17,26 +17,25 @@ struct AnimationOptions: Hashable, Codable {
     let timeRepetition: Double
 }
 
-struct Decor: Hashable, Identifiable {
+struct DecorType: Hashable, Identifiable {
     let id: UUID
     let name: String
     let locationType: LocationType
     let animationOptions: AnimationOptions?
     let resourceName: String
-    let positon: CGPoint
     let height: CGFloat
     let width: CGFloat
+    
     var resourceUrl: URL? {
         Bundle.main.url(forResource: resourceName, withExtension: animationOptions == nil ? "png" : "gif")
     }
     
-    init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, positon: CGPoint, height: CGFloat) {
+    init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, height: CGFloat) {
         self.id = id
         self.name = name
         self.locationType = locationType
         self.animationOptions = animationOptions
         self.resourceName = resourceName
-        self.positon = positon
         self.height = height
         
         if animationOptions == nil {
@@ -44,10 +43,10 @@ struct Decor: Hashable, Identifiable {
                 guard let url = Bundle.main.url(forResource: name, withExtension: "png") else { return nil }
                 return UIImage(contentsOfFile: url.path)
             }()
-
+            
             let originalWidth = image?.size.width
             let originalHeight = image?.size.height
-
+            
             if let originalWidth, let originalHeight, originalHeight > 0 {
                 width = CGFloat(height) * (originalWidth / originalHeight)
             } else {
@@ -56,6 +55,16 @@ struct Decor: Hashable, Identifiable {
         } else {
             width = (Decor.gifAspectRatio(named: name) ?? 1) * height
         }
+    }
+    
+    init(from: DecorTypeModelGRDB) {
+        id = from.id
+        name = from.name
+        locationType = from.locationType
+        animationOptions = from.animationOptions
+        resourceName = from.resourceName
+        height = from.height
+        width = from.width
     }
     
     init(from: DecorModel) {
@@ -64,7 +73,6 @@ struct Decor: Hashable, Identifiable {
         locationType = from.locationType
         animationOptions = from.animationOptions
         resourceName = from.resourceUrl
-        positon = .zero
         height = from.height
         
         if from.animationOptions == nil {
@@ -72,10 +80,10 @@ struct Decor: Hashable, Identifiable {
                 guard let url = Bundle.main.url(forResource: from.name, withExtension: "png") else { return nil }
                 return UIImage(contentsOfFile: url.path)
             }()
-
+            
             let originalWidth = image?.size.width
             let originalHeight = image?.size.height
-
+            
             if let originalWidth, let originalHeight, originalHeight > 0 {
                 width = CGFloat(height) * (originalWidth / originalHeight)
             } else {
@@ -85,9 +93,70 @@ struct Decor: Hashable, Identifiable {
             width = (Decor.gifAspectRatio(named: name) ?? 1) * height
         }
     }
+}
+
+
+struct Decor: Hashable, Identifiable {
+    let id: UUID
     
-    func copy(positon: CGPoint) -> Decor {
-        Decor(id: self.id, name: self.name, locationType: self.locationType, animationOptions: self.animationOptions, resourceName: self.resourceName, positon: positon, height: self.height)
+    let decorType: DecorType
+    let rootRoomID: UUID
+    
+    let offsetY: Double
+    let offsetX: Double
+    
+    init(id: UUID = UUID(), decorType: DecorType, rootRoomID: UUID, offsetY: Double, offsetX: Double) {
+        self.id = id
+        self.decorType = decorType
+        self.rootRoomID = rootRoomID
+        self.offsetY = offsetY
+        self.offsetX = offsetX
+    }
+    
+    init(from: DecorModelGRDB) {
+        guard let decorType = from.decorType else {
+            fatalError()
+        }
+        
+        self.id = from.id
+        self.decorType = DecorType(from: decorType)
+        self.rootRoomID = from.rootRoomID
+        self.offsetY = from.offsetY
+        self.offsetX = from.offsetX
+    }
+    
+    
+    //    init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, positon: CGPoint, height: CGFloat) {
+    //        self.id = id
+    //        self.name = name
+    //        self.locationType = locationType
+    //        self.animationOptions = animationOptions
+    //        self.resourceName = resourceName
+    //        self.positon = positon
+    //        self.height = height
+    //
+    //        if animationOptions == nil {
+    //            let image: UIImage? = {
+    //                guard let url = Bundle.main.url(forResource: name, withExtension: "png") else { return nil }
+    //                return UIImage(contentsOfFile: url.path)
+    //            }()
+    //
+    //            let originalWidth = image?.size.width
+    //            let originalHeight = image?.size.height
+    //
+    //            if let originalWidth, let originalHeight, originalHeight > 0 {
+    //                width = CGFloat(height) * (originalWidth / originalHeight)
+    //            } else {
+    //                width = CGFloat(height)
+    //            }
+    //        } else {
+    //            width = (Decor.gifAspectRatio(named: name) ?? 1) * height
+    //        }
+    //    }
+    
+    
+    func copy(offsetX: Double? = nil, offsetY: Double? = nil) -> Decor {
+        Decor(id: self.id, decorType: self.decorType, rootRoomID: self.rootRoomID, offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX)
     }
     
     
@@ -95,7 +164,7 @@ struct Decor: Hashable, Identifiable {
         let parts = resourceName.split(separator: ".", maxSplits: 1)
         let name = String(parts.first ?? "")
         let ext = parts.count > 1 ? String(parts.last!) : "gif"
-
+        
         guard let url = Bundle.main.url(forResource: name, withExtension: ext),
               let source = CGImageSourceCreateWithURL(url as CFURL, nil),
               let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
@@ -104,7 +173,7 @@ struct Decor: Hashable, Identifiable {
               height > 0 else {
             return nil
         }
-
+        
         return width / height
     }
 }

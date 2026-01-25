@@ -105,7 +105,7 @@ extension AppStore {
     func updateDecorPosition(_ decor: Decor, newPosition: CGPoint) {
         guard let decor = currentRoom.decor[decor.id] else { return } //.first { $0.id == decor.id } else { return }
 //        if decor.positon.x.isAlmostEqual(to: newPosition.x) && decor.positon.y.isAlmostEqual(to: newPosition.y) { return }
-        let newDecor = decor.copy(positon: newPosition)
+        let newDecor = decor.copy(offsetX: newPosition.x, offsetY: newPosition.y)
 //        Task {
 //            await plantRepository.updatePlant(newPlant)
 //        }

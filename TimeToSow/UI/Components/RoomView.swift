@@ -139,30 +139,30 @@ extension RoomView: PositionDecorDelegate {
         
         let shelfs = store.state.shelfType.shelfPositions.sorted { $0.coefOffsetY < $1.coefOffsetY }
         
-        switch decor.locationType {
+        switch decor.decorType.locationType {
         case .stand:
-            let y = y + decor.height
-            let deltaX = decor.width / 2
+            let y = y + decor.decorType.height
+            let deltaX = decor.decorType.width / 2
             
             for shelf in shelfs {
                 if shelf.coefOffsetY * height >= y {
                     if x + deltaX >= shelf.paddingLeading && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
-                        result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.height)
+                        result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.decorType.height)
                         return result
                     }
                 }
             }
             
-            result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - decor.height)
+            result = CGPoint(x: x, y: (shelfs.last?.coefOffsetY ?? 1) * height - decor.decorType.height)
         case .hand:
-            let deltaX = decor.width / 2
+            let deltaX = decor.decorType.width / 2
             for shelf in shelfs {
                 if shelf.coefOffsetY * height >= y {
                     if x + deltaX >= shelf.paddingLeading && x + deltaX <= roomViewWidth - shelf.paddingTrailing {
                         if shelf != shelfs.last {
                             result = CGPoint(x: x, y: shelf.coefOffsetY * height)
                         } else {
-                            result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.height)
+                            result = CGPoint(x: x, y: shelf.coefOffsetY * height - decor.decorType.height)
                         }
                         
                         return result
@@ -172,7 +172,7 @@ extension RoomView: PositionDecorDelegate {
             
             result = CGPoint(x: x, y: (shelfs.first?.coefOffsetY ?? 1) * height)
         case .free:
-            let maxY = (shelfs.last?.coefOffsetY ?? 1) * height - decor.height
+            let maxY = (shelfs.last?.coefOffsetY ?? 1) * height - decor.decorType.height
             result = CGPoint(x: x, y: min(y, maxY))
         }
         
