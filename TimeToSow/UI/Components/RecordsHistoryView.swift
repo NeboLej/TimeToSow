@@ -57,9 +57,15 @@ struct RecordsHistoryView: View {
             Rectangle()
                 .frame(width: 10)
                 .foregroundStyle(Color(hex: note.tag.color))
-            Text(note.time.toHoursAndMinutes())
-                .font(.myRegular(16))
-                .foregroundStyle(.black)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(note.time.toHoursAndMinutes())
+                    .font(.myRegular(16))
+                    .foregroundStyle(.black)
+                Text("\(note.date.toHourMinuteDate()) - \(note.date.getOffsetDate(note.time, component: .minute).toHourMinuteDate())")
+                    .font(.myRegular(11))
+                    .foregroundStyle(.black.opacity(0.5))
+            }
+
             Spacer()
             TagView(tag: note.tag)
                 .padding(.trailing, 10)
@@ -87,7 +93,7 @@ struct RecordsHistoryView: View {
                                                           offsetX: 200,
                                                           isOnShelf: true,
                                                           notes: [
-                                                           Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                                           Note(date: Date().getOffsetDate(-3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
                                                            Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
                                                           ]
                                                          )))

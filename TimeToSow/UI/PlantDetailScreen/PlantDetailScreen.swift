@@ -11,7 +11,8 @@ fileprivate enum L: LocalizedStringKey {
     case desctiprionTitle = "PlantDetailScreen.descriptionTitle"
     case recordsHistoryTitle = "PlantDetailScreen.recordsHistoryTitle"
     case editButton = "PlantDetailScreen.editButton"
-    case toShelfButton = "PlantDetailScreen.toShelfButton"
+    case returnToShelfButton = "PlantDetailScreen.returnToShelfButton"
+    case removeFromShelfButton = "PlantDetailScreen.removeFromShelfButton"
     case deleteButton = "PlantDetailScreen.deleteButton"
     
     var loc: LocalizedStringKey { rawValue }
@@ -20,6 +21,7 @@ fileprivate enum L: LocalizedStringKey {
 struct PlantDetailScreen: View {
     
     @State var store: PlantDetailScreenStore
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
@@ -146,8 +148,9 @@ struct PlantDetailScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     
                     menuElement(L.editButton.loc, color: Color(hex: "DDFFB7")) {}
-                    menuElement(L.toShelfButton.loc, color: Color(hex: "C9F3FF")) {
+                    menuElement(store.state.plant.isOnShelf ? L.removeFromShelfButton.loc : L.returnToShelfButton.loc, color: Color(hex: "C9F3FF")) {
                         store.send(.removeFromShelf)
+                        dismiss()
                     }
                     menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {}
                 }
@@ -185,7 +188,7 @@ struct PlantDetailScreen: View {
                                                           offsetX: 200,
                                                           isOnShelf: true,
                                                           notes: [
-                                                           Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                                           Note(date: Date().getOffsetDate(-3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
                                                            Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
                                                           ]
                                                          )))

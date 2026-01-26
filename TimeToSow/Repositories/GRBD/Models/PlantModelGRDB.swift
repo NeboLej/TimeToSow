@@ -23,6 +23,7 @@ struct PlantModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
     var offsetX: Double
     var time: Int
     var isOnShelf: Bool
+    var dateCreate: Date
     
     var seed: SeedModelGRDB?
     var pot: PotModelGRDB?
@@ -41,10 +42,11 @@ struct PlantModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
         offsetX = from.offsetX
         time = from.time
         isOnShelf = from.isOnShelf
+        dateCreate = from.dateCreate
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, seedID, potID, name, userDescription, offsetY, offsetX, time, rootRoomID, isOnShelf
+        case id, seedID, potID, name, userDescription, offsetY, offsetX, time, rootRoomID, isOnShelf, dateCreate
         case seed, pot, notes
     }
 }
@@ -61,6 +63,7 @@ extension PlantModelGRDB {
         container["time"] = time
         container["rootRoomID"] = rootRoomID
         container["isOnShelf"] = isOnShelf
+        container["dateCreate"] = dateCreate
     }
 }
 

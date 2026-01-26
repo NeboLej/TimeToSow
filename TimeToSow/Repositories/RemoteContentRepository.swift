@@ -104,7 +104,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     private func fetch<T: Decodable>(path: String, type: T.Type) async throws -> T {
         let url = try await client.storage
             .from("models")
-            .createSignedURL(path: "challengeSeason.json", expiresIn: 60)
+            .createSignedURL(path: path, expiresIn: 60)
         
         let data = try Data(contentsOf: url)
         data.printJSON()

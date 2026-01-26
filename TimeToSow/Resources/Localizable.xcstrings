@@ -239,7 +239,7 @@
         }
       }
     },
-    "PlantDetailScreen.toShelfButton" : {
+    "PlantDetailScreen.removeFromShelfButton" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -252,6 +252,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Убрать с полки"
+          }
+        }
+      }
+    },
+    "PlantDetailScreen.returnToShelfButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Return to the shelf"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вернуть на поку"
           }
         }
       }

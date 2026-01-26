@@ -22,11 +22,19 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func toHourMinuteDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter.string(from: self)
+    }
+    
+    
     func isCurrentMonth() -> Bool {
         Calendar.current.isDate(self, equalTo: Date(), toGranularity: .month)
     }
     
-    func getOffsetDate(offset: Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: offset, to: self) ?? Date()
+    func getOffsetDate(_ offset: Int, component: Calendar.Component = Calendar.Component.day) -> Date {
+        Calendar.current.date(byAdding: component, value: offset, to: self) ?? Date()
     }
 }

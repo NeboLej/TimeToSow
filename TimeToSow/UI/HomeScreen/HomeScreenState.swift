@@ -24,23 +24,24 @@ struct HomeScreenState {
     let boxDecor: [Decor]
     
     init(appStore: AppStore) {
+        let plants = appStore.currentRoom.plants
         roomName = appStore.currentRoom.name
         shelf = appStore.currentRoom.shelfType
         room = appStore.currentRoom.roomType
         headerColor = Color.averageTopRowColor(from: UIImage(named: room.image))
         plantCount = appStore.currentRoom.plants.count
-        loggedMinutesCount = appStore.currentRoom.plants.reduce(0) { $0 + $1.value.time }
-        allNotes = appStore.currentRoom.plants.flatMap(\.value.notes)
+        loggedMinutesCount = plants.reduce(0) { $0 + $1.value.time }
+        allNotes = plants.flatMap(\.value.notes)
         
         selectedPlant = appStore.selectedPlant
-        topPlant = appStore.currentRoom.plants.map { $0.value }.max(by: { $0.time < $1.time })
+        topPlant = plants.map { $0.value }.max(by: { $0.time < $1.time })
         
         let dict = allNotes.reduce(into: [:]) { result, note in
             result[note.tag, default: 0] += note.time
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
         selectedTag = appStore.selectedTag
-        boxPlants = appStore.currentRoom.plants.filter { !$0.value.isOnShelf }.map { $0.value }
+        boxPlants = plants.filter { !$0.value.isOnShelf }.map { $0.value }.sorted(by: { $1.dateCreate > $0.dateCreate })
         
         boxDecor = [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3]
     }

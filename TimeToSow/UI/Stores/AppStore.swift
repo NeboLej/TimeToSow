@@ -89,6 +89,7 @@ class AppStore {
             deleteTag(tag)
         case .changeShelfVisibility(plant: let plant, isVisible: let isVisible):
             updatePlantVisibleInShelf(plant, isVisible: isVisible)
+            selectedPlant = nil
         }
     }
     

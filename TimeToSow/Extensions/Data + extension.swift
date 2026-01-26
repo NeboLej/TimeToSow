@@ -12,7 +12,7 @@ extension Data {
         if let jsonString = String(data: self, encoding: .utf8) {
             print(jsonString)
         } else {
-            Logger.log("Не удалось преобраховать data в json ", location: .unowned, event: .error(nil))
+            Logger.log("Не удалось преобразовать data в json ", location: .unowned, event: .error(nil))
         }
     }
 }

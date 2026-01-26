@@ -13,7 +13,7 @@ extension AppStore {
     func createNewUserRoom() async -> UserRoom {
         let randomRoom = await roomRepository.getRandomRoom()
         let randomShelf = await shelfRepository.getRandomShelf()
-        let dateCreate = Date()//.getOffsetDate(offset: -32)
+        let dateCreate = Date()//.getOffsetDate(days: -32)
         
         return UserRoom(shelfType: randomShelf, roomType: randomRoom, name: dateCreate.toMonthYearDate(), dateCreate: dateCreate, plants: [:], decor: [:])
     }
@@ -81,7 +81,7 @@ extension AppStore {
     //MARK: - Note
     func getRandomNote() -> Note {
         guard let selectedTag else { fatalError() }
-        return Note(date: Date().getOffsetDate(offset: (-5...0).randomElement()!),
+        return Note(date: Date().getOffsetDate((-5...0).randomElement()!),
              time: (5...240).randomElement()!,
              tag: selectedTag)
     }
