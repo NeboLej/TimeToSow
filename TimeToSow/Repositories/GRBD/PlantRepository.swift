@@ -55,6 +55,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                      description: "",
                      offsetY: Double((10...250).randomElement()!),
                      offsetX: Double((10...350).randomElement()!),
+                     isOnShelf: true,
                      notes: [note])
     }
     
@@ -62,7 +63,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         do {
             try await dbPool.write { db in
                 if try PlantModelGRDB.filter(key: plant.id).fetchCount(db) != 0 {
-                    let mutablePlant = PlantModelGRDB(from1: plant)
+                    let mutablePlant = PlantModelGRDB(from: plant)
                     try mutablePlant.update(db)
                     Logger.log("update plant", location: .GRDB, event: .success)
                 } else {
@@ -86,7 +87,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         do {
             try await dbPool.write { db in
                 if try PlantModelGRDB.filter(key: plant.id).fetchCount(db) == 0 {
-                    var mutablePlant = PlantModelGRDB(from1: plant)
+                    var mutablePlant = PlantModelGRDB(from: plant)
                     try mutablePlant.insert(db)
                     Logger.log("save new plant", location: .GRDB, event: .success)
                 } else {

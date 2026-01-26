@@ -60,6 +60,15 @@ extension AppStore {
         userRooms[plant.rootRoomID]?.plants[plant.id] = newPlant
     }
     
+    func updatePlantVisibleInShelf(_ plant: Plant, isVisible: Bool) {
+        guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
+        let newPlant = plant.copy(isVisible: isVisible)
+        Task {
+            await plantRepository.updatePlant(newPlant)
+        }
+        userRooms[plant.rootRoomID]?.plants[plant.id] = newPlant
+    }
+    
     //test
     func addRandomPlantToShelf() {
         Task {

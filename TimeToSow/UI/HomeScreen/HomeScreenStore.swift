@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-class HomeScreenStore: FeatureStore {
+final class HomeScreenStore: FeatureStore {
     
     var state: HomeScreenState
     private var delegate: HomeScreenDelegate
@@ -21,13 +21,13 @@ class HomeScreenStore: FeatureStore {
         observeAppState()
     }
     
-    func send(_ acion: HomeScreenAction, animation: Animation? = .default) {
+    func send(_ action: HomeScreenAction, animation: Animation? = .default) {
         if let animation {
             withAnimation(animation) {
-                delegate.send(action: acion)
+                delegate.send(action: action)
             }
         } else {
-            delegate.send(action: acion)
+            delegate.send(action: action)
         }
     }
     

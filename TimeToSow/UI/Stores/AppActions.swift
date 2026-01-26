@@ -22,4 +22,5 @@ enum AppAction {
     case selectTag(Tag)
     case newTag(Tag)
     case deleteTag(Tag)
+    case changeShelfVisibility(plant: Plant, isVisible: Bool)
 }

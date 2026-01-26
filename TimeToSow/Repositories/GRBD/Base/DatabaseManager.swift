@@ -103,6 +103,7 @@ final class DatabaseManager {
             t.column("offsetX", .double).notNull()
             t.column("time", .integer).notNull()
             t.column("rootRoomID", .blob).notNull()
+            t.column("isOnShelf", .boolean).notNull()
             
             t.foreignKey(["seedID"], references: "seed", onDelete: .restrict, onUpdate: .cascade)
             t.foreignKey(["potID"], references: "pot", onDelete: .restrict, onUpdate: .cascade)

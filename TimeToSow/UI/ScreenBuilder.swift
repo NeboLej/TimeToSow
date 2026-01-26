@@ -49,7 +49,7 @@ final class ScreenBuilder {
         case .progress(let minutes):
             ProgressScreen(store: ProgressScreenStore(appStore: appStore, minutes: minutes))
         case .plantDetails(let plant):
-            PlantDetailScreen(plant: plant)
+            PlantDetailScreen(store: PlantDetailScreenStore(appStore: appStore, plant: plant))
                 .ignoresSafeArea()
         case .debugScreen:
             DebugScreenView()

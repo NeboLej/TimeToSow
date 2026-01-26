@@ -71,22 +71,25 @@ struct RecordsHistoryView: View {
 }
 
 #Preview {
-    PlantDetailScreen(plant: Plant(rootRoomID: UUID(),
-                                   seed: Seed(name: "seed1.name",
-                                              image: "seed23",
-                                              height: 45,
-                                              rarity: .common),
-                                   pot: Pot(name: "pot1.name",
-                                            image: "pot21",
-                                            height: 24,
-                                            rarity: .common),
-                                   name: "Oleg",
-                                   description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
-                                   offsetY: 200,
-                                   offsetX: 200,
-                                   notes: [
-                                    Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
-                                    Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
-                                   ]
-                                  ))
+    
+    screenBuilderMock.getScreen(type: .plantDetails(Plant(rootRoomID: UUID(),
+                                                          seed: Seed(name: "seed1.name",
+                                                                     image: "seed23",
+                                                                     height: 45,
+                                                                     rarity: .common),
+                                                          pot: Pot(name: "pot1.name",
+                                                                   image: "pot21",
+                                                                   height: 24,
+                                                                   rarity: .common),
+                                                          name: "Oleg",
+                                                          description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
+                                                          offsetY: 200,
+                                                          offsetX: 200,
+                                                          isOnShelf: true,
+                                                          notes: [
+                                                           Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                                           Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
+                                                          ]
+                                                         )))
+
 }

@@ -27,7 +27,7 @@ final class RoomFeatureStore: FeatureStore {
         
         state = RoomViewState(roomType: room.roomType,
                               shelfType: room.shelfType,
-                              plants: room.plants.values.map { PlantViewState(plant: $0, isSelected: $0 == appStore.selectedPlant) },
+                              plants: room.plants.values.filter { $0.isOnShelf }.map { PlantViewState(plant: $0, isSelected: $0 == appStore.selectedPlant) },
                               decor: room.decor.values.map { $0 })
         self.room = room
         

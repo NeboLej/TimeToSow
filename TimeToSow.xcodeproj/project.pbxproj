@@ -10,6 +10,9 @@
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E201B552F127718002B49A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E201B542F127718002B49A1 /* Logger.swift */; };
 		8E2957932F26679500EA144A /* DecorTypeModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */; };
+		8E2957952F27CB1800EA144A /* PlantDetailScreenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957942F27CB1800EA144A /* PlantDetailScreenStore.swift */; };
+		8E2957972F27CB2100EA144A /* PlantDetailScreenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957962F27CB2100EA144A /* PlantDetailScreenAction.swift */; };
+		8E2957992F27CB2900EA144A /* PlantDetailScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957982F27CB2900EA144A /* PlantDetailScreenState.swift */; };
 		8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */; };
 		8E2E5EE72EF8546000B91347 /* PlantDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */; };
 		8E4C247E2F1FE12400ADF98F /* CustomBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4C247D2F1FE12400ADF98F /* CustomBackgroundModifier.swift */; };
@@ -145,6 +148,9 @@
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E201B542F127718002B49A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorTypeModelGRDB.swift; sourceTree = "<group>"; };
+		8E2957942F27CB1800EA144A /* PlantDetailScreenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreenStore.swift; sourceTree = "<group>"; };
+		8E2957962F27CB2100EA144A /* PlantDetailScreenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreenAction.swift; sourceTree = "<group>"; };
+		8E2957982F27CB2900EA144A /* PlantDetailScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreenState.swift; sourceTree = "<group>"; };
 		8E2E5EE32EF853F000B91347 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailScreen.swift; sourceTree = "<group>"; };
 		8E4C247D2F1FE12400ADF98F /* CustomBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundModifier.swift; sourceTree = "<group>"; };
@@ -304,6 +310,9 @@
 			isa = PBXGroup;
 			children = (
 				8E2E5EE62EF8546000B91347 /* PlantDetailScreen.swift */,
+				8E2957942F27CB1800EA144A /* PlantDetailScreenStore.swift */,
+				8E2957962F27CB2100EA144A /* PlantDetailScreenAction.swift */,
+				8E2957982F27CB2900EA144A /* PlantDetailScreenState.swift */,
 			);
 			path = PlantDetailScreen;
 			sourceTree = "<group>";
@@ -753,6 +762,7 @@
 			files = (
 				8EA1C9D92EFDB34C00DF690F /* PieChartView.swift in Sources */,
 				8EFEEEF92F0E58A700857A23 /* HistoryScreenAction.swift in Sources */,
+				8E2957972F27CB2100EA144A /* PlantDetailScreenAction.swift in Sources */,
 				8EC86E272E06D01B00AA6AFA /* HomeScreenStore.swift in Sources */,
 				8EC86DF72E06208600AA6AFA /* PlantView.swift in Sources */,
 				8EAF67CE2EF3529000780BB9 /* RoomFeatureAction.swift in Sources */,
@@ -761,6 +771,7 @@
 				8E85902D2F1D591500B6F614 /* SystemBlur.swift in Sources */,
 				8EF575892DDA00E200AEC31A /* TimePickerView.swift in Sources */,
 				8EC86F532E18547600AA6AFA /* Color + extension.swift in Sources */,
+				8E2957992F27CB2900EA144A /* PlantDetailScreenState.swift in Sources */,
 				8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */,
 				8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
@@ -790,6 +801,7 @@
 				8ED63A872F1273780013632F /* BaseRepository.swift in Sources */,
 				8E869C712F225F6400DECCBF /* Сhallenge.swift in Sources */,
 				8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */,
+				8E2957952F27CB1800EA144A /* PlantDetailScreenStore.swift in Sources */,
 				8ED63A882F1273780013632F /* DatabaseManager.swift in Sources */,
 				8E869C782F22750800DECCBF /* ChallengeState.swift in Sources */,
 				8ED63A892F1273780013632F /* NoteModelGRDB.swift in Sources */,

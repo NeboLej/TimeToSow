@@ -163,6 +163,7 @@ struct PlantPreview: View {
                                   description: "",
                                   offsetY: 200,
                                   offsetX: 200,
+                                  isOnShelf: true,
                                   notes: []))
         .padding(.top, 40)
         Spacer()

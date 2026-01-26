@@ -17,6 +17,7 @@ struct Plant: Hashable, Identifiable {
     let offsetY: Double
     let offsetX: Double
     let time: Int
+    let isOnShelf: Bool
     
     let notes: [Note]
     let rootRoomID: UUID
@@ -35,6 +36,7 @@ struct Plant: Hashable, Identifiable {
         notes = from.notes.map { Note(from: $0) }
         time = notes.reduce(0) { $0 + $1.time }
         rootRoomID = from.rootRoomID
+        isOnShelf = from.isOnShelf
     }
     
     static func == (lhs: Plant, rhs: Plant) -> Bool {
@@ -42,7 +44,7 @@ struct Plant: Hashable, Identifiable {
     }
     
     init(id: UUID = UUID(), rootRoomID: UUID, seed: Seed, pot: Pot, name: String, description: String,
-         offsetY: Double, offsetX: Double, notes: [Note]) {
+         offsetY: Double, offsetX: Double, isOnShelf: Bool, notes: [Note]) {
         self.id = id
         self.seed = seed
         self.pot = pot
@@ -52,12 +54,13 @@ struct Plant: Hashable, Identifiable {
         self.offsetX = offsetX
         self.time = notes.reduce(0) { $0 + $1.time }
         self.notes = notes
+        self.isOnShelf = isOnShelf
         self.rootRoomID = rootRoomID
     }
     
-    func copy(offsetX: Double? = nil, offsetY: Double? = nil, notes: [Note]? = nil) -> Plant {
+    func copy(offsetX: Double? = nil, offsetY: Double? = nil, isVisible: Bool? = nil, notes: [Note]? = nil) -> Plant {
         Plant(id: self.id, rootRoomID: self.rootRoomID, seed: self.seed, pot: self.pot, name: self.name, description: self.description,
-              offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX,
+              offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX, isOnShelf: isVisible ?? self.isOnShelf,
               notes: notes ?? self.notes)
     }
 }

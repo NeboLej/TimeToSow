@@ -19,20 +19,11 @@ fileprivate enum L: LocalizedStringKey {
 
 struct PlantDetailScreen: View {
     
-    let plant: Plant
-    
-    var groupNotesByDay: [[Note]] {
-        let grouped = Dictionary(grouping: plant.notes) { note in
-            Calendar.current.startOfDay(for: note.date)
-        }
-        
-        return grouped
-            .sorted { $0.key > $1.key }
-            .map { $0.value }
-    }
+    @State var store: PlantDetailScreenStore
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
+            let plant = store.state.plant
             VStack(spacing: 0) {
                 headerView()
                 ScrollView(.vertical, showsIndicators: false) {
@@ -114,7 +105,7 @@ struct PlantDetailScreen: View {
     private func statisticsView() -> some View {
         TextureView(insets: .init(top: 6, leading: 15, bottom: 6, trailing: 15),
                     texture: Image(.smallTexture1), cornerRadius: 12) {
-            DrawText(text: plant.time.toHoursAndMinutes(),
+            DrawText(text: store.state.plant.time.toHoursAndMinutes(),
                      font: UIFont.myNumber(18),
                      duration: 1)
             .foregroundStyle(.black)
@@ -126,7 +117,7 @@ struct PlantDetailScreen: View {
     @ViewBuilder
     private func tagStatisticsSection() -> some View {
         TextureView(insets: .zero) {
-            TagStatisticsView(notes: plant.notes)
+            TagStatisticsView(notes: store.state.plant.notes)
         }.padding(.all, 10)
     }
     
@@ -153,41 +144,49 @@ struct PlantDetailScreen: View {
             }
             if isMenuOpen {
                 VStack(alignment: .leading, spacing: 12) {
-                    menuElement(L.editButton.loc, color: Color(hex: "DDFFB7"))
-                    menuElement(L.toShelfButton.loc, color: Color(hex: "C9F3FF"))
-                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8"))
+                    
+                    menuElement(L.editButton.loc, color: Color(hex: "DDFFB7")) {}
+                    menuElement(L.toShelfButton.loc, color: Color(hex: "C9F3FF")) {
+                        store.send(.removeFromShelf)
+                    }
+                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {}
                 }
             }
         }
     }
     
     @ViewBuilder
-    private func menuElement(_ text: LocalizedStringKey, color: Color) -> some View {
-        TextureView(insets: .init(top: 4, leading: 6, bottom: 4, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
-            Text(text)
-                .font(.myTitle(16))
-                .foregroundStyle(.black)
+    private func menuElement(_ text: LocalizedStringKey, color: Color, _ action: @escaping ()->()) -> some View {
+        Button {
+            action()
+        } label: {
+            TextureView(insets: .init(top: 4, leading: 6, bottom: 4, trailing: 8), texture: Image(.smallTexture1), color: color, cornerRadius: 0) {
+                Text(text)
+                    .font(.myTitle(16))
+                    .foregroundStyle(.black)
+            }
         }
     }
 }
 
 #Preview {
-    PlantDetailScreen(plant: Plant(rootRoomID: UUID(),
-                                   seed: Seed(name: "seed1.name",
-                                              image: "seed23",
-                                              height: 45,
-                                              rarity: .common),
-                                   pot: Pot(name: "pot1.name",
-                                            image: "pot21",
-                                            height: 24,
-                                            rarity: .common),
-                                   name: "Oleg",
-                                   description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
-                                   offsetY: 200,
-                                   offsetX: 200,
-                                   notes: [
-                                    Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
-                                    Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
-                                   ]
-                                  ))
+    screenBuilderMock.getScreen(type: .plantDetails(Plant(rootRoomID: UUID(),
+                                                          seed: Seed(name: "seed1.name",
+                                                                     image: "seed23",
+                                                                     height: 45,
+                                                                     rarity: .common),
+                                                          pot: Pot(name: "pot1.name",
+                                                                   image: "pot21",
+                                                                   height: 24,
+                                                                   rarity: .common),
+                                                          name: "Oleg",
+                                                          description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
+                                                          offsetY: 200,
+                                                          offsetX: 200,
+                                                          isOnShelf: true,
+                                                          notes: [
+                                                           Note(date: Date().getOffsetDate(offset: -3), time: 100, tag: Tag(name: "Name", color: "#3D90D9")),
+                                                           Note(date: Date(), time: 70, tag: Tag(name: "Name2", color: "#13D0D9"))
+                                                          ]
+                                                         )))
 }

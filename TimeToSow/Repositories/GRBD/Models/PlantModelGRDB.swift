@@ -22,6 +22,7 @@ struct PlantModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
     var offsetY: Double
     var offsetX: Double
     var time: Int
+    var isOnShelf: Bool
     
     var seed: SeedModelGRDB?
     var pot: PotModelGRDB?
@@ -29,20 +30,21 @@ struct PlantModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
-    init(from1: Plant) {
-        id = from1.id
-        seedID = from1.seed.id
-        potID = from1.pot.id
-        rootRoomID = from1.rootRoomID
-        name = from1.name
-        userDescription = from1.description
-        offsetY = from1.offsetY
-        offsetX = from1.offsetX
-        time = from1.time
+    init(from: Plant) {
+        id = from.id
+        seedID = from.seed.id
+        potID = from.pot.id
+        rootRoomID = from.rootRoomID
+        name = from.name
+        userDescription = from.description
+        offsetY = from.offsetY
+        offsetX = from.offsetX
+        time = from.time
+        isOnShelf = from.isOnShelf
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, seedID, potID, name, userDescription, offsetY, offsetX, time, rootRoomID
+        case id, seedID, potID, name, userDescription, offsetY, offsetX, time, rootRoomID, isOnShelf
         case seed, pot, notes
     }
 }
@@ -58,6 +60,7 @@ extension PlantModelGRDB {
         container["offsetX"] = offsetX
         container["time"] = time
         container["rootRoomID"] = rootRoomID
+        container["isOnShelf"] = isOnShelf
     }
 }
 

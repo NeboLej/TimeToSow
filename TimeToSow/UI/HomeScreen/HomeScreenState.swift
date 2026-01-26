@@ -40,7 +40,7 @@ struct HomeScreenState {
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
         selectedTag = appStore.selectedTag
-        boxPlants = appStore.currentRoom.plants.map { $0.value }
+        boxPlants = appStore.currentRoom.plants.filter { !$0.value.isOnShelf }.map { $0.value }
         
         boxDecor = [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3]
     }
