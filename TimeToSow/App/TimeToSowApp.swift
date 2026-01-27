@@ -31,14 +31,11 @@ struct TimeToSowApp: App {
     private var appStore: AppStore
     
     init() {
-
         let repositoryFactory = RepositoryFactory()
         
         let appStore = AppStore(factory: repositoryFactory)
         screenBuilder = ScreenBuilder(appStore: appStore, repositoryFactory: repositoryFactory)
         self.appStore = appStore
-        
-        loadLocalJSONLocalization()
     }
     
     @State private var isShowContent = false
@@ -62,27 +59,13 @@ struct TimeToSowApp: App {
                 }
             }
             .sheet(item: coordinator.activeSheet, onDismiss: {
-                print("dismiss")
+                
             }, content: { screenType in
                 screenBuilder.getScreen(type: screenType)
             })
             .fullScreenCover(item: coordinator.fullScreenCover, content: { screenType in
                 screenBuilder.getScreen(type: screenType)
             })
-        }
-    }
-    
-    private func loadLocalJSONLocalization() {
-        guard let url = Bundle.main.url(forResource: "remote_localization", withExtension: "json") else {
-            assertionFailure("Localization JSON not found")
-            return
-        }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            try JSONLocalizationService.shared.load(from: data)
-        } catch {
-            assertionFailure("Failed to load localization: \(error)")
         }
     }
 }

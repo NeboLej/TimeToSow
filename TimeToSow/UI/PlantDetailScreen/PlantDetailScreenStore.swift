@@ -13,7 +13,6 @@ final class PlantDetailScreenStore: FeatureStore {
     private let plant: Plant
     var state: PlantDetailScreenState
     
-    
     init(appStore: AppStore, plant: Plant) {
         self.plant = plant
         self.state = PlantDetailScreenState(plant: plant)
@@ -32,10 +31,8 @@ final class PlantDetailScreenStore: FeatureStore {
     
     private func appStoreSend(_ action: PlantDetailScreenAction) {
         switch action {
-        case .removeFromShelf:
-            appStore.send(AppAction.changeShelfVisibility(plant: plant, isVisible: false))
-        case .putOnShelf:
-            appStore.send(AppAction.changeShelfVisibility(plant: plant, isVisible: true))
+        case .changeShelfVisibility:
+            appStore.send(AppAction.changeShelfVisibility(plant: plant, isVisible: !plant.isOnShelf))
         case .deletePlant:
             break
         }

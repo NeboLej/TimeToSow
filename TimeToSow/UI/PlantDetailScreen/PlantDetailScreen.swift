@@ -149,7 +149,7 @@ struct PlantDetailScreen: View {
                     
                     menuElement(L.editButton.loc, color: Color(hex: "DDFFB7")) {}
                     menuElement(store.state.plant.isOnShelf ? L.removeFromShelfButton.loc : L.returnToShelfButton.loc, color: Color(hex: "C9F3FF")) {
-                        store.send(.removeFromShelf)
+                        store.send(.changeShelfVisibility)
                         dismiss()
                     }
                     menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {}

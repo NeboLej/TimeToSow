@@ -8,7 +8,6 @@
 import Foundation
 
 enum PlantDetailScreenAction {
-    case removeFromShelf
-    case putOnShelf
+    case changeShelfVisibility
     case deletePlant
 }

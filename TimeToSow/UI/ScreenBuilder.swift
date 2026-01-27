@@ -9,7 +9,7 @@ import SwiftUI
 
 enum ScreenType: Identifiable, Hashable {
     
-    case home, editRoom, progress(Int), plantDetails(Plant), debugScreen, history, tags, challenge
+    case home, editRoom, progress(Int), plantDetails(Plant), debugScreen, history, tags, challenge, box
     
     var id: String {
         switch self {
@@ -21,6 +21,7 @@ enum ScreenType: Identifiable, Hashable {
         case .history: "history"
         case .tags: "tags"
         case .challenge: "challenge"
+        case .box: "box"
         }
     }
 }
@@ -60,6 +61,8 @@ final class ScreenBuilder {
         case .challenge:
             let challengeService = ChallengeService(currentUserRoom: appStore.currentRoom, challengeRepository: repositories.challengeRepository)
             ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: challengeService, imageRepository: repositories.remoteRepository))
+        case .box:
+            BoxScreen(store: BoxScreenStore(appStore: appStore))
         }
     }
     

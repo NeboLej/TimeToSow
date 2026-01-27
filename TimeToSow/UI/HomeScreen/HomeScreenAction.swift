@@ -16,6 +16,7 @@ enum HomeScreenAction {
     case toEditRoomScreen
     case toTagsScreen
     case toChallengeScreen
+    case toBoxScreen
 }
 
 protocol HomeScreenDelegate: AnyObject {
@@ -41,6 +42,8 @@ extension AppStore: HomeScreenDelegate {
             appCoordinator.navigate(to: .tags, modal: true)
         case .toChallengeScreen:
             appCoordinator.path.append(ScreenType.challenge)
+        case .toBoxScreen:
+            appCoordinator.navigate(to: .box, modal: true)
         }
     }
 }

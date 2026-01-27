@@ -24,9 +24,7 @@ struct HomeScreen: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     
     @State private var selectedTime: Int
-    @State private var isProgress = false
     @State private var progressTime: Int?
-    @State private var isShowBox = false
     
     private var store: HomeScreenStore
     private var screenBuilder: ScreenBuilder
@@ -51,7 +49,7 @@ struct HomeScreen: View {
                                 .frame(width: 60)
                                 .offset(x: 30, y: 20)
                                 .onTapGesture {
-                                    isShowBox.toggle()
+                                    store.send(.toBoxScreen)
                                 }
                         }.zIndex(100)
                         
@@ -71,14 +69,7 @@ struct HomeScreen: View {
                     }
                 }.coordinateSpace(name: "SCROLL")
             }
-            if isShowBox {
-                BoxView(plants: store.state.boxPlants, decor: store.state.boxDecor, isShowBox: $isShowBox)
-                    .frame(height: UIScreen.main.bounds.height / 2.2)
-                    .transition(.move(edge: .bottom))
-                    .zIndex(100)
-            }
         }
-        .animation(.easeInOut(duration: 0.3), value: isShowBox)
         .background(
             Color(hex: "FFF9EE")
                 .overlay(
@@ -340,29 +331,6 @@ var tmpPot = Pot(name: "aeded",
                  rarity: .common)
 
 #Preview {
-    //    ContentView()
     screenBuilderMock.getScreen(type: .home)
     //        .environment(\.locale, .init(identifier: "en"))
 }
-
-//struct GifView: View, Equatable {
-//    static func == (lhs: GifView, rhs: GifView) -> Bool {
-//        true
-//    }
-//
-//    let isAnimating: Bool
-//
-//    var body: some View {
-//        AnimatedImage(name: "feature2.gif", isAnimating: .constant(isAnimating))
-//            .resizable()
-//            .customLoopCount(2)
-//            .scaledToFit()
-//            .frame(height: 50)
-//    }
-//}
-//
-//GifView(isAnimating: isAnimation)
-//    .onTapGesture {
-//        isAnimation.toggle()
-//    }
-//
