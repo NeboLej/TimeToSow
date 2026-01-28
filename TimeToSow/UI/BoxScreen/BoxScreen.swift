@@ -33,7 +33,7 @@ struct BoxScreen: View {
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
             .ignoresSafeArea(.all, edges: .bottom)
-            .background(.mainBackground)
+            .presentationBackground(.mainBackground)
     }
     
     @ViewBuilder

@@ -107,7 +107,8 @@ struct TagsScreen: View {
         }
         .presentationDetents([.fraction(0.4), .large], selection: $mode)
         .presentationDragIndicator(.visible)
-        .modifier(CustomBackgroundModifier())
+        .ignoresSafeArea(.all, edges: .bottom)
+        .presentationBackground(.mainBackground)
         .onAppear {
             currentTag = store.state.selectedTag
         }

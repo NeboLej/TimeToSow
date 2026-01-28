@@ -26,7 +26,8 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                     .limit(1)
                     .including(required: UserRoomModelGRDB.shelf)
                     .including(required: UserRoomModelGRDB.room)
-                    .including(all: UserRoomModelGRDB.plants.including(required: PlantModelGRDB.seed)
+                    .including(all: UserRoomModelGRDB.decors.including(required: DecorModelGRDB.decorType))
+                    .including(all: UserRoomModelGRDB.plants
                         .including(required: PlantModelGRDB.seed)
                         .including(required: PlantModelGRDB.pot)
                         .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
@@ -82,7 +83,8 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                     .filter(Column("id") == id)
                     .including(required: UserRoomModelGRDB.shelf)
                     .including(required: UserRoomModelGRDB.room)
-                    .including(all: UserRoomModelGRDB.plants.including(required: PlantModelGRDB.seed)
+                    .including(all: UserRoomModelGRDB.decors.including(required: DecorModelGRDB.decorType))
+                    .including(all: UserRoomModelGRDB.plants
                         .including(required: PlantModelGRDB.seed)
                         .including(required: PlantModelGRDB.pot)
                         .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))

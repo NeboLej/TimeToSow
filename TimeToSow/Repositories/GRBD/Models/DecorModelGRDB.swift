@@ -25,24 +25,21 @@ struct DecorModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Table
         case id, decorTypeID, rootRoomID, offsetY, offsetX
         case decorType
     }
-    
 
-//    init(from: Decor) {
-//        id = from.id
-//        name = from.name
-//        locationType = from.locationType
-//        animationOptions = from.animationOptions
-//        resourceName = from.resourceName
-//        positon = from.positon
-//        height = from.height
-//        width = from.width
-//    }
+    init(from: Decor) {
+        id = from.id
+        decorTypeID = from.decorType.id
+        rootRoomID = from.rootRoomID
+        offsetY = from.offsetY
+        offsetX = from.offsetX
+    }
 }
 
 extension DecorModelGRDB {
     func encode(to container: inout PersistenceContainer) {
         container["id"] = id
         container["decorTypeID"] = decorTypeID
+        container["rootRoomID"] = rootRoomID
         container["offsetY"] = offsetY
         container["offsetX"] = offsetX
     }

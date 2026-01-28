@@ -10,15 +10,18 @@ import GRDB
 
 struct DecorTypeModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord {
     static let databaseTableName = "decorType"
-    mutating func didInsert(with rowID: Int64, for column: String?) { }
 
     var id: UUID
+    var stableId: String
     var name: String
     var locationType: LocationType
     var animationOptions: AnimationOptions?
     var resourceName: String
     var height: CGFloat
     var width: CGFloat
+    var isUnlocked: Bool
+    
+    mutating func didInsert(with rowID: Int64, for column: String?) { }
 
     init(from: DecorType) {
         id = from.id
@@ -28,5 +31,7 @@ struct DecorTypeModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, T
         resourceName = from.resourceName
         height = from.height
         width = from.width
+        stableId = from.stableId
+        isUnlocked = from.isUnlocked
     }
 }

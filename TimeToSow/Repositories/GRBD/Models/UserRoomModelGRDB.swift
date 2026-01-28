@@ -21,12 +21,13 @@ struct UserRoomModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, Ta
     var shelf: ShelfModelGRDB?
     var room: RoomModelGRDB?
     var plants: [PlantModelGRDB]?
+    var decors: [DecorModelGRDB]?
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
     enum CodingKeys: CodingKey {
         case id, shelfID, roomID, name, dateCreate
-        case shelf, room, plants
+        case shelf, room, plants, decors
     }
     
     init(from: UserRoom) {
@@ -52,4 +53,5 @@ extension UserRoomModelGRDB {
     static let shelf = belongsTo(ShelfModelGRDB.self, using: ForeignKey(["shelfID"]))
     static let room = belongsTo(RoomModelGRDB.self, using: ForeignKey(["roomID"]))
     static let plants = hasMany(PlantModelGRDB.self, using: ForeignKey(["rootRoomID"]))
+    static let decors = hasMany(DecorModelGRDB.self, using: ForeignKey(["rootRoomID"]))
 }

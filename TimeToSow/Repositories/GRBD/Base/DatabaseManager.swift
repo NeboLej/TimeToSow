@@ -82,6 +82,27 @@ final class DatabaseManager {
             t.column("height", .integer).notNull()
         }
         
+        try db.create(table: "decorType", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("stableId", .blob).notNull()
+            t.column("name", .text).notNull()
+            t.column("locationType", .blob).notNull()
+            t.column("animationOptions", .blob)
+            t.column("resourceName", .text).notNull()
+            t.column("width", .double).notNull()
+            t.column("height", .double).notNull()
+            t.column("isUnlocked", .boolean).notNull()
+        }
+        
+        try db.create(table: "challangeSeason", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("version", .integer).notNull()
+            t.column("title", .text).notNull()
+            t.column("startDate", .double).notNull()
+            t.column("endDate", .double).notNull()
+            t.column("challenges", .blob).notNull()
+        }
+        
         try db.create(table: "userRoom", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
             t.column("shelfID", .blob).notNull()
@@ -122,25 +143,15 @@ final class DatabaseManager {
             t.foreignKey(["tagID"], references: "tag", onDelete: .restrict, onUpdate: .cascade)
         }
         
-        try db.create(table: "challangeSeason", ifNotExists: true) { t in
+        try db.create(table: "decor", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
-            t.column("version", .integer).notNull()
-            t.column("title", .text).notNull()
-            t.column("startDate", .double).notNull()
-            t.column("endDate", .double).notNull()
-            t.column("challenges", .blob).notNull()
+            t.column("decorTypeID", .blob).notNull()
+            t.column("rootRoomID", .blob).notNull()
+            t.column("offsetY", .double).notNull()
+            t.column("offsetX", .double).notNull()
+            
+            t.foreignKey(["decorTypeID"], references: "decorType", onDelete: .restrict, onUpdate: .cascade)
+            t.foreignKey(["rootRoomID"], references: "userRoom", onDelete: .cascade, onUpdate: .cascade)
         }
-        
-//        try db.create(table: "decor", ifNotExists: true) { t in
-//            t.column("id", .blob).primaryKey()
-//            t.column("name", .text).notNull()
-//            t.column("locationType", .blob).notNull()
-//            t.column("animationOptions", .blob)
-//            t.column("resourceName", .text).notNull()
-//            t.column("offsetY", .double).notNull()
-//            t.column("offsetX", .double).notNull()
-//            t.column("width", .double).notNull()
-//            t.column("height", .integer).notNull()
-//        }
     }
 }

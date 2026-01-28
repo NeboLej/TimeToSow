@@ -43,6 +43,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         do {
             let data = try Data(contentsOf: url)
             try JSONLocalizationService.shared.load(from: data)
+            Logger.log("Succes fetch localized srings", location: .remote, event: .success)
         } catch {
             assertionFailure("Failed to load localization: \(error)")
         }
@@ -54,10 +55,10 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         Task {
             do {
                 version = try await fetch(path: "contentVersions.json", type: ContentVersions.self)
+                Logger.log("Succes fetch version content", location: .remote, event: .success)
                 await checkChallengesSeason()
-                
             } catch {
-                print(error.localizedDescription)
+                Logger.log("Error fetch versioin content", location: .remote, event: .error(error))
             }
         }
     }
@@ -101,6 +102,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
             let challengeSeason = try await fetch(path: "challengeSeason.json", type: ChallengeSeasonRemote.self)
             await prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
             await challengeRepository.addNewChallangeSeason(challengeSeason)
+            Logger.log("Succes fetch challange season", location: .remote, event: .success)
         } catch {
             fatalError()
         }

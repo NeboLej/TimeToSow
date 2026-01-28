@@ -49,7 +49,7 @@ class UserRoom: Hashable {
     }
     
     init(from: UserRoomModelGRDB) {
-        guard let shelf = from.shelf, let room = from.room, let plants = from.plants else {
+        guard let shelf = from.shelf, let room = from.room, let plants = from.plants, let decors = from.decors else {
             fatalError("requered parameter is nil")
         }
         id = from.id
@@ -65,8 +65,9 @@ class UserRoom: Hashable {
         }
         self.plants = plantsDict
         
+        let decorArray = decors.map { Decor(from: $0) }
         var dict = [UUID: Decor]()
-        [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3].forEach {
+        decorArray.forEach {
             dict[$0.id] = $0
         }
         decor = dict

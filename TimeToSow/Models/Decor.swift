@@ -25,18 +25,20 @@ struct DecorType: Hashable, Identifiable {
     let resourceName: String
     let height: CGFloat
     let width: CGFloat
+    let isUnlocked: Bool
     
     var resourceUrl: URL? {
         Bundle.main.url(forResource: resourceName, withExtension: animationOptions == nil ? "png" : "gif")
     }
     
-    init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, height: CGFloat) {
+    init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, height: CGFloat, isUnlocked: Bool) {
         self.id = id
         self.name = name
         self.locationType = locationType
         self.animationOptions = animationOptions
         self.resourceName = resourceName
         self.height = height
+        self.isUnlocked = isUnlocked
         
         if animationOptions == nil {
             let image: UIImage? = {
@@ -65,6 +67,7 @@ struct DecorType: Hashable, Identifiable {
         resourceName = from.resourceName
         height = from.height
         width = from.width
+        isUnlocked = from.isUnlocked
     }
     
     init(from: DecorModel) {
@@ -74,6 +77,7 @@ struct DecorType: Hashable, Identifiable {
         animationOptions = from.animationOptions
         resourceName = from.resourceUrl
         height = from.height
+        isUnlocked = false
         
         if from.animationOptions == nil {
             let image: UIImage? = {
@@ -92,6 +96,12 @@ struct DecorType: Hashable, Identifiable {
         } else {
             width = (Decor.gifAspectRatio(named: name) ?? 1) * height
         }
+    }
+}
+
+extension DecorType {
+    var stableId: String {
+        name + "-" + String(locationType.rawValue) + "-" + resourceName
     }
 }
 
