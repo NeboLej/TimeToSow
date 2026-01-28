@@ -29,7 +29,7 @@ struct RoomView: View {
     @State var height: CGFloat = 400
     @State var roomViewWidth: CGFloat = 0
     
-    var store: RoomFeatureStore
+    @State var store: RoomFeatureStore
     
     var body: some View {
         GeometryReader { proxy in

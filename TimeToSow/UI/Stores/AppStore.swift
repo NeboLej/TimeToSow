@@ -21,8 +21,15 @@ class AppStore {
     let plantRepository: PlantRepositoryProtocol
     @ObservationIgnored
     let tagRepository: TagRepositoryProtocol
+//    @ObservationIgnored
     @ObservationIgnored
-    let remoteRepository: RemoteContentRepositoryProtocol
+    let challengeRepository: ChallengeRepositoryProtocol
+    
+    @ObservationIgnored
+    var remoteRepository: RemoteContentRepositoryProtocol?
+    
+    @ObservationIgnored
+    var challengeService: ChallengeService
     
     var currentRoom: UserRoom = .empty
     var selectedPlant: Plant?
@@ -37,13 +44,30 @@ class AppStore {
         self.tagRepository = factory.tagRepository
         self.roomRepository = factory.roomRepository
         self.shelfRepository = factory.shelfRepository
-        self.remoteRepository = factory.remoteRepository
-//
-//        let challengeRepository = ChallengeRepository(dbPool: DatabaseManager.shared.dbPool)
-//        
-//        let dd = RemoteContentRepository(challengeRepository: challengeRepository)
-//        
+        self.challengeRepository = factory.challengeRepository
+        self.challengeService = factory.challengeService
+        
         getData()
+    }
+    
+    func send(_ action: BackgroundEventAction) {
+        switch action {
+        case .completeChallenges(let challenges):
+            print("completeChallenge \(challenges)")
+        case .challengesSeasonPrepared:
+            challengeService.observeAppState(appStore: self)
+            print("challengesSeasonPrepared")
+        }
+    }
+    
+    func send(_ action: NavigateAction) {
+        switch action {
+        case .toDetailPlant(let plant):
+            guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
+            appCoordinator.navigate(to: .plantDetails(plant), modal: true)
+        case .toDebugScreen:
+            appCoordinator.activeSheet = .debugScreen
+        }
     }
     
     func send(_ action: AppAction) {
@@ -64,9 +88,6 @@ class AppStore {
             setNewShelf(newShelf)
         case .addRandomPlant:
             addRandomPlantToShelf()
-        case .detailPlant(let plant):
-            guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
-            appCoordinator.navigate(to: .plantDetails(plant), modal: true)
         case .addRandomNote:
             guard let selectedPlant else { return }
             let newNotes = getRandomNote()
@@ -75,8 +96,6 @@ class AppStore {
             let newPlant = selectedPlant.copy(notes: notes)
             self.selectedPlant = newPlant
             currentRoom.plants[selectedPlant.id] = newPlant
-        case .toDebugScreen:
-            appCoordinator.activeSheet = .debugScreen
         case .addNewPlant(let plant):
             saveNewPlant(plant)
         case .getUserRoom(let id):
@@ -109,51 +128,9 @@ class AppStore {
             }
             userRooms[currentRoom.id] = currentRoom
             simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
+            
+//            challengeService = ChallengeService(appStore: self, challengeRepository: challengeRepository)
+            remoteRepository = RemoteContentRepository(appStore: self, challengeRepository: challengeRepository)
         }
     }
-}
-
-import Supabase
-
-class FFff {
-    
-    func ff() async {
-        
-
-        
-        let client = SupabaseClient(
-            supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
-            supabaseKey: "sb_publishable_7-Jo895jGaHwZuHOs1IYRw_nen0dCG8",
-            options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
-        )
-        
-        
-        let signedURL = try? await client
-            .storage
-            .from("plant")
-            .createSignedURL(
-                path: "pot59.png",
-                expiresIn: 60 // секунды
-            )
-
-        print(signedURL?.path())
-        
-        let signed = try! await client.storage
-            .from("models")
-            .createSignedURL(
-                path: "challengeList.json",
-                expiresIn: 60
-            )
-        
-        let data = try! Data(contentsOf: signed)
-        let config = try! JSONDecoder().decode(Config.self, from: data)
-        print(config)
-    }
-
-}
-
-struct Config: Decodable {
-    let title: String
-    let imagePath: String
-    let isEnabled: Bool
 }

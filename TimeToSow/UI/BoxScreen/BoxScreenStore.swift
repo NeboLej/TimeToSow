@@ -58,7 +58,7 @@ final class BoxScreenStore: FeatureStore {
             appStore.send(.changeShelfVisibility(plant: plant, isVisible: true))
         case .toShelfDecor(let decor): break
         case .infoPlant(let plant):
-            appStore.send(AppAction.detailPlant(plant))
+            appStore.send(NavigateAction.toDetailPlant(plant))
         case .infoDecor(let decor): break
         }
     }

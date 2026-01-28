@@ -16,10 +16,13 @@ protocol ImageRepositoryProtocol {
     func imageURL(for path: String) async -> URL?
 }
 
+
+
 final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let challengeRepository: ChallengeRepositoryProtocol
     private var version: ContentVersions?
+    private let appStore: AppStore
     
     private let client = SupabaseClient(
         supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
@@ -27,10 +30,11 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
     )
     
-    init(challengeRepository: ChallengeRepositoryProtocol) {
+    init(appStore: AppStore, challengeRepository: ChallengeRepositoryProtocol) {
         self.challengeRepository = challengeRepository
+        self.appStore = appStore
         
-//        updateRemoteData()
+        updateRemoteData()
         loadLocalJSONLocalization()
     }
     
@@ -95,6 +99,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         } else if currentSeason?.version != version?.challengeVersion {
             await updateChallengesSeason()
         }
+        appStore.send(.challengesSeasonPrepared)
     }
     
     private func updateChallengesSeason() async {

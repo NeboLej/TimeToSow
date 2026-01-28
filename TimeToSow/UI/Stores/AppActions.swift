@@ -14,13 +14,21 @@ enum AppAction {
     case changedRoomType(RoomType)
     case changedShelfType(ShelfType)
     case addRandomPlant
-    case detailPlant(Plant)
     case addRandomNote
-    case toDebugScreen
     case addNewPlant(Plant)
     case getUserRoom(id: UUID)
     case selectTag(Tag)
     case newTag(Tag)
     case deleteTag(Tag)
     case changeShelfVisibility(plant: Plant, isVisible: Bool)
+}
+
+enum NavigateAction {
+    case toDetailPlant(Plant)
+    case toDebugScreen
+}
+
+enum BackgroundEventAction {
+    case completeChallenges([Challenge])
+    case challengesSeasonPrepared
 }

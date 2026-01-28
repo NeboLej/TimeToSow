@@ -9,11 +9,13 @@ import SwiftUI
 
 @Observable
 final class RoomFeatureStore: FeatureStore {
-    var state: RoomViewState
+    
+    var state: RoomViewState { RoomViewState(userRoom: room, selectedPlant: appStore.selectedPlant) }
     
     private var delegate: RoomFeatureDelegate
     private var selectedRoomId: UUID?
-    var room: UserRoom
+    private var room: UserRoom
+    
     
     init(appStore: AppStore&RoomFeatureDelegate, selectedRoomId: UUID? = nil) {
         self.delegate = appStore
@@ -25,14 +27,9 @@ final class RoomFeatureStore: FeatureStore {
             room = appStore.currentRoom
         }
         
-        state = RoomViewState(roomType: room.roomType,
-                              shelfType: room.shelfType,
-                              plants: room.plants.values.filter { $0.isOnShelf }.map { PlantViewState(plant: $0, isSelected: $0 == appStore.selectedPlant) },
-                              decor: room.decor.values.map { $0 })
         self.room = room
         
         super.init(appStore: appStore)
-        observeAppState()
     }
     
     func send(_ action: RoomFeatureAction, animation: Animation? = .default) {
@@ -43,24 +40,5 @@ final class RoomFeatureStore: FeatureStore {
         } else {
             delegate.send(action)
         }
-    }
-    
-    //MARK: - Private
-    private func observeAppState() {
-        withObservationTracking {
-            _ = appStore.currentRoom
-            _ = appStore.selectedPlant
-        } onChange: { [weak self] in
-            self?.rebuildState()
-        }
-    }
-    
-    private func rebuildState() {
-        state = RoomViewState(roomType: room.roomType,
-                              shelfType: room.shelfType,
-                              plants: room.plants.values.map { PlantViewState(plant: $0, isSelected: $0 == appStore.selectedPlant) },
-                              decor: room.decor.values.map { $0 })
-        
-        observeAppState()
     }
 }

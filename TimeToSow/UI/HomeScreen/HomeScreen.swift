@@ -26,7 +26,7 @@ struct HomeScreen: View {
     @State private var selectedTime: Int
     @State private var progressTime: Int?
     
-    private var store: HomeScreenStore
+    @State private var store: HomeScreenStore
     private var screenBuilder: ScreenBuilder
     
     init(store: HomeScreenStore, screenBuilder: ScreenBuilder) {

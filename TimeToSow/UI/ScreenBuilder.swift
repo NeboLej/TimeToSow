@@ -59,8 +59,8 @@ final class ScreenBuilder {
         case .tags:
             TagsScreen(store: TagsScreenStore(appStore: appStore, tagRepository: repositories.tagRepository))
         case .challenge:
-            let challengeService = ChallengeService(currentUserRoom: appStore.currentRoom, challengeRepository: repositories.challengeRepository)
-            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: challengeService, imageRepository: repositories.remoteRepository))
+            EmptyView()
+//            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: appStore.challengeService, imageRepository: appStore.remoteRepository))
         case .box:
             BoxScreen(store: BoxScreenStore(appStore: appStore))
         }

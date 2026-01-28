@@ -32,7 +32,7 @@ extension AppStore: RoomFeatureDelegate {
         case .movePlant(let plant, let position):
             send(AppAction.movePlant(plant: plant, newPosition: position))
         case .detailPlant(let plant):
-            send(AppAction.detailPlant(plant))
+            send(NavigateAction.toDetailPlant(plant))
         case .moveDecor(let decor, let positioin):
             send(AppAction.moveDecor(decor: decor, newPosition: positioin))
         }

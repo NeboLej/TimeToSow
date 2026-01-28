@@ -7,18 +7,53 @@
 
 import Foundation
 
-class ChallengeService {
+final class ChallengeService {
     
-    private let currentUserRoom: UserRoom
+    private var currentUserRoom: UserRoom = .empty
+//    private let appStore: AppStore
     private let challengeRepository: ChallengeRepositoryProtocol
+    private var challengeSeason: ChallengeSeason?
     
-    init(currentUserRoom: UserRoom, challengeRepository: ChallengeRepositoryProtocol) {
-        self.currentUserRoom = currentUserRoom
+    init(challengeRepository: ChallengeRepositoryProtocol) {
+//        self.appStore = appStore
         self.challengeRepository = challengeRepository
+        
+//        observeAppState()
+    }
+    
+    func fetchChallengeSeason() {
+        Task {
+            challengeSeason = await challengeRepository.getCurrentChallengeSeason()
+        }
     }
     
     func getChallegeThisSeason() async -> ChallengeSeason? {
         return await challengeRepository.getCurrentChallengeSeason()
+    }
+    
+    
+//    //MARK: - Private
+    func observeAppState(appStore: AppStore) {
+        withObservationTracking {
+            _ = appStore.currentRoom
+            _ = appStore.selectedPlant
+        } onChange: { [weak self] in
+            self?.rebuildState(appStore: appStore)
+        }
+    }
+    
+    private func rebuildState(appStore: AppStore) {
+        guard let challengeSeason else {
+            observeAppState(appStore: appStore)
+            return
+        }
+        currentUserRoom = appStore.currentRoom
+        
+        let completedChallenges = challengeSeason.challenges.filter { getProgressBy(challenge: $0) >= 1 }
+        if !completedChallenges.isEmpty {
+            appStore.send(.completeChallenges(completedChallenges))
+        }
+        observeAppState(appStore: appStore)
     }
     
 //    func getChallegeThisSeason() -> ChallengeSeason {
