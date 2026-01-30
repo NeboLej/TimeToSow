@@ -16,8 +16,6 @@ protocol ImageRepositoryProtocol {
     func imageURL(for path: String) async -> URL?
 }
 
-
-
 final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let challengeRepository: ChallengeRepositoryProtocol

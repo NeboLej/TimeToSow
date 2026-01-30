@@ -171,7 +171,8 @@ struct DefaultModels {
         Pot(name: "pot61.name", image: "pot61", height: 22, rarity: .epic, anchorPointCoefficient: .init(x: 0, y: 0.006)),
         Pot(name: "pot62.name", image: "pot62", height: 20, rarity: .uncommon),
         Pot(potFeatures: [.narrow], name: "pot63.name", image: "pot63", height: 28, rarity: .epic),
-        Pot(potFeatures: [.narrow], name: "pot64.name", image: "pot64", height: 40, rarity: .epic)
+        Pot(potFeatures: [.narrow], name: "pot64.name", image: "pot64", height: 40, rarity: .epic),
+        Pot(name: "pot65.name", image: "pot65", height: 20, rarity: .epic)
     ]
     
     //MARK: - SEEDS
@@ -212,60 +213,16 @@ struct DefaultModels {
         Seed(name: "seed35.name", image: "seed35", height: 30, rarity: .rare),
         Seed(name: "seed36.name", unavailavlePotTypes: [.narrow], image: "seed36", height: 30, rarity: .uncommon),
         Seed(name: "seed37.name", unavailavlePotTypes: [.narrow],  image: "seed37", height: 50, rarity: .epic, rootCoordinateCoef: .init(x: -0.05, y: 0)),
-        
-        Seed(name: "seed38.name",
-             image: "seed38",
-             height: 27,
-             rarity: .common),
-        
-        Seed(name: "seed39.name",
-             image: "seed39",
-             height: 40,
-             rarity: .uncommon,
-             rootCoordinateCoef: .init(x: 0.05, y: 0)),
-        
-        Seed(name: "seed40.name",
-             image: "seed40",
-             height: 26,
-             rarity: .common),
-        
-        Seed(name: "seed41.name",
-             image: "seed41",
-             height: 26,
-             rarity: .common,
-             rootCoordinateCoef: .init(x: 0.05, y: 0)),
-        
-        Seed(name: "seed42.name",
-             image: "seed42",
-             height: 22,
-             rarity: .common),
-        
-        Seed(name: "seed43.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed43",
-             height: 23,
-             rarity: .uncommon),
-        
-        Seed(name: "seed44.name",
-             image: "seed44",
-             height: 38,
-             rarity: .epic,
-             rootCoordinateCoef: .init(x: -0.03, y: 0.13)),
-        
-        Seed(name: "seed45.name",
-             image: "seed45",
-             height: 44,
-             rarity: .uncommon),
-        
-        Seed(name: "seed46.name",
-             image: "seed46",
-             height: 24,
-             rarity: .uncommon),
-        
-        Seed(name: "seed47.name",
-             image: "seed47",
-             height: 24,
-             rarity: .uncommon),
+        Seed(name: "seed38.name", image: "seed38", height: 27, rarity: .common),
+        Seed(name: "seed39.name", image: "seed39", height: 40, rarity: .uncommon, rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        Seed(name: "seed40.name", image: "seed40", height: 26, rarity: .common),
+        Seed(name: "seed41.name", image: "seed41", height: 26, rarity: .common, rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        Seed(name: "seed42.name", image: "seed42", height: 22, rarity: .common),
+        Seed(name: "seed43.name", unavailavlePotTypes: [.narrow], image: "seed43", height: 23, rarity: .uncommon),
+        Seed(name: "seed44.name", image: "seed44", height: 38, rarity: .epic, rootCoordinateCoef: .init(x: -0.03, y: 0.13)),
+        Seed(name: "seed45.name", image: "seed45", height: 44, rarity: .uncommon),
+        Seed(name: "seed46.name", image: "seed46", height: 24, rarity: .uncommon),
+        Seed(name: "seed47.name",  image: "seed47", height: 24, rarity: .uncommon),
         
         Seed(name: "seed48.name",
              image: "seed48",
@@ -368,7 +325,8 @@ struct DefaultModels {
              height: 32,
              rarity: .common),
         
-        Seed(name: "see66.name", image: "seed66", height: 37, rarity: .common)
+        Seed(name: "see66.name", image: "seed66", height: 37, rarity: .common),
+        Seed(name: "see67.name", image: "seed67", height: 50, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
     ]
     
 }
