@@ -326,7 +326,7 @@ struct DefaultModels {
              rarity: .common),
         
         Seed(name: "see66.name", image: "seed66", height: 37, rarity: .common),
-        Seed(name: "see67.name", image: "seed67", height: 50, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
+        Seed(name: "see67.name", image: "seed67", height: 60, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
     ]
     
 }

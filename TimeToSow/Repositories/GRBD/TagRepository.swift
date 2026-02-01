@@ -87,7 +87,7 @@ final class TagRepository: BaseRepository, TagRepositoryProtocol {
         do {
             try await dbPool.write { db in
                 if try TagModelGRDB.filter(key: tag.id).fetchCount(db) != 0 {
-                    var deletedTag = TagModelGRDB(from: tag.copy(isDeleted: true))
+                    let deletedTag = TagModelGRDB(from: tag.copy(isDeleted: true))
                     try deletedTag.update(db)
                 }
             }

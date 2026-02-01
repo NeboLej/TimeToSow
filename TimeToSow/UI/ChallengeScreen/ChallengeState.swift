@@ -14,6 +14,22 @@ struct ChallengeState: Equatable {
     let seasonStartDate: Date
     let seasonEndDate: Date
     
+    let seasonIsActive: Bool
+    
+    init(seasonName: String, seasonDescription: String, challengeProgress: [ChallengeProgress], seasonStartDate: Date, seasonEndDate: Date) {
+        self.seasonName = seasonName
+        self.seasonDescription = seasonDescription
+        self.challengeProgress = challengeProgress
+        self.seasonStartDate = seasonStartDate
+        self.seasonEndDate = seasonEndDate
+        
+        if seasonStartDate < seasonEndDate {
+            seasonIsActive = (seasonStartDate...seasonEndDate).contains(Date()) && !challengeProgress.isEmpty
+        } else {
+            seasonIsActive = false
+        }
+    }
+    
     static let empty: ChallengeState = .init(
         seasonName: "",
         seasonDescription: "",
@@ -21,6 +37,7 @@ struct ChallengeState: Equatable {
         seasonStartDate: Date(),
         seasonEndDate: Date()
     )
+    
 }
 
 struct ChallengeProgress: Identifiable, Equatable {

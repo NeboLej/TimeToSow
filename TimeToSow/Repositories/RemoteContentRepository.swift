@@ -28,7 +28,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let client = SupabaseClient(
         supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
-        supabaseKey: "",
+        supabaseKey: "sb_publishable_7-Jo895jGaHwZuHOs1IYRw_nen0dCG8",
         options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
     )
     
