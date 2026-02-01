@@ -21,6 +21,8 @@ class RepositoryFactory {
                                                                     seedRepository: seedRepository,
                                                                     potRepository: potRepository)
     lazy var challengeService = ChallengeService(challengeRepository: challengeRepository)
+    
+    lazy var remoteRepository = RemoteContentRepository(challengeRepository: challengeRepository)
 }
 
 @main

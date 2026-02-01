@@ -18,7 +18,7 @@ final class HistoryScreenStore: FeatureStore {
         state = HistoryScreenState(selectedRoomId: appStore.currentRoom.id, appStore: appStore)
         
         super.init(appStore: appStore)
-        observeAppState()
+        rebuildState()
     }
     
     func send(action: HistoryScreenAction) {
@@ -34,24 +34,11 @@ final class HistoryScreenStore: FeatureStore {
         }
     }
     
-    //MARK: - Private
-    private func observeAppState() {
-        withObservationTracking {
-            _ = appStore.userRooms
-        } onChange: { [weak self] in
-            Task { @MainActor in
-                self?.rebuildState()
-            }
-        }
-    }
-    
     private func rebuildState() {
         if appStore.userRooms[selectedUserRoomId] != nil {
             state = HistoryScreenState(selectedRoomId: selectedUserRoomId, appStore: appStore)
         } else {
             selectedUserRoomId = appStore.currentRoom.id
         }
-        observeAppState()
     }
-    
 }

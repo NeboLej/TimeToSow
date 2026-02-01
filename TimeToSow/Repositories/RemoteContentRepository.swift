@@ -8,6 +8,10 @@
 import Foundation
 import Supabase
 
+protocol BackgroundEventDeleagate: AnyObject {
+    func send(_ action: BackgroundEventAction)
+}
+
 protocol RemoteContentRepositoryProtocol: ImageRepositoryProtocol {
     func updateRemoteData()
 }
@@ -20,7 +24,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let challengeRepository: ChallengeRepositoryProtocol
     private var version: ContentVersions?
-    private let appStore: AppStore
+    weak var delegate: BackgroundEventDeleagate?
     
     private let client = SupabaseClient(
         supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
@@ -28,9 +32,8 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
     )
     
-    init(appStore: AppStore, challengeRepository: ChallengeRepositoryProtocol) {
+    init(challengeRepository: ChallengeRepositoryProtocol) {
         self.challengeRepository = challengeRepository
-        self.appStore = appStore
         
         updateRemoteData()
         loadLocalJSONLocalization()
@@ -97,7 +100,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         } else if currentSeason?.version != version?.challengeVersion {
             await updateChallengesSeason()
         }
-        appStore.send(.challengesSeasonPrepared)
+        delegate?.send(.challengesSeasonPrepared)
     }
     
     private func updateChallengesSeason() async {

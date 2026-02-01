@@ -10,20 +10,17 @@ import Foundation
 final class ChallengeService {
     
     private var currentUserRoom: UserRoom = .empty
-//    private let appStore: AppStore
     private let challengeRepository: ChallengeRepositoryProtocol
     private var challengeSeason: ChallengeSeason?
     
     init(challengeRepository: ChallengeRepositoryProtocol) {
-//        self.appStore = appStore
         self.challengeRepository = challengeRepository
-        
-//        observeAppState()
     }
     
-    func fetchChallengeSeason() {
+    func startObservation(appStore: AppStore) {
         Task {
             challengeSeason = await challengeRepository.getCurrentChallengeSeason()
+            rebuildState(appStore: appStore)
         }
     }
     
@@ -31,11 +28,10 @@ final class ChallengeService {
         return await challengeRepository.getCurrentChallengeSeason()
     }
     
-    
-//    //MARK: - Private
-    func observeAppState(appStore: AppStore) {
+    //MARK: - Private
+    private func observeAppState(appStore: AppStore) {
         withObservationTracking {
-            _ = appStore.currentRoom
+            _ = appStore.currentRoom.plants
             _ = appStore.selectedPlant
         } onChange: { [weak self] in
             self?.rebuildState(appStore: appStore)

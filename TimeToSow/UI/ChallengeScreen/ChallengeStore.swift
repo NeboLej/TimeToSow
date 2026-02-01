@@ -33,11 +33,11 @@ final class ChallengeStore: FeatureStore {
             
             progressList = try await asyncMap(currentSeason.challenges) { [weak self] in
                 guard let self else { fatalError() }
-                let progress = challengeService.getProgressBy(challenge: $0)
+                let progress = min(challengeService.getProgressBy(challenge: $0), 1)
                 return ChallengeProgress(challengeId: $0.id,
                                   name: $0.title,
                                   description: $0.type.getDescription(expectedValue: $0.expectedValue, expectedSecondValue: $0.expectedSecondValue),
-                                  isCompleted: progress >= 1,
+                                  isCompleted: progress == 1,
                                   progress: progress,
                                   rewardDecor: $0.rewardDecor,
                                   rewardUrl: await imageRepository.imageURL(for: $0.rewardDecor?.resourceUrl ?? ""))

@@ -614,6 +614,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8EF5756A2DCE4E6700AEC31A /* Components */,
 				8E29579C2F293E1C00EA144A /* BoxScreen */,
 				8E869C742F2274D300DECCBF /* ChallengeScreen */,
 				8E886B252F1BA7D90001A734 /* TagsScreen */,
@@ -622,7 +623,6 @@
 				8E2E5EE52EF8544200B91347 /* PlantDetailScreen */,
 				8E75DE0E2E5A2EAF0004C3D3 /* ProgressScreen */,
 				8EC86E322E06E82B00AA6AFA /* EditRoomScreen */,
-				8EF5756A2DCE4E6700AEC31A /* Components */,
 				8EF575442DCE3F3A00AEC31A /* HomeScreen */,
 				8EF575462DCE3F3A00AEC31A /* Stores */,
 				8EF575482DCE3F3A00AEC31A /* ScreenBuilder.swift */,

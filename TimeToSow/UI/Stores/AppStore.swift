@@ -9,7 +9,7 @@ import SwiftUI
 import GRDB
 
 @Observable
-class AppStore {
+final class AppStore: BackgroundEventDeleagate {
     
     @ObservationIgnored
     let myRoomRepository: UserRoomRepositoryProtocol
@@ -22,11 +22,11 @@ class AppStore {
     @ObservationIgnored
     let tagRepository: TagRepositoryProtocol
 //    @ObservationIgnored
-    @ObservationIgnored
-    let challengeRepository: ChallengeRepositoryProtocol
+//    @ObservationIgnored
+//    let challengeRepository: ChallengeRepositoryProtocol
     
-    @ObservationIgnored
-    var remoteRepository: RemoteContentRepositoryProtocol?
+//    @ObservationIgnored
+//    var remoteRepository: RemoteContentRepositoryProtocol?
     
     @ObservationIgnored
     var challengeService: ChallengeService
@@ -37,6 +37,7 @@ class AppStore {
     var selectedTag: Tag?
     var simpleUserRooms: [SimpleUserRoom] = []
     var userRooms: [UUID: UserRoom] = [:]
+    var challegeSeason: ChallengeSeason?
     
     init(factory: RepositoryFactory) {
         self.myRoomRepository = factory.myRoomRepository
@@ -44,8 +45,9 @@ class AppStore {
         self.tagRepository = factory.tagRepository
         self.roomRepository = factory.roomRepository
         self.shelfRepository = factory.shelfRepository
-        self.challengeRepository = factory.challengeRepository
         self.challengeService = factory.challengeService
+        
+        factory.remoteRepository.delegate = self
         
         getData()
     }
@@ -55,7 +57,7 @@ class AppStore {
         case .completeChallenges(let challenges):
             print("completeChallenge \(challenges)")
         case .challengesSeasonPrepared:
-            challengeService.observeAppState(appStore: self)
+            challengeService.startObservation(appStore: self)
             print("challengesSeasonPrepared")
         }
     }
@@ -114,10 +116,6 @@ class AppStore {
     
     func getData() {
         Task {
-//            let newRoom = await createNewUserRoom()
-//            await myRoomRepository.saveNewRoom(newRoom)
-//            await fff.ff()
-            
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
             if let lastRoom, lastRoom.dateCreate.isCurrentMonth() {
@@ -128,9 +126,6 @@ class AppStore {
             }
             userRooms[currentRoom.id] = currentRoom
             simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
-            
-//            challengeService = ChallengeService(appStore: self, challengeRepository: challengeRepository)
-            remoteRepository = RemoteContentRepository(appStore: self, challengeRepository: challengeRepository)
         }
     }
 }
