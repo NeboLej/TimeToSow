@@ -34,7 +34,7 @@ struct ChallengeSeason: Identifiable {
     }
 }
 
-struct Challenge: Identifiable {
+struct Challenge: Identifiable, Equatable {
     let id: UUID
     let title: String
     let type: ChallengeType

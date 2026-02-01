@@ -9,7 +9,7 @@ import Foundation
 
 enum BoxScreenAction {
     case toShelfPlant(Plant)
-    case toShelfDecor(Decor)
+    case toShelfDecor(DecorType)
     case infoPlant(Plant)
-    case infoDecor(Decor)
+    case infoDecor(DecorType)
 }

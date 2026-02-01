@@ -28,6 +28,7 @@ enum ScreenType: Identifiable, Hashable {
 
 enum ComponentType {
     case roomView(id: UUID? = nil)
+    case challengeCompleteView
 }
 
 final class ScreenBuilder {
@@ -61,7 +62,7 @@ final class ScreenBuilder {
         case .challenge:
             ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: appStore.challengeService, imageRepository: repositories.remoteRepository))
         case .box:
-            BoxScreen(store: BoxScreenStore(appStore: appStore))
+            BoxScreen(store: BoxScreenStore(appStore: appStore, decorRepository: repositories.decorRepository))
         }
     }
     
@@ -70,6 +71,8 @@ final class ScreenBuilder {
         switch type {
         case .roomView(let id):
             RoomView(store: RoomFeatureStore(appStore: appStore, selectedRoomId: id))
+        case .challengeCompleteView:
+            ChallengeCompleteView(store: RewardChallengeStore(appStore: appStore, imageRepository: repositories.remoteRepository))
         }
     }
 }

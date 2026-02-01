@@ -19,7 +19,7 @@ struct BoxScreen: View {
             }
         }
     }
-    @State private var selectedDecor: Decor? {
+    @State private var selectedDecor: DecorType? {
         willSet {
             if selectedPlant != nil {
                 selectedPlant = nil
@@ -70,13 +70,24 @@ struct BoxScreen: View {
                     let columns = 2
                     let width = (geo.size.width - CGFloat(10 * (columns - 1))) / CGFloat(columns)
                     ScrollView {
-                        MasonryLayout(columns: columns, spacing: 10) {
-                            if selection == 0 {
-                                plantCollection(cellWidth: width)
-                            } else if selection == 1 {
-                                decorCollection(cellWidth: width)
+                        if selection == 0 {
+                            if store.state.plants.isEmpty {
+                                emptyState("Тут можно хранить растения, которым пока не место на полке")
+                            } else {
+                                MasonryLayout(columns: columns, spacing: 10) {
+                                    plantCollection(cellWidth: width)
+                                }
+                            }
+                        } else if selection == 1 {
+                            if store.state.decors.isEmpty {
+                                emptyState("Выполняйте испытания, чтобы получать элементы декора")
+                            } else {
+                                MasonryLayout(columns: columns, spacing: 10) {
+                                    decorCollection(cellWidth: width)
+                                }
                             }
                         }
+                        
                         Spacer(minLength: 30)
                     }.scrollIndicators(.hidden)
                 }
@@ -118,7 +129,7 @@ struct BoxScreen: View {
     @ViewBuilder
     private func decorCollection(cellWidth: CGFloat) -> some View {
         ForEach(store.state.decors) { decor in
-            DecorPreview(zoomCoef: 2, decor: decor)
+            DecorTypePreview(zoomCoef: 2, decor: decor)
                 .flatShadow(blur: 5, distanceToLight: 30)
                 .frame(width: cellWidth)
                 .padding(.vertical, 24)
@@ -140,6 +151,16 @@ struct BoxScreen: View {
                     }
                 }
         }
+    }
+    
+    @ViewBuilder
+    private func emptyState(_ text: String) -> some View {
+        Text(text)
+            .font(.myTitle(20))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.black.opacity(0.6))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 40)
     }
     
     @ViewBuilder
@@ -186,5 +207,6 @@ struct BoxScreen: View {
 }
 
 #Preview {
-    screenBuilderMock.getScreen(type: .home)
+//    screenBuilderMock.getScreen(type: .home)
+    screenBuilderMock.getScreen(type: .box)
 }

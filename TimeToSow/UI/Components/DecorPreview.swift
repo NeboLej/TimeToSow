@@ -32,3 +32,28 @@ struct DecorPreview: View {
 //        }
     }
 }
+
+struct DecorTypePreview: View {
+    
+    @State var zoomCoef: CGFloat = 2.5
+    @State var decor: DecorType
+    
+    var body: some View {
+        WebImage(url: decor.resourceUrl)
+            .resizable()
+            .scaledToFit()
+            .padding()
+            .frame(height: decor.height * zoomCoef)
+        
+//        if name.contains(".gif") {
+//            AnimatedImage(name: name, bundle: .main)
+//                .resizable()
+//                .customLoopCount(rewardDecor.animationOptions?.repeatCount ?? 1)
+//                .scaledToFit()
+//                .padding()
+////                            .frame(width: rewardDecor.width * 1.7)
+//        } else {
+//
+//        }
+    }
+}

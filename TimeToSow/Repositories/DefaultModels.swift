@@ -16,7 +16,6 @@ struct DefaultModels {
         Tag(stableId: "default_2", name: "Yoga", color: "#68F205"),
         Tag(stableId: "default_3", name: "Programm", color: "#F2E205"),
         Tag(stableId: "default_4", name: "Read", color: "#F25C05"),
-        Tag(stableId: "default_5", name: "Run in the morning", color: "#8C8303")
     ]
     
     //MARK: - ROOMS
@@ -172,7 +171,7 @@ struct DefaultModels {
         Pot(name: "pot62.name", image: "pot62", height: 20, rarity: .uncommon),
         Pot(potFeatures: [.narrow], name: "pot63.name", image: "pot63", height: 28, rarity: .epic),
         Pot(potFeatures: [.narrow], name: "pot64.name", image: "pot64", height: 40, rarity: .epic),
-        Pot(name: "pot65.name", image: "pot65", height: 20, rarity: .epic)
+        Pot(name: "pot65.name", image: "pot65", height: 30, rarity: .epic)
     ]
     
     //MARK: - SEEDS
@@ -223,110 +222,25 @@ struct DefaultModels {
         Seed(name: "seed45.name", image: "seed45", height: 44, rarity: .uncommon),
         Seed(name: "seed46.name", image: "seed46", height: 24, rarity: .uncommon),
         Seed(name: "seed47.name",  image: "seed47", height: 24, rarity: .uncommon),
-        
-        Seed(name: "seed48.name",
-             image: "seed48",
-             height: 24,
-             rarity: .uncommon),
-        
-        Seed(name: "seed49.name",
-             image: "seed49",
-             height: 24,
-             rarity: .uncommon),
-        
-        Seed(name: "seed50.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed50",
-             height: 42,
-             rarity: .legendary),
-        
-        Seed(name: "seed51.name",
-             image: "seed51",
-             height: 37,
-             rarity: .common),
-        
-        Seed(name: "seed52.name",
-             image: "seed52",
-             height: 68,
-             rarity: .rare),
-        
-        Seed(name: "seed53.name",
-             image: "seed53",
-             height: 36,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: 0.08, y: 0)),
-        
-        Seed(name: "seed54.name",
-             image: "seed54",
-             height: 36,
-             rarity: .rare),
-        
-        Seed(name: "seed55.name",
-             image: "seed55",
-             height: 32,
-             rarity: .uncommon,
-             rootCoordinateCoef: .init(x: 0, y: 0.15)),
-        
-        Seed(name: "seed56.name",
-             image: "seed56",
-             height: 32,
-             rarity: .uncommon,
-             rootCoordinateCoef: .init(x: 0, y: 0.15)),
-        
-        Seed(name: "seed57.name",
-             image: "seed57",
-             height: 32,
-             rarity: .uncommon,
-             rootCoordinateCoef: .init(x: 0, y: 0.15)),
-        
-        Seed(name: "seed58.name",
-             image: "seed58",
-             height: 36,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: -0.08, y: 0)),
-        
-        Seed(name: "seed59.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed59",
-             height: 10,
-             rarity: .common),
-        
-        Seed(name: "seed60.name",
-             image: "seed60",
-             height: 34,
-             rarity: .uncommon),
-        
-        Seed(name: "seed61.name",
-             image: "seed61",
-             height: 28,
-             rarity: .rare,
-             rootCoordinateCoef: .init(x: -0.07, y: 0)),
-        
-        Seed(name: "seed62.name",
-             image: "seed62",
-             height: 60,
-             rarity: .rare),
-        
-        Seed(name: "seed63.name",
-             image: "seed63",
-             height: 80,
-             rarity: .epic),
-        
-        Seed(name: "seed64.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed64",
-             height: 65,
-             rarity: .epic,
-             rootCoordinateCoef: .init(x: 0.08, y: 0)),
-        
-        Seed(name: "seed65.name",
-             unavailavlePotTypes: [.narrow],
-             image: "seed65",
-             height: 32,
-             rarity: .common),
-        
-        Seed(name: "see66.name", image: "seed66", height: 37, rarity: .common),
-        Seed(name: "see67.name", image: "seed67", height: 60, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
+        Seed(name: "seed48.name", image: "seed48", height: 24, rarity: .uncommon),
+        Seed(name: "seed49.name", image: "seed49", height: 24, rarity: .uncommon),
+        Seed(name: "seed50.name", unavailavlePotTypes: [.narrow], image: "seed50", height: 42, rarity: .legendary),
+        Seed(name: "seed51.name", image: "seed51", height: 37, rarity: .common),
+        Seed(name: "seed52.name", image: "seed52", height: 68, rarity: .rare),
+        Seed(name: "seed53.name", image: "seed53", height: 36, rarity: .rare, rootCoordinateCoef: .init(x: 0.08, y: 0)),
+        Seed(name: "seed54.name", image: "seed54", height: 36, rarity: .rare),
+        Seed(name: "seed55.name", image: "seed55", height: 32, rarity: .uncommon, rootCoordinateCoef: .init(x: 0, y: 0.15)),
+        Seed(name: "seed56.name", image: "seed56", height: 32, rarity: .uncommon, rootCoordinateCoef: .init(x: 0, y: 0.15)),
+        Seed(name: "seed57.name", image: "seed57", height: 32, rarity: .uncommon, rootCoordinateCoef: .init(x: 0, y: 0.15)),
+        Seed(name: "seed58.name", image: "seed58", height: 36, rarity: .rare, rootCoordinateCoef: .init(x: -0.08, y: 0)),
+        Seed(name: "seed59.name", unavailavlePotTypes: [.narrow], image: "seed59", height: 10, rarity: .common),
+        Seed(name: "seed60.name", image: "seed60", height: 34, rarity: .uncommon),
+        Seed(name: "seed61.name", image: "seed61", height: 28, rarity: .rare, rootCoordinateCoef: .init(x: -0.07, y: 0)),
+        Seed(name: "seed62.name", image: "seed62", height: 60, rarity: .rare),
+        Seed(name: "seed63.name", image: "seed63", height: 80, rarity: .epic),
+        Seed(name: "seed64.name", unavailavlePotTypes: [.narrow], image: "seed64", height: 65, rarity: .epic, rootCoordinateCoef: .init(x: 0.08, y: 0)),
+        Seed(name: "seed65.name", unavailavlePotTypes: [.narrow], image: "seed65", height: 32, rarity: .common),
+        Seed(name: "seed66.name", image: "seed66", height: 37, rarity: .common),
+        Seed(name: "seed67.name", image: "seed67", height: 60, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
     ]
-    
 }

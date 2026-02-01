@@ -119,6 +119,10 @@
 		8ED72C412F02E1D8008E6869 /* JSONLocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */; };
 		8ED72C432F02E2E1008E6869 /* remote_localization.json in Resources */ = {isa = PBXBuildFile; fileRef = 8ED72C422F02E2E1008E6869 /* remote_localization.json */; };
 		8ED72C862F07D517008E6869 /* DebugScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED72C852F07D517008E6869 /* DebugScreenView.swift */; };
+		8ED8B3012F2FC60F008FA843 /* RewardChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8B3002F2FC60F008FA843 /* RewardChallengeView.swift */; };
+		8ED8B3032F2FC625008FA843 /* RewardChallengeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8B3022F2FC625008FA843 /* RewardChallengeStore.swift */; };
+		8ED8B3052F2FC62A008FA843 /* RewardChallengeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8B3042F2FC62A008FA843 /* RewardChallengeState.swift */; };
+		8ED8B3072F2FD38E008FA843 /* RewardChallengeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8B3062F2FD38E008FA843 /* RewardChallengeAction.swift */; };
 		8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */; };
 		8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4C5A12E7A126600818D95 /* TextureButton.swift */; };
 		8EE61D362F1AB020002E8B30 /* EditRoomStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE61D352F1AB020002E8B30 /* EditRoomStore.swift */; };
@@ -259,6 +263,10 @@
 		8ED72C402F02E1D8008E6869 /* JSONLocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLocalizationService.swift; sourceTree = "<group>"; };
 		8ED72C422F02E2E1008E6869 /* remote_localization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = remote_localization.json; sourceTree = "<group>"; };
 		8ED72C852F07D517008E6869 /* DebugScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugScreenView.swift; sourceTree = "<group>"; };
+		8ED8B3002F2FC60F008FA843 /* RewardChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChallengeView.swift; sourceTree = "<group>"; };
+		8ED8B3022F2FC625008FA843 /* RewardChallengeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChallengeStore.swift; sourceTree = "<group>"; };
+		8ED8B3042F2FC62A008FA843 /* RewardChallengeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChallengeState.swift; sourceTree = "<group>"; };
+		8ED8B3062F2FD38E008FA843 /* RewardChallengeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardChallengeAction.swift; sourceTree = "<group>"; };
 		8EE4C59F2E7A10A000818D95 /* EdgeInsets + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets + extension.swift"; sourceTree = "<group>"; };
 		8EE4C5A12E7A126600818D95 /* TextureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureButton.swift; sourceTree = "<group>"; };
 		8EE61D352F1AB020002E8B30 /* EditRoomStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomStore.swift; sourceTree = "<group>"; };
@@ -501,6 +509,17 @@
 			path = DebugScreen;
 			sourceTree = "<group>";
 		};
+		8ED8B2FF2F2FC5F5008FA843 /* RewardChallengeView */ = {
+			isa = PBXGroup;
+			children = (
+				8ED8B3002F2FC60F008FA843 /* RewardChallengeView.swift */,
+				8ED8B3022F2FC625008FA843 /* RewardChallengeStore.swift */,
+				8ED8B3042F2FC62A008FA843 /* RewardChallengeState.swift */,
+				8ED8B3062F2FD38E008FA843 /* RewardChallengeAction.swift */,
+			);
+			path = RewardChallengeView;
+			sourceTree = "<group>";
+		};
 		8EF574E32DCCEEAE00AEC31A = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +633,7 @@
 		8EF575492DCE3F3A00AEC31A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8ED8B2FF2F2FC5F5008FA843 /* RewardChallengeView */,
 				8EF5756A2DCE4E6700AEC31A /* Components */,
 				8E29579C2F293E1C00EA144A /* BoxScreen */,
 				8E869C742F2274D300DECCBF /* ChallengeScreen */,
@@ -836,6 +856,7 @@
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
 				8ED63A8E2F1273780013632F /* ShelfModelGRDB.swift in Sources */,
+				8ED8B3052F2FC62A008FA843 /* RewardChallengeState.swift in Sources */,
 				8ED63A8F2F1273780013632F /* TagModelGRDB.swift in Sources */,
 				8ED63A902F1273780013632F /* UserRoomModelGRDB.swift in Sources */,
 				8ED63A912F1273780013632F /* PlantRepository.swift in Sources */,
@@ -889,8 +910,11 @@
 				8E2957A22F293E5400EA144A /* BoxScreenAction.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8E941BB62F21289C002F0B07 /* Decor.swift in Sources */,
+				8ED8B3032F2FC625008FA843 /* RewardChallengeStore.swift in Sources */,
 				8E886B272F1BA82F0001A734 /* TagsScreen.swift in Sources */,
+				8ED8B3072F2FD38E008FA843 /* RewardChallengeAction.swift in Sources */,
 				8EAF67CB2EF3520200780BB9 /* AppActions.swift in Sources */,
+				8ED8B3012F2FC60F008FA843 /* RewardChallengeView.swift in Sources */,
 				8E886B292F1BA8580001A734 /* TagsScreenState.swift in Sources */,
 				8EC86F082E0F3A6000AA6AFA /* FlatShadow.swift in Sources */,
 				8E75DE122E5A2EE60004C3D3 /* ProgressScreenStore.swift in Sources */,

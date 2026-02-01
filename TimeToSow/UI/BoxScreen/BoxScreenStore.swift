@@ -12,18 +12,23 @@ final class BoxScreenStore: FeatureStore {
     
     var state: BoxScreenState = BoxScreenState(plants: [], decors: [])
     
-    private var boxPlants: [Plant] = []
-    private var boxDecor: [Decor] = []
+    @ObservationIgnored
+    private let decorRepository: DecorRepositoryProtocol
     
-    override init(appStore: AppStore) {
+    private var boxPlants: [Plant] = []
+    private var currentDecor: [Decor] = []
+    private var decorTypes: [DecorType] = []
+    
+    init(appStore: AppStore, decorRepository: DecorRepositoryProtocol) {
+        self.decorRepository = decorRepository
         super.init(appStore: appStore)
         
         let plants = appStore.currentRoom.plants
         
         boxPlants = plants.filter { !$0.value.isOnShelf }.map { $0.value }.sorted(by: { $1.dateCreate > $0.dateCreate })
-        boxDecor = appStore.currentRoom.decor.map { $0.value }
+        currentDecor = appStore.currentRoom.decor.map { $0.value }
         
-        rebuildState()
+        getData()
     }
     
     func send(_ action: BoxScreenAction, animation: Animation? = .default) {
@@ -38,6 +43,12 @@ final class BoxScreenStore: FeatureStore {
         }
     }
     
+    private func getData() {
+        Task {
+            decorTypes = await decorRepository.getAllDecorTypes()
+            rebuildState()
+        }
+    }
     
     //MARK: - Private
     private func handle(_ action: BoxScreenAction) {
@@ -46,7 +57,7 @@ final class BoxScreenStore: FeatureStore {
             boxPlants.removeAll(where: { plant == $0 })
             rebuildState()
         case .toShelfDecor(let decor):
-            boxDecor.removeAll(where: { decor == $0 })
+            currentDecor.removeAll(where: { decor.id == $0.decorType.id })
             rebuildState()
         default: break
         }
@@ -65,6 +76,12 @@ final class BoxScreenStore: FeatureStore {
     
     private func rebuildState() {
 
-        state = BoxScreenState(plants: boxPlants, decors: boxDecor)
+        let filtredDecorTypes = decorTypes.filter { type in
+            !currentDecor.contains { decor in
+                decor.decorType.id == type.id
+            }
+        }
+        
+        state = BoxScreenState(plants: boxPlants, decors: filtredDecorTypes)
     }
 }

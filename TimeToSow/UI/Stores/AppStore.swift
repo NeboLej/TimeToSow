@@ -21,13 +21,6 @@ final class AppStore: BackgroundEventDeleagate {
     let plantRepository: PlantRepositoryProtocol
     @ObservationIgnored
     let tagRepository: TagRepositoryProtocol
-//    @ObservationIgnored
-//    @ObservationIgnored
-//    let challengeRepository: ChallengeRepositoryProtocol
-    
-//    @ObservationIgnored
-//    var remoteRepository: RemoteContentRepositoryProtocol?
-    
     @ObservationIgnored
     var challengeService: ChallengeService
     
@@ -38,6 +31,7 @@ final class AppStore: BackgroundEventDeleagate {
     var simpleUserRooms: [SimpleUserRoom] = []
     var userRooms: [UUID: UserRoom] = [:]
     var challegeSeason: ChallengeSeason?
+    var completedChallenges: [Challenge] = []
     
     init(factory: RepositoryFactory) {
         self.myRoomRepository = factory.myRoomRepository
@@ -56,6 +50,7 @@ final class AppStore: BackgroundEventDeleagate {
         switch action {
         case .completeChallenges(let challenges):
             print("completeChallenge \(challenges)")
+            completedChallenges = challenges  
         case .challengesSeasonPrepared:
             challengeService.startObservation(appStore: self)
             print("challengesSeasonPrepared")
@@ -111,6 +106,8 @@ final class AppStore: BackgroundEventDeleagate {
         case .changeShelfVisibility(plant: let plant, isVisible: let isVisible):
             updatePlantVisibleInShelf(plant, isVisible: isVisible)
             selectedPlant = nil
+        case .reward(challenge: let challenge):
+            completedChallenges.removeAll(where: { $0.id == challenge.id })
         }
     }
     

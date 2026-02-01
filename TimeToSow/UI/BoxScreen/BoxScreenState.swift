@@ -9,5 +9,5 @@ import Foundation
 
 struct BoxScreenState {
     let plants: [Plant]
-    let decors: [Decor]
+    let decors: [DecorType]
 }

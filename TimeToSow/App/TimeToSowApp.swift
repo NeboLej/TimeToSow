@@ -16,10 +16,11 @@ class RepositoryFactory {
     let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
     let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
     let challengeRepository: ChallengeRepositoryProtocol = ChallengeRepository(dbPool: DatabaseManager.shared.dbPool)
+    let decorRepository: DecorRepositoryProtocol = DecorRepository(dbPool: DatabaseManager.shared.dbPool)
     
     lazy var plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
-                                                                    seedRepository: seedRepository,
-                                                                    potRepository: potRepository)
+                                                                        seedRepository: seedRepository,
+                                                                        potRepository: potRepository)
     lazy var challengeService = ChallengeService(challengeRepository: challengeRepository)
     
     lazy var remoteRepository = RemoteContentRepository(challengeRepository: challengeRepository)
@@ -48,10 +49,13 @@ struct TimeToSowApp: App {
             
             NavigationStack(path: coordinator.path) {
                 if isShowContent {
-                    screenBuilder.getScreen(type: .home)
-                        .navigationDestination(for: ScreenType.self) {
-                            screenBuilder.getScreen(type: $0)
-                        }
+                    ZStack {
+                        screenBuilder.getScreen(type: .home)
+                            .navigationDestination(for: ScreenType.self) {
+                                screenBuilder.getScreen(type: $0)
+                            }
+                        screenBuilder.getComponent(type: .challengeCompleteView)
+                    }
                 }
             }
             .onAppear {
