@@ -9,14 +9,16 @@ import Foundation
 
 struct ChallengeSeason: Identifiable {
     let id: UUID
+    let stableId: String
     let version: Int
     let title: String
     let startDate: Date
     let endDate: Date
     let challenges: [Challenge]
     
-    init(id: UUID, version: Int, title: String, startDate: Date, endDate: Date, challenges: [Challenge]) {
+    init(id: UUID, stableId: String, version: Int, title: String, startDate: Date, endDate: Date, challenges: [Challenge]) {
         self.id = id
+        self.stableId = stableId
         self.version = version
         self.title = title
         self.startDate = startDate
@@ -26,6 +28,7 @@ struct ChallengeSeason: Identifiable {
     
     init(from: ChallengeSeasonModelGRDB) {
         self.id = from.id
+        self.stableId = from.stableId
         self.version = from.version
         self.title = from.title
         self.startDate = from.startDate
@@ -54,5 +57,23 @@ struct Challenge: Identifiable, Equatable {
         rewardDecor = from.reward
         rewardRoom = nil
         rewardShelf = nil
+    }
+}
+
+struct CompletedChallenge {
+    let id: UUID
+    var seasonID: String
+    let date: Date
+    
+    init(id: UUID = UUID(), seasonID: String, date: Date) {
+        self.id = id
+        self.seasonID = seasonID
+        self.date = date
+    }
+    
+    init(from: CompletedChallengeModelGRDB) {
+        self.id = from.id
+        self.seasonID = from.seasonID
+        self.date = from.date
     }
 }

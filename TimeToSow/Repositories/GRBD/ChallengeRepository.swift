@@ -11,6 +11,8 @@ import GRDB
 protocol ChallengeRepositoryProtocol {
     func getCurrentChallengeSeason() async -> ChallengeSeason?
     func addNewChallangeSeason(_ challengeSeason: ChallengeSeasonRemote) async
+    func getAllCompletedChallanges(seasonID: String) async -> [CompletedChallenge]
+    func saveCompletedChallenges(_ challenges: [CompletedChallenge]) async
 }
 
 class ChallengeRepository: BaseRepository, ChallengeRepositoryProtocol {
@@ -19,14 +21,7 @@ class ChallengeRepository: BaseRepository, ChallengeRepositoryProtocol {
         do {
             let latest = try await dbPool.read { db in
                 try ChallengeSeasonModelGRDB
-//                    .order(Column("dateCreate").desc)
                     .limit(1)
-//                    .including(required: UserRoomModelGRDB.shelf)
-//                    .including(required: UserRoomModelGRDB.room)
-//                    .including(all: UserRoomModelGRDB.plants.including(required: PlantModelGRDB.seed)
-//                        .including(required: PlantModelGRDB.seed)
-//                        .including(required: PlantModelGRDB.pot)
-//                        .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag)))
                     .fetchOne(db)
             }
             
@@ -40,13 +35,41 @@ class ChallengeRepository: BaseRepository, ChallengeRepositoryProtocol {
         }
     }
     
+    func getAllCompletedChallanges(seasonID: String) async -> [CompletedChallenge] {
+        do {
+            let challenges = try await dbPool.write { db in
+                 try CompletedChallengeModelGRDB
+                    .filter(Column("seasonID") == seasonID)
+                    .fetchAll(db)
+            }
+            return challenges.map { CompletedChallenge(from: $0) }
+        } catch {
+            Logger.log("getAllCompletedChallanges error", location: .GRDB, event: .error(error))
+            return []
+        }
+    }
+    
+    func saveCompletedChallenges(_ challenges: [CompletedChallenge]) async {
+        do {
+            try await dbPool.write { db in
+                for challenge in challenges {
+                    var new = CompletedChallengeModelGRDB(from: challenge)
+                    try new.insert(db)
+                }
+                Logger.log("save new \(challenges.count) CompletedChallenges", location: .GRDB, event: .success)
+            }
+        } catch {
+            Logger.log("error save new CompletedChallenge", location: .GRDB, event: .error(error))
+        }
+    }
+    
     func addNewChallangeSeason(_ challengeSeason: ChallengeSeasonRemote) async {
         do {
             try await dbPool.write { db in
                 try ChallengeSeasonModelGRDB.deleteAll(db)
                 if try ChallengeSeasonModelGRDB.fetchCount(db) == 0 {
-                    var newSwason = ChallengeSeasonModelGRDB(from: challengeSeason)
-                    try newSwason.insert(db)
+                    var newSeason = ChallengeSeasonModelGRDB(from: challengeSeason)
+                    try newSeason.insert(db)
                     Logger.log("save new challenge season", location: .GRDB, event: .success)
                 } else {
                     Logger.log("save new challenge season error", location: .GRDB, event: .success)

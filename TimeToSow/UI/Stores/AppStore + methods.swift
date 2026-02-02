@@ -120,5 +120,4 @@ extension AppStore {
 //        }
         currentRoom.decor[decor.id] = newDecor
     }
-    
 }

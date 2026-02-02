@@ -49,11 +49,9 @@ final class AppStore: BackgroundEventDeleagate {
     func send(_ action: BackgroundEventAction) {
         switch action {
         case .completeChallenges(let challenges):
-            print("completeChallenge \(challenges)")
-            completedChallenges = challenges  
+            completedChallenges = challenges
         case .challengesSeasonPrepared:
             challengeService.startObservation(appStore: self)
-            print("challengesSeasonPrepared")
         }
     }
     

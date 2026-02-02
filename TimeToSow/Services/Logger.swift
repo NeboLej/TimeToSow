@@ -13,12 +13,14 @@ final class Logger {
         case GRDB
         case remote
         case unowned
+        case challengeService
         
         var text: String {
             switch self {
             case .GRDB: return "💿"
             case .remote: return "🌍"
             case .unowned: return "🧭"
+            case .challengeService: return "🔧"
             }
         }
     }

@@ -46,17 +46,19 @@ struct TimeToSowApp: App {
         
         WindowGroup {
             let coordinator = Bindable(appStore.appCoordinator)
-            
-            NavigationStack(path: coordinator.path) {
-                if isShowContent {
-                    ZStack {
-                        screenBuilder.getScreen(type: .home)
-                            .navigationDestination(for: ScreenType.self) {
-                                screenBuilder.getScreen(type: $0)
-                            }
-                        screenBuilder.getComponent(type: .challengeCompleteView)
+            ZStack {
+                NavigationStack(path: coordinator.path) {
+                    if isShowContent {
+                        ZStack {
+                            screenBuilder.getScreen(type: .home)
+                                .navigationDestination(for: ScreenType.self) {
+                                    screenBuilder.getScreen(type: $0)
+                                }
+                            
+                        }
                     }
                 }
+                screenBuilder.getComponent(type: .challengeCompleteView)
             }
             .onAppear {
                 DispatchQueue.main.async {

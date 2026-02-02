@@ -131,7 +131,9 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         
         let data = try Data(contentsOf: url)
         data.printJSON()
-        let response = try JSONDecoder().decode(type.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        let response = try decoder.decode(type.self, from: data)
         return response
     }
 }

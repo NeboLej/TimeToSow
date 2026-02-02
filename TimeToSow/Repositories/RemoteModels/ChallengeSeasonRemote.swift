@@ -8,6 +8,7 @@
 import Foundation
 
 struct ChallengeSeasonRemote: Codable {
+    let id: String
     let version: Int
     let title: String
     let startDate: Date

@@ -12,6 +12,8 @@ final class ChallengeService {
     private var currentUserRoom: UserRoom = .empty
     private let challengeRepository: ChallengeRepositoryProtocol
     private var challengeSeason: ChallengeSeason?
+    private var rebuildTask: Task<Void, Never>?
+    private var completedChallenges: [CompletedChallenge] = []
     
     init(challengeRepository: ChallengeRepositoryProtocol) {
         self.challengeRepository = challengeRepository
@@ -20,34 +22,60 @@ final class ChallengeService {
     func startObservation(appStore: AppStore) {
         Task {
             challengeSeason = await challengeRepository.getCurrentChallengeSeason()
-            rebuildState(appStore: appStore)
+            guard let challengeSeason else { return }
+            completedChallenges = await challengeRepository.getAllCompletedChallanges(seasonID: challengeSeason.stableId)
+            await rebuildState(appStore: appStore)
         }
     }
     
     func getChallegeThisSeason() async -> ChallengeSeason? {
         return await challengeRepository.getCurrentChallengeSeason()
     }
-    
+
     //MARK: - Private
     private func observeAppState(appStore: AppStore) {
         withObservationTracking {
             _ = appStore.currentRoom.plants
-            _ = appStore.selectedPlant
         } onChange: { [weak self] in
-            self?.rebuildState(appStore: appStore)
+            guard let self else { return }
+            
+            rebuildTask?.cancel()
+            
+            rebuildTask = Task.detached(priority: .utility) {
+                do {
+                    try await Task.sleep(for: .seconds(5))
+                    await self.rebuildState(appStore: appStore)
+                } catch {
+                    Logger.log("Error observeAppState", location: .challengeService, event: .error(error))
+                }
+            }
         }
     }
     
-    private func rebuildState(appStore: AppStore) {
+    private func rebuildState(appStore: AppStore) async {
         guard let challengeSeason else {
             observeAppState(appStore: appStore)
             return
         }
         currentUserRoom = appStore.currentRoom
         
-        let completedChallenges = challengeSeason.challenges.filter { getProgressBy(challenge: $0) >= 1 }
-        if !completedChallenges.isEmpty {
-            appStore.send(.completeChallenges(completedChallenges))
+        let uncompletedChallenges = challengeSeason.challenges.filter { seasonChallenge in
+            !completedChallenges.contains(where: { $0.id == seasonChallenge.id })
+        }
+        let newCompletedChallenges = uncompletedChallenges.filter { getProgressBy(challenge: $0) >= 1 }
+        
+        if !newCompletedChallenges.isEmpty {
+            let newCompletedChallengesModels = newCompletedChallenges.map {
+                CompletedChallenge(id: $0.id, seasonID: challengeSeason.stableId, date: Date())
+            }
+            
+            await MainActor.run {
+                Logger.log("Complete new challenge", location: .challengeService, event: .success)
+                appStore.send(.completeChallenges(newCompletedChallenges))
+            }
+            
+            await challengeRepository.saveCompletedChallenges(newCompletedChallengesModels)
+            completedChallenges.append(contentsOf: newCompletedChallengesModels)
         }
         observeAppState(appStore: appStore)
     }

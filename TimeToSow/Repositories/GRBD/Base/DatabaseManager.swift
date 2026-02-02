@@ -96,6 +96,7 @@ final class DatabaseManager {
         
         try db.create(table: "challangeSeason", ifNotExists: true) { t in
             t.column("id", .blob).primaryKey()
+            t.column("stableId", .text).notNull()
             t.column("version", .integer).notNull()
             t.column("title", .text).notNull()
             t.column("startDate", .double).notNull()
@@ -152,6 +153,12 @@ final class DatabaseManager {
             
             t.foreignKey(["decorTypeID"], references: "decorType", onDelete: .restrict, onUpdate: .cascade)
             t.foreignKey(["rootRoomID"], references: "userRoom", onDelete: .cascade, onUpdate: .cascade)
+        }
+        
+        try db.create(table: "completedChallenge", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("seasonID", .text).notNull()
+            t.column("date", .double).notNull()
         }
     }
 }
