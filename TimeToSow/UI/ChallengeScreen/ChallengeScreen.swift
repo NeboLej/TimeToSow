@@ -71,28 +71,12 @@ struct ChallengeScreen: View {
                 .foregroundStyle(.black.opacity(0.3))
             
             VStack {
-                
                 if let rewardDecor = challenge.rewardDecor {
-                    //                    let name = (challenge.rewardDecor?.resourceName ?? "") + (challenge.rewardDecor?.animationOptions != nil ? ".gif" : ".png")
-                    //
-                    //                    let name
-                    let name = challenge.rewardDecor?.resourceUrl ?? ""
-                    
-                    let _ = print(name)
-                    if name.contains(".gif") {
-                        AnimatedImage(name: name, bundle: .main)
-                            .resizable()
-                            .customLoopCount(rewardDecor.animationOptions?.repeatCount ?? 1)
-                            .scaledToFit()
-                            .padding()
-                        //                            .frame(width: rewardDecor.width * 1.7)
-                    } else {
-                        WebImage(url: challenge.rewardUrl)
-                            .resizable()
-                            .scaledToFit()
-                            .padding()
-                            .frame(height: rewardDecor.height * 1.7)
-                    }
+                    WebImage(url: challenge.rewardUrl)
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
+                        .frame(height: rewardDecor.height * 1.7)
                     Text(rewardDecor.name)
                         .multilineTextAlignment(.center)
                 }

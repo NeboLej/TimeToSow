@@ -60,7 +60,7 @@ final class ChallengeService {
         currentUserRoom = appStore.currentRoom
         
         let uncompletedChallenges = challengeSeason.challenges.filter { seasonChallenge in
-            !completedChallenges.contains(where: { $0.id == seasonChallenge.id })
+            !completedChallenges.contains(where: { $0.challengeID == seasonChallenge.id })
         }
         let newCompletedChallenges = uncompletedChallenges.filter { getProgressBy(challenge: $0) >= 1 }
         

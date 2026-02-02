@@ -38,7 +38,7 @@ struct ChallengeSeason: Identifiable {
 }
 
 struct Challenge: Identifiable, Equatable {
-    let id: UUID
+    let id: String
     let title: String
     let type: ChallengeType
     let expectedValue: Int
@@ -48,7 +48,7 @@ struct Challenge: Identifiable, Equatable {
     let rewardShelf: ShelfType?
     
     init(from: ChallengeModel) {
-        id = UUID()
+        id = from.id
         title = from.title
         type = from.type
         expectedValue = from.expectedValue
@@ -61,18 +61,18 @@ struct Challenge: Identifiable, Equatable {
 }
 
 struct CompletedChallenge {
-    let id: UUID
+    let challengeID: String
     var seasonID: String
     let date: Date
     
-    init(id: UUID = UUID(), seasonID: String, date: Date) {
-        self.id = id
+    init(id: String, seasonID: String, date: Date) {
+        self.challengeID = id
         self.seasonID = seasonID
         self.date = date
     }
     
     init(from: CompletedChallengeModelGRDB) {
-        self.id = from.id
+        self.challengeID = from.challengeID
         self.seasonID = from.seasonID
         self.date = from.date
     }

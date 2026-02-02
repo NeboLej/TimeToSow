@@ -10,10 +10,10 @@ import Foundation
 struct RewardChallengeState: Equatable {
     var id = UUID()
     var challanges: [Challenge]
-    var images: [UUID: URL?] = [:]
+    var images: [String: URL?] = [:]
     var isShow: Bool = false
     
-    init(challanges: [Challenge], images: [UUID : URL?]) {
+    init(challanges: [Challenge], images: [String : URL?]) {
         self.challanges = challanges
         self.images = images
         self.isShow = !challanges.isEmpty

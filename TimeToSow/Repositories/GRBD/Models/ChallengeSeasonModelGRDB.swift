@@ -34,14 +34,14 @@ struct ChallengeSeasonModelGRDB: Codable, FetchableRecord, MutablePersistableRec
 struct CompletedChallengeModelGRDB: Codable, FetchableRecord, MutablePersistableRecord, TableRecord {
     static let databaseTableName = "completedChallenge"
     
-    var id: UUID
+    var challengeID: String
     var seasonID: String
     var date: Date
     
     mutating func didInsert(with rowID: Int64, for column: String?) { }
     
     init(from: CompletedChallenge) {
-        self.id = from.id
+        self.challengeID = from.challengeID
         self.seasonID = from.seasonID
         self.date = from.date
     }

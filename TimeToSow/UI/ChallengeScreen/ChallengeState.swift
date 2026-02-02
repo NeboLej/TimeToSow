@@ -42,7 +42,7 @@ struct ChallengeState: Equatable {
 
 struct ChallengeProgress: Identifiable, Equatable {
     let id: UUID = UUID()
-    let challengeId: UUID
+    let challengeId: String
     let name: String
     let description: String
     let isCompleted: Bool

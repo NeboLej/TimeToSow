@@ -156,7 +156,7 @@ final class DatabaseManager {
         }
         
         try db.create(table: "completedChallenge", ifNotExists: true) { t in
-            t.column("id", .blob).primaryKey()
+            t.column("challengeID", .text).primaryKey()
             t.column("seasonID", .text).notNull()
             t.column("date", .double).notNull()
         }

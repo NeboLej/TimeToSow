@@ -8,6 +8,7 @@
 import Foundation
 
 struct ChallengeModel: Codable {
+    let id: String
     let title: String
     let type: ChallengeType
     let expectedValue: Int

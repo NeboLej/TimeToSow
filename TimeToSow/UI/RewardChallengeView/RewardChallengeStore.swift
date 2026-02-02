@@ -12,7 +12,7 @@ final class RewardChallengeStore: FeatureStore {
     
     var state: RewardChallengeState
     
-    private var images: [UUID: URL?] = [:]
+    private var images: [String: URL?] = [:]
     private var challenges: [Challenge] = []
     
     @ObservationIgnored
@@ -54,7 +54,7 @@ final class RewardChallengeStore: FeatureStore {
             }
             
             await MainActor.run {
-                var newImages: [UUID: URL?] = [:]
+                var newImages: [String: URL?] = [:]
                 urls.forEach { challange, url in
                     newImages[challange.id] = url
                 }

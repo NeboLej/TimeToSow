@@ -20,7 +20,7 @@ final class Logger {
             case .GRDB: return "💿"
             case .remote: return "🌍"
             case .unowned: return "🧭"
-            case .challengeService: return "🔧"
+            case .challengeService: return "🎭"
             }
         }
     }
