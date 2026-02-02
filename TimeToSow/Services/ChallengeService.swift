@@ -73,8 +73,6 @@ final class ChallengeService {
                 Logger.log("Complete new challenge", location: .challengeService, event: .success)
                 appStore.send(.completeChallenges(newCompletedChallenges))
             }
-            
-            await challengeRepository.saveCompletedChallenges(newCompletedChallengesModels)
             completedChallenges.append(contentsOf: newCompletedChallengesModels)
         }
         observeAppState(appStore: appStore)

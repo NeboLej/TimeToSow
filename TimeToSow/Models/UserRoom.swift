@@ -40,12 +40,7 @@ class UserRoom: Hashable {
         self.name = name
         self.dateCreate = dateCreate
         self.plants = plants
-        
-        var dict = [UUID: Decor]()
-        [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3].forEach {
-            dict[$0.id] = $0
-        }
-        self.decor = dict
+        self.decor = decor
     }
     
     init(from: UserRoomModelGRDB) {

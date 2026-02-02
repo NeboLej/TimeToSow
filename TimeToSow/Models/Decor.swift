@@ -28,7 +28,7 @@ struct DecorType: Hashable, Identifiable {
     let isUnlocked: Bool
     
     var resourceUrl: URL? {
-        Bundle.main.url(forResource: resourceName, withExtension: animationOptions == nil ? "png" : "gif")
+        LocalImageStore.shared.localURL(for: resourceName)
     }
     
     init(id: UUID, name: String, locationType: LocationType, animationOptions: AnimationOptions?, resourceName: String, height: CGFloat, isUnlocked: Bool) {

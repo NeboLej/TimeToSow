@@ -16,6 +16,7 @@ enum AppAction {
     case addRandomPlant
     case addRandomNote
     case addNewPlant(Plant)
+    case addNewDecorToShelf(DecorType)
     case getUserRoom(id: UUID)
     case selectTag(Tag)
     case newTag(Tag)
@@ -31,5 +32,5 @@ enum NavigateAction {
 
 enum BackgroundEventAction {
     case completeChallenges([Challenge])
-    case challengesSeasonPrepared
+    case challengesSeasonPrepared(ChallengeSeason)
 }

@@ -32,38 +32,40 @@ struct DecorView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center, spacing: 0) {
             let decor = decor.decorType
-            let name = decor.resourceName + (decor.animationOptions != nil ? ".gif" : ".png")
+//            let name = decor.resourceName + (decor.animationOptions != nil ? ".gif" : ".png")
+//            
+            WebImage(url: decor.resourceUrl)
+                .resizable()
+                .scaledToFit()
+                .frame(height: decor.height)
             
-            if name.contains(".gif") {
-                AnimatedImage(name: name, bundle: .main, isAnimating: $isAnimating)
-                    .resizable()
-                    .customLoopCount(decor.animationOptions?.repeatCount ?? 1)
-                    .scaledToFit()
-                    .frame(height: decor.height)
-                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
-                    .onTapGesture {
-                        isAnimating = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (decor.animationOptions?.duration ?? 2)) {
-                            isAnimating = false
-                        }
-                    }
-            } else {
-                WebImage(url: decor.resourceUrl)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: decor.height)
-                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
-//                Image.file(name)
+//            if name.contains(".gif") {
+//                AnimatedImage(name: name, bundle: .main, isAnimating: $isAnimating)
 //                    .resizable()
+//                    .customLoopCount(decor.animationOptions?.repeatCount ?? 1)
 //                    .scaledToFit()
 //                    .frame(height: decor.height)
-//                    .offset(x: decor.positon.x, y: decor.positon.y)
-            }
+//                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
+//                    .onTapGesture {
+//                        isAnimating = true
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + (decor.animationOptions?.duration ?? 2)) {
+//                            isAnimating = false
+//                        }
+//                    }
+//            } else {
+// 
+////                Image.file(name)
+////                    .resizable()
+////                    .scaledToFit()
+////                    .frame(height: decor.height)
+////                    .offset(x: decor.positon.x, y: decor.positon.y)
+//            }
         }
         .animation(.easeInOut(duration: 0.1), value: offsetX)
         .animation(.easeIn(duration: isDragging ? 0 : 0.4), value: offsetY)
+        .zIndex(isDragging ? 10000 : abs(offsetY))
         .offset(x: offsetX, y: offsetY)
         .onAppear {
             decorFall()
@@ -117,13 +119,16 @@ struct DecorView: View {
     }
 }
 
-#Preview {
-    VStack {
-        screenBuilderMock.getComponent(type: .roomView(id: nil))
-        Spacer()
-    }.ignoresSafeArea()
-}
+//#Preview {
+//    VStack {
+//        screenBuilderMock.getComponent(type: .roomView(id: nil))
+//        Spacer()
+//    }.ignoresSafeArea()
+//}
 
+#Preview {
+    screenBuilderMock.getScreen(type: .home)
+}
 
 //#Preview {
 //    DecorView(decor: Decor(id: UUID(), name: "Лошадка", locationType: .stand,

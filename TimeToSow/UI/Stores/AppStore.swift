@@ -22,6 +22,10 @@ final class AppStore: BackgroundEventDeleagate {
     @ObservationIgnored
     let tagRepository: TagRepositoryProtocol
     @ObservationIgnored
+    let challengeRepository: ChallengeRepositoryProtocol
+    @ObservationIgnored
+    let decorRepository: DecorRepositoryProtocol
+    @ObservationIgnored
     var challengeService: ChallengeService
     
     var currentRoom: UserRoom = .empty
@@ -39,7 +43,9 @@ final class AppStore: BackgroundEventDeleagate {
         self.tagRepository = factory.tagRepository
         self.roomRepository = factory.roomRepository
         self.shelfRepository = factory.shelfRepository
+        self.challengeRepository = factory.challengeRepository
         self.challengeService = factory.challengeService
+        self.decorRepository = factory.decorRepository
         
         factory.remoteRepository.delegate = self
         
@@ -50,7 +56,8 @@ final class AppStore: BackgroundEventDeleagate {
         switch action {
         case .completeChallenges(let challenges):
             completedChallenges = challenges
-        case .challengesSeasonPrepared:
+        case .challengesSeasonPrepared(let challengeSeason):
+            self.challegeSeason = challengeSeason
             challengeService.startObservation(appStore: self)
         }
     }
@@ -93,6 +100,8 @@ final class AppStore: BackgroundEventDeleagate {
             currentRoom.plants[selectedPlant.id] = newPlant
         case .addNewPlant(let plant):
             saveNewPlant(plant)
+        case .addNewDecorToShelf(let decorType):
+            newDecorToShelf(decorType)
         case .getUserRoom(let id):
             getUserRoom(by: id)
         case .selectTag(let tag):
@@ -105,7 +114,10 @@ final class AppStore: BackgroundEventDeleagate {
             updatePlantVisibleInShelf(plant, isVisible: isVisible)
             selectedPlant = nil
         case .reward(challenge: let challenge):
-            completedChallenges.removeAll(where: { $0.id == challenge.id })
+            saveCompleteChallenge(challenge)
+            if let decor = challenge.rewardDecor {
+                saveNewDecorType(decor)
+            }
         }
     }
     

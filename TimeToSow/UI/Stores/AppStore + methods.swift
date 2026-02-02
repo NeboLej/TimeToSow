@@ -120,4 +120,32 @@ extension AppStore {
 //        }
         currentRoom.decor[decor.id] = newDecor
     }
+    
+    func saveNewDecorType(_ decorModel: DecorModel) {
+        Task {
+            let decorType = DecorType(from: decorModel)
+            await decorRepository.saveNewDecorTypes([decorType])
+        }
+    }
+    
+    func newDecorToShelf(_ decorType: DecorType) {
+        let offsetY = Double((10...250).randomElement()!)
+        let offsetX = Double((10...350).randomElement()!)
+        let decor = Decor(decorType: decorType, rootRoomID: currentRoom.id, offsetY: offsetY, offsetX: offsetX)
+        currentRoom.decor[decor.id] = decor
+        userRooms[currentRoom.id]?.decor[decor.id] = decor
+        Task {
+            await decorRepository.saveNewDecor(decor)
+        }
+    }
+    
+    //MARK: - Challenge
+    func saveCompleteChallenge(_ challenge: Challenge) {
+        completedChallenges.removeAll(where: { $0.id == challenge.id })
+        Task {
+            guard let challegeSeason else { return }
+            let newCompletedChallenge = CompletedChallenge(id: challenge.id, seasonID: challegeSeason.stableId, date: Date())
+            await challengeRepository.saveCompletedChallenge(newCompletedChallenge)
+        }
+    }
 }

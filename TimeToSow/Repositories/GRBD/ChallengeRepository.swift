@@ -12,7 +12,7 @@ protocol ChallengeRepositoryProtocol {
     func getCurrentChallengeSeason() async -> ChallengeSeason?
     func addNewChallangeSeason(_ challengeSeason: ChallengeSeasonRemote) async
     func getAllCompletedChallanges(seasonID: String) async -> [CompletedChallenge]
-    func saveCompletedChallenges(_ challenges: [CompletedChallenge]) async
+    func saveCompletedChallenge(_ challenge: CompletedChallenge) async
 }
 
 class ChallengeRepository: BaseRepository, ChallengeRepositoryProtocol {
@@ -49,14 +49,12 @@ class ChallengeRepository: BaseRepository, ChallengeRepositoryProtocol {
         }
     }
     
-    func saveCompletedChallenges(_ challenges: [CompletedChallenge]) async {
+    func saveCompletedChallenge(_ challenge: CompletedChallenge) async {
         do {
             try await dbPool.write { db in
-                for challenge in challenges {
-                    var new = CompletedChallengeModelGRDB(from: challenge)
-                    try new.insert(db)
-                }
-                Logger.log("save new \(challenges.count) CompletedChallenges", location: .GRDB, event: .success)
+                var new = CompletedChallengeModelGRDB(from: challenge)
+                try new.insert(db)
+                Logger.log("save new CompletedChallenges", location: .GRDB, event: .success)
             }
         } catch {
             Logger.log("error save new CompletedChallenge", location: .GRDB, event: .error(error))

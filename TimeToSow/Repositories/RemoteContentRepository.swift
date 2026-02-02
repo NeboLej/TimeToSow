@@ -95,12 +95,11 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private func checkChallengesSeason() async {
         let currentSeason = await challengeRepository.getCurrentChallengeSeason()
-        if currentSeason == nil {
+        if currentSeason == nil || currentSeason?.version != version?.challengeVersion {
             await updateChallengesSeason()
-        } else if currentSeason?.version != version?.challengeVersion {
-            await updateChallengesSeason()
+        } else {
+            delegate?.send(.challengesSeasonPrepared(currentSeason!))
         }
-        delegate?.send(.challengesSeasonPrepared)
     }
     
     private func updateChallengesSeason() async {
@@ -108,6 +107,10 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
             let challengeSeason = try await fetch(path: "challengeSeason.json", type: ChallengeSeasonRemote.self)
             await prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
             await challengeRepository.addNewChallangeSeason(challengeSeason)
+            
+            if let currentSeason = await challengeRepository.getCurrentChallengeSeason() {
+                delegate?.send(.challengesSeasonPrepared(currentSeason))
+            }
             Logger.log("Succes fetch challange season", location: .remote, event: .success)
         } catch {
             fatalError()
