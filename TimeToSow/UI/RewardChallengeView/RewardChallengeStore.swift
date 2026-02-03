@@ -12,7 +12,6 @@ final class RewardChallengeStore: FeatureStore {
     
     var state: RewardChallengeState
     
-    private var images: [String: URL?] = [:]
     private var challenges: [Challenge] = []
     
     override init(appStore: AppStore) {
@@ -27,8 +26,8 @@ final class RewardChallengeStore: FeatureStore {
     
     func send(_ action: RewardChallengeAction) {
         switch action {
-        case .reward(let challenge):
-            appStore.send(.reward(challenge: challenge))
+        case .reward(let challenge, let isUse):
+            appStore.send(.reward(challenge: challenge, isUse: isUse))
         }
     }
     
@@ -41,8 +40,12 @@ final class RewardChallengeStore: FeatureStore {
     }
     
     private func rebuildState() {
-        challenges = appStore.completedChallenges
-        state = RewardChallengeState(challanges: challenges)
-        observeAppState()
+        Task {
+            await MainActor.run {
+                challenges = appStore.completedChallenges
+                state = RewardChallengeState(challanges: challenges)
+            }
+            observeAppState()
+        }
     }
 }

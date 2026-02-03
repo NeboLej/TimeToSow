@@ -29,6 +29,7 @@
 		8E6AD7722F326F3C0041568F /* DataPrefether.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7712F326F3C0041568F /* DataPrefether.swift */; };
 		8E6AD7742F3276300041568F /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7732F3276300041568F /* RepositoryFactory.swift */; };
 		8E6AD7762F327A170041568F /* BaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7752F327A170041568F /* BaseFile.swift */; };
+		8E6AD7782F328FC90041568F /* RepositoryFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7772F328FC90041568F /* RepositoryFactoryMock.swift */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
@@ -178,6 +179,7 @@
 		8E6AD7712F326F3C0041568F /* DataPrefether.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPrefether.swift; sourceTree = "<group>"; };
 		8E6AD7732F3276300041568F /* RepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
 		8E6AD7752F327A170041568F /* BaseFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFile.swift; sourceTree = "<group>"; };
+		8E6AD7772F328FC90041568F /* RepositoryFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactoryMock.swift; sourceTree = "<group>"; };
 		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 			children = (
 				8EF5753A2DCE3F3A00AEC31A /* TimeToSowApp.swift */,
 				8E6AD7732F3276300041568F /* RepositoryFactory.swift */,
+				8E6AD7772F328FC90041568F /* RepositoryFactoryMock.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				8EA1C9D52EFD84EA00DF690F /* TagStatisticsView.swift in Sources */,
 				8E2957A42F2A55AA00EA144A /* DecorRepository.swift in Sources */,
 				8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */,
+				8E6AD7782F328FC90041568F /* RepositoryFactoryMock.swift in Sources */,
 				8E2957A22F293E5400EA144A /* BoxScreenAction.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8E941BB62F21289C002F0B07 /* Decor.swift in Sources */,

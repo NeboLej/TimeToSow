@@ -42,6 +42,7 @@ struct HomeScreen: View {
                     VStack(spacing: 0) {
                         ZStack(alignment: .bottomLeading) {
                             roomView()
+                                .id(store.state.room)
                             Image(.deleteAnimation6)
                                 .resizable()
                                 .scaledToFit()

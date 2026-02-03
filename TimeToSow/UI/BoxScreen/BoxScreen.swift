@@ -129,8 +129,8 @@ struct BoxScreen: View {
     @ViewBuilder
     private func decorCollection(cellWidth: CGFloat) -> some View {
         ForEach(store.state.decors) { decor in
-            DecorTypePreview(decorType: decor, zoom: 3)
-                .flatShadow(blur: 5, distanceToLight: 30)
+            DecorTypePreview(decorType: decor, zoom: 2)
+                .shadow(color: .black.opacity(0.8), radius: 4, x: 1, y: 1)
                 .frame(width: cellWidth)
                 .padding(.vertical, 24)
                 .background(.black.opacity(0.1))

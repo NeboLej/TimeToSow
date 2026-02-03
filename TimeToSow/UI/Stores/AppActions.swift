@@ -22,7 +22,7 @@ enum AppAction {
     case newTag(Tag)
     case deleteTag(Tag)
     case changeShelfVisibility(plant: Plant, isVisible: Bool)
-    case reward(challenge: Challenge)
+    case reward(challenge: Challenge, isUse: Bool)
 }
 
 enum NavigateAction {

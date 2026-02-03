@@ -57,7 +57,7 @@ final class BoxScreenStore: FeatureStore {
             boxPlants.removeAll(where: { plant == $0 })
             rebuildState()
         case .toShelfDecor(let decor):
-            currentDecor.removeAll(where: { decor.id == $0.decorType.id })
+            decorTypes.removeAll(where: { decor.id == $0.id })
             rebuildState()
         default: break
         }
@@ -76,9 +76,8 @@ final class BoxScreenStore: FeatureStore {
     }
     
     private func rebuildState() {
-
         let filtredDecorTypes = decorTypes.filter { type in
-            currentDecor.contains { decor in
+            !currentDecor.contains { decor in
                 decor.decorType.id == type.id
             }
         }

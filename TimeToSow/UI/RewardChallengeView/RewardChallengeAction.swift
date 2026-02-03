@@ -8,5 +8,5 @@
 import Foundation
 
 enum RewardChallengeAction {
-    case reward(challenge: Challenge)
+    case reward(challenge: Challenge, isUse: Bool)
 }

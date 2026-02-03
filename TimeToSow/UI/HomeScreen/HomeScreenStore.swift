@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 final class HomeScreenStore: FeatureStore {
     
-    var state: HomeScreenState { HomeScreenState(appStore: appStore)}
+    var state: HomeScreenState { HomeScreenState(appStore: appStore) }
     
     private var delegate: HomeScreenDelegate
     

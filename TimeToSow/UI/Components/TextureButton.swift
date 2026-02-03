@@ -12,16 +12,20 @@ struct TextureButton: View {
     private let label: LocalizedStringKey?
     private let icon: Image?
     private let color: Color
+    private let textColor: Color
+    private let font: Font
     private let action: () -> ()
     
     @GestureState private var isPressed = false
     @State private var animation: Bool = false
     
-    init(label: LocalizedStringKey, color: Color = .white, icon: Image? = nil, action: @escaping () -> ()) {
+    init(label: LocalizedStringKey, color: Color = .white, textColor: Color = .white, font: Font = Font.myNumber(24), icon: Image? = nil, action: @escaping () -> ()) {
         self.color = color
         self.icon = icon
         self.label = label
         self.action = action
+        self.textColor = textColor
+        self.font = font
     }
     
     var body: some View {
@@ -36,13 +40,13 @@ struct TextureButton: View {
                     if let icon {
                         icon
                             .resizable()
-                            .foregroundStyle(.white)
+                            .foregroundStyle(textColor)
                             .frame(width: 24, height: 24)
                     }
                     if let label {
                         Text(label)
-                            .font(.myNumber(24))
-                            .foregroundStyle(.white)
+                            .font(font)
+                            .foregroundStyle(textColor)
                     }
                 }
             }

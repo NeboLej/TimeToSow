@@ -113,10 +113,10 @@ final class AppStore: BackgroundEventDeleagate {
         case .changeShelfVisibility(plant: let plant, isVisible: let isVisible):
             updatePlantVisibleInShelf(plant, isVisible: isVisible)
             selectedPlant = nil
-        case .reward(challenge: let challenge):
+        case .reward(challenge: let challenge, let isUse):
             saveCompleteChallenge(challenge)
             if let decor = challenge.rewardDecor {
-                saveNewDecorType(decor)
+                saveNewDecorType(decor, toShelf: isUse)
             }
         }
     }
@@ -125,14 +125,20 @@ final class AppStore: BackgroundEventDeleagate {
         Task {
             selectedTag = await tagRepository.getRandomTag()
             let lastRoom = await myRoomRepository.getCurrentRoom()
+            let room: UserRoom
+            
             if let lastRoom, lastRoom.dateCreate.isCurrentMonth() {
-                currentRoom = lastRoom
+                room = lastRoom
             } else {
-                currentRoom = await createNewUserRoom()
-                await myRoomRepository.saveNewRoom(currentRoom)
+                room = await createNewUserRoom()
+                await myRoomRepository.saveNewRoom(room)
             }
-            userRooms[currentRoom.id] = currentRoom
             simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
+            
+            await MainActor.run {
+                currentRoom = room
+                userRooms[currentRoom.id] = currentRoom
+            }
         }
     }
 }

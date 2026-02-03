@@ -121,10 +121,13 @@ extension AppStore {
         currentRoom.decor[decor.id] = newDecor
     }
     
-    func saveNewDecorType(_ decorModel: DecorModel) {
+    func saveNewDecorType(_ decorModel: DecorModel, toShelf: Bool) {
         Task {
             let decorType = DecorType(from: decorModel)
             await decorRepository.saveNewDecorTypes([decorType])
+            if toShelf {
+                newDecorToShelf(decorType)
+            }
         }
     }
     

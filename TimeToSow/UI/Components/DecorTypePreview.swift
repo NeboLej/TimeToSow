@@ -11,23 +11,36 @@ import SDWebImageSwiftUI
 struct DecorTypePreview: View {
     
     @Binding private var isDragging: Bool
-    @State private var decor: DecorType
     @State private var isAnimating: Bool = false
-    @State private var zoomCoef: CGFloat
+    
+    private let zoomCoef: CGFloat
+    private let animationOptions: AnimationOptions?
+    private let height: CGFloat
+    private let resourceUrl: URL?
     
     init(decorType: DecorType, zoom: CGFloat = 1, isDragging: Binding<Bool> = .constant(false)) {
         self._isDragging = isDragging
-        self.decor = decorType
         self.zoomCoef = zoom
+        animationOptions = decorType.animationOptions
+        height = decorType.height
+        resourceUrl = decorType.resourceUrl
+    }
+    
+    init(decorModel: DecorModel, zoom: CGFloat = 1) {
+        self._isDragging = .constant(false)
+        self.zoomCoef = zoom
+        animationOptions = decorModel.animationOptions
+        height = decorModel.height
+        resourceUrl = decorModel.imageUrl
     }
     
     var body: some View {
-        if let animation = decor.animationOptions {
-            AnimatedImage(url: decor.resourceUrl, isAnimating: $isAnimating)
+        if let animation = animationOptions {
+            AnimatedImage(url: resourceUrl, isAnimating: $isAnimating)
                 .customLoopCount(animation.repeatCount)
                 .resizable()
                 .scaledToFit()
-                .frame(height: decor.height * zoomCoef)
+                .frame(height: height * zoomCoef)
                 .onAppear {
                     let randomTime = Double.random(in: 1...animation.timeRepetition)
                     DispatchQueue.main.asyncAfter(deadline: .now() + randomTime) {
@@ -44,10 +57,10 @@ struct DecorTypePreview: View {
                     }
                 }
         } else {
-            WebImage(url: decor.resourceUrl)
+            WebImage(url: resourceUrl)
                 .resizable()
                 .scaledToFit()
-                .frame(height: decor.height * zoomCoef)
+                .frame(height: height * zoomCoef)
         }
     }
 }

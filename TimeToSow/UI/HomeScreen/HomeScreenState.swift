@@ -20,8 +20,6 @@ struct HomeScreenState {
     let selectedTag: Tag?
     let topPlant: Plant?
     let topTag: Tag?
-    let boxPlants: [Plant]
-    let boxDecor: [Decor]
     
     init(appStore: AppStore) {
         let plants = appStore.currentRoom.plants
@@ -41,9 +39,6 @@ struct HomeScreenState {
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
         selectedTag = appStore.selectedTag
-        boxPlants = plants.filter { !$0.value.isOnShelf }.map { $0.value }.sorted(by: { $1.dateCreate > $0.dateCreate })
-        
-        boxDecor = [tmpRewardDecor1, tmpRewardDecor2, tmpRewardDecor3]
     }
 }
 
