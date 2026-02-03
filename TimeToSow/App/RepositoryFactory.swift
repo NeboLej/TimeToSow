@@ -40,12 +40,11 @@ class RepositoryFactory: RepositoryFactoryProtocol {
     let challengeService: ChallengeServiceProtocol
     let remoteRepository: RemoteContentRepositoryProtocol
     
-    
     init() {
         let dbPool: DatabasePool = DatabaseManager.shared.dbPool
-        let client = SupabaseClient(supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
-                                                    supabaseKey: "sb_publishable_7-Jo895jGaHwZuHOs1IYRw_nen0dCG8",
-                                                    options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true)))
+        let client = SupabaseClient(supabaseURL: URL(string: Secrets.superBaseUrl)!,
+                                    supabaseKey: Secrets.superBaseKey,
+                                    options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true)))
         let dataPrefetcher = DataPrefether(client: client)
         
         tagRepository = TagRepository(dbPool: dbPool)

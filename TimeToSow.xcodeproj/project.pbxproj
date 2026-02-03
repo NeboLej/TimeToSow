@@ -28,6 +28,7 @@
 		8E6AD7702F3263270041568F /* DecorTypePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD76F2F3263270041568F /* DecorTypePreview.swift */; };
 		8E6AD7722F326F3C0041568F /* DataPrefether.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7712F326F3C0041568F /* DataPrefether.swift */; };
 		8E6AD7742F3276300041568F /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7732F3276300041568F /* RepositoryFactory.swift */; };
+		8E6AD7762F327A170041568F /* BaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7752F327A170041568F /* BaseFile.swift */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
@@ -176,6 +177,7 @@
 		8E6AD76F2F3263270041568F /* DecorTypePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorTypePreview.swift; sourceTree = "<group>"; };
 		8E6AD7712F326F3C0041568F /* DataPrefether.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPrefether.swift; sourceTree = "<group>"; };
 		8E6AD7732F3276300041568F /* RepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
+		8E6AD7752F327A170041568F /* BaseFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFile.swift; sourceTree = "<group>"; };
 		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				8EBF14792DE657A700422876 /* Font +.swift */,
 				8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */,
 				8ED72C422F02E2E1008E6869 /* remote_localization.json */,
+				8E6AD7752F327A170041568F /* BaseFile.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				8E7EFC892F25511800D10C58 /* ChallengeSeasonModelGRDB.swift in Sources */,
 				8EC86E192E06C9E800AA6AFA /* ShelfType.swift in Sources */,
 				8EE61D3A2F1AB034002E8B30 /* EditRoomActions.swift in Sources */,
+				8E6AD7762F327A170041568F /* BaseFile.swift in Sources */,
 				8E6AD7702F3263270041568F /* DecorTypePreview.swift in Sources */,
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
 				8E7EFC852F2550D300D10C58 /* ChallengeModel.swift in Sources */,
