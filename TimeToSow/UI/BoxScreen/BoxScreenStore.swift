@@ -78,7 +78,7 @@ final class BoxScreenStore: FeatureStore {
     private func rebuildState() {
 
         let filtredDecorTypes = decorTypes.filter { type in
-            !currentDecor.contains { decor in
+            currentDecor.contains { decor in
                 decor.decorType.id == type.id
             }
         }

@@ -15,17 +15,13 @@ final class RewardChallengeStore: FeatureStore {
     private var images: [String: URL?] = [:]
     private var challenges: [Challenge] = []
     
-    @ObservationIgnored
-    private var imageRepository: ImageRepositoryProtocol
-    
-    init(appStore: AppStore, imageRepository: ImageRepositoryProtocol) {
-        self.imageRepository = imageRepository
-        self.state = RewardChallengeState(challanges: [], images: [:])
+    override init(appStore: AppStore) {
+        self.state = RewardChallengeState(challanges: [])
         
         super.init(appStore: appStore)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.loadingImages()
+            self.rebuildState()
         }
     }
     
@@ -40,33 +36,13 @@ final class RewardChallengeStore: FeatureStore {
         withObservationTracking {
             _ = appStore.completedChallenges
         } onChange: {
-            self.loadingImages()
-        }
-    }
-    
-    private func loadingImages() {
-        Task {
-            let needImageArray = appStore.completedChallenges.filter { images[$0.id] == nil }
-            
-            let urls = try await asyncMap(needImageArray) { [weak self] in
-                guard let self else { fatalError() }
-                return ($0, await imageRepository.imageURL(for: $0.rewardDecor?.resourceUrl ?? "") )
-            }
-            
-            await MainActor.run {
-                var newImages: [String: URL?] = [:]
-                urls.forEach { challange, url in
-                    newImages[challange.id] = url
-                }
-                images = newImages
-                rebuildState()
-            }
+            self.rebuildState()
         }
     }
     
     private func rebuildState() {
         challenges = appStore.completedChallenges
-        state = RewardChallengeState(challanges: challenges, images: images)
+        state = RewardChallengeState(challanges: challenges)
         observeAppState()
     }
 }

@@ -34,9 +34,9 @@ enum ComponentType {
 final class ScreenBuilder {
     
     private let appStore: AppStore
-    private let repositories: RepositoryFactory
+    private let repositories: RepositoryFactoryProtocol
     
-    init(appStore: AppStore, repositoryFactory: RepositoryFactory) {
+    init(appStore: AppStore, repositoryFactory: RepositoryFactoryProtocol) {
         self.appStore = appStore
         self.repositories = repositoryFactory
     }
@@ -60,7 +60,7 @@ final class ScreenBuilder {
         case .tags:
             TagsScreen(store: TagsScreenStore(appStore: appStore, tagRepository: repositories.tagRepository))
         case .challenge:
-            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: appStore.challengeService, imageRepository: repositories.remoteRepository))
+            ChallengeScreen(store: ChallengeStore(appStore: appStore, challengeService: appStore.challengeService))
         case .box:
             BoxScreen(store: BoxScreenStore(appStore: appStore, decorRepository: repositories.decorRepository))
         }
@@ -72,7 +72,7 @@ final class ScreenBuilder {
         case .roomView(let id):
             RoomView(store: RoomFeatureStore(appStore: appStore, selectedRoomId: id))
         case .challengeCompleteView:
-            ChallengeCompleteView(store: RewardChallengeStore(appStore: appStore, imageRepository: repositories.remoteRepository))
+            ChallengeCompleteView(store: RewardChallengeStore(appStore: appStore))
         }
     }
 }

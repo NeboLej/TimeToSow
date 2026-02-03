@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class ChallengeService {
+protocol ChallengeServiceProtocol {
+    func startObservation(appStore: AppStore)
+    func getChallegeThisSeason() async -> ChallengeSeason?
+    func getProgressBy(challenge: Challenge) -> Double
+}
+
+final class ChallengeService: ChallengeServiceProtocol {
     
     private var currentUserRoom: UserRoom = .empty
     private let challengeRepository: ChallengeRepositoryProtocol
@@ -30,6 +36,28 @@ final class ChallengeService {
     
     func getChallegeThisSeason() async -> ChallengeSeason? {
         return await challengeRepository.getCurrentChallengeSeason()
+    }
+    
+    func getProgressBy(challenge: Challenge) -> Double {
+        if challenge.expectedValue <= 0 { return 0 }
+        
+        switch challenge.type {
+        case .totalLoggetTime:
+            return totalLoggetTime(expected: challenge.expectedValue)
+        case .numberOfPlants:
+            return numberOfPlants(expected: challenge.expectedValue)
+        case .differentTagsUsed:
+            return differentTagsUsed(expected: challenge.expectedValue)
+        case .numberOfPlantsNRarity:
+            guard let rarityValue = challenge.expectedSecondValue else { return 0 }
+            return numberOfPlantsNRarity(expected: challenge.expectedValue, rarity: rarityValue)
+        case .oneTimeRecordingTime:
+            guard let expectedTime = challenge.expectedSecondValue else { return 0 }
+            return oneTimeRecordingTime(expected: challenge.expectedValue, time: expectedTime)
+        case .weekendProductivity:
+            return weekendProductivity(expected: challenge.expectedValue)
+        default: return 0
+        }
     }
 
     //MARK: - Private
@@ -102,28 +130,6 @@ final class ChallengeService {
 //                        ]
 //        )
 //    }
-    
-    func getProgressBy(challenge: Challenge) -> Double {
-        if challenge.expectedValue <= 0 { return 0 }
-        
-        switch challenge.type {
-        case .totalLoggetTime:
-            return totalLoggetTime(expected: challenge.expectedValue)
-        case .numberOfPlants:
-            return numberOfPlants(expected: challenge.expectedValue)
-        case .differentTagsUsed:
-            return differentTagsUsed(expected: challenge.expectedValue)
-        case .numberOfPlantsNRarity:
-            guard let rarityValue = challenge.expectedSecondValue else { return 0 }
-            return numberOfPlantsNRarity(expected: challenge.expectedValue, rarity: rarityValue)
-        case .oneTimeRecordingTime:
-            guard let expectedTime = challenge.expectedSecondValue else { return 0 }
-            return oneTimeRecordingTime(expected: challenge.expectedValue, time: expectedTime)
-        case .weekendProductivity:
-            return weekendProductivity(expected: challenge.expectedValue)
-        default: return 0
-        }
-    }
     
     private func totalLoggetTime(expected: Int) -> Double {
         let allTime = currentUserRoom.plants.values.reduce(0) { $0 + $1.time }

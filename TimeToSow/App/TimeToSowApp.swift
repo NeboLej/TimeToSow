@@ -6,25 +6,6 @@
 //
 
 import SwiftUI
-import GRDB
-
-class RepositoryFactory {
-    let tagRepository: TagRepositoryProtocol = TagRepository(dbPool: DatabaseManager.shared.dbPool)
-    let shelfRepository: ShelfRepositoryProtocol = ShelfRepository(dbPool: DatabaseManager.shared.dbPool)
-    let roomRepository: RoomRepositoryProtocol = RoomRepository(dbPool: DatabaseManager.shared.dbPool)
-    let seedRepository: SeedRepositoryProtocol = SeedRepository(dbPool: DatabaseManager.shared.dbPool)
-    let potRepository: PotRepositoryProtocol = PotRepository(dbPool: DatabaseManager.shared.dbPool)
-    let myRoomRepository: UserRoomRepositoryProtocol = UserRoomRepository(dbPool: DatabaseManager.shared.dbPool)
-    let challengeRepository: ChallengeRepositoryProtocol = ChallengeRepository(dbPool: DatabaseManager.shared.dbPool)
-    let decorRepository: DecorRepositoryProtocol = DecorRepository(dbPool: DatabaseManager.shared.dbPool)
-    
-    lazy var plantRepository: PlantRepositoryProtocol = PlantRepository(dbPool: DatabaseManager.shared.dbPool,
-                                                                        seedRepository: seedRepository,
-                                                                        potRepository: potRepository)
-    lazy var challengeService = ChallengeService(challengeRepository: challengeRepository)
-    
-    lazy var remoteRepository = RemoteContentRepository(challengeRepository: challengeRepository)
-}
 
 @main
 struct TimeToSowApp: App {

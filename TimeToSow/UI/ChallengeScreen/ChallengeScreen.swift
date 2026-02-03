@@ -72,7 +72,7 @@ struct ChallengeScreen: View {
             
             VStack {
                 if let rewardDecor = challenge.rewardDecor {
-                    WebImage(url: challenge.rewardUrl)
+                    WebImage(url: rewardDecor.imageUrl)
                         .resizable()
                         .scaledToFit()
                         .padding()

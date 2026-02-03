@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 fileprivate enum L: LocalizedStringKey {
     case newPlantTitle = "HomeScreen.newPlantTitle"
@@ -301,7 +300,6 @@ struct HomeScreen: View {
             view
         }
     }
-    
 }
 
 

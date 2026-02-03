@@ -13,4 +13,8 @@ struct DecorModel: Codable, Equatable {
     let animationOptions: AnimationOptions?
     let resourceUrl: String
     let height: CGFloat
+    
+    var imageUrl: URL? {
+        LocalImageStore.shared.localURL(for: resourceUrl)
+    }
 }

@@ -26,7 +26,7 @@ final class AppStore: BackgroundEventDeleagate {
     @ObservationIgnored
     let decorRepository: DecorRepositoryProtocol
     @ObservationIgnored
-    var challengeService: ChallengeService
+    var challengeService: ChallengeServiceProtocol
     
     var currentRoom: UserRoom = .empty
     var selectedPlant: Plant?
@@ -37,7 +37,7 @@ final class AppStore: BackgroundEventDeleagate {
     var challegeSeason: ChallengeSeason?
     var completedChallenges: [Challenge] = []
     
-    init(factory: RepositoryFactory) {
+    init(factory: RepositoryFactoryProtocol) {
         self.myRoomRepository = factory.myRoomRepository
         self.plantRepository = factory.plantRepository
         self.tagRepository = factory.tagRepository
@@ -47,7 +47,7 @@ final class AppStore: BackgroundEventDeleagate {
         self.challengeService = factory.challengeService
         self.decorRepository = factory.decorRepository
         
-        factory.remoteRepository.delegate = self
+        factory.remoteRepository.setDelegate(self)
         
         getData()
     }

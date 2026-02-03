@@ -12,28 +12,24 @@ protocol BackgroundEventDeleagate: AnyObject {
     func send(_ action: BackgroundEventAction)
 }
 
-protocol RemoteContentRepositoryProtocol: ImageRepositoryProtocol {
+protocol RemoteContentRepositoryProtocol {
     func updateRemoteData()
-}
-
-protocol ImageRepositoryProtocol {
-    func imageURL(for path: String) async -> URL?
+    func setDelegate(_ delegate: BackgroundEventDeleagate)
 }
 
 final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     
     private let challengeRepository: ChallengeRepositoryProtocol
     private var version: ContentVersions?
-    weak var delegate: BackgroundEventDeleagate?
+    private weak var delegate: BackgroundEventDeleagate?
     
-    private let client = SupabaseClient(
-        supabaseURL: URL(string: "https://wdjemgjqjoevvylteewd.supabase.co")!,
-        supabaseKey: "",
-        options: SupabaseClientOptions(auth: SupabaseClientOptions.AuthOptions(emitLocalSessionAsInitialSession: true) )
-    )
+    private let client: SupabaseClient
+    private let imagePrefetcher: PrefetcherImageProtocol
     
-    init(challengeRepository: ChallengeRepositoryProtocol) {
+    init(client: SupabaseClient, challengeRepository: ChallengeRepositoryProtocol, imagePrefetcher: PrefetcherImageProtocol) {
         self.challengeRepository = challengeRepository
+        self.client = client
+        self.imagePrefetcher = imagePrefetcher
         
         updateRemoteData()
         loadLocalJSONLocalization()
@@ -55,7 +51,6 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     }
     
     //MARK: RemoteContentRepositoryProtocol
-    
     func updateRemoteData() {
         Task {
             do {
@@ -68,31 +63,11 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         }
     }
     
-    //MARK: ImageRepositoryProtocol
-    
-    func imageURL(for path: String) async -> URL? {
-        let localStore = LocalImageStore.shared
-        let localURL = localStore.localURL(for: path)
-        
-        if localStore.exists(localURL) {
-            return localURL
-        }
-        
-        do {
-            let signed = try await client.storage
-                .from("")
-                .createSignedURL(path: path, expiresIn: 60)
-            
-            let (data, _) = try await URLSession.shared.data(from: signed)
-            try data.write(to: localURL, options: .atomic)
-            return localURL
-        } catch {
-            return nil
-        }
+    func setDelegate(_ delegate: BackgroundEventDeleagate) {
+        self.delegate = delegate
     }
     
     //MARK: private
-    
     private func checkChallengesSeason() async {
         let currentSeason = await challengeRepository.getCurrentChallengeSeason()
         if currentSeason == nil || currentSeason?.version != version?.challengeVersion {
@@ -105,7 +80,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     private func updateChallengesSeason() async {
         do {
             let challengeSeason = try await fetch(path: "challengeSeason.json", type: ChallengeSeasonRemote.self)
-            await prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
+            await imagePrefetcher.prefetchImages(imagePaths: challengeSeason.challenges.map { $0.reward.resourceUrl })
             await challengeRepository.addNewChallangeSeason(challengeSeason)
             
             if let currentSeason = await challengeRepository.getCurrentChallengeSeason() {
@@ -114,16 +89,6 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
             Logger.log("Succes fetch challange season", location: .remote, event: .success)
         } catch {
             fatalError()
-        }
-    }
-    
-    private func prefetchImages(imagePaths: [String]) async {
-        await withTaskGroup(of: Void.self) { group in
-            for path in imagePaths {
-                group.addTask {
-                    _ = await self.imageURL(for: path)
-                }
-            }
         }
     }
     
@@ -144,4 +109,3 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
 struct ContentVersions: Codable {
     let challengeVersion: Int
 }
-

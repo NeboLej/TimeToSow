@@ -11,15 +11,13 @@ import Foundation
 final class ChallengeStore: FeatureStore {
     
     var state: ChallengeState
-    private var challengeService: ChallengeService
+    private var challengeService: ChallengeServiceProtocol
     private var progressList: [ChallengeProgress] = []
     private var currentSeason: ChallengeSeason?
-    private var imageRepository: ImageRepositoryProtocol
     
-    init(appStore: AppStore, challengeService: ChallengeService, imageRepository: ImageRepositoryProtocol) {
+    init(appStore: AppStore, challengeService: ChallengeServiceProtocol) {
         state = ChallengeState.empty
         self.challengeService = challengeService
-        self.imageRepository = imageRepository
         super.init(appStore: appStore)
         
         getData()
@@ -31,16 +29,14 @@ final class ChallengeStore: FeatureStore {
             
             self.currentSeason = currentSeason
             
-            progressList = try await asyncMap(currentSeason.challenges) { [weak self] in
-                guard let self else { fatalError() }
+            progressList = currentSeason.challenges.map {
                 let progress = min(challengeService.getProgressBy(challenge: $0), 1)
                 return ChallengeProgress(challengeId: $0.id,
                                   name: $0.title,
                                   description: $0.type.getDescription(expectedValue: $0.expectedValue, expectedSecondValue: $0.expectedSecondValue),
                                   isCompleted: progress == 1,
                                   progress: progress,
-                                  rewardDecor: $0.rewardDecor,
-                                  rewardUrl: await imageRepository.imageURL(for: $0.rewardDecor?.resourceUrl ?? ""))
+                                  rewardDecor: $0.rewardDecor)
             }
             
             rebuildState()

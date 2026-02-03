@@ -48,5 +48,4 @@ struct ChallengeProgress: Identifiable, Equatable {
     let isCompleted: Bool
     let progress: Double
     let rewardDecor: DecorModel?
-    let rewardUrl: URL?
 }

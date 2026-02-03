@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct DecorView: View {
     
@@ -19,11 +18,9 @@ struct DecorView: View {
     @State private var offsetY: CGFloat
     
     @State private var isDragging = false
-    @State private var isAnimating = false
     
     init(decor: Decor, positionDelegate: PositionDecorDelegate) {
         self.decor = decor
-//        self.isSelected = plant.isSelected
         self.offsetX = decor.offsetX
         self.offsetY = decor.offsetY
         self.accumulatedX = decor.offsetX
@@ -33,38 +30,9 @@ struct DecorView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            let decor = decor.decorType
-//            let name = decor.resourceName + (decor.animationOptions != nil ? ".gif" : ".png")
-//            
-            WebImage(url: decor.resourceUrl)
-                .resizable()
-                .scaledToFit()
-                .frame(height: decor.height)
-            
-//            if name.contains(".gif") {
-//                AnimatedImage(name: name, bundle: .main, isAnimating: $isAnimating)
-//                    .resizable()
-//                    .customLoopCount(decor.animationOptions?.repeatCount ?? 1)
-//                    .scaledToFit()
-//                    .frame(height: decor.height)
-//                    .offset(x: self.decor.offsetX, y: self.decor.offsetY)
-//                    .onTapGesture {
-//                        isAnimating = true
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + (decor.animationOptions?.duration ?? 2)) {
-//                            isAnimating = false
-//                        }
-//                    }
-//            } else {
-// 
-////                Image.file(name)
-////                    .resizable()
-////                    .scaledToFit()
-////                    .frame(height: decor.height)
-////                    .offset(x: decor.positon.x, y: decor.positon.y)
-//            }
+            DecorTypePreview(decorType: decor.decorType, isDragging: $isDragging)
         }
-        .animation(.easeInOut(duration: 0.1), value: offsetX)
-        .animation(.easeIn(duration: isDragging ? 0 : 0.4), value: offsetY)
+        .animation(isDragging ? nil : .easeInOut(duration: 1), value: offsetX)
         .zIndex(isDragging ? 10000 : abs(offsetY))
         .offset(x: offsetX, y: offsetY)
         .onAppear {
@@ -111,27 +79,10 @@ struct DecorView: View {
             accumulatedX = offsetX
             accumulatedY = offsetY
             Vibration.medium.vibrate()
-//            isShowDust = true
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                isShowDust = false
-//            }
         }
     }
 }
 
-//#Preview {
-//    VStack {
-//        screenBuilderMock.getComponent(type: .roomView(id: nil))
-//        Spacer()
-//    }.ignoresSafeArea()
-//}
-
 #Preview {
     screenBuilderMock.getScreen(type: .home)
 }
-
-//#Preview {
-//    DecorView(decor: Decor(id: UUID(), name: "Лошадка", locationType: .stand,
-//                           animationOptions: AnimationOptions(duration: 1, repeatCount: 2, timeRepetition: 30),
-//                           resourceName: "decor1", positon: .zero, height: 40, width: 40))
-//}

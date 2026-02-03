@@ -46,8 +46,8 @@ struct ChallengeCompleteView: View {
     @ViewBuilder
     private func rewardView() -> some View {
         if let challenge = selectedCallenge,
-           let rewardUrl = store.state.images[challenge.id],
-           let reward = challenge.rewardDecor {
+           let reward = challenge.rewardDecor,
+           let url = reward.imageUrl {
             
             VStack {
                 Text("Получен\n\(reward.name)")
@@ -55,7 +55,7 @@ struct ChallengeCompleteView: View {
                     .font(.myNumber(30))
                     .foregroundStyle(.black)
                 
-                WebImage(url: rewardUrl)
+                WebImage(url: url)
                     .resizable()
                     .scaledToFit()
                     .padding()
@@ -127,8 +127,8 @@ struct ChallengeCompleteView: View {
             }
             .padding()
             Spacer()
-            if let rewardUrl = store.state.images[challenge.id], let reward = challenge.rewardDecor {
-                WebImage(url: rewardUrl)
+            if let reward = challenge.rewardDecor {
+                WebImage(url: reward.imageUrl)
                     .resizable()
                     .scaledToFit()
                     .padding()

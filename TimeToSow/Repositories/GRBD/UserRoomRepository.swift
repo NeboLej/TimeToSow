@@ -18,6 +18,13 @@ protocol UserRoomRepositoryProtocol {
 
 final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
     
+    private let imagePrefetcher: PrefetcherImageProtocol
+    
+    init(dbPool: DatabasePool, imagePrefetcher: PrefetcherImageProtocol) {
+        self.imagePrefetcher = imagePrefetcher
+        super.init(dbPool: dbPool)
+    }
+    
     func getCurrentRoom() async -> UserRoom? {
         do {
             let latest = try await dbPool.read { db in
@@ -35,7 +42,9 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
             }
             
             if let latest {
-                return UserRoom(from: latest)
+                let room = UserRoom(from: latest)
+                await imagePrefetcher.prefetchImages(imagePaths: room.decor.map { $0.value.decorType.resourceName })
+                return room
             } else {
                 return nil
             }
@@ -78,7 +87,7 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
     //это работает, но нужно додумывать репозиторий чтобы запрос текущего проходил через этот метод
     func getUserRoomBy(by id: UUID) async -> UserRoom? {
         do {
-            let latest = try await dbPool.read { db in
+            let roomModel = try await dbPool.read { db in
                 try UserRoomModelGRDB
                     .filter(Column("id") == id)
                     .including(required: UserRoomModelGRDB.shelf)
@@ -91,8 +100,10 @@ final class UserRoomRepository: BaseRepository, UserRoomRepositoryProtocol {
                     .fetchOne(db)
             }
             
-            if let latest {
-                return UserRoom(from: latest)
+            if let roomModel {
+                let room = UserRoom(from: roomModel)
+                await imagePrefetcher.prefetchImages(imagePaths: room.decor.map { $0.value.decorType.resourceName })
+                return room
             } else {
                 return nil
             }
