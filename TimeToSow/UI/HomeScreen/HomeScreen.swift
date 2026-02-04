@@ -331,5 +331,5 @@ var tmpPot = Pot(name: "aeded",
 
 #Preview {
     screenBuilderMock.getScreen(type: .home)
-    //        .environment(\.locale, .init(identifier: "en"))
+            .environment(\.locale, .init(identifier: "en"))
 }

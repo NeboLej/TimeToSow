@@ -30,6 +30,13 @@
 		8E6AD7742F3276300041568F /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7732F3276300041568F /* RepositoryFactory.swift */; };
 		8E6AD7762F327A170041568F /* BaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7752F327A170041568F /* BaseFile.swift */; };
 		8E6AD7782F328FC90041568F /* RepositoryFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6AD7772F328FC90041568F /* RepositoryFactoryMock.swift */; };
+		8E6B26782F33EA8B0003678C /* ProgressScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B26772F33EA8B0003678C /* ProgressScreenState.swift */; };
+		8E6B267A2F33EF520003678C /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B26792F33EF520003678C /* TaskModel.swift */; };
+		8E6B267C2F33EFA20003678C /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267B2F33EFA20003678C /* LocalNotification.swift */; };
+		8E6B267E2F33F0010003678C /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267D2F33F0010003678C /* TaskService.swift */; };
+		8E6B26802F33F0260003678C /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267F2F33F0260003678C /* LocalNotificationService.swift */; };
+		8E6BF2FC2F33BACE003F8ABC /* TaskModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF2FB2F33BACE003F8ABC /* TaskModelGRDB.swift */; };
+		8E6BF2FE2F33BFC1003F8ABC /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF2FD2F33BFC1003F8ABC /* TaskRepository.swift */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
 		8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */; };
 		8E7240C62EE23D0700D08CE7 /* TextureOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */; };
@@ -180,6 +187,13 @@
 		8E6AD7732F3276300041568F /* RepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
 		8E6AD7752F327A170041568F /* BaseFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFile.swift; sourceTree = "<group>"; };
 		8E6AD7772F328FC90041568F /* RepositoryFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactoryMock.swift; sourceTree = "<group>"; };
+		8E6B26772F33EA8B0003678C /* ProgressScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressScreenState.swift; sourceTree = "<group>"; };
+		8E6B26792F33EF520003678C /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		8E6B267B2F33EFA20003678C /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		8E6B267D2F33F0010003678C /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
+		8E6B267F2F33F0260003678C /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		8E6BF2FB2F33BACE003F8ABC /* TaskModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModelGRDB.swift; sourceTree = "<group>"; };
+		8E6BF2FD2F33BFC1003F8ABC /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
 		8E7240C52EE23D0700D08CE7 /* TextureOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureOverlay.swift; sourceTree = "<group>"; };
 		8E7240C72EE23D3100D08CE7 /* View + Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Modifiers.swift"; sourceTree = "<group>"; };
@@ -326,6 +340,8 @@
 				8E7EFC7B2F254F3300D10C58 /* LocalImageStore.swift */,
 				8E201B542F127718002B49A1 /* Logger.swift */,
 				8E869C722F226F4C00DECCBF /* ChallengeService.swift */,
+				8E6B267D2F33F0010003678C /* TaskService.swift */,
+				8E6B267F2F33F0260003678C /* LocalNotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -368,6 +384,7 @@
 			children = (
 				8E75DE0F2E5A2EC50004C3D3 /* ProgressScreen.swift */,
 				8E75DE112E5A2EE50004C3D3 /* ProgressScreenStore.swift */,
+				8E6B26772F33EA8B0003678C /* ProgressScreenState.swift */,
 				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
 			path = ProgressScreen;
@@ -476,6 +493,7 @@
 				8ED63A792F1273780013632F /* ShelfModelGRDB.swift */,
 				8ED63A7A2F1273780013632F /* TagModelGRDB.swift */,
 				8ED63A7B2F1273780013632F /* UserRoomModelGRDB.swift */,
+				8E6BF2FB2F33BACE003F8ABC /* TaskModelGRDB.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -494,6 +512,7 @@
 				8ED63A822F1273780013632F /* TagRepository.swift */,
 				8ED63A832F1273780013632F /* UserRoomRepository.swift */,
 				8E7EFC792F24F88900D10C58 /* ChallengeRepository.swift */,
+				8E6BF2FD2F33BFC1003F8ABC /* TaskRepository.swift */,
 			);
 			path = GRBD;
 			sourceTree = "<group>";
@@ -579,8 +598,10 @@
 				8EF575602DCE432300AEC31A /* Plant.swift */,
 				8EF575622DCE433900AEC31A /* Pot.swift */,
 				8EF575642DCE434B00AEC31A /* Seed.swift */,
+				8E6B26792F33EF520003678C /* TaskModel.swift */,
 				8EC86E182E06C9E800AA6AFA /* ShelfType.swift */,
 				8EF575662DCE435800AEC31A /* Tag.swift */,
+				8E6B267B2F33EFA20003678C /* LocalNotification.swift */,
 				8EC86E142E06C75400AA6AFA /* RoomType.swift */,
 				8EA1C9D22EFD836700DF690F /* Note.swift */,
 				8E5B34182EFEADD200354CAB /* Rarity.swift */,
@@ -864,6 +885,7 @@
 				8ED63A8A2F1273780013632F /* PlantModelGRDB.swift in Sources */,
 				8E886B2B2F1BA86F0001A734 /* TagsScreenStore.swift in Sources */,
 				8ED63A8B2F1273780013632F /* PotModelGRDB.swift in Sources */,
+				8E6B26782F33EA8B0003678C /* ProgressScreenState.swift in Sources */,
 				8E869C732F226F4C00DECCBF /* ChallengeService.swift in Sources */,
 				8ED63A8C2F1273780013632F /* RoomModelGRDB.swift in Sources */,
 				8ED63A8D2F1273780013632F /* SeedModelGRDB.swift in Sources */,
@@ -877,6 +899,7 @@
 				8ED63A942F1273780013632F /* SeedRepository.swift in Sources */,
 				8ED63A952F1273780013632F /* ShelfRepository.swift in Sources */,
 				8E7EFC832F2550BD00D10C58 /* ChallengeSeasonRemote.swift in Sources */,
+				8E6BF2FC2F33BACE003F8ABC /* TaskModelGRDB.swift in Sources */,
 				8ED63A962F1273780013632F /* TagRepository.swift in Sources */,
 				8ED63A972F1273780013632F /* UserRoomRepository.swift in Sources */,
 				8ED63A982F1273780013632F /* DefaultModels.swift in Sources */,
@@ -884,6 +907,7 @@
 				8E5B34192EFEADD200354CAB /* Rarity.swift in Sources */,
 				8EAF68062EF471E300780BB9 /* HomeScreenAction.swift in Sources */,
 				8EBF147A2DE657A700422876 /* Font +.swift in Sources */,
+				8E6B267C2F33EFA20003678C /* LocalNotification.swift in Sources */,
 				8EAF67C52EF33AB500780BB9 /* RoomFeatureStore.swift in Sources */,
 				8EF575652DCE434B00AEC31A /* Seed.swift in Sources */,
 				8EFEEEF52F0E589100857A23 /* HistoryScreenState.swift in Sources */,
@@ -901,6 +925,7 @@
 				8E7EFC7A2F24F88900D10C58 /* ChallengeRepository.swift in Sources */,
 				8EE4C5A02E7A10A000818D95 /* EdgeInsets + extension.swift in Sources */,
 				8E29579E2F293E4100EA144A /* BoxScreenStore.swift in Sources */,
+				8E6BF2FE2F33BFC1003F8ABC /* TaskRepository.swift in Sources */,
 				8EF5754D2DCE3F3A00AEC31A /* HomeScreen.swift in Sources */,
 				8EEB2E892E7B54CF00D0F736 /* TagView.swift in Sources */,
 				8E7EFC892F25511800D10C58 /* ChallengeSeasonModelGRDB.swift in Sources */,
@@ -911,8 +936,10 @@
 				8EF5754E2DCE3F3A00AEC31A /* AppStore.swift in Sources */,
 				8E7EFC852F2550D300D10C58 /* ChallengeModel.swift in Sources */,
 				8E85902F2F1D593700B6F614 /* CustomColorPicker.swift in Sources */,
+				8E6B267A2F33EF520003678C /* TaskModel.swift in Sources */,
 				8EFEEEF32F0E587600857A23 /* HistoryScreen.swift in Sources */,
 				8EE61D362F1AB020002E8B30 /* EditRoomStore.swift in Sources */,
+				8E6B26802F33F0260003678C /* LocalNotificationService.swift in Sources */,
 				8EAF67D22EF352E300780BB9 /* RoomViewState.swift in Sources */,
 				8EF575502DCE3F3A00AEC31A /* ScreenBuilder.swift in Sources */,
 				8EE61D382F1AB029002E8B30 /* EditRoomState.swift in Sources */,
@@ -922,6 +949,7 @@
 				8E2957A42F2A55AA00EA144A /* DecorRepository.swift in Sources */,
 				8E886B2D2F1BA8870001A734 /* TagsScreenAction.swift in Sources */,
 				8E6AD7782F328FC90041568F /* RepositoryFactoryMock.swift in Sources */,
+				8E6B267E2F33F0010003678C /* TaskService.swift in Sources */,
 				8E2957A22F293E5400EA144A /* BoxScreenAction.swift in Sources */,
 				8E5B33F92EFDD59000354CAB /* Date + extension.swift in Sources */,
 				8E941BB62F21289C002F0B07 /* Decor.swift in Sources */,

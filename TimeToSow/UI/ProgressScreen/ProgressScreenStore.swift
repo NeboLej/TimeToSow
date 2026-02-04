@@ -8,87 +8,54 @@
 import SwiftUI
 
 @Observable
-class ProgressScreenStore: FeatureStore, TimerListenerProtocol {
-
-    enum State {
-        case progress, completed
+final class ProgressScreenStore: FeatureStore {
+    
+    private var minutes: Int
+    private var selectedTag: Tag
+    private var startDate: Date
+    private var progressScreenType: ProgressScreenStateType
+    private var progressState: ProgressScreenState.State = .progress
+    
+    var state: ProgressScreenState {
+        ProgressScreenState(state: progressState, minutes: minutes, startDate: startDate)
     }
     
-    var state: State = .progress
-    var progress: Float = 0.0
-    var minutes: Int
-    var timerVM: TimerVM!
-    var newPlant: Plant? = nil
-    var selectedTag: Tag
-    var startDate: Date
-    
-    private var delegate: ProgressScreenDelegate
-
-    
-    init(appStore: AppStore&ProgressScreenDelegate, minutes: Int) {
-        delegate = appStore
-        self.minutes = minutes
-        selectedTag = appStore.selectedTag!
-        startDate = Date()
+    init(appStore: AppStore, state: ProgressScreenStateType) {
+        self.minutes = state.minutes
+        selectedTag = state.tag
+        startDate = state.startDate
+        progressScreenType = state
+        
         super.init(appStore: appStore)
-        
-        self.timerVM = TimerVM(minutes: Float(minutes), startSecond: 0, parent: self)
-        
-        observeAppState()
-    }
-    
-    func getNewPlant() {
-        let note = Note(date: Date(), time: minutes, tag: selectedTag)
-        Task {
-            newPlant = await appStore.getRandomPlant(note: note)
-        }
-    }
-    
-    func newPlantToShelf() {
-        let plant = newPlant!
-        send(.finishProgress(plant: plant))
-    }
-    
-    func calcProgress(newValue: Float) {
-        progress = 1.0 - ((100.0 / (Float(minutes) * 60)) * newValue)/100.0
     }
     
     func send(_ action: ProgressScreenAction, animation: Animation? = .default) {
         if let animation {
             withAnimation(animation) {
-                delegate.send(action: action)
+                handle(action)
             }
         } else {
-            delegate.send(action: action)
+            handle(action)
         }
     }
     
     //MARK: - Private
-    private func observeAppState() {
-        withObservationTracking {
-            _ = appStore.currentRoom
-            _ = appStore.selectedTag
-        } onChange: { [weak self] in
-            self?.rebuildState()
+    private func handle(_ action: ProgressScreenAction) {
+        switch action {
+        case .startProgress: break
+        case .stopProgress: break
+        case .finishProgress:
+            getNewPlant()
+        case .plantToShelf(let plant):
+            appStore.send(.addNewPlant(plant))
         }
     }
     
-    private func rebuildState() {
-        selectedTag = appStore.selectedTag!
-        observeAppState()
-    }
-    
-    //MARK: - TimerListenerProtocol
-    func timeRuns(seconds: Float) {
-        calcProgress(newValue: seconds)
-    }
-    
-    func timeFinish(on: Bool) {
-        if on {
-            getNewPlant()
-            state = .completed
-        } else {
-            state = .progress
+    private func getNewPlant() {
+        let note = Note(date: Date(), time: minutes, tag: selectedTag)
+        Task {
+            let plant = await appStore.getRandomPlant(note: note)
+            progressState = .completed(plant)
         }
     }
 }

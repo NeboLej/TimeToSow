@@ -21,6 +21,7 @@ class RepositoryFactoryMock: RepositoryFactoryProtocol {
     let plantRepository: PlantRepositoryProtocol
     let challengeService: ChallengeServiceProtocol
     let remoteRepository: RemoteContentRepositoryProtocol
+    let taskService: TaskServiceProtocol
     
     init() {
         let dbPool: DatabasePool = DatabaseManager.shared.dbPool
@@ -42,6 +43,11 @@ class RepositoryFactoryMock: RepositoryFactoryProtocol {
         remoteRepository = RemoteRepositoryMock()
         
         challengeService = ChallengeService(challengeRepository: challengeRepository)
+        
+        let taskRepository: TaskRepositoryProtocol = TaskRepository(dbPool: dbPool)
+        let localNotificationService: LocalNotificationServiceProtocol = LocalNotificationService()
+        
+        taskService = TaskService(repository: taskRepository, localNotificationService: localNotificationService)
     }
 }
 

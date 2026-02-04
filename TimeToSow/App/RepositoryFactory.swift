@@ -19,8 +19,10 @@ protocol RepositoryFactoryProtocol {
     var challengeRepository: ChallengeRepositoryProtocol { get }
     var decorRepository: DecorRepositoryProtocol { get }
     var plantRepository: PlantRepositoryProtocol { get }
-    var challengeService: ChallengeServiceProtocol { get }
     var remoteRepository: RemoteContentRepositoryProtocol { get }
+    
+    var challengeService: ChallengeServiceProtocol { get }
+    var taskService: TaskServiceProtocol { get }
 }
 
 class RepositoryFactory: RepositoryFactoryProtocol {
@@ -33,8 +35,10 @@ class RepositoryFactory: RepositoryFactoryProtocol {
     let challengeRepository: ChallengeRepositoryProtocol
     let decorRepository: DecorRepositoryProtocol
     let plantRepository: PlantRepositoryProtocol
-    let challengeService: ChallengeServiceProtocol
     let remoteRepository: RemoteContentRepositoryProtocol
+    
+    let challengeService: ChallengeServiceProtocol
+    var taskService: TaskServiceProtocol
     
     init() {
         let dbPool: DatabasePool = DatabaseManager.shared.dbPool
@@ -55,5 +59,10 @@ class RepositoryFactory: RepositoryFactoryProtocol {
         remoteRepository = RemoteContentRepository(client: client, challengeRepository: challengeRepository, imagePrefetcher: dataPrefetcher)
         
         challengeService = ChallengeService(challengeRepository: challengeRepository)
+        
+        let taskRepository: TaskRepositoryProtocol = TaskRepository(dbPool: dbPool)
+        let localNotificationService: LocalNotificationServiceProtocol = LocalNotificationService()
+        
+        taskService = TaskService(repository: taskRepository, localNotificationService: localNotificationService)
     }
 }

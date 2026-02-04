@@ -15,6 +15,7 @@ final class Logger {
         case unowned
         case challengeService
         case imageFetcher
+        case notificationCenter
         
         var text: String {
             switch self {
@@ -23,6 +24,7 @@ final class Logger {
             case .unowned: return "🧭"
             case .challengeService: return "🎭"
             case .imageFetcher: return "🌅"
+            case .notificationCenter: return "🔔"
             }
         }
     }

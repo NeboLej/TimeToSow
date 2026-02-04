@@ -160,5 +160,16 @@ final class DatabaseManager {
             t.column("seasonID", .text).notNull()
             t.column("date", .double).notNull()
         }
+        
+        try db.create(table: "task", ifNotExists: true) { t in
+            t.column("id", .blob).primaryKey()
+            t.column("startTime", .double).notNull()
+            t.column("time", .integer).notNull()
+            t.column("tagID", .blob).notNull()
+            t.column("plantID", .blob)
+            
+            t.foreignKey(["tagID"], references: "tag", onDelete: .restrict, onUpdate: .cascade)
+            t.foreignKey(["plantID"], references: "plant", onDelete: .restrict, onUpdate: .cascade)
+        }
     }
 }

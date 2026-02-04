@@ -12,7 +12,8 @@ struct ProgressScreen: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var store: ProgressScreenStore
-    @State var isShowAlert = false
+    @State private var isShowAlert = false
+    @State private var progress: CGFloat = 0
     
     init(store: ProgressScreenStore) {
         self.store = store
@@ -48,17 +49,17 @@ struct ProgressScreen: View {
             .textureOverlay(opacity: 0.3)
             
             VStack {
-                switch store.state {
+                switch store.state.state {
                 case .progress:
                     processView()
-                case .completed:
-                    completedView()
+                case .completed(let plant):
+                    completedView(plant: plant)
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .animation(.easeIn, value: store.state)
+        .animation(.easeIn, value: store.state.state)
         .onAppear {
             store.send(.startProgress)
         }
@@ -81,14 +82,17 @@ struct ProgressScreen: View {
             .padding(.top, 50)
             .padding(.leading, 20)
             
-            SendTimerView(progress: CGFloat(store.progress))
+            SendTimerView(progress: progress)
                 .frame(width: 112)
                 .padding(.top, 70)
             
-            
-            TimerView(vm: store.timerVM)
-                .padding(.bottom, 8)
-                .padding(.top, 45)
+            TimerView(startDate: store.state.startDate, minutes: store.state.minutes, onSecondsChange: { second in
+                calcProgress(newValue: second)
+            }, onFinish: { isFinish in
+                store.send(.finishProgress)
+            })
+            .padding(.bottom, 8)
+            .padding(.top, 45)
             
             Text("Ученые доказали, что дела лучше делаются если не смотреть на экран")
                 .multilineTextAlignment(.center)
@@ -112,15 +116,13 @@ struct ProgressScreen: View {
     }
     
     @ViewBuilder
-    func completedView() -> some View {
+    func completedView(plant: Plant) -> some View {
         VStack(alignment: .center, spacing: 0) {
-            if store.newPlant != nil {
-                PlantPreview(zoomCoef: 2,
-                             plant: store.newPlant!,
-                             isShowPlantRating: true,
-                             isShowPotRating: true)
-                .padding(.top, 120)
-            }
+            PlantPreview(zoomCoef: 2,
+                         plant: plant,
+                         isShowPlantRating: true,
+                         isShowPotRating: true)
+            .padding(.top, 120)
             
             Text("Успех!")
                 .font(.myNumber(50))
@@ -128,8 +130,8 @@ struct ProgressScreen: View {
                 .padding(.top, 45)
                 .padding(.bottom, 8)
             
-            let seedName = "\(RemoteText.text(store.newPlant?.seed.name ?? ""))"
-            let potName = "\(RemoteText.text(store.newPlant?.pot.name ?? ""))"
+            let seedName = "\(RemoteText.text(plant.seed.name))"
+            let potName = "\(RemoteText.text(plant.pot.name))"
 
             Text("Теперь у вас есть \n \(seedName) \(potName)")
                 .multilineTextAlignment(.center)
@@ -138,13 +140,17 @@ struct ProgressScreen: View {
                 .padding(.top, 50)
             
             TextureButton(label: "поместить на полку", color: .strokeAcsent1, icon: nil) {
-                store.newPlantToShelf()
+                store.send(.plantToShelf(plant))
                 dismiss()
             }.padding(.top, 150)
         }
     }
+    
+    private func calcProgress(newValue: Int) {
+        progress = 1.0 - ((100.0 / CGFloat((store.state.minutes * 60)) * CGFloat(newValue))) / 100.0
+    }
 }
 
 #Preview {
-    screenBuilderMock.getScreen(type: .progress(1))
+    screenBuilderMock.getScreen(type: .progress(.new(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil))))
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 enum AppAction {
+    case startNewTask(minutes: Int)
     case selectPlant(Plant?)
     case movePlant(plant: Plant, newPosition: CGPoint)
     case moveDecor(decor: Decor, newPosition: CGPoint)

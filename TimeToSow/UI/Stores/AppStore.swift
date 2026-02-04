@@ -74,6 +74,8 @@ final class AppStore: BackgroundEventDeleagate {
     
     func send(_ action: AppAction) {
         switch action {
+        case .startNewTask(minutes: let minutes):
+            startNewTask(minutes: minutes)
         case .selectPlant(let plant):
             if let plant {
                 selectedPlant = userRooms[plant.rootRoomID]?.plants[plant.id]
@@ -140,5 +142,11 @@ final class AppStore: BackgroundEventDeleagate {
                 userRooms[currentRoom.id] = currentRoom
             }
         }
+    }
+    
+    func startNewTask(minutes: Int) {
+        guard let selectedTag else { return }
+        let task = TaskModel(id: UUID(), startTime: Date(), time: minutes, tag: selectedTag, plant: selectedPlant)
+        appCoordinator.navigate(to: .progress(.new(task)), modal: false)
     }
 }

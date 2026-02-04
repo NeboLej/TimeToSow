@@ -33,7 +33,7 @@ extension AppStore: HomeScreenDelegate {
         case .toDebugScreen:
             send(.toDebugScreen)
         case .toProgressScreen(let time):
-            appCoordinator.navigate(to: .progress(time), modal: false)
+            send(.startNewTask(minutes: time))
         case .toHistoryScreen:
             appCoordinator.path.append(ScreenType.history)
         case .toEditRoomScreen:
