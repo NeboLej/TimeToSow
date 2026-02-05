@@ -41,7 +41,7 @@ struct RecordsHistoryView: View {
                         recordRow(note)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", systemImage: "trash") {
-                                    print("delete")
+                                    
                                 }.tint(.strokeAcsent2)
                             }
                             .enableScrollViewSwipeActionModifier()

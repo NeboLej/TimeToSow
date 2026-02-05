@@ -53,7 +53,8 @@ struct TextureView<Content>: View where Content : View {
         TextureButton(label: "Start",
                       color: .green,
                       icon: Image(.deleteAnimation2)) {
-            print("asdasd")}
+            
+        }
         TagView(tag: Tag(name: "play in basketball", color: "#D17474"))
         TextureView {
             HStack(spacing: 20) {

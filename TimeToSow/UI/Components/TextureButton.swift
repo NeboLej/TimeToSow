@@ -67,7 +67,6 @@ struct PressableStyle: ButtonStyle {
     VStack {
         TextureButton(label: "Start",
                       color: .green,
-                      icon: Image(.deleteAnimation2)) {
-            print("asdasd")}
+                      icon: Image(.deleteAnimation2)) { }
     }
 }

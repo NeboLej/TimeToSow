@@ -197,7 +197,6 @@ struct HomeScreen: View {
                     
                     VStack(alignment: .trailing, spacing: 18) {
                         TextureButton(label: L.startButton.loc, color: .strokeAcsent1, icon: Image(.iconPlay)) {
-                            print("start")
                             store.send(.toProgressScreen(time: selectedTime))
                         }
                         
