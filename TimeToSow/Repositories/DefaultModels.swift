@@ -127,8 +127,8 @@ struct DefaultModels {
         Pot(name: "pot18.name", image: "pot18", height: 16, rarity: .common, anchorPointCoefficient: .init(x: -0.15, y: 0)),
         Pot(name: "pot19.name", image: "pot19", height: 16, rarity: .uncommon, anchorPointCoefficient: .init(x: -0.15, y: 0)),
         Pot(name: "pot20.name", image: "pot20", height: 16, rarity: .uncommon, anchorPointCoefficient: .init(x: -0.15, y: 0)),
-        Pot(name: "pot21.name", image: "pot21", height: 24, rarity: .legendary),
-        Pot(name: "pot22.name", image: "pot22", height: 26, rarity: .uncommon),
+        Pot(name: "pot21.name", image: "pot21", height: 26, rarity: .legendary),
+        Pot(name: "pot22.name", image: "pot22", height: 27, rarity: .uncommon),
         Pot(name: "pot23.name", image: "pot23", height: 20, rarity: .rare),
         Pot(name: "pot24.name", image: "pot24", height: 22, rarity: .legendary),
         Pot(name: "pot25.name", image: "pot25", height: 22, rarity: .uncommon),
@@ -168,10 +168,11 @@ struct DefaultModels {
         Pot(name: "pot59.name", image: "pot59", height: 22, rarity: .rare, anchorPointCoefficient: .init(x: 0, y: 0.006)),
         Pot(name: "pot60.name", image: "pot60", height: 22, rarity: .rare, anchorPointCoefficient: .init(x: 0, y: 0.006)),
         Pot(name: "pot61.name", image: "pot61", height: 22, rarity: .epic, anchorPointCoefficient: .init(x: 0, y: 0.006)),
-        Pot(name: "pot62.name", image: "pot62", height: 20, rarity: .uncommon),
+        Pot(name: "pot62.name", image: "pot62", height: 28, rarity: .uncommon),
         Pot(potFeatures: [.narrow], name: "pot63.name", image: "pot63", height: 28, rarity: .epic),
         Pot(potFeatures: [.narrow], name: "pot64.name", image: "pot64", height: 40, rarity: .epic),
-        Pot(name: "pot65.name", image: "pot65", height: 30, rarity: .epic)
+        Pot(name: "pot65.name", image: "pot65", height: 30, rarity: .epic),
+        Pot(name: "pot66.name", image: "pot66", height: 20, rarity: .rare)
     ]
     
     //MARK: - SEEDS
@@ -241,6 +242,12 @@ struct DefaultModels {
         Seed(name: "seed64.name", unavailavlePotTypes: [.narrow], image: "seed64", height: 65, rarity: .epic, rootCoordinateCoef: .init(x: 0.08, y: 0)),
         Seed(name: "seed65.name", unavailavlePotTypes: [.narrow], image: "seed65", height: 32, rarity: .common),
         Seed(name: "seed66.name", image: "seed66", height: 37, rarity: .common),
-        Seed(name: "seed67.name", image: "seed67", height: 60, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0))
+        Seed(name: "seed67.name", image: "seed67", height: 60, rarity: .rare, rootCoordinateCoef: .init(x: 0.03, y: 0)),
+        Seed(name: "see68.name", image: "seed68", height: 35, rarity: .rare, rootCoordinateCoef: .init(x: 0.07, y: 0.03)),
+        Seed(name: "see69.name", image: "seed69", height: 40, rarity: .epic, rootCoordinateCoef: .init(x: -0.05, y: 0.04)),
+        Seed(name: "seed70.name", image: "seed70", height: 55, rarity: .legendary, rootCoordinateCoef: .init(x: 0.05, y: 0)),
+        Seed(name: "seed71.name", unavailavlePotTypes: [.narrow], image: "seed71", height: 50, rarity: .legendary, rootCoordinateCoef: .init(x: 0.1, y: 0.005)),
+        Seed(name: "seed72.name", image: "seed72", height: 45, rarity: .legendary, rootCoordinateCoef: .init(x: 0, y: 0.291)),
+        Seed(name: "seed73.name", image: "seed73", height: 45, rarity: .legendary, rootCoordinateCoef: .init(x: 0, y: 0.104))
     ]
 }
