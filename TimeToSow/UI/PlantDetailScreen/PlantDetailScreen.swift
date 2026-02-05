@@ -30,7 +30,8 @@ struct PlantDetailScreen: View {
                 headerView()
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        titleLabel(Text(plant.name))
+                        let name = [RemoteText.text(plant.seed.name), RemoteText.text(plant.pot.name)].joined(separator: " ")
+                        titleLabel(Text(name))
                             .foregroundStyle(.black)
                             .padding(.all, 10)
                         
@@ -182,7 +183,6 @@ struct PlantDetailScreen: View {
                                                                    image: "pot21",
                                                                    height: 24,
                                                                    rarity: .common),
-                                                          name: "Oleg",
                                                           description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
                                                           offsetY: 200,
                                                           offsetX: 200,

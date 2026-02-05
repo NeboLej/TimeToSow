@@ -258,7 +258,7 @@ struct DebugScreenView: View {
     
     func selectPlant() {
         guard let selectedSeed, let selectedPot else { return }
-        selectedPlant = Plant(rootRoomID: UUID(), seed: selectedSeed, pot: selectedPot, name: "", description: "", offsetY: 0, offsetX: 0, isOnShelf: true, notes: [])
+        selectedPlant = Plant(rootRoomID: UUID(), seed: selectedSeed, pot: selectedPot, description: "", offsetY: 0, offsetX: 0, isOnShelf: true, notes: [])
     }
 }
 

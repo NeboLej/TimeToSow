@@ -52,12 +52,30 @@ class RepositoryFactoryMock: RepositoryFactoryProtocol {
 }
 
 class RemoteRepositoryMock: RemoteContentRepositoryProtocol {
+    init() {
+        loadLocalJSONLocalization()
+    }
     func updateRemoteData() {
         
     }
     
     func setDelegate(_ delegate: any BackgroundEventDeleagate) {
         
+    }
+    
+    private func loadLocalJSONLocalization() {
+        guard let url = Bundle.main.url(forResource: "remote_localization", withExtension: "json") else {
+            assertionFailure("Localization JSON not found")
+            return
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            try JSONLocalizationService.shared.load(from: data)
+            Logger.log("Succes fetch localized srings", location: .remote, event: .success)
+        } catch {
+            assertionFailure("Failed to load localization: \(error)")
+        }
     }
 }
 

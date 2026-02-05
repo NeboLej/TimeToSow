@@ -63,11 +63,11 @@ struct TimeToSowApp: App {
     }
 }
 
-#if DEBUG
+//#if DEBUG
 let screenBuilderMock: ScreenBuilder = {
     let repositoryFactory = RepositoryFactoryMock()
     
     let appStore = AppStore(factory: repositoryFactory)
     return ScreenBuilder(appStore: appStore, repositoryFactory: repositoryFactory)
 }()
-#endif
+//#endif

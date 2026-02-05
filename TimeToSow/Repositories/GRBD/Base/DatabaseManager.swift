@@ -119,7 +119,6 @@ final class DatabaseManager {
             t.column("id", .blob).primaryKey()
             t.column("seedID", .blob).notNull()
             t.column("potID", .blob).notNull()
-            t.column("name", .text).notNull()
             t.column("userDescription", .text).notNull()
             t.column("offsetY", .double).notNull()
             t.column("offsetX", .double).notNull()

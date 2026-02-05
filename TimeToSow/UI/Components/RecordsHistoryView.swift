@@ -87,7 +87,6 @@ struct RecordsHistoryView: View {
                                                                    image: "pot21",
                                                                    height: 24,
                                                                    rarity: .common),
-                                                          name: "Oleg",
                                                           description: "jasdkjn aksnd ajsdnkan kjndknakj dna",
                                                           offsetY: 200,
                                                           offsetX: 200,

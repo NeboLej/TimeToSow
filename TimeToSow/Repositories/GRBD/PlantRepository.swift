@@ -47,11 +47,9 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         let randomSeed = await seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
         let randomPot = await potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
         
-        let name = [RemoteText.text(randomSeed.name), RemoteText.text(randomPot.name)].joined(separator: " ")
         return Plant(rootRoomID: roomID,
                      seed: randomSeed,
                      pot: randomPot,
-                     name: name,
                      description: "",
                      offsetY: Double((10...250).randomElement()!),
                      offsetX: Double((10...350).randomElement()!),
