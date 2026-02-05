@@ -37,13 +37,13 @@ extension AppStore: HomeScreenDelegate {
         case .toHistoryScreen:
             appCoordinator.path.append(ScreenType.history)
         case .toEditRoomScreen:
-            appCoordinator.navigate(to: .editRoom, modal: true)
+            appCoordinator.present(to: .editRoom, modal: true)
         case .toTagsScreen:
-            appCoordinator.navigate(to: .tags, modal: true)
+            appCoordinator.present(to: .tags, modal: true)
         case .toChallengeScreen:
-            appCoordinator.path.append(ScreenType.challenge)
+            appCoordinator.navigate(to: ScreenType.challenge)
         case .toBoxScreen:
-            appCoordinator.navigate(to: .box, modal: true)
+            appCoordinator.present(to: .box, modal: true)
         }
     }
 }

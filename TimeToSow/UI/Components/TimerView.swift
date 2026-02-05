@@ -61,6 +61,6 @@ struct TimerView: View {
 
 
 #Preview {
-    screenBuilderMock.getScreen(type: .progress(.new(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil))))
+    screenBuilderMock.getScreen(type: .progress(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil)))
 }
 

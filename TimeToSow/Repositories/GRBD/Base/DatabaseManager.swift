@@ -166,9 +166,11 @@ final class DatabaseManager {
             t.column("time", .integer).notNull()
             t.column("tagID", .blob).notNull()
             t.column("plantID", .blob)
+            t.column("rewardPlantID", .blob)
             
             t.foreignKey(["tagID"], references: "tag", onDelete: .restrict, onUpdate: .cascade)
             t.foreignKey(["plantID"], references: "plant", onDelete: .restrict, onUpdate: .cascade)
+            t.foreignKey(["rewardPlantID"], references: "plant", onDelete: .restrict, onUpdate: .cascade)
         }
     }
 }

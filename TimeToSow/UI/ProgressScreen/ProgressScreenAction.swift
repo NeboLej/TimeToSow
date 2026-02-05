@@ -11,5 +11,5 @@ enum ProgressScreenAction {
     case startProgress
     case stopProgress
     case finishProgress
-    case plantToShelf(Plant)
+    case plantToShelf
 }

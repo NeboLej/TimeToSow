@@ -9,7 +9,7 @@ import SwiftUI
 
 enum ScreenType: Identifiable, Hashable {
     
-    case home, editRoom, progress(ProgressScreenStateType), plantDetails(Plant), debugScreen, history, tags, challenge, box
+    case home, editRoom, progress(TaskModel), plantDetails(Plant), debugScreen, history, tags, challenge, box
     
     var id: String {
         switch self {
@@ -48,8 +48,8 @@ final class ScreenBuilder {
             HomeScreen(store: HomeScreenStore(appStore: appStore), screenBuilder: self)
         case .editRoom:
             EditRoomScreen(store: EditRoomStore(appStore: appStore, roomRepository: repositories.roomRepository, shelfRepository: repositories.shelfRepository))
-        case .progress(let state):
-            ProgressScreen(store: ProgressScreenStore(appStore: appStore, state: state))
+        case .progress(let task):
+            ProgressScreen(store: ProgressScreenStore(appStore: appStore, taskService: repositories.taskService, task: task))
         case .plantDetails(let plant):
             PlantDetailScreen(store: PlantDetailScreenStore(appStore: appStore, plant: plant))
                 .ignoresSafeArea()

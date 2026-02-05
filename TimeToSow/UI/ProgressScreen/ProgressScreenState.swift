@@ -17,26 +17,25 @@ struct ProgressScreenState {
     let startDate: Date
 }
 
-enum ProgressScreenStateType: Hashable {
-    case new(TaskModel)
-    case progress(TaskModel)
-    case completed(TaskModel, Plant)
-    
-    var minutes: Int {
-        switch self {
-        case .new(let task), .progress(let task), .completed(let task, _): task.time
-        }
-    }
-    
-    var startDate: Date {
-        switch self {
-        case .new(let task), .progress(let task), .completed(let task, _): task.startTime
-        }
-    }
-    
-    var tag: Tag {
-        switch self {
-        case .new(let task), .progress(let task), .completed(let task, _): task.tag
-        }
-    }
-}
+//enum ProgressScreenStateType: Hashable {
+//    case new(TaskModel)
+//    case progress(TaskModel)
+//    
+//    var minutes: Int {
+//        switch self {
+//        case .new(let task), .progress(let task): task.time
+//        }
+//    }
+//    
+//    var startDate: Date {
+//        switch self {
+//        case .new(let task), .progress(let task): task.startTime
+//        }
+//    }
+//    
+//    var tag: Tag {
+//        switch self {
+//        case .new(let task), .progress(let task): task.tag
+//        }
+//    }
+//}

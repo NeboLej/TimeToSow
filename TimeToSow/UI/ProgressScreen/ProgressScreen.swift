@@ -60,6 +60,7 @@ struct ProgressScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
         .animation(.easeIn, value: store.state.state)
+        .navigationBarBackButtonHidden()
         .onAppear {
             store.send(.startProgress)
         }
@@ -97,6 +98,7 @@ struct ProgressScreen: View {
             Text("Ученые доказали, что дела лучше делаются если не смотреть на экран")
                 .multilineTextAlignment(.center)
                 .font(.myNumber(20))
+                .foregroundStyle(.black)
                 .padding(.horizontal, 16)
                 .padding(.top, 50)
             
@@ -136,11 +138,12 @@ struct ProgressScreen: View {
             Text("Теперь у вас есть \n \(seedName) \(potName)")
                 .multilineTextAlignment(.center)
                 .font(.myNumber(20))
+                .foregroundStyle(.black)
                 .padding(.horizontal, 16)
                 .padding(.top, 50)
             
             TextureButton(label: "поместить на полку", color: .strokeAcsent1, icon: nil) {
-                store.send(.plantToShelf(plant))
+                store.send(.plantToShelf)
                 dismiss()
             }.padding(.top, 150)
         }
@@ -152,5 +155,5 @@ struct ProgressScreen: View {
 }
 
 #Preview {
-    screenBuilderMock.getScreen(type: .progress(.new(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil))))
+    screenBuilderMock.getScreen(type: .progress(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil)))
 }

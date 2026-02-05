@@ -63,6 +63,6 @@ class RepositoryFactory: RepositoryFactoryProtocol {
         let taskRepository: TaskRepositoryProtocol = TaskRepository(dbPool: dbPool)
         let localNotificationService: LocalNotificationServiceProtocol = LocalNotificationService()
         
-        taskService = TaskService(repository: taskRepository, localNotificationService: localNotificationService)
+        taskService = TaskService(repository: taskRepository, plantRepository: plantRepository, localNotificationService: localNotificationService)
     }
 }

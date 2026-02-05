@@ -11,6 +11,7 @@ import GRDB
 protocol TaskRepositoryProtocol {
     func addTask(_ task: TaskModel) async
     func getTask() async -> TaskModel?
+    func updateTask(_ task: TaskModel) async
     func deleteTask() async
 }
 
@@ -33,7 +34,20 @@ final class TaskRepository: BaseRepository, TaskRepositoryProtocol {
     func getTask() async -> TaskModel? {
         do {
             let tasks = try await dbPool.read { db in
-                try TaskModelGRDB.fetchAll(db)
+                try TaskModelGRDB
+                    .including(required: TaskModelGRDB.tag)
+                    .including(optional: TaskModelGRDB.plant
+                        .including(optional: PlantModelGRDB.seed)
+                        .including(optional: PlantModelGRDB.pot)
+                        .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag))
+                    )
+                    .including(optional: TaskModelGRDB.rewardPlant
+                        .including(optional: PlantModelGRDB.seed)
+                        .including(optional: PlantModelGRDB.pot)
+                        .including(all: PlantModelGRDB.notes.including(required: NoteModelGRDB.tag))
+                    )
+                    .fetchAll(db)
+                
             }
             if tasks.count == 0 {
                 return nil
@@ -47,6 +61,18 @@ final class TaskRepository: BaseRepository, TaskRepositoryProtocol {
         } catch {
             Logger.log("Error fetching task", location: .GRDB, event: .error(error))
             return nil
+        }
+    }
+    
+    func updateTask(_ task: TaskModel) async {
+        do {
+            try await dbPool.write { db in
+                let taskToUpdate = TaskModelGRDB(from: task)
+                try taskToUpdate.update(db)
+            }
+            Logger.log("Success saving updated task", location: .GRDB, event: .success)
+        } catch {
+            Logger.log("Error saving updated task", location: .GRDB, event: .error(error))
         }
     }
     

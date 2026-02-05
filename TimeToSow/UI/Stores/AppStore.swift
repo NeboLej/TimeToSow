@@ -26,7 +26,9 @@ final class AppStore: BackgroundEventDeleagate {
     @ObservationIgnored
     let decorRepository: DecorRepositoryProtocol
     @ObservationIgnored
-    var challengeService: ChallengeServiceProtocol
+    let challengeService: ChallengeServiceProtocol
+    @ObservationIgnored
+    let taskService: TaskServiceProtocol
     
     var currentRoom: UserRoom = .empty
     var selectedPlant: Plant?
@@ -46,10 +48,13 @@ final class AppStore: BackgroundEventDeleagate {
         self.challengeRepository = factory.challengeRepository
         self.challengeService = factory.challengeService
         self.decorRepository = factory.decorRepository
+        self.taskService = factory.taskService
         
         factory.remoteRepository.setDelegate(self)
         
-        getData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.getData()
+        }
     }
     
     func send(_ action: BackgroundEventAction) {
@@ -66,7 +71,7 @@ final class AppStore: BackgroundEventDeleagate {
         switch action {
         case .toDetailPlant(let plant):
             guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
-            appCoordinator.navigate(to: .plantDetails(plant), modal: true)
+            appCoordinator.present(to: .plantDetails(plant), modal: true)
         case .toDebugScreen:
             appCoordinator.activeSheet = .debugScreen
         }
@@ -100,8 +105,11 @@ final class AppStore: BackgroundEventDeleagate {
             let newPlant = selectedPlant.copy(notes: notes)
             self.selectedPlant = newPlant
             currentRoom.plants[selectedPlant.id] = newPlant
-        case .addNewPlant(let plant):
-            saveNewPlant(plant)
+        case .addNewPlant(let newPlant):
+            userRooms[newPlant.rootRoomID]?.plants[newPlant.id] = newPlant
+            if newPlant.rootRoomID == currentRoom.id {
+                currentRoom.plants[newPlant.id] = newPlant
+            }
         case .addNewDecorToShelf(let decorType):
             newDecorToShelf(decorType)
         case .getUserRoom(let id):
@@ -125,7 +133,8 @@ final class AppStore: BackgroundEventDeleagate {
     
     func getData() {
         Task {
-            selectedTag = await tagRepository.getRandomTag()
+            let continueTask = await taskService.getTask()
+
             let lastRoom = await myRoomRepository.getCurrentRoom()
             let room: UserRoom
             
@@ -137,6 +146,13 @@ final class AppStore: BackgroundEventDeleagate {
             }
             simpleUserRooms = await myRoomRepository.getAllSimpleUserRooms()
             
+            if let continueTask {
+                selectedTag = continueTask.tag
+                self.continueTask(task: continueTask)
+            } else {
+                selectedTag = await tagRepository.getRandomTag()
+            }
+            
             await MainActor.run {
                 currentRoom = room
                 userRooms[currentRoom.id] = currentRoom
@@ -147,6 +163,11 @@ final class AppStore: BackgroundEventDeleagate {
     func startNewTask(minutes: Int) {
         guard let selectedTag else { return }
         let task = TaskModel(id: UUID(), startTime: Date(), time: minutes, tag: selectedTag, plant: selectedPlant)
-        appCoordinator.navigate(to: .progress(.new(task)), modal: false)
+        taskService.newTask(task)
+        appCoordinator.navigate(to: ScreenType.progress(task))
+    }
+    
+    func continueTask(task: TaskModel) {
+        appCoordinator.navigate(to: ScreenType.progress(task))
     }
 }

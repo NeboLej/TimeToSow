@@ -20,11 +20,15 @@ class AppCoordinator {
         self.currentScreen = .home
     }
     
-    func navigate(to newScreen: ScreenType, modal: Bool = false) {
+    func present(to newScreen: ScreenType, modal: Bool = false) {
         if !modal {
             fullScreenCover = newScreen
         } else {
             activeSheet = newScreen
         }
+    }
+    
+    func navigate(to: ScreenType) {
+        path.append(to)
     }
 }

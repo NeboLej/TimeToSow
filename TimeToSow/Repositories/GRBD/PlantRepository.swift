@@ -97,7 +97,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                 try await saveNote(note, plantID: plant.id)
             }
         } catch {
-            fatalError()
+            Logger.log("save new plant error, plant not uniqe", location: .GRDB, event: .success)
         }
     }
     
