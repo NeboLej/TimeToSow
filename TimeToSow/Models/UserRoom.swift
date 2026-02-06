@@ -32,6 +32,7 @@ class UserRoom: Hashable {
     var dateCreate: Date
     var plants: [UUID: Plant]
     var decor: [UUID: Decor]
+    var isUpdatedRoom: Bool = false
     
     init(id: UUID = UUID.init(), shelfType: ShelfType, roomType: RoomType, name: String, dateCreate: Date, plants: [UUID: Plant], decor: [UUID: Decor]) {
         self.id = id

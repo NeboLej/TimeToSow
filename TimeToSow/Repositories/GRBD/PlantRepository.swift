@@ -12,8 +12,11 @@ protocol PlantRepositoryProtocol {
     func createRandomPlant(note: Note, roomID: UUID) async -> Plant
     func saveNewPlant(_ plant: Plant) async
     func getAllPlants() async -> [Plant]
+    func saveNote(_ note: Note, plantID: UUID) async
     
     func updatePlant(_ plant: Plant) async
+    func upgradePlant(_ plant: Plant, note: Note) async -> Plant
+    func deletePlant(_ plant: Plant) async
 }
 
 final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
@@ -57,6 +60,22 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
                      notes: [note])
     }
     
+    func upgradePlant(_ plant: Plant, note: Note) async -> Plant {
+        let fullTime = plant.notes.reduce(0, { $0 + $1.time }) + note.time
+        let distributedTime = distributeTime(fullTime: fullTime)
+        let randomSeed = await seedRepository.getRandomSeedBy(rarity: distributedTime.seed)
+        let randomPot = await potRepository.getRandomPotBy(rarity: distributedTime.pot, unavailablePotFeatures: randomSeed.unavailavlePotTypes)
+        
+        return Plant(rootRoomID: plant.rootRoomID,
+                     seed: randomSeed,
+                     pot: randomPot,
+                     description: "",
+                     offsetY: 0,
+                     offsetX: 0,
+                     isOnShelf: false,
+                     notes: [note])
+    }
+    
     func updatePlant(_ plant: Plant) async {
         do {
             try await dbPool.write { db in
@@ -73,11 +92,28 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
         }
     }
     
-    func saveNote(_ note: Note, plantID: UUID) async throws {
-        try await dbPool.write { db in
-            var modelNote = NoteModelGRDB(from: note, plantID: plantID)
-            try modelNote.insert(db)
-            Logger.log("save new note", location: .GRDB, event: .success)
+    func deletePlant(_ plant: Plant) async {
+        do {
+            try await dbPool.write { db in
+                if try PlantModelGRDB.filter(key: plant.id).fetchCount(db) != 0 {
+                    try PlantModelGRDB.filter(key: plant.id).deleteAll(db)
+                    Logger.log("delete plant", location: .GRDB, event: .success)
+                }
+            }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func saveNote(_ note: Note, plantID: UUID) async {
+        do {
+            try await dbPool.write { db in
+                var modelNote = NoteModelGRDB(from: note, plantID: plantID)
+                try modelNote.insert(db)
+                Logger.log("save new note", location: .GRDB, event: .success)
+            }
+        } catch {
+            fatalError()
         }
     }
     
@@ -94,7 +130,7 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
             }
             
             if let note = plant.notes.first {
-                try await saveNote(note, plantID: plant.id)
+                await saveNote(note, plantID: plant.id)
             }
         } catch {
             Logger.log("save new plant error, plant not uniqe", location: .GRDB, event: .success)

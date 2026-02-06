@@ -13,8 +13,14 @@ struct RoomViewState {
     let shelfType: ShelfType
     let plants: [PlantViewState]
     let decor: [Decor]
+    let userRoom: UserRoom
+    
+    var updatedHash: String {
+        shelfType.id.uuidString + userRoom.isUpdatedRoom.hashValue.description
+    }
     
     init(userRoom: UserRoom, selectedPlant: Plant?) {
+        self.userRoom = userRoom
         roomType = userRoom.roomType
         shelfType = userRoom.shelfType
         plants = userRoom.plants.values.filter { $0.isOnShelf }.map { PlantViewState(plant: $0, isSelected: $0 == selectedPlant) }

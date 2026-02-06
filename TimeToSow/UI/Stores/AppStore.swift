@@ -164,6 +164,7 @@ final class AppStore: BackgroundEventDeleagate {
         guard let selectedTag else { return }
         let task = TaskModel(id: UUID(), startTime: Date(), time: minutes, tag: selectedTag, plant: selectedPlant)
         taskService.newTask(task)
+        selectedPlant = nil
         appCoordinator.navigate(to: ScreenType.progress(task))
     }
     

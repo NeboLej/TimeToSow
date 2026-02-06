@@ -15,27 +15,6 @@ struct ProgressScreenState {
     let state: State
     let minutes: Int
     let startDate: Date
+    
+    let upgradedPlant: Plant?
 }
-
-//enum ProgressScreenStateType: Hashable {
-//    case new(TaskModel)
-//    case progress(TaskModel)
-//    
-//    var minutes: Int {
-//        switch self {
-//        case .new(let task), .progress(let task): task.time
-//        }
-//    }
-//    
-//    var startDate: Date {
-//        switch self {
-//        case .new(let task), .progress(let task): task.startTime
-//        }
-//    }
-//    
-//    var tag: Tag {
-//        switch self {
-//        case .new(let task), .progress(let task): task.tag
-//        }
-//    }
-//}

@@ -18,7 +18,7 @@ struct RecordsHistoryView: View {
         
         return grouped
             .sorted { $0.key > $1.key }
-            .map { $0.value }
+            .map { $0.value.sorted(by: { $0.date > $1.date }) }
     }
     
     var body: some View {

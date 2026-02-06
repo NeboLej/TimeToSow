@@ -58,8 +58,8 @@ struct Plant: Hashable, Identifiable {
         self.dateCreate = dateCreate
     }
     
-    func copy(offsetX: Double? = nil, offsetY: Double? = nil, isVisible: Bool? = nil, notes: [Note]? = nil) -> Plant {
-        Plant(id: self.id, rootRoomID: self.rootRoomID, seed: self.seed, pot: self.pot, description: self.description,
+    func copy(offsetX: Double? = nil, offsetY: Double? = nil, isVisible: Bool? = nil, notes: [Note]? = nil, seed: Seed? = nil, pot: Pot? = nil) -> Plant {
+        Plant(id: self.id, rootRoomID: self.rootRoomID, seed: seed ?? self.seed, pot: pot ?? self.pot, description: self.description,
               offsetY: offsetY ?? self.offsetY, offsetX: offsetX ?? self.offsetX, isOnShelf: isVisible ?? self.isOnShelf, dateCreate: self.dateCreate,
               notes: notes ?? self.notes)
     }

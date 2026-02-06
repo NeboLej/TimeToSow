@@ -42,7 +42,7 @@ struct RoomView: View {
                     .aspectRatio(contentMode: .fill)
                 
                 plants()
-                    .id(store.state.shelfType)
+                    .id(store.state.updatedHash)
                 
                 decor()
                     .id(store.state.shelfType)

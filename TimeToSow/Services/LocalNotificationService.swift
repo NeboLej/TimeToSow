@@ -46,6 +46,7 @@ final class LocalNotificationService: LocalNotificationServiceProtocol {
     
     func deleteAll(withType: LocalNotificationType) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [withType.rawValue])
+        Logger.log("Deleted notification \(withType.rawValue)", location: .notificationCenter, event: .success)
     }
     
     private func requestPermissionIfNeeded() async -> Bool {

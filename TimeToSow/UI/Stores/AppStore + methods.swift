@@ -50,6 +50,11 @@ extension AppStore {
         return randomPlant
     }
     
+    func getUpgradedPlant(plant: Plant, note: Note) async -> Plant {
+        let plant = await plantRepository.upgradePlant(plant, note: note)
+        return plant
+    }
+    
     func updatePlantPosition(_ plant: Plant, newPosition: CGPoint) {
         guard let plant = userRooms[plant.rootRoomID]?.plants[plant.id] else { return }
         if plant.offsetX.isAlmostEqual(to: Double(newPosition.x)) && plant.offsetY.isAlmostEqual(to: Double(newPosition.y)) { return }
@@ -67,6 +72,20 @@ extension AppStore {
             await plantRepository.updatePlant(newPlant)
         }
         userRooms[plant.rootRoomID]?.plants[plant.id] = newPlant
+    }
+    
+    func combinePlants(main: Plant, donor: Plant) {
+        let note = donor.notes.first!
+        let newNote = Note(date: note.date, time: note.time, tag: note.tag)
+        let upgradedPlant = main.copy(offsetY: main.offsetY + 20, notes: main.notes + [newNote], seed: donor.seed, pot: donor.pot)
+        Task {
+            await plantRepository.updatePlant(upgradedPlant)
+            await plantRepository.deletePlant(donor)
+            await plantRepository.saveNote(newNote, plantID: main.id)
+        }
+        userRooms[main.rootRoomID]?.plants[main.id] = upgradedPlant
+        userRooms[main.rootRoomID]?.plants[donor.id] = nil
+        userRooms[main.rootRoomID]?.isUpdatedRoom.toggle()
     }
     
     //test

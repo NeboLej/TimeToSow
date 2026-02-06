@@ -35,6 +35,7 @@
 		8E6B267C2F33EFA20003678C /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267B2F33EFA20003678C /* LocalNotification.swift */; };
 		8E6B267E2F33F0010003678C /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267D2F33F0010003678C /* TaskService.swift */; };
 		8E6B26802F33F0260003678C /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6B267F2F33F0260003678C /* LocalNotificationService.swift */; };
+		8E6B26822F3670630003678C /* ugradeAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E6B26812F3670630003678C /* ugradeAnimation.gif */; };
 		8E6BF2FC2F33BACE003F8ABC /* TaskModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF2FB2F33BACE003F8ABC /* TaskModelGRDB.swift */; };
 		8E6BF2FE2F33BFC1003F8ABC /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF2FD2F33BFC1003F8ABC /* TaskRepository.swift */; };
 		8E6C3E9E2F1137630074CD4E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6C3E9D2F1137630074CD4E /* GRDB */; };
@@ -192,6 +193,7 @@
 		8E6B267B2F33EFA20003678C /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		8E6B267D2F33F0010003678C /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		8E6B267F2F33F0260003678C /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		8E6B26812F3670630003678C /* ugradeAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ugradeAnimation.gif; sourceTree = "<group>"; };
 		8E6BF2FB2F33BACE003F8ABC /* TaskModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModelGRDB.swift; sourceTree = "<group>"; };
 		8E6BF2FD2F33BFC1003F8ABC /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		8E6EAD982F16B82400BFB40C /* FloatingPoint + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint + extension.swift"; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 		8EF575422DCE3F3A00AEC31A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E6B26812F3670630003678C /* ugradeAnimation.gif */,
 				8E7EFC6A2F23CF8F00D10C58 /* Decor */,
 				8E941BB22F210A46002F0B07 /* Animations */,
 				8E5B34662F02789200354CAB /* Underdog-Regular.ttf */,
@@ -823,6 +826,7 @@
 				8EF575522DCE3F3A00AEC31A /* Assets.xcassets in Resources */,
 				8EA1C9D72EFD909900DF690F /* K2D-Light.ttf in Resources */,
 				8ED72C3F2F02C56E008E6869 /* Localizable.xcstrings in Resources */,
+				8E6B26822F3670630003678C /* ugradeAnimation.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

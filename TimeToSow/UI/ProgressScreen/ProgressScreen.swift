@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ProgressScreen: View {
     
@@ -120,11 +121,37 @@ struct ProgressScreen: View {
     @ViewBuilder
     func completedView(plant: Plant) -> some View {
         VStack(alignment: .center, spacing: 0) {
-            PlantPreview(zoomCoef: 2,
-                         plant: plant,
-                         isShowPlantRating: true,
-                         isShowPotRating: true)
-            .padding(.top, 120)
+            if let upgradePlant = store.state.upgradedPlant {
+                HStack {
+                    let oldPlantZoomCoef = upgradePlant.seed.width > 70 ? 1.5 : 2
+                    let newPlantZoomCoef = plant.seed.width > 70 ? 1.5 : 2
+                    let zoom = min(oldPlantZoomCoef, newPlantZoomCoef)
+                    Spacer()
+                    PlantPreview(zoomCoef: zoom,
+                                 plant: upgradePlant,
+                                 isShowPlantRating: true,
+                                 isShowPotRating: true)
+                    
+                    AnimatedImage(name: "ugradeAnimation.gif")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50)
+                        .padding(.horizontal, 16)
+                    
+                    PlantPreview(zoomCoef: zoom,
+                                 plant: plant,
+                                 isShowPlantRating: true,
+                                 isShowPotRating: true)
+                    Spacer()
+                }
+                .padding(.top, 120)
+            } else {
+                PlantPreview(zoomCoef: 2,
+                             plant: plant,
+                             isShowPlantRating: true,
+                             isShowPotRating: true)
+                .padding(.top, 120)
+            }
             
             Text("Успех!")
                 .font(.myNumber(50))
@@ -155,5 +182,15 @@ struct ProgressScreen: View {
 }
 
 #Preview {
-    screenBuilderMock.getScreen(type: .progress(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: nil)))
+    screenBuilderMock.getScreen(type: .progress(TaskModel(id: UUID(), startTime: Date(), time: 1, tag: Tag(id: UUID(), stableId: "sss", name: "ff", color: "", isDeleted: false), plant: plant1)))
 }
+
+fileprivate let plant1 = Plant(id: UUID(), rootRoomID: UUID(),
+                   seed: DefaultModels.seeds[9],
+                   pot: DefaultModels.pots[22],
+                   description: "",
+                   offsetY: 0,
+                   offsetX: 0,
+                   isOnShelf: true,
+                   dateCreate: Date(),
+                   notes: [])
