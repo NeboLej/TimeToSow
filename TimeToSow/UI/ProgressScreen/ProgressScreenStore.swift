@@ -28,7 +28,7 @@ final class ProgressScreenStore: FeatureStore {
     init(appStore: AppStore, taskService: TaskServiceProtocol, task: TaskModel) {
         self.minutes = task.time
         selectedTag = task.tag
-        startDate = task.startTime.getOffsetDate(-50, component: .second)
+        startDate = task.startTime//.getOffsetDate(-50, component: .second)
         rewardPlant = task.rewardPlant
         upgradedPlant = task.plant
         self.taskService = taskService

@@ -77,7 +77,7 @@ extension AppStore {
     func combinePlants(main: Plant, donor: Plant) {
         let note = donor.notes.first!
         let newNote = Note(date: note.date, time: note.time, tag: note.tag)
-        let upgradedPlant = main.copy(offsetY: main.offsetY + 20, notes: main.notes + [newNote], seed: donor.seed, pot: donor.pot)
+        let upgradedPlant = main.copy(offsetY: main.offsetY + 10, notes: main.notes + [newNote], seed: donor.seed, pot: donor.pot)
         Task {
             await plantRepository.updatePlant(upgradedPlant)
             await plantRepository.deletePlant(donor)

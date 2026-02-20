@@ -248,6 +248,8 @@ struct DefaultModels {
         Seed(name: "seed70.name", image: "seed70", height: 55, rarity: .legendary, rootCoordinateCoef: .init(x: 0.05, y: 0)),
         Seed(name: "seed71.name", unavailavlePotTypes: [.narrow], image: "seed71", height: 50, rarity: .legendary, rootCoordinateCoef: .init(x: 0.1, y: 0.005)),
         Seed(name: "seed72.name", image: "seed72", height: 45, rarity: .legendary, rootCoordinateCoef: .init(x: 0, y: 0.291)),
-        Seed(name: "seed73.name", image: "seed73", height: 45, rarity: .legendary, rootCoordinateCoef: .init(x: 0, y: 0.104))
+        Seed(name: "seed73.name", image: "seed73", height: 45, rarity: .legendary, rootCoordinateCoef: .init(x: 0, y: 0.104)),
+        Seed(name: "seed74.name", image: "seed74", height: 50, rarity: .epic, rootCoordinateCoef: .init(x: -0.04, y: 0.24)),
+        Seed(name: "seed75.name", image: "seed75", height: 40, rarity: .legendary, rootCoordinateCoef: .init(x: -0.05, y: 0.2))
     ]
 }
