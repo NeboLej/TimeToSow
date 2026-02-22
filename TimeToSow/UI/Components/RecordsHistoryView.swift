@@ -10,6 +10,7 @@ import SwiftUI
 struct RecordsHistoryView: View {
     
     let notes: [Note]
+    let deleteNote: ((Note) -> ())?
     
     private var groupNotesByDay: [[Note]] {
         let grouped = Dictionary(grouping: notes) { note in
@@ -37,11 +38,10 @@ struct RecordsHistoryView: View {
                         .padding(.leading, 10)
                     
                     ForEach(dayNotes) { note in
-                        
                         recordRow(note)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", systemImage: "trash") {
-                                    
+                                    deleteNote?(note)
                                 }.tint(.strokeAcsent2)
                             }
                             .enableScrollViewSwipeActionModifier()

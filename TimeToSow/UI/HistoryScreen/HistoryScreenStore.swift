@@ -31,6 +31,9 @@ final class HistoryScreenStore: FeatureStore {
             } else {
                 appStore.send(.getUserRoom(id: id))
             }
+        case .deleteNote(note: let note):
+            appStore.send(.deleteNote(note: note, roomId: selectedUserRoomId))
+            rebuildState()
         }
     }
     

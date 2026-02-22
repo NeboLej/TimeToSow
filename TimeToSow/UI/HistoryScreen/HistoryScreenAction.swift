@@ -9,4 +9,5 @@ import Foundation
 
 enum HistoryScreenAction {
     case selectRoom(id: UUID)
+    case deleteNote(note: Note)
 }

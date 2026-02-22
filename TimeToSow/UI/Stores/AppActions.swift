@@ -24,6 +24,8 @@ enum AppAction {
     case deleteTag(Tag)
     case changeShelfVisibility(plant: Plant, isVisible: Bool)
     case reward(challenge: Challenge, isUse: Bool)
+    case deletePlant(plant: Plant)
+    case deleteNote(note: Note, roomId: UUID)
 }
 
 enum NavigateAction {

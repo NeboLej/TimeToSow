@@ -17,6 +17,7 @@ protocol PlantRepositoryProtocol {
     func updatePlant(_ plant: Plant) async
     func upgradePlant(_ plant: Plant, note: Note) async -> Plant
     func deletePlant(_ plant: Plant) async
+    func deleteNote(_ note: Note) async
 }
 
 final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
@@ -102,6 +103,24 @@ final class PlantRepository: BaseRepository, PlantRepositoryProtocol {
             }
         } catch {
             fatalError()
+        }
+    }
+    
+    func deleteNote(_ note: Note) async {
+        do {
+            try await dbPool.write { db in
+                let deleted = try NoteModelGRDB
+                    .filter(key: note.id)
+                    .deleteAll(db)
+
+                if deleted > 0 {
+                    Logger.log("delete note", location: .GRDB, event: .success)
+                } else {
+                    Logger.log("note not found", location: .GRDB, event: .error(nil))
+                }
+            }
+        } catch {
+            Logger.log("Error delete note", location: .GRDB, event: .error(error))
         }
     }
     

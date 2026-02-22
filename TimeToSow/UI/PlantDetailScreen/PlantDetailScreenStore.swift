@@ -10,7 +10,7 @@ import SwiftUI
 @Observable
 final class PlantDetailScreenStore: FeatureStore {
     
-    private let plant: Plant
+    private var plant: Plant
     var state: PlantDetailScreenState
     
     init(appStore: AppStore, plant: Plant) {
@@ -34,7 +34,11 @@ final class PlantDetailScreenStore: FeatureStore {
         case .changeShelfVisibility:
             appStore.send(AppAction.changeShelfVisibility(plant: plant, isVisible: !plant.isOnShelf))
         case .deletePlant:
-            break
+            appStore.send(.deletePlant(plant: plant))
+        case .deleteNote(let note):
+            plant = plant.copy(notes: plant.notes.filter { $0.id != note.id })
+            self.state = PlantDetailScreenState(plant: plant)
+            appStore.send(.deleteNote(note: note, roomId: plant.rootRoomID))
         }
     }
 }

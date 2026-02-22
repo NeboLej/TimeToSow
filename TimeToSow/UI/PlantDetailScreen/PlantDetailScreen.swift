@@ -21,6 +21,7 @@ fileprivate enum L: LocalizedStringKey {
 struct PlantDetailScreen: View {
     
     @State var store: PlantDetailScreenStore
+    @State private var isShowAlert = false
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -67,9 +68,11 @@ struct PlantDetailScreen: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 20)
                         
-                        RecordsHistoryView(notes: plant.notes)
-                            .padding(.horizontal, 10)
-                            .padding(.bottom, 100)
+                        RecordsHistoryView(notes: plant.notes) { note in
+                            store.send(.deleteNote(note))
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, 100)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -79,6 +82,17 @@ struct PlantDetailScreen: View {
                 .padding()
             
         }.background(.mainBackground)
+            .alert("При удаления этого растения все связанные с ним записи будут удалены. Если вы хотите скрыть растение, то используйте функцию \"Убрать с полки\"", isPresented: $isShowAlert) {
+                Button(role: .destructive) {
+                    store.send(.deletePlant)
+                    dismiss()
+                } label: {
+                    Text("Удалить")
+                }
+                Button(role: .cancel) { } label: {
+                    Text("Отмена")
+                }
+            }
         
     }
     
@@ -147,13 +161,14 @@ struct PlantDetailScreen: View {
             }
             if isMenuOpen {
                 VStack(alignment: .leading, spacing: 12) {
-                    
                     menuElement(L.editButton.loc, color: Color(hex: "DDFFB7")) {}
                     menuElement(store.state.plant.isOnShelf ? L.removeFromShelfButton.loc : L.returnToShelfButton.loc, color: Color(hex: "C9F3FF")) {
                         store.send(.changeShelfVisibility)
                         dismiss()
                     }
-                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {}
+                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {
+                        isShowAlert = true
+                    }
                 }
             }
         }

@@ -88,6 +88,13 @@ extension AppStore {
         userRooms[main.rootRoomID]?.isUpdatedRoom.toggle()
     }
     
+    func deletePlant(_ plant: Plant) {
+        Task {
+            await plantRepository.deletePlant(plant)
+        }
+        userRooms[plant.rootRoomID]?.plants[plant.id] = nil
+    }
+    
     //test
     func addRandomPlantToShelf() {
         Task {
@@ -103,6 +110,19 @@ extension AppStore {
         return Note(date: Date().getOffsetDate((-5...0).randomElement()!),
              time: (5...240).randomElement()!,
              tag: selectedTag)
+    }
+    
+    func deleteNote(_ note: Note, roomId: UUID) {
+        guard let plant = userRooms[roomId]?.plants.values.first(where: { $0.notes.contains(where: { $0.id == note.id})}) else { return }
+        let newPlant = plant.copy(notes: plant.notes.filter({ $0.id != note.id }))
+        userRooms[roomId]?.plants[plant.id] = newPlant
+        if newPlant.id == currentRoom.id {
+            currentRoom.plants[plant.id] = newPlant
+        }
+        
+        Task {
+           await plantRepository.deleteNote(note)
+        }
     }
     
     //MARK: - Room

@@ -147,7 +147,9 @@ struct HistoryScreen: View {
                 .font(.myTitle(20))
                 .foregroundStyle(.black)
                 .padding(.bottom, -12)
-            RecordsHistoryView(notes: store.state.notes)
+            RecordsHistoryView(notes: store.state.notes) { note in
+                store.send(action: .deleteNote(note: note))
+            }
         }.padding(.horizontal, 10)
             .padding(.top, 12)
     }

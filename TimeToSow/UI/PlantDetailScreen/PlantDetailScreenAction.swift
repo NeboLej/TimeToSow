@@ -10,4 +10,5 @@ import Foundation
 enum PlantDetailScreenAction {
     case changeShelfVisibility
     case deletePlant
+    case deleteNote(Note)
 }

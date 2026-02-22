@@ -128,6 +128,10 @@ final class AppStore: BackgroundEventDeleagate {
             if let decor = challenge.rewardDecor {
                 saveNewDecorType(decor, toShelf: isUse)
             }
+        case .deletePlant(plant: let plant):
+            deletePlant(plant)
+        case .deleteNote(note: let note, let roomId):
+            deleteNote(note, roomId: roomId)
         }
     }
     
