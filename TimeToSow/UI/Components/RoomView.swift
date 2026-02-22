@@ -37,15 +37,17 @@ struct RoomView: View {
                 Image(store.state.roomType.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                Image(store.state.shelfType.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                
-                plants()
-                    .id(store.state.updatedHash)
                 
                 decor()
                     .id(store.state.shelfType)
+                
+                Image(store.state.shelfType.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .allowsHitTesting(false)
+                
+                plants()
+                    .id(store.state.updatedHash)
             }
         }
         .frame(height: height)

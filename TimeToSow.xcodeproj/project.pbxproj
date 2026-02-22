@@ -48,9 +48,6 @@
 		8E75DE142E5A306C0004C3D3 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE132E5A306C0004C3D3 /* TimerView.swift */; };
 		8E75DE182E5A3BEE0004C3D3 /* PlantPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */; };
 		8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A7FE12EDF959400575A81 /* DrawText.swift */; };
-		8E7EFC6B2F23CF8F00D10C58 /* decor1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC672F23CF8F00D10C58 /* decor1.gif */; };
-		8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC682F23CF8F00D10C58 /* decor2.png */; };
-		8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7EFC692F23CF8F00D10C58 /* decor3.png */; };
 		8E7EFC6F2F23D34900D10C58 /* DecorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC6E2F23D34900D10C58 /* DecorView.swift */; };
 		8E7EFC762F24049700D10C58 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7EFC752F24049700D10C58 /* Supabase */; };
 		8E7EFC782F24E87B00D10C58 /* RemoteContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EFC772F24E87B00D10C58 /* RemoteContentRepository.swift */; };
@@ -205,9 +202,6 @@
 		8E75DE132E5A306C0004C3D3 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8E75DE172E5A3BEE0004C3D3 /* PlantPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPreview.swift; sourceTree = "<group>"; };
 		8E7A7FE12EDF959400575A81 /* DrawText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawText.swift; sourceTree = "<group>"; };
-		8E7EFC672F23CF8F00D10C58 /* decor1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = decor1.gif; sourceTree = "<group>"; };
-		8E7EFC682F23CF8F00D10C58 /* decor2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor2.png; sourceTree = "<group>"; };
-		8E7EFC692F23CF8F00D10C58 /* decor3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = decor3.png; sourceTree = "<group>"; };
 		8E7EFC6E2F23D34900D10C58 /* DecorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorView.swift; sourceTree = "<group>"; };
 		8E7EFC772F24E87B00D10C58 /* RemoteContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteContentRepository.swift; sourceTree = "<group>"; };
 		8E7EFC792F24F88900D10C58 /* ChallengeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeRepository.swift; sourceTree = "<group>"; };
@@ -390,16 +384,6 @@
 				8EFEEEDF2F0D201000857A23 /* ProgressScreenAction.swift */,
 			);
 			path = ProgressScreen;
-			sourceTree = "<group>";
-		};
-		8E7EFC6A2F23CF8F00D10C58 /* Decor */ = {
-			isa = PBXGroup;
-			children = (
-				8E7EFC672F23CF8F00D10C58 /* decor1.gif */,
-				8E7EFC682F23CF8F00D10C58 /* decor2.png */,
-				8E7EFC692F23CF8F00D10C58 /* decor3.png */,
-			);
-			path = Decor;
 			sourceTree = "<group>";
 		};
 		8E7EFC812F2550B100D10C58 /* RemoteModels */ = {
@@ -625,7 +609,6 @@
 			isa = PBXGroup;
 			children = (
 				8E6B26812F3670630003678C /* ugradeAnimation.gif */,
-				8E7EFC6A2F23CF8F00D10C58 /* Decor */,
 				8E941BB22F210A46002F0B07 /* Animations */,
 				8E5B34662F02789200354CAB /* Underdog-Regular.ttf */,
 				8E5B34642F0276C400354CAB /* StampatelloFaceto.otf */,
@@ -814,9 +797,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EBF14812DE6689E00422876 /* K2D-MediumItalic.ttf in Resources */,
-				8E7EFC6B2F23CF8F00D10C58 /* decor1.gif in Resources */,
-				8E7EFC6C2F23CF8F00D10C58 /* decor2.png in Resources */,
-				8E7EFC6D2F23CF8F00D10C58 /* decor3.png in Resources */,
 				8E5B34672F02789200354CAB /* Underdog-Regular.ttf in Resources */,
 				8EBF14822DE6689E00422876 /* K2D-ExtraLightItalic.ttf in Resources */,
 				8EBF147E2DE667F900422876 /* SedgwickAve-Regular.ttf in Resources */,

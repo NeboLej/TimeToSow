@@ -33,7 +33,7 @@ struct DecorView: View {
             DecorTypePreview(decorType: decor.decorType, isDragging: $isDragging)
         }
         .animation(isDragging ? nil : .easeInOut(duration: 1), value: offsetX)
-        .zIndex(isDragging ? 10000 : abs(offsetY))
+//        .zIndex(isDragging ? 10000 : abs(offsetY))
         .offset(x: offsetX, y: offsetY)
         .onAppear {
             decorFall()
