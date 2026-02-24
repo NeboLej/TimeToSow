@@ -15,11 +15,11 @@ struct TimeToSowApp: App {
     
     init() {
         let repositoryFactory: RepositoryFactoryProtocol
-#if DEBUG
-        repositoryFactory = RepositoryFactoryMock()
-        #else
+//#if DEBUG
+//        repositoryFactory = RepositoryFactoryMock()
+//        #else
         repositoryFactory = RepositoryFactory()
-#endif
+//#endif
         let appStore = AppStore(factory: repositoryFactory)
         screenBuilder = ScreenBuilder(appStore: appStore, repositoryFactory: repositoryFactory)
         self.appStore = appStore

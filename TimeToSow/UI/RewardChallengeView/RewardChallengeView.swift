@@ -59,7 +59,7 @@ struct ChallengeCompleteView: View {
             
             ZStack(alignment: .bottom) {
                 VStack {
-                    Text("Получен\n\(reward.name)")
+                    Text("Получен\n\(RemoteText.text(reward.name))")
                         .multilineTextAlignment(.center)
                         .font(.myNumber(30))
                         .foregroundStyle(.black)
@@ -132,7 +132,7 @@ struct ChallengeCompleteView: View {
                 Text("Испытание выполнено!")
                     .font(.myNumber(20))
                     .foregroundStyle(.black)
-                Text(challenge.title)
+                Text(RemoteText.text(challenge.title))
                     .font(.myNumber(14))
                     .foregroundStyle(.black.opacity(0.8))
                 button(label: "Получить награду", color: .yellow) {

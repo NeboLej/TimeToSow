@@ -71,7 +71,7 @@ class RemoteRepositoryMock: RemoteContentRepositoryProtocol {
         
         do {
             let data = try Data(contentsOf: url)
-            try JSONLocalizationService.shared.load(from: data)
+            try JSONLocalizationService.shared.load(from: data, type: .other)
             Logger.log("Succes fetch localized srings", location: .remote, event: .success)
         } catch {
             assertionFailure("Failed to load localization: \(error)")

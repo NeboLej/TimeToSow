@@ -32,10 +32,11 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         self.imagePrefetcher = imagePrefetcher
         
         updateRemoteData()
-        loadLocalJSONLocalization()
+        loadRemoteJSONLocalization()
     }
     
-    private func loadLocalJSONLocalization() {
+    private func loadRemoteJSONLocalization() {
+        //tmp not remote
         guard let url = Bundle.main.url(forResource: "remote_localization", withExtension: "json") else {
             assertionFailure("Localization JSON not found")
             return
@@ -43,7 +44,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
         
         do {
             let data = try Data(contentsOf: url)
-            try JSONLocalizationService.shared.load(from: data)
+            try JSONLocalizationService.shared.load(from: data, type: .other)
             Logger.log("Succes fetch localized srings", location: .remote, event: .success)
         } catch {
             assertionFailure("Failed to load localization: \(error)")
@@ -56,7 +57,7 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
             do {
                 version = try await fetch(path: "contentVersions.json", type: ContentVersions.self)
                 Logger.log("Succes fetch version content", location: .remote, event: .success)
-                await checkChallengesSeason()
+                await loadContentByVersion()
             } catch {
                 Logger.log("Error fetch versioin content", location: .remote, event: .error(error))
             }
@@ -68,12 +69,33 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
     }
     
     //MARK: private
-    private func checkChallengesSeason() async {
+    private func loadContentByVersion() async {
+        guard let version else { return }
         let currentSeason = await challengeRepository.getCurrentChallengeSeason()
-        if currentSeason == nil || currentSeason?.version != version?.challengeVersion {
+        let localazedVersions = JSONLocalizationService.shared.getSavedVersions()
+        
+        if currentSeason == nil || currentSeason?.version != version.challengeVersion {
             await updateChallengesSeason()
-        } else {
-            delegate?.send(.challengesSeasonPrepared(currentSeason!))
+        }
+        
+        if version.localizedChallengeVersion != localazedVersions[.challenge] {
+            await updateRemoteLocalizations(type: .challenge, newVersion: version.localizedChallengeVersion)
+        }
+        
+        delegate?.send(.challengesSeasonPrepared(currentSeason!))
+    }
+    
+    private func updateRemoteLocalizations(type: LocalizedFilesType, newVersion: Int) async {
+        do {
+            let url = try await client.storage
+                .from("models")
+                .createSignedURL(path: type.fileName, expiresIn: 60)
+            let data = try Data(contentsOf: url)
+            data.printJSON()
+            try JSONLocalizationService.shared.load(from: data, type: type)
+            JSONLocalizationService.shared.saveNewVerion(type: type, version: newVersion)
+        } catch {
+            fatalError()
         }
     }
     
@@ -108,4 +130,5 @@ final class RemoteContentRepository: RemoteContentRepositoryProtocol {
 
 struct ContentVersions: Codable {
     let challengeVersion: Int
+    let localizedChallengeVersion: Int
 }

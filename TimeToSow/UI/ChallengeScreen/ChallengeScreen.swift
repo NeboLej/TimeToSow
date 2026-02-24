@@ -40,10 +40,8 @@ struct ChallengeScreen: View {
                     Text("Испытания")
                         .font(.myTitle(30))
                         .foregroundStyle(.black)
-                    Text(store.state.seasonName)
+                    Text(RemoteText.text(store.state.seasonName))
                         .font(.myTitle(24))
-                        .foregroundStyle(.black)
-                    Text(store.state.seasonDescription)
                         .foregroundStyle(.black)
                     
                     headerBanner()
@@ -120,7 +118,7 @@ struct ChallengeScreen: View {
     private func challengeProgressCell(_ challenge: ChallengeProgress, colorPair: ColorPeir) -> some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(challenge.name)
+                Text(RemoteText.text(challenge.name))
                     .font(.myNumber(20))
                     .foregroundStyle(colorPair.1)
                     .padding(.bottom, 8)
@@ -149,7 +147,7 @@ struct ChallengeScreen: View {
                         .scaledToFit()
                         .padding()
                         .frame(height: rewardDecor.height * 2)
-                    Text(rewardDecor.name)
+                    Text(RemoteText.text(rewardDecor.name))
                         .font(.myNumber(16))
                         .foregroundStyle(colorPair.1)
                         .multilineTextAlignment(.center)
