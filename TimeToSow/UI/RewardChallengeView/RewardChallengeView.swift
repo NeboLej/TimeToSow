@@ -8,13 +8,10 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
+
 struct ChallengeCompleteView: View {
     @State var store: RewardChallengeStore
     
-    //    init(store: RewardChallengeStore) {
-    //        self.store = store
-    //    }
-    //
     @State private var selectedCallenge: Challenge?
     @State private var rotation: Double = -0
     @State private var scale: CGFloat = 0.2
@@ -59,7 +56,7 @@ struct ChallengeCompleteView: View {
             
             ZStack(alignment: .bottom) {
                 VStack {
-                    Text("Получен\n\(RemoteText.text(reward.name))")
+                    Text(Lo.RewardChallenge.rewarding(RemoteText.text(reward.name)))
                         .multilineTextAlignment(.center)
                         .font(.myNumber(30))
                         .foregroundStyle(.black)
@@ -73,12 +70,12 @@ struct ChallengeCompleteView: View {
                 .cornerRadius(.infinity, corners: .allCorners)
                 
                 HStack(spacing: 16) {
-                    TextureButton(label: "В коробку", color: .yellow,
+                    TextureButton(label: Lo.Button.inABox, color: .yellow,
                                   textColor: .black, font: .myNumber(20), icon: nil) {
                         finishRewardProcess(isShelf: false)
                     }
                     
-                    TextureButton(label: "На полку", color: .yellow,
+                    TextureButton(label: Lo.Button.onShelf, color: .yellow,
                                   textColor: .black, font: .myNumber(20), icon: nil) {
                         finishRewardProcess(isShelf: true)
                     }
@@ -129,13 +126,13 @@ struct ChallengeCompleteView: View {
     private func challangeCell(for challenge: Challenge) -> some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Испытание выполнено!")
+                Text(Lo.RewardChallenge.challengeComplete)
                     .font(.myNumber(20))
                     .foregroundStyle(.black)
                 Text(RemoteText.text(challenge.title))
                     .font(.myNumber(14))
                     .foregroundStyle(.black.opacity(0.8))
-                button(label: "Получить награду", color: .yellow) {
+                button(label: Lo.Button.getReward, color: .yellow) {
                     startRewarding(challenge)
                 }
                 .padding(.top, 10)
@@ -159,7 +156,7 @@ struct ChallengeCompleteView: View {
     }
     
     @ViewBuilder
-    private func button(label: LocalizedStringKey, color: Color = .white, action: @escaping () -> Void) -> some View {
+    private func button(label: String, color: Color = .white, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             TextureView(
                 insets: .init(top: 6, leading: 18, bottom: 6, trailing: 18),

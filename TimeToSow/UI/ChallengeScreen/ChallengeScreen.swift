@@ -41,6 +41,7 @@ struct ChallengeScreen: View {
                         .font(.myTitle(30))
                         .foregroundStyle(.black)
                     Text(RemoteText.text(store.state.seasonName))
+                        .multilineTextAlignment(.center)
                         .font(.myTitle(24))
                         .foregroundStyle(.black)
                     

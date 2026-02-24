@@ -13,6 +13,7 @@ struct HomeScreenState {
     let room: RoomType
     let headerColor: Color
     let plantCount: Int
+    let bonusCount: Int
     let loggedMinutesCount: Int
     let allNotes: [Note]
     
@@ -39,6 +40,7 @@ struct HomeScreenState {
         }
         topTag = dict.map { ($0.key, $0.value) }.max(by: { $0.1 > $1.1 })?.0
         selectedTag = appStore.selectedTag
+        bonusCount = appStore.currentRoom.decor.count
     }
 }
 

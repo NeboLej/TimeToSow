@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0B5A642F4E0C68000C181D /* Localizatioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B5A632F4E0C68000C181D /* Localizatioin.swift */; };
 		8E13E1CD2E7A00E700E5CA1F /* TextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */; };
 		8E201B552F127718002B49A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E201B542F127718002B49A1 /* Logger.swift */; };
 		8E2957932F26679500EA144A /* DecorTypeModelGRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */; };
@@ -162,6 +163,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E0B5A632F4E0C68000C181D /* Localizatioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizatioin.swift; sourceTree = "<group>"; };
 		8E13E1CC2E7A00E700E5CA1F /* TextureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureView.swift; sourceTree = "<group>"; };
 		8E201B542F127718002B49A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8E2957922F26679500EA144A /* DecorTypeModelGRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorTypeModelGRDB.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 				8EBF14792DE657A700422876 /* Font +.swift */,
 				8ED72C3E2F02C56E008E6869 /* Localizable.xcstrings */,
 				8ED72C422F02E2E1008E6869 /* remote_localization.json */,
+				8E0B5A632F4E0C68000C181D /* Localizatioin.swift */,
 				8E6AD7752F327A170041568F /* BaseFile.swift */,
 			);
 			path = Resources;
@@ -832,6 +835,7 @@
 				8E6EAD992F16B82400BFB40C /* FloatingPoint + extension.swift in Sources */,
 				8E6AD7722F326F3C0041568F /* DataPrefether.swift in Sources */,
 				8E2E5EE42EF853F000B91347 /* AppCoordinator.swift in Sources */,
+				8E0B5A642F4E0C68000C181D /* Localizatioin.swift in Sources */,
 				8EF5756D2DCE4E8700AEC31A /* RoomView.swift in Sources */,
 				8E7A7FE22EDF959400575A81 /* DrawText.swift in Sources */,
 				8EE4C5A22E7A126600818D95 /* TextureButton.swift in Sources */,
