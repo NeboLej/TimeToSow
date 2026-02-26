@@ -37,7 +37,7 @@ struct ChallengeScreen: View {
         VStack {
             if store.state.seasonIsActive {
                 ScrollView {
-                    Text("Испытания")
+                    Text(Lo.ChallengeScreen.title)
                         .font(.myTitle(30))
                         .foregroundStyle(.black)
                     Text(RemoteText.text(store.state.seasonName))
@@ -63,7 +63,7 @@ struct ChallengeScreen: View {
     }
     
     @ViewBuilder private func emptyState() -> some View {
-        Text("Нет активных испытаний")
+        Text(Lo.ChallengeScreen.emptyState)
             .font(Font.myNumber(20))
             .foregroundStyle(.black.opacity(0.7))
     }
@@ -88,13 +88,13 @@ struct ChallengeScreen: View {
     @ViewBuilder private func headerBanner() -> some View {
         VStack(alignment: .trailing) {
             HStack {
-                Text("Проходите ежесезонные испытания и получайте уникальные награды для украшения вашей комнаты")
+                Text(Lo.ChallengeScreen.allChallengesDescriptioin)
                     .font(Font.myTitle(18))
                     .foregroundStyle(.black.opacity(0.65))
                 Spacer()
             }
             
-            Text("Дата окончания \(store.state.seasonEndDate.toReadableDate())")
+            Text(Lo.ChallengeScreen.endSeasonDate(store.state.seasonEndDate.toReadableDate()))
                 .font(.myNumber(14))
                 .foregroundStyle(.black.opacity(0.8))
                 .padding(.top, 12)

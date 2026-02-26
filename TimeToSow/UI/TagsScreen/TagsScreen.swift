@@ -29,7 +29,7 @@ struct TagsScreen: View {
     }
     
     var newTag: Tag {
-        Tag(name: newTagName.isEmpty ? "new tag" : newTagName, color: newTagColor.toHex())
+        Tag(name: newTagName.isEmpty ? Lo.TagsScreen.newTagPlaceholder : newTagName, color: newTagColor.toHex())
     }
     
     init(store: TagsScreenStore) {
@@ -83,7 +83,7 @@ struct TagsScreen: View {
                             .listRowBackground(Color.white.opacity(0.8))
                         
                         TextField("", text: $newTagName,
-                                  prompt: Text("New tag name")
+                                  prompt: Text(Lo.TagsScreen.newTagTextFieldPlaceholder)
                             .foregroundStyle(.black.opacity(0.5))
                         )
                         .foregroundStyle(.black)
@@ -95,7 +95,7 @@ struct TagsScreen: View {
             }
             
             HStack {
-                TextureButton(label: "Save", color: .accentColor) {
+                TextureButton(label: Lo.Button.save, color: .accentColor) {
                     if store.state.mode == .addNewTag, !newTagName.isEmpty {
                         store.send(.addNewTag(name: newTagName, color: newTagColor.toHex()))
                     } else if store.state.mode == .list, let currentTag {
@@ -115,23 +115,23 @@ struct TagsScreen: View {
         .onChange(of: store.state.selectedTag) { oldValue, newValue in
             currentTag = store.state.selectedTag
         }
-        .alert("Удалить этот тег? \nПри удалении тэг останется истории связанных с ним записей", isPresented: $isShowDeleteAllert) {
+        .alert(Lo.TagsScreen.deleteAlertMessage, isPresented: $isShowDeleteAllert) {
             Button(role: .destructive) {
                 if let currentTag {
                     store.send(.deleteTag(currentTag))
                 }
             } label: {
-                Text("Удалить")
+                Text(Lo.Button.delete)
             }
             Button(role: .cancel) { } label: {
-                Text("Отмена")
+                Text(Lo.Button.cancel)
             }
         }
     }
     
     @ViewBuilder func colorPicker() -> some View {
         HStack {
-            Text("Choose a color")
+            Text(Lo.TagsScreen.colorPickerTitle)
                 .foregroundStyle(.black)
             Spacer()
             Circle()

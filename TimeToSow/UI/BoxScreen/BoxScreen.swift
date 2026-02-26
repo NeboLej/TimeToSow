@@ -42,7 +42,7 @@ struct BoxScreen: View {
             VStack {
                 HStack {
                     Spacer()
-                    Text("Коробка")
+                    Text(Lo.BoxScreen.title)
                         .font(.myTitle(24))
                         .foregroundStyle(.black)
                         .padding(.leading, 30)
@@ -60,8 +60,8 @@ struct BoxScreen: View {
                 .padding(.horizontal)
                 
                 Picker("", selection: $selection) {
-                    Text("Растения").tag(0)
-                    Text("Декор").tag(1)
+                    Text(Lo.BoxScreen.pickerPlants).tag(0)
+                    Text(Lo.BoxScreen.pickerDecor).tag(1)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
@@ -72,7 +72,7 @@ struct BoxScreen: View {
                     ScrollView {
                         if selection == 0 {
                             if store.state.plants.isEmpty {
-                                emptyState("Тут можно хранить растения, которым пока не место на полке")
+                                emptyState(Lo.BoxScreen.emptyStatePlants)
                             } else {
                                 MasonryLayout(columns: columns, spacing: 10) {
                                     plantCollection(cellWidth: width)
@@ -80,7 +80,7 @@ struct BoxScreen: View {
                             }
                         } else if selection == 1 {
                             if store.state.decors.isEmpty {
-                                emptyState("Выполняйте испытания, чтобы получать элементы декора")
+                                emptyState(Lo.BoxScreen.emptyStateDecor)
                             } else {
                                 MasonryLayout(columns: columns, spacing: 10) {
                                     decorCollection(cellWidth: width)
@@ -167,14 +167,14 @@ struct BoxScreen: View {
     private func overlayMenu() -> some View {
         VStack {
             Spacer()
-            button(label: "Info") {
+            button(label: Lo.BoxScreen.cellMenuInfo) {
                 if let selectedPlant {
                     store.send(.infoPlant(selectedPlant))
                 } else if let selectedDecor {
                     store.send(.infoDecor(selectedDecor))
                 }
             }
-            button(label: "To shelf") {
+            button(label: Lo.BoxScreen.cellMenuOnShelf) {
                 if let selectedPlant {
                     store.send(.toShelfPlant(selectedPlant))
                     self.selectedPlant = nil
@@ -188,7 +188,7 @@ struct BoxScreen: View {
     }
     
     @ViewBuilder
-    private func button(label: LocalizedStringKey, action: @escaping () -> Void, color: Color = .white) -> some View {
+    private func button(label: String, action: @escaping () -> Void, color: Color = .white) -> some View {
         Button(action: action) {
             TextureView(
                 insets: .init(top: 6, leading: 18, bottom: 6, trailing: 18),
