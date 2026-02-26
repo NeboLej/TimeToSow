@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-fileprivate enum L: LocalizedStringKey {
-    case newPlantTitle = "HomeScreen.newPlantTitle"
-    case updatePlantTitle = "HomeScreen.upgradePlantTitle"
-    case startButton = "HomeScreen.startButton"
-    case monthStatistic_PlantCount = "HomeScreen.MonthStatistic.plantCountText"
-    case monthStatistic_BonusCount = "HomeScreen.MonthStatistic.bonusCountText"
-    case monthStatistic_TopPlant = "HomeScreen.MonthStatistic.topPlantText"
-    case monthStatistic_TopTag = "HomeScreen.MonthStatistic.topTagText"
-    
-    var loc: LocalizedStringKey { rawValue }
-}
-
 struct HistoryScreen: View {
     
     //    @Environment(\.screenBuilder) var screenBuilder: ScreenBuilder
@@ -44,7 +32,7 @@ struct HistoryScreen: View {
             content
         }
         .background(.mainBackground)
-        .navigationTitle("History")
+        .navigationTitle(Lo.HistoryScreen.title)
         .navigationBarBackButtonHidden(true)
         .toolbarBackground(store.state.headerColor, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
@@ -143,7 +131,7 @@ struct HistoryScreen: View {
     @ViewBuilder
     private func notesHistorySection() -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("История записей")
+            Text(Lo.HistoryScreen.recordsHistoryTitle)
                 .font(.myTitle(20))
                 .foregroundStyle(.black)
                 .padding(.bottom, -12)
@@ -165,27 +153,27 @@ struct HistoryScreen: View {
                         .padding(.top, 16)
                         .padding(.bottom, 8)
                     
-                    lineStatisticView(title: L.monthStatistic_PlantCount.loc,
+                    lineStatisticView(title: Lo.MonthStatistic.plantCount,
                                       view: Text(String(store.state.plantCount))
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
-                    lineStatisticView(title: L.monthStatistic_BonusCount.loc,
+                    lineStatisticView(title: Lo.MonthStatistic.bonusCount,
                                       view: Text("1")
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
                     if let topPlant = store.state.topPlant {
-                        lineStatisticView(title: L.monthStatistic_TopPlant.loc,
+                        lineStatisticView(title: Lo.MonthStatistic.topPlant,
                                           view: RarityView(count: topPlant.seed.rarity.starCount + topPlant.pot.rarity.starCount)
                             .frame(height: 12)
                         )
                     }
                     
                     if let topTag = store.state.topTag {
-                        lineStatisticView(title: L.monthStatistic_TopTag.loc,
+                        lineStatisticView(title: Lo.MonthStatistic.topTag,
                                           view: TagView(tag: topTag)
                             .id(store.state.topTag)
                         )
@@ -210,7 +198,7 @@ struct HistoryScreen: View {
     }
     
     @ViewBuilder
-    func lineStatisticView(title: LocalizedStringKey, view: some View) -> some View {
+    func lineStatisticView(title: String, view: some View) -> some View {
         HStack {
             Text(title)
                 .font(.myRegular(14))

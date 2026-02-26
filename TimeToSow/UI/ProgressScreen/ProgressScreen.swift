@@ -96,7 +96,7 @@ struct ProgressScreen: View {
             .padding(.bottom, 8)
             .padding(.top, 45)
             
-            Text("Ученые доказали, что дела лучше делаются если не смотреть на экран")
+            Text(Lo.ProgressScreen.sliderOfPhrases1)
                 .multilineTextAlignment(.center)
                 .font(.myNumber(20))
                 .foregroundStyle(.black)
@@ -105,15 +105,15 @@ struct ProgressScreen: View {
             
             Spacer()
         }
-        .alert("При закрытии этого экрана таймер будет остановлен", isPresented: $isShowAlert) {
+        .alert(Lo.ProgressScreen.stopAlertMessage, isPresented: $isShowAlert) {
             Button(role: .destructive) {
                 store.send(.stopProgress)
                 dismiss()
             } label: {
-                Text("Закрыть")
+                Text(Lo.ProgressScreen.stopAlertNegative)
             }
             Button(role: .cancel) { } label: {
-                Text("Остаться")
+                Text(Lo.ProgressScreen.stopAlertPositive)
             }
         }
     }
@@ -153,7 +153,7 @@ struct ProgressScreen: View {
                 .padding(.top, 120)
             }
             
-            Text("Успех!")
+            Text(Lo.ProgressScreen.completeProgressTitle)
                 .font(.myNumber(50))
                 .foregroundStyle(.black)
                 .padding(.top, 45)
@@ -162,14 +162,14 @@ struct ProgressScreen: View {
             let seedName = "\(RemoteText.text(plant.seed.name))"
             let potName = "\(RemoteText.text(plant.pot.name))"
 
-            Text("Теперь у вас есть \n \(seedName) \(potName)")
+            Text(Lo.ProgressScreen.plantName(seed: seedName, pot: potName))
                 .multilineTextAlignment(.center)
                 .font(.myNumber(20))
                 .foregroundStyle(.black)
                 .padding(.horizontal, 16)
                 .padding(.top, 50)
             
-            TextureButton(label: "поместить на полку", color: .strokeAcsent1, icon: nil) {
+            TextureButton(label: Lo.ProgressScreen.onShelfButton, color: .strokeAcsent1, icon: nil) {
                 store.send(.plantToShelf)
                 dismiss()
             }.padding(.top, 150)

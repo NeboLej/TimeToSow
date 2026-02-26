@@ -27,10 +27,10 @@ struct EditRoomScreen: View {
             
             Spacer()
             HStack {
-                TextureButton(label: "Cancel", color: .strokeAcsent2) {
+                TextureButton(label: Lo.Button.cancel, color: .strokeAcsent2) {
                     dismiss()
                 }
-                TextureButton(label: "Save", color: .strokeAcsent1) {
+                TextureButton(label: Lo.Button.save, color: .strokeAcsent1) {
                     store.send(.save)
                     dismiss()
                 }

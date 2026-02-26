@@ -40,7 +40,7 @@ struct RecordsHistoryView: View {
                     ForEach(dayNotes) { note in
                         recordRow(note)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button("Delete", systemImage: "trash") {
+                                Button(Lo.Button.delete, systemImage: "trash") {
                                     deleteNote?(note)
                                 }.tint(.strokeAcsent2)
                             }

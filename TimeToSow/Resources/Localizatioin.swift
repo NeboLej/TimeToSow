@@ -16,16 +16,20 @@ enum Lo {
         static let onShelf = String(localized: "Button.OnShelf")
         static let save = String(localized: "Button.save")
         static let delete = String(localized: "Button.delete")
-        static let cancel = String(localized: "Button.cencel")
+        static let cancel = String(localized: "Button.cancel")
+        static let edit = String(localized: "Button.edit")
     }
     
     enum HomeScreen {
         static let newPlantTitle = String(localized: "HomeScreen.newPlantTitle")
         static let updatePlantTitle = String(localized: "HomeScreen.upgradePlantTitle")
-        static let monthStatistic_PlantCount = String(localized: "HomeScreen.MonthStatistic.plantCountText")
-        static let monthStatistic_BonusCount = String(localized: "HomeScreen.MonthStatistic.bonusCountText")
-        static let monthStatistic_TopPlant = String(localized: "HomeScreen.MonthStatistic.topPlantText")
-        static let monthStatistic_TopTag = String(localized: "HomeScreen.MonthStatistic.topTagText")
+    }
+    
+    enum MonthStatistic {
+        static let plantCount = String(localized: "MonthStatistic.plantCountText")
+        static let bonusCount = String(localized: "MonthStatistic.bonusCountText")
+        static let topPlant = String(localized: "MonthStatistic.topPlantText")
+        static let topTag = String(localized: "MonthStatistic.topTagText")
     }
     
     enum BoxScreen {
@@ -62,6 +66,31 @@ enum Lo {
         static func rewarding(_ string: String) -> String {
             String(format: String(localized: "ChallengeCompleteView.Rewarding"), string)
         }
+    }
+    
+    enum HistoryScreen {
+        static let title = String(localized: "HistoryScreen.title")
+        static let recordsHistoryTitle = String(localized: "HistoryScreen.recordsHistoryTitle")
+    }
+    
+    enum PlantDetailScreen {
+        static let recordsHistoryTitle = String(localized: "PlantDetailScreen.recordsTitle")
+        static let descriptionTitle = String(localized: "PlantDetailScreen.descriptionTitle")
+        static let returnToShelfButton = String(localized: "PlantDetailScreen.returnToShelfButton")
+        static let removeFromShelfButton = String(localized: "PlantDetailScreen.removeFromShelfButton")
+        static let deletePlantAlertMessage = String(localized: "PlantDetailScreen.Alert.DeletePlant.message")
+    }
+    
+    enum ProgressScreen {
+        static let sliderOfPhrases1 = String(localized: "ProgressScreen.sliderOfPhrases_1")
+        static let stopAlertMessage = String(localized: "ProgressScreen.Alert.Stop.message")
+        static let stopAlertPositive = String(localized: "ProgressScreen.Alert.Stop.positiveAction")
+        static let stopAlertNegative = String(localized: "ProgressScreen.Alert.Stop.negativeAction")
+        static let completeProgressTitle = String(localized: "ProgressScreen.completeProgressTitle")
+        static let onShelfButton = String(localized: "ProgressScreen.onShelfButton")
         
+        static func plantName(seed: String, pot: String) -> String {
+            String(format: String(localized: "ProgressScreen.plantName"), seed, pot)
+        }
     }
 }

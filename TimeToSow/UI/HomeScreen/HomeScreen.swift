@@ -234,27 +234,27 @@ struct HomeScreen: View {
                         .padding(.top, 16)
                         .padding(.bottom, 8)
                     
-                    lineStatisticView(title: Lo.HomeScreen.monthStatistic_PlantCount,
+                    lineStatisticView(title: Lo.MonthStatistic.plantCount,
                                       view: Text(String(store.state.plantCount))
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
-                    lineStatisticView(title: Lo.HomeScreen.monthStatistic_BonusCount,
+                    lineStatisticView(title: Lo.MonthStatistic.bonusCount,
                                       view: Text(String(store.state.bonusCount))
                         .font(.myRegular(14))
                         .foregroundStyle(.black)
                     )
                     
                     if let topPlant = store.state.topPlant {
-                        lineStatisticView(title: Lo.HomeScreen.monthStatistic_TopPlant,
+                        lineStatisticView(title: Lo.MonthStatistic.topPlant,
                                           view: RarityView(count: topPlant.seed.rarity.starCount + topPlant.pot.rarity.starCount)
                             .frame(height: 12)
                         )
                     }
                     
                     if let topTag = store.state.topTag {
-                        lineStatisticView(title: Lo.HomeScreen.monthStatistic_TopTag,
+                        lineStatisticView(title: Lo.MonthStatistic.topTag,
                                           view: TagView(tag: topTag)
                         )
                     }

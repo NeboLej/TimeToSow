@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-fileprivate enum L: LocalizedStringKey {
-    case desctiprionTitle = "PlantDetailScreen.descriptionTitle"
-    case recordsHistoryTitle = "PlantDetailScreen.recordsHistoryTitle"
-    case editButton = "PlantDetailScreen.editButton"
-    case returnToShelfButton = "PlantDetailScreen.returnToShelfButton"
-    case removeFromShelfButton = "PlantDetailScreen.removeFromShelfButton"
-    case deleteButton = "PlantDetailScreen.deleteButton"
-    
-    var loc: LocalizedStringKey { rawValue }
-}
-
 struct PlantDetailScreen: View {
     
     @State var store: PlantDetailScreenStore
@@ -47,7 +36,7 @@ struct PlantDetailScreen: View {
                             .padding(.vertical, 20)
                         }
                         if !plant.description.isEmpty {
-                            titleLabel(Text(L.desctiprionTitle.loc))
+                            titleLabel(Text(Lo.PlantDetailScreen.descriptionTitle))
                                 .padding(.horizontal, 10)
                                 .padding(.top, 10)
                             
@@ -62,7 +51,7 @@ struct PlantDetailScreen: View {
                             .padding(.top, 10)
                             .shadow(color: .black.opacity(0.2), radius: 2, x: -1, y: -1)
                         
-                        titleLabel(Text(L.recordsHistoryTitle.loc))
+                        titleLabel(Text(Lo.PlantDetailScreen.recordsHistoryTitle))
                             .foregroundStyle(.black)
                             .padding(.bottom, -6)
                             .padding(.horizontal, 10)
@@ -82,15 +71,15 @@ struct PlantDetailScreen: View {
                 .padding()
             
         }.background(.mainBackground)
-            .alert("При удаления этого растения все связанные с ним записи будут удалены. Если вы хотите скрыть растение, то используйте функцию \"Убрать с полки\"", isPresented: $isShowAlert) {
+            .alert(Lo.PlantDetailScreen.deletePlantAlertMessage, isPresented: $isShowAlert) {
                 Button(role: .destructive) {
                     store.send(.deletePlant)
                     dismiss()
                 } label: {
-                    Text("Удалить")
+                    Text(Lo.Button.delete)
                 }
                 Button(role: .cancel) { } label: {
-                    Text("Отмена")
+                    Text(Lo.Button.cancel)
                 }
             }
         
@@ -161,12 +150,12 @@ struct PlantDetailScreen: View {
             }
             if isMenuOpen {
                 VStack(alignment: .leading, spacing: 12) {
-                    menuElement(L.editButton.loc, color: Color(hex: "DDFFB7")) {}
-                    menuElement(store.state.plant.isOnShelf ? L.removeFromShelfButton.loc : L.returnToShelfButton.loc, color: Color(hex: "C9F3FF")) {
+                    menuElement(Lo.Button.edit, color: Color(hex: "DDFFB7")) {}
+                    menuElement(store.state.plant.isOnShelf ? Lo.PlantDetailScreen.removeFromShelfButton : Lo.PlantDetailScreen.returnToShelfButton, color: Color(hex: "C9F3FF")) {
                         store.send(.changeShelfVisibility)
                         dismiss()
                     }
-                    menuElement(L.deleteButton.loc, color: Color(hex: "FFC8C8")) {
+                    menuElement(Lo.Button.delete, color: Color(hex: "FFC8C8")) {
                         isShowAlert = true
                     }
                 }
@@ -175,7 +164,7 @@ struct PlantDetailScreen: View {
     }
     
     @ViewBuilder
-    private func menuElement(_ text: LocalizedStringKey, color: Color, _ action: @escaping ()->()) -> some View {
+    private func menuElement(_ text: String, color: Color, _ action: @escaping ()->()) -> some View {
         Button {
             action()
         } label: {
